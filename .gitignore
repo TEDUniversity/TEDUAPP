@@ -73,12 +73,12 @@ captures/
 .externalNativeBuild
 
 # Google Services (e.g. APIs or Firebase)
-google-services.json
+#google-services.json
 
 # Freeline
 freeline.py
 freeline/
-freeline_project_description.json
+#freeline_project_description.json
 
 # fastlane
 fastlane/report.xml
@@ -115,7 +115,7 @@ node_modules
 # TODO: Check in yarn.lock in open source. Right now we need to keep it out
 # from the GitHub repo as importing it might conflict with internal workspaces
 yarn.lock
-package-lock.json
+#package-lock.json
 
 # OS X
 .DS_Store
@@ -132,7 +132,7 @@ package-lock.json
 
 # ReactCommon subdir shouldn't have Xcode project
 /ReactCommon/**/*.xcodeproj
-package.json
+#package.json
 
 
 # Xcode
@@ -194,7 +194,7 @@ node_modules
 # TODO: Check in yarn.lock in open source. Right now we need to keep it out
 # from the GitHub repo as importing it might conflict with internal workspaces
 yarn.lock
-package-lock.json
+#package-lock.json
 
 # OS X
 .DS_Store
