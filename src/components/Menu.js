@@ -8,7 +8,6 @@
 
 import React, { Component } from "react";
 import { Text, View, StyleSheet, Image, Dimensions } from "react-native";
-import BottomToolbarr from "./BottomToolbarr";
 
 class Menu extends Component {
   static navigationOptions = {
@@ -35,7 +34,6 @@ class Menu extends Component {
         <View style={styles.subContainer}>
           <Text style={styles.text}>This is Menu.</Text>
         </View>
-        <BottomToolbarr navigation={this.props.navigation} />
       </View>
     );
   }

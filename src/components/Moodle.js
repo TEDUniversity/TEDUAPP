@@ -8,7 +8,6 @@
 
 import React, { Component } from "react";
 import { Text, View, StyleSheet } from "react-native";
-import BottomToolbarr from "./BottomToolbarr";
 
 class Moodle extends Component {
     static navigationOptions = {
@@ -26,7 +25,6 @@ class Moodle extends Component {
                     This is Moodle.
                 </Text>
             </View>
-            <BottomToolbarr navigation={this.props.navigation} />
         </View>
     );
   }
