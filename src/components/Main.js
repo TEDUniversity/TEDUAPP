@@ -52,14 +52,14 @@ class Main extends Component {
         key: 'MoodleRouter',
         icon: 'music-note',
         label: 'Music',
-        barColor: '#E64A19',
+        barColor: '#A93B13',
         pressColor: 'rgba(255, 255, 255, 0.16)'
       },
       {
         key: 'CouncilRouter',
         icon: 'music-note',
         label: 'Music',
-        barColor: '#E64A19',
+        barColor: '#E46D55',
         pressColor: 'rgba(255, 255, 255, 0.16)'
       }
     ]
