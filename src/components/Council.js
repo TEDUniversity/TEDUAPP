@@ -9,7 +9,6 @@
 import React, { Component } from "react";
 import { Text, View, StyleSheet, Dimensions } from "react-native";
 import Image from 'react-native-scalable-image';
-import BottomToolbarr from "./BottomToolbarr";
 
 class Council extends Component {
     static navigationOptions = {
@@ -30,7 +29,6 @@ class Council extends Component {
                     This is Council.
                 </Text>
             </View>
-            <BottomToolbarr navigation={this.props.navigation} />
         </View>
     );
   }
