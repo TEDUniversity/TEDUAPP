@@ -49,7 +49,8 @@ const styles = {
   button: {
     alignItems: 'center',
     backgroundColor: '#DDDDDD',
-    padding: 10
+    padding: 10,
+    width: Dimensions.get("window").width / 2
   },
 };
 /*
