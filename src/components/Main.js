@@ -15,13 +15,7 @@ import Image from 'react-native-scalable-image';
 
 class Main extends Component {
     static navigationOptions = {
-        headerTitle: (
-            <Image resizeMode="contain" width={Dimensions.get('window').width} style={{ marginTop: 40 }} source={require("./img/header/anatepe2.png")} />
-        ),
-        title: "Council",
-        headerStyle: { marginTop: 0, backgroundColor: "#fff" },
-        headerLeft: null,
-        gesturesEnabled: false,
+        
       };
     
     state = { activeTab: "NewsRouter" };
@@ -77,19 +71,19 @@ class Main extends Component {
     showTab() {
       switch (this.state.activeTab) {
         case 'NewsRouter':
-            return <News />;
+            return <News navOp={this.navigationOptions} />;
             break;
         case 'MenuRouter':
-            return <Menu />;
+            return <Menu navOp={this.navigationOptions} />;
             break;
         case 'CalendarRouter':
-            return <Calendar />;
+            return <Calendar navOp={this.navigationOptions} />;
             break;
         case 'MoodleRouter':
-            return <Moodle />;
+            return <Moodle navOp={this.navigationOptions} />;
             break;
         case 'CouncilRouter':
-            return <Council />;
+            return <Council navOp={this.navigationOptions} />;
             break;
       }
     }

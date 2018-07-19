@@ -7,15 +7,14 @@
  */
 
 import React, { Component } from "react";
-import { Text, View, StyleSheet } from "react-native";
+import { Text, View, StyleSheet, Dimensions } from "react-native";
 import axios from "axios";
+import Image from 'react-native-scalable-image';
+
 
 class News extends Component {
     static navigationOptions = {
-        title: "News",
-        headerStyle: { marginTop: 0, backgroundColor: "#fff" },
-        headerLeft: null,
-        gesturesEnabled: false,
+        
       };
     
       state = { data: [], loading: true };
@@ -31,15 +30,15 @@ class News extends Component {
     //chrome dan js debug yaparak görebilirsin console log ları
     componentWillMount() {
         //internetten bulduğum kod burda ama çalışmıyor
-        const parseString = require('xml2js').parseString;
+        //const parseString = require('xml2js').parseString;
         //const xml = "<root>Hello xml2js!</root>"
-        axios
+        /*axios
           .get("https://www.tedu.edu.tr/rss.xml")
           .then(response => {
             parseString(response, (err, result) => {
                 console.log(result);
                 });
-          });
+          });*/
         
         //Yunusmarkette kullandığımız kod aşağıda
         //browser da  linki açarak response u görebilirsin
@@ -59,7 +58,20 @@ class News extends Component {
         console.log(this.state.data);
       }
 
+    sendNavOps = props => {
+        this.props.navOp.setParams({
+            headerTitle: (
+                <Image resizeMode="contain" width={Dimensions.get('window').width} style={{ marginTop: 40 }} source={require("./img/header/anatepe2.png")} />
+            ),
+            title: "Council",
+            headerStyle: { marginTop: 0, backgroundColor: "#fff" },
+            headerLeft: null,
+            gesturesEnabled: false,
+        });
+    }
+
     render() {
+    this.sendNavOps();
     return (
         <View style={styles.container}>
             <View style={styles.subContainer}>
