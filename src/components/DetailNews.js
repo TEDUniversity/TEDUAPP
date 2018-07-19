@@ -1,24 +1,18 @@
 import React from "react";
-import { Text, View, Image, Dimensions } from "react-native";
+import { Text, View, Image, Dimensions,TouchableOpacity } from "react-native";
 import HTML from "react-native-render-html";
 
-const Detail = props => {
+const DetailNews = props => {
   const { containerStyle, subContainerStyle, ImageStyle, titleStyle } = styles;
   //   alert(JSON.stringify(props.data));
   return (
     <View style={containerStyle}>
-      <View style={subContainerStyle}>
-        <Text stye={titleStyle}> {props.data.title} </Text>
-      </View>
-
-      <View style={subContainerStyle}>
-        {/* <Image style={ImageStyle} source={{ uri: props.data.image }} /> */}
-        <Text> {props.data.links[0].url} </Text>
-      </View>
-
-      <View style={subContainerStyle}>
-        <Text> {props.data.published} </Text>
-      </View>
+      <TouchableOpacity
+         style={styles.button}
+         onPress={() => { console.log("Pressed"); }}
+        >
+         <Text> {props.data.title} </Text>
+       </TouchableOpacity>
     </View>
   );
 };
@@ -28,14 +22,12 @@ const styles = {
     borderWidth: 1,
     borderRadius: 2,
     borderColor: "#ddd",
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 2,
+    
     elevation: 1,
     marginLeft: 5,
     marginRight: 5,
-    marginTop: 10
+    marginTop: 10,
+    flex: 1
   },
   subContainerStyle: {
     borderBottomWidth: 1,
@@ -53,7 +45,21 @@ const styles = {
   },
   titleStyle: {
     fontSize: 18
-  }
+  },
+  button: {
+    alignItems: 'center',
+    backgroundColor: '#DDDDDD',
+    padding: 10
+  },
 };
+/*
+<TouchableOpacity
+         style={styles.button}
+         onPress={() => { console.log("Pressed"); }}
+        >
+         <Text> {props.data.title} </Text>
+       </TouchableOpacity>
+*/
 
-export default Detail;
+
+export default DetailNews;
