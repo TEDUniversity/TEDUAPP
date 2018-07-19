@@ -23,7 +23,7 @@ class Main extends Component {
         source={require("./img/header/anatepe2.png")}
       />
     ),
-    title: "Council",
+    title: "Main",
     headerStyle: { marginTop: 0, backgroundColor: "#fff" },
     headerLeft: null,
     gesturesEnabled: false
