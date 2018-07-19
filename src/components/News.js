@@ -8,6 +8,7 @@
 
 import React, { Component } from "react";
 import { Text, View, StyleSheet } from "react-native";
+import axios from "axios";
 
 class News extends Component {
     static navigationOptions = {
@@ -16,7 +17,48 @@ class News extends Component {
         headerLeft: null,
         gesturesEnabled: false,
       };
-  
+    
+      state = { data: [], loading: true };
+
+
+      /*    
+      xml parse etmek için bulduğum linkler aşağıda 
+      https://www.npmjs.com/package/xmldom
+      https://github.com/Leonidas-from-XIV/node-xml2js
+      https://stackoverflow.com/questions/29805704/react-native-fetch-xml-data
+      */
+
+    //chrome dan js debug yaparak görebilirsin console log ları
+    componentWillMount() {
+        //internetten bulduğum kod burda ama çalışmıyor
+        const parseString = require('xml2js').parseString;
+        //const xml = "<root>Hello xml2js!</root>"
+        axios
+          .get("https://www.tedu.edu.tr/rss.xml")
+          .then(response => {
+            parseString(response, (err, result) => {
+                console.log(result);
+                });
+          });
+        
+        //Yunusmarkette kullandığımız kod aşağıda
+        //browser da  linki açarak response u görebilirsin
+        /*axios
+          .get("https://www.tedu.edu.tr/rss.xml")
+          .then(response => {
+            this.whenLoaded(response);
+          })
+          .catch(error => {
+            console.log(error);
+          });*/
+      }
+
+    whenLoaded(response) {
+        this.setState({ data: response.data });
+        this.setState({ loading: false });
+        console.log(this.state.data);
+      }
+
     render() {
     return (
         <View style={styles.container}>
