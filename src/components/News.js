@@ -13,7 +13,9 @@ import {
   ScrollView,
   StyleSheet,
   ActivityIndicator,
-  Dimensions
+  Dimensions,
+  Platform, 
+  Animated
 } from "react-native";
 import axios from "axios";
 import * as rssParser from "react-native-rss-parser";
@@ -26,7 +28,9 @@ const Spinner = ({ size }) => (
 );
 
 class News extends Component {
-    
+
+     
+
   static navigationOptions = {
     title: "News",
     headerStyle: { marginTop: 0, backgroundColor: "#fff" },
@@ -36,14 +40,20 @@ class News extends Component {
 
   constructor(props) {
     super(props);
-    this.renderData = this.renderData.bind(this);
+    this.renderData = this.renderData.bind(this); 
+    this.scrollYAnimatedValue = new Animated.Value(0);
+    this.array = [];
     }
-  state = { data: [], loading: true };
+    //const HEADER_MIN_HEIGHT = 50;
+    //const HEADER_MAX_HEIGHT = 200;
+    state = { data: [], loading: true };
 
   
-  componentWillMount() {
-    //const parseString = require("xml2js").parseString;
-    
+  componentWillMount() {  
+    for (let i = 1; i <= 50; i++)
+    {
+        this.array.push(i);
+    }  
     fetch("https://www.tedu.edu.tr/rss.xml")
       .then(response => response.text())
       .then(responseData => rssParser.parse(responseData))
@@ -52,6 +62,7 @@ class News extends Component {
         console.log(rss.items.length);
       });
 
+    
    
   }
 
@@ -67,7 +78,46 @@ class News extends Component {
     ));
   }
   render() {
-    if (this.state.loading) {
+
+
+    const headerHeight = this.scrollYAnimatedValue.interpolate(
+        {
+            inputRange: [ 0, ( 200 - 50 ) ],
+            outputRange: [ 200, 50 ],
+            extrapolate: 'clamp'
+        });
+     
+        const headerBackgroundColor = this.scrollYAnimatedValue.interpolate(
+        {
+            inputRange: [ 0, ( 200 - 50 )  ],
+            outputRange: [ '#212121', '#01579B' ],
+            extrapolate: 'clamp'
+        });
+    
+return (<View style = { styles.container }>
+    <ScrollView 
+        contentContainerStyle = {{ paddingTop: 200 }}
+        scrollEventThrottle = { 16 }
+        onScroll = { Animated.event(
+          [{ nativeEvent: { contentOffset: { y: this.scrollYAnimatedValue }}}]
+    )}>
+    {
+        this.array.map(( item, key ) =>
+        (
+            <View key = { key } style = { styles.item }>
+                <Text style = { styles.itemText }>Row { item }</Text>
+            </View>
+        ))
+    }
+    </ScrollView>
+
+    <Animated.View style = {[ styles.animatedHeader, { height: headerHeight, backgroundColor: headerBackgroundColor } ]}>
+        <Text style = { styles.headerText }>Animated Header</Text>
+    </Animated.View>
+</View>);
+
+
+    /*if (this.state.loading) {
       return <Spinner size={"large"} />;
     } else {
       return (
@@ -77,7 +127,7 @@ class News extends Component {
           </ScrollView>
         </View>
       );
-    }
+    }*/
   }
 }
 
@@ -95,7 +145,43 @@ const styles = StyleSheet.create({
     width: Dimensions.get("window").width / 2,
     //flexDirection: "row",
 
-  }
+  },
+  container:
+    {
+        flex: 1,
+        paddingTop: (Platform.OS == 'ios') ? 20 : 0
+    },
+ 
+    animatedHeader:
+    {
+        position: 'absolute',
+        top: (Platform.OS == 'ios') ? 20 : 0,
+        left: 0,
+        right: 0,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+ 
+    headerText:
+    {
+        color: 'white',
+        fontSize: 22
+    },
+ 
+    item:
+    {
+        backgroundColor: '#E0E0E0',
+        margin: 8,
+        height: 45,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+ 
+    itemText:
+    {
+        color: 'black',
+        fontSize: 16
+    }
 });
 
 export default News;
