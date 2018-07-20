@@ -13,24 +13,21 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import Image from "react-native-scalable-image";
 
 class Main extends Component {
-    
+    /*static navigationOptions = ({ navigation }) => {
+        const { state } = navigation;
+
+        if (state.params !== undefined) {
+            return { 
+                headerTitle: state.params.websiteURL
+            };
+        }  
+    };*/
   static navigationOptions = {
-    headerTitle: (
-      <Image
-        resizeMode="contain"
-        width={Dimensions.get("window").width}
-        style={StyleSheet.absoluteFill}
-        style={{ marginTop: 40 }}
-        
-        source={require("./img/header/anatepe2.png")}
-      />
-    ),
-    title: "Main",
-    headerStyle: {  marginTop: 0, backgroundColor: "#fff", height: 80 },
-    headerLeft: null,
-    gesturesEnabled: false
+    title: ""
+      
   };
 
+  
   state = { activeTab: "NewsRouter" };
 
   tabs = [
@@ -84,19 +81,19 @@ class Main extends Component {
   showTab() {
     switch (this.state.activeTab) {
       case 'NewsRouter':
-          return <News navOp={this.navigationOptions} />;
+          return <News navigation={this.props.navigation} />;
           break;
       case 'MenuRouter':
-          return <Menu navOp={this.navigationOptions} />;
+          return <Menu navigation={this.navigationOptions} />;
           break;
       case 'CalendarRouter':
-          return <Calendar navOp={this.navigationOptions} />;
+          return <Calendar navigation={this.navigationOptions} />;
           break;
       case 'MoodleRouter':
-          return <Moodle navOp={this.navigationOptions} />;
+          return <Moodle navigation={this.navigationOptions} />;
           break;
       case 'CouncilRouter':
-          return <Council navOp={this.navigationOptions} />;
+          return <Council navigation={this.navigationOptions} />;
           break;
     }
   }
@@ -139,3 +136,20 @@ const styles = StyleSheet.create({
 });
 
 export default Main;
+
+/*
+headerTitle: (
+      <Image
+        resizeMode="contain"
+        width={Dimensions.get("window").width}
+        style={StyleSheet.absoluteFill}
+        style={{ marginTop: 40 }}
+        
+        source={require("./img/header/anatepe2.png")}
+      />
+    ),
+    title: "Main",
+    headerStyle: { backgroundColor: "#fff", height: 80 },
+    headerLeft: null,
+    gesturesEnabled: false
+*/

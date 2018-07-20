@@ -18,6 +18,9 @@ import {
 import axios from "axios";
 import * as rssParser from "react-native-rss-parser";
 import DetailNews from "./DetailNews";
+import HeaderImageScrollView, { TriggeringView } from 'react-native-image-header-scroll-view';
+import Image from "react-native-scalable-image";
+import Main from "./Main";
 
 const Spinner = ({ size }) => (
   <View style={styles.spinnerStyle}>
@@ -33,17 +36,39 @@ class News extends Component {
     headerLeft: null,
     gesturesEnabled: false
   };
+   
+
 
   constructor(props) {
     super(props);
     this.renderData = this.renderData.bind(this);
+    this.setNavOp = this.setNavOp.bind(this);
     }
-  state = { data: [], loading: true };
+  state = { data: [], 
+    loading: true,
+    title: "News",
+    headerStyle: { marginTop: 0, backgroundColor: "#fff" },
+    headerLeft: null,
+    gesturesEnabled: false
+ };
 
   
   componentWillMount() {
+      Main.navigationOptions.title = this.state.title;
+        
+      
+    /*const { setParams } = this.props.navigation;
+    setParams({ headerTitle: (
+        <Image
+          resizeMode="contain"
+          width={Dimensions.get("window").width}
+          style={StyleSheet.absoluteFill}
+          style={{ marginTop: 40 }}
+          
+          source={require("./img/header/anatepe2.png")}
+        />
+      ) });*/
     //const parseString = require("xml2js").parseString;
-    
     fetch("https://www.tedu.edu.tr/rss.xml")
       .then(response => response.text())
       .then(responseData => rssParser.parse(responseData))
@@ -51,9 +76,45 @@ class News extends Component {
         this.whenLoaded(rss.items);
         console.log(rss.items.length);
       });
-
-   
   }
+
+  componentDidMount() {
+      /*this.props.navigation.setParams({
+        headerTitle: (
+            <Image
+              resizeMode="contain"
+              width={Dimensions.get("window").width}
+              style={StyleSheet.absoluteFill}
+              style={{ marginTop: 40 }}
+              
+              source={require("./img/header/anatepe2.png")}
+            />
+          ),
+          title: "Main",
+          headerStyle: { backgroundColor: "#fff", height: 80 },
+          headerLeft: null,
+          gesturesEnabled: false
+      });*/
+  }
+
+  setNavOp(props) {
+    props.navigation.setParams({ 
+      headerTitle: (
+          <Image
+            resizeMode="contain"
+            width={Dimensions.get("window").width}
+            style={StyleSheet.absoluteFill}
+            style={{ marginTop: 40 }}
+            
+            source={require("./img/header/anatepe2.png")}
+          />
+        ),
+        title: "Main",
+        headerStyle: { backgroundColor: "#fff", height: 80 },
+        headerLeft: null,
+        gesturesEnabled: false
+     });
+}
 
   whenLoaded(response) {
     this.setState({ data: response });
@@ -66,16 +127,29 @@ class News extends Component {
       <DetailNews key={Id} data={responseData} />
     ));
   }
+
+  
   render() {
+
     if (this.state.loading) {
       return <Spinner size={"large"} />;
     } else {
       return (
-        <View style={styles.container}>
-          <ScrollView>
-            <View style={styles.subContainer} >{this.renderData()}</View>
-          </ScrollView>
+        
+        <HeaderImageScrollView
+        maxHeight={120}
+        minHeight={10}
+        renderHeader={() => <Image resizeMode="contain" source={require("./img/header/anatepe2.png")} width={Dimensions.get("window").width} />}
+        
+        >
+        <View style={{}}>
+          <TriggeringView >
+                <View style={styles.subContainer} >{this.renderData()}</View>
+          </TriggeringView>
         </View>
+      </HeaderImageScrollView>
+
+        
       );
     }
   }
@@ -92,7 +166,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold"
   },
   subContainer: {
-    width: Dimensions.get("window").width / 2,
+    //width: Dimensions.get("window").width / 2,
     //flexDirection: "row",
 
   }

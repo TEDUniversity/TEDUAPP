@@ -24,7 +24,6 @@ class Menu extends Component {
     const { width } = Dimensions.get("window");
     return (
       <View style={styles.container}>
-        
         <View style={styles.subContainer}>
           <Text style={styles.text}>This is Menu.</Text>
         </View>
