@@ -19,12 +19,14 @@ class Main extends Component {
       <Image
         resizeMode="contain"
         width={Dimensions.get("window").width}
+        style={StyleSheet.absoluteFill}
         style={{ marginTop: 40 }}
+        
         source={require("./img/header/anatepe2.png")}
       />
     ),
     title: "Main",
-    headerStyle: { marginTop: 0, backgroundColor: "#fff" },
+    headerStyle: {  marginTop: 0, backgroundColor: "#fff", height: 80 },
     headerLeft: null,
     gesturesEnabled: false
   };

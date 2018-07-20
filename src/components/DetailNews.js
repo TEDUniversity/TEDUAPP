@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, View, Image, Dimensions,TouchableOpacity } from "react-native";
+import { Text, View, Image, Dimensions, TouchableOpacity } from "react-native";
 import HTML from "react-native-render-html";
 
 const DetailNews = props => {
@@ -7,7 +7,7 @@ const DetailNews = props => {
   //   alert(JSON.stringify(props.data));
   return (
     <View style={containerStyle}>
-      <TouchableOpacity
+        <TouchableOpacity
          style={styles.button}
          onPress={() => { console.log("Pressed"); }}
         >
@@ -19,10 +19,6 @@ const DetailNews = props => {
 
 const styles = {
   containerStyle: {
-    borderWidth: 1,
-    borderRadius: 2,
-    borderColor: "#ddd",
-    
     elevation: 1,
     marginLeft: 5,
     marginRight: 5,
@@ -50,7 +46,7 @@ const styles = {
     alignItems: 'center',
     backgroundColor: '#DDDDDD',
     padding: 10,
-    width: Dimensions.get("window").width / 2
+    
   },
 };
 /*

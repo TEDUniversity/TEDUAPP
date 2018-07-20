@@ -12,7 +12,8 @@ import {
   View,
   ScrollView,
   StyleSheet,
-  ActivityIndicator
+  ActivityIndicator,
+  Dimensions
 } from "react-native";
 import axios from "axios";
 import * as rssParser from "react-native-rss-parser";
@@ -71,8 +72,8 @@ class News extends Component {
     } else {
       return (
         <View style={styles.container}>
-          <ScrollView style={styles.subContainer}>
-            {this.renderData()}
+          <ScrollView>
+            <View style={styles.subContainer} >{this.renderData()}</View>
           </ScrollView>
         </View>
       );
@@ -84,13 +85,16 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "space-between",
-    alignItems: "center"
+    alignItems: "center",
+    //marginTop: 60
   },
   text: {
     fontWeight: "bold"
   },
   subContainer: {
-    flex: 1,
+    width: Dimensions.get("window").width / 2,
+    //flexDirection: "row",
+
   }
 });
 
