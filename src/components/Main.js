@@ -84,16 +84,16 @@ class Main extends Component {
           return <News navigation={this.props.navigation} />;
           break;
       case 'MenuRouter':
-          return <Menu navigation={this.navigationOptions} />;
+          return <Menu navigation={this.this.props.navigation} />;
           break;
       case 'CalendarRouter':
-          return <Calendar navigation={this.navigationOptions} />;
+          return <Calendar navigation={this.this.props.navigation} />;
           break;
       case 'MoodleRouter':
-          return <Moodle navigation={this.navigationOptions} />;
+          return <Moodle navigation={this.this.props.navigation} />;
           break;
       case 'CouncilRouter':
-          return <Council navigation={this.navigationOptions} />;
+          return <Council navigation={this.this.props.navigation} />;
           break;
     }
   }
