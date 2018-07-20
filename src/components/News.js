@@ -13,7 +13,8 @@ import {
   ScrollView,
   StyleSheet,
   ActivityIndicator,
-  Dimensions
+  Dimensions,
+  Animated
 } from "react-native";
 import axios from "axios";
 import * as rssParser from "react-native-rss-parser";
@@ -51,8 +52,16 @@ class News extends Component {
         this.whenLoaded(rss.items);
         console.log(rss.items.length);
       });
+  }
 
-   
+
+  componentDidMount() {
+    this.props.setNavigationOptions({
+    title: "News",
+    headerStyle: { marginTop: 0, backgroundColor: "#fff" },
+    headerLeft: null,
+    gesturesEnabled: false
+});
   }
 
   whenLoaded(response) {
@@ -72,7 +81,10 @@ class News extends Component {
     } else {
       return (
         <View style={styles.container}>
-          <ScrollView>
+          <ScrollView
+          onScroll={Animated.event([{ nativeEvent: { contentOffset: { y: this.animatedValue } } }])}
+          scrollEventThrottle={16}
+          >
             <View style={styles.subContainer} >{this.renderData()}</View>
           </ScrollView>
         </View>

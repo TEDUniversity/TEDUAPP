@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Text, View, StyleSheet, Dimensions } from "react-native";
+import { Text, View, TouchableOpacity, StyleSheet, Dimensions } from "react-native";
 import News from "./News";
 import Moodle from "./Moodle";
 import Menu from "./Menu";
@@ -13,25 +13,37 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import Image from "react-native-scalable-image";
 
 class Main extends Component {
-    
+    /*static navigationOptions = ({ navigation }) => {
+        const { state } = navigation;
+
+        if (state.params !== undefined) {
+            return { 
+                headerTitle: state.params.websiteURL
+            };
+        }  
+    };*/
   static navigationOptions = {
     headerTitle: (
-      <Image
-        resizeMode="contain"
-        width={Dimensions.get("window").width}
-        style={StyleSheet.absoluteFill}
-        style={{ marginTop: 40 }}
-        
-        source={require("./img/header/anatepe2.png")}
-      />
-    ),
-    title: "Main",
-    headerStyle: {  marginTop: 0, backgroundColor: "#fff", height: 80 },
-    headerLeft: null,
-    gesturesEnabled: false
+        <Image
+          resizeMode="contain"
+          width={Dimensions.get("window").width}
+          style={StyleSheet.absoluteFill}
+          style={{ marginTop: 40 }}
+          
+          source={require("./img/header/anatepe2.png")}
+        />
+      ),
+      title: "Main",
+      headerStyle: { height: 80 },
+      headerLeft: null,
+      gesturesEnabled: false
   };
 
-  state = { activeTab: "NewsRouter" };
+  constructor() {
+    super();
+    this.state = { headerTitle: "", activeTab: "NewsRouter", navigationOptions: {} };
+  }
+  
 
   tabs = [
     {
@@ -84,24 +96,28 @@ class Main extends Component {
   showTab() {
     switch (this.state.activeTab) {
       case 'NewsRouter':
-          return <News navOp={this.navigationOptions} />;
-          break;
+          return <News setNavigationOptions={this.setNavigationOptions} />;
       case 'MenuRouter':
-          return <Menu navOp={this.navigationOptions} />;
-          break;
+          return <Menu navigation={this.navigationOptions} />;
       case 'CalendarRouter':
-          return <Calendar navOp={this.navigationOptions} />;
-          break;
+          return <Calendar navigation={this.navigationOptions} />;
       case 'MoodleRouter':
-          return <Moodle navOp={this.navigationOptions} />;
-          break;
+          return <Moodle navigation={this.navigationOptions} />;
       case 'CouncilRouter':
-          return <Council navOp={this.navigationOptions} />;
-          break;
+          return <Council navigation={this.navigationOptions} />;
     }
   }
+  setNavigationOptions = (navigationOptions) => {
+    this.setState({ navigationOptions });
+  }
+ 
+  getNavOps() {
+      return this.state.navigationOptions.headerTitle;
+  }
+
 
   render() {
+    console.log(this.state.navigationOptions);
     return (
       <View style={{ flex: 1 }}>
         <View style={styles.container}>
@@ -139,3 +155,20 @@ const styles = StyleSheet.create({
 });
 
 export default Main;
+
+/*
+headerTitle: (
+      <Image
+        resizeMode="contain"
+        width={Dimensions.get("window").width}
+        style={StyleSheet.absoluteFill}
+        style={{ marginTop: 40 }}
+        
+        source={require("./img/header/anatepe2.png")}
+      />
+    ),
+    title: "Main",
+    headerStyle: { backgroundColor: "#fff", height: 80 },
+    headerLeft: null,
+    gesturesEnabled: false
+*/
