@@ -80,38 +80,33 @@ class News extends Component {
       return <Spinner size={"large"} />;
     } else {
       return (
-        <View style={styles.container}>
           <ScrollView
           onScroll={Animated.event([{ nativeEvent: { contentOffset: { y: this.animatedValue } } }])}
           scrollEventThrottle={16}
           contentContainerStyle={styles.container}
-          style={styles.containerr}
           >
             <View style={styles.subContainer} >{this.renderData()}</View>
           </ScrollView>
-        </View>
       );
     }
   }
 }
 
 const styles = StyleSheet.create({
-    containerr: {
-        height: 500
-      },
   container: {
-    flexDirection: 'row',
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginTop: 40,
     flexWrap: 'wrap',
+  },
+  subContainer: {
+    
+    flexBasis: '50%',
+    width: Dimensions.get("window").width / 2,
   },
   text: {
     fontWeight: "bold"
   },
-  subContainer: {
-    
-    marginTop: 10,
-    width: Dimensions.get("window").width / 2,
-    //flexDirection: "row",
-  }
 });
 
 export default News;
