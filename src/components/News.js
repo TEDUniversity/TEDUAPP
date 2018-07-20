@@ -54,9 +54,7 @@ class News extends Component {
 
   
   componentWillMount() {
-      Main.navigationOptions.title = this.state.title;
-        
-      
+    Main.navigationOptions.title = this.state.title;
     /*const { setParams } = this.props.navigation;
     setParams({ headerTitle: (
         <Image
