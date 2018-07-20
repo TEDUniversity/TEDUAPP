@@ -61,7 +61,7 @@ class News extends Component {
     headerStyle: { marginTop: 0, backgroundColor: "#fff" },
     headerLeft: null,
     gesturesEnabled: false
-});
+    });
   }
 
   whenLoaded(response) {
@@ -84,6 +84,8 @@ class News extends Component {
           <ScrollView
           onScroll={Animated.event([{ nativeEvent: { contentOffset: { y: this.animatedValue } } }])}
           scrollEventThrottle={16}
+          contentContainerStyle={styles.container}
+          style={styles.containerr}
           >
             <View style={styles.subContainer} >{this.renderData()}</View>
           </ScrollView>
@@ -94,19 +96,21 @@ class News extends Component {
 }
 
 const styles = StyleSheet.create({
+    containerr: {
+        height: 500
+      },
   container: {
-    flex: 1,
-    justifyContent: "space-between",
-    alignItems: "center",
-    //marginTop: 60
+    flexDirection: 'row',
+    flexWrap: 'wrap',
   },
   text: {
     fontWeight: "bold"
   },
   subContainer: {
+    
+    marginTop: 10,
     width: Dimensions.get("window").width / 2,
     //flexDirection: "row",
-
   }
 });
 

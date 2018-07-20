@@ -11,14 +11,20 @@ import { Text, View, StyleSheet, Image, Dimensions } from "react-native";
 
 class Menu extends Component {
   static navigationOptions = {
-    title: "Menu",
-    headerStyle: { marginTop: 0, backgroundColor: "#fff" },
-    headerLeft: null,
-    gesturesEnabled: false,
-    style: {
-      color: "#000000"
-    }
+    
   };
+
+  componentDidMount() {
+    this.props.setNavigationOptions({
+      title: "Menu",
+      headerStyle: { marginTop: 0, backgroundColor: "#fff" },
+      headerLeft: null,
+      gesturesEnabled: false,
+      style: {
+        color: "#000000"
+      }
+    });
+  }
 
   render() {
     const { width } = Dimensions.get("window");

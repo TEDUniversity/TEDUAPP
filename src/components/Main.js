@@ -13,15 +13,7 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import Image from "react-native-scalable-image";
 
 class Main extends Component {
-    /*static navigationOptions = ({ navigation }) => {
-        const { state } = navigation;
-
-        if (state.params !== undefined) {
-            return { 
-                headerTitle: state.params.websiteURL
-            };
-        }  
-    };*/
+    
   static navigationOptions = {
     headerTitle: (
         <Image
@@ -44,6 +36,10 @@ class Main extends Component {
     this.state = { headerTitle: "", activeTab: "NewsRouter", navigationOptions: {} };
   }
   
+  setNavigationOptions = (navigationOptions) => {
+    this.setState({ navigationOptions });
+  }
+
 
   tabs = [
     {
@@ -82,9 +78,8 @@ class Main extends Component {
       pressColor: "rgba(255, 255, 255, 0.16)"
     }
   ];
-  renderIcon = icon => ({ isActive }) => (
-    <Icon size={24} color="white" name={icon} />
-  );
+
+  
   renderTab = ({ tab, isActive }) => (
     <FullTab
       isActive={isActive}
@@ -93,28 +88,26 @@ class Main extends Component {
       renderIcon={this.renderIcon(tab.icon)}
     />
   );
+
+  
   showTab() {
     switch (this.state.activeTab) {
       case 'NewsRouter':
           return <News setNavigationOptions={this.setNavigationOptions} />;
       case 'MenuRouter':
-          return <Menu navigation={this.navigationOptions} />;
+          return <Menu setNavigationOptions={this.setNavigationOptions} />;
       case 'CalendarRouter':
-          return <Calendar navigation={this.navigationOptions} />;
+          return <Calendar setNavigationOptions={this.setNavigationOptions} />;
       case 'MoodleRouter':
-          return <Moodle navigation={this.navigationOptions} />;
+          return <Moodle setNavigationOptions={this.setNavigationOptions} />;
       case 'CouncilRouter':
-          return <Council navigation={this.navigationOptions} />;
+          return <Council setNavigationOptions={this.setNavigationOptions} />;
     }
   }
-  setNavigationOptions = (navigationOptions) => {
-    this.setState({ navigationOptions });
-  }
- 
-  getNavOps() {
-      return this.state.navigationOptions.headerTitle;
-  }
 
+  renderIcon = icon => ({ isActive }) => (
+    <Icon size={24} color="white" name={icon} />
+  );
 
   render() {
     console.log(this.state.navigationOptions);
