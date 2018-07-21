@@ -73,16 +73,14 @@ const styles = StyleSheet.create({
   text: {
     fontWeight: "bold",
     color: "white",
-    alignItems: "center",
     textAlign: 'center',
     textAlignVertical: 'center',
-    justifyContent: "center",
-    alignSelf: 'center'
+    
   },
   subContainer: {
     marginTop: 10,
     justifyContent: "center",
-    alignSelf: 'center',
+    alignItems: 'center',
 
   }
 });
