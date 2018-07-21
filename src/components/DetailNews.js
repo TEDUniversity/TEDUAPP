@@ -10,7 +10,7 @@ const DetailNews = props => {
          style={styles.button}
          onPress={() => { console.log("Pressed"); }}
         >
-         <Text> {props.data.title} </Text>
+         <Text style={styles.text}> {props.data.title} </Text>
        </TouchableOpacity>
   );
 };
@@ -24,13 +24,19 @@ const styles = {
   button: {
     alignItems: 'center',
     backgroundColor: '#DDDDDD',
-    width: Dimensions.get("window").width / 2,
-    padding: 10,
+    width: (Dimensions.get("window").width / 2) - 10,
+    padding: 5,
     elevation: 1,
     marginLeft: 5,
     marginRight: 5,
     marginTop: 10,    
+    justifyContent: 'center',
   },
+  text: {
+    textAlign: 'center',
+    textAlignVertical: 'center',
+    
+  }
 };
 /*
 <TouchableOpacity

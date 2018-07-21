@@ -88,8 +88,8 @@ class News extends Component {
 
         <View style={styles.container}>
             <FlatList
-                style={styles.list}
-                //contentContainerStyle=
+                //style={styles.list}
+                contentContainerStyle={styles.list}
                 data={this.state.data}
                 renderItem={({ item }) => <DetailNews data={item} />}
                 numColumns={2}
@@ -124,10 +124,9 @@ const styles = StyleSheet.create({
   container: {
     marginTop: 40,
     marginRight: 5,
-    marginLeft: 5,
+    //marginLeft: 5,
   },
   list: {
-    
 
   },
   text: {
