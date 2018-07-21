@@ -38,12 +38,11 @@ class News extends Component {
     super(props);
     this.renderData = this.renderData.bind(this);
     }
-  state = { data: [], loading: true };
+  state = { data: [], dataEtkinlikler: [], dataHaberler: [], dataDuyurular: [], loading: true };
 
   
   componentWillMount() {
     //const parseString = require("xml2js").parseString;
-    
     fetch("https://www.tedu.edu.tr/rss.xml")
       .then(response => response.text())
       .then(responseData => rssParser.parse(responseData))
@@ -51,12 +50,25 @@ class News extends Component {
         this.whenLoaded(rss.items);
         console.log(rss.items.length);
       });
-
-   
   }
 
   whenLoaded(response) {
     this.setState({ data: response });
+    this.state.data.map((item) => {
+        if (item.link.includes("gundem/duyurular")) {
+            //this.setState({ dataDuyurular: this.state.dataDuyurular.concat(item) });
+            console.log("1");
+        } else if (item.link.includes("gundem/etkinlikler")) {
+            //this.setState({ dataEtkinlikler: this.state.dataEtkinlikler.concat(item) });
+            console.log("2");
+        } else if (item.link.includes("gundem/haberler")) {
+            //this.setState({ dataHaberler: this.state.dataHaberler.concat(item) });
+            console.log("3");
+        }
+    });
+    //console.log(this.state.dataDuyurular);
+    //console.log(this.state.dataEtkinlikler);
+    //console.log(this.state.dataHaberler);
     this.setState({ loading: false });
     //console.log(JSON.stringify(response));
     //console.log(this.state.data);
