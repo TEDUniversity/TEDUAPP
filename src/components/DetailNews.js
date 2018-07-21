@@ -11,11 +11,12 @@ const DetailNews = props => {
          style={styles.button}
          onPress={() => { console.log("Pressed"); }}
         >
-         <Text> {props.data.title} </Text>
+         <Text style={styles.text}> {props.data.title} </Text>
        </TouchableOpacity>
     </View>
   );
 };
+
 
 const styles = {
   containerStyle: {
@@ -40,8 +41,9 @@ const styles = {
     width: 300,
     flex: 1
   },
-  titleStyle: {
-    fontSize: 18
+  text: {
+    textAlign: 'center',
+    textAlignVertical: 'center',
   },
   button: {
     alignItems: 'center',
@@ -49,7 +51,7 @@ const styles = {
     padding: 10,
     height: 100,
     width: 200,
-    
+    justifyContent: 'center',
   },
 };
 /*
