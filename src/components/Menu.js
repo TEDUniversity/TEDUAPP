@@ -75,8 +75,9 @@ const styles = StyleSheet.create({
     color: "white",
     alignItems: "center",
     textAlign: 'center',
-
-
+    textAlignVertical: 'center',
+    justifyContent: "center",
+    alignSelf: 'center'
   },
   subContainer: {
     marginTop: 10,
