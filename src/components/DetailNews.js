@@ -23,7 +23,8 @@ const styles = {
     marginLeft: 5,
     marginRight: 5,
     marginTop: 10,
-    flex: 1
+    flex: 1,
+    
   },
   subContainerStyle: {
     borderBottomWidth: 1,
@@ -46,6 +47,8 @@ const styles = {
     alignItems: 'center',
     backgroundColor: '#DDDDDD',
     padding: 10,
+    height: 100,
+    width: 200,
     
   },
 };

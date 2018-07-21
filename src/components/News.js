@@ -18,6 +18,7 @@ import {
 import axios from "axios";
 import * as rssParser from "react-native-rss-parser";
 import DetailNews from "./DetailNews";
+import HorizontalList from "./HorizontalList";
 
 const Spinner = ({ size }) => (
   <View style={styles.spinnerStyle}>
@@ -36,7 +37,9 @@ class News extends Component {
 
   constructor(props) {
     super(props);
-    this.renderData = this.renderData.bind(this);
+    //this.renderDataDuyurular = this.renderDataDuyurular.bind(this);
+    //this.renderDataEtkinlikler = this.renderDataEtkinlikler.bind(this);
+    //this.renderDataHaberler = this.renderDataHaberler.bind(this);
     }
   state = { data: [], dataEtkinlikler: [], dataHaberler: [], dataDuyurular: [], loading: true };
 
@@ -54,27 +57,51 @@ class News extends Component {
 
   whenLoaded(response) {
     this.setState({ data: response });
-    this.state.data.map((item) => {
-        if (item.link.includes("gundem/duyurular")) {
+    //other way of traversing an array
+    /*const arrayLength = this.state.data.length;
+    for (let i = 0; i < arrayLength; i++) {
+        //console.log(this.state.data[i]);
+        if (this.state.data[i].link.includes("gundem/duyurular")) {
             //this.setState({ dataDuyurular: this.state.dataDuyurular.concat(item) });
             console.log("1");
-        } else if (item.link.includes("gundem/etkinlikler")) {
+        } else if (this.state.data[i].link.includes("gundem/etkinlikler")) {
             //this.setState({ dataEtkinlikler: this.state.dataEtkinlikler.concat(item) });
             console.log("2");
-        } else if (item.link.includes("gundem/haberler")) {
+        } else if (this.state.data[i].link.includes("gundem/haberler")) {
             //this.setState({ dataHaberler: this.state.dataHaberler.concat(item) });
             console.log("3");
         }
+    }*/
+    //one way of traversing an array
+    this.state.data.map((item) => {
+        if (item.links[0].url.includes("gundem/duyurular")) {
+            this.setState({ dataDuyurular: this.state.dataDuyurular.concat(item) });
+        } else if (item.links[0].url.includes("gundem/etkinlikler")) {
+            this.setState({ dataEtkinlikler: this.state.dataEtkinlikler.concat(item) });
+        } else if (item.links[0].url.includes("gundem/haberler")) {
+            this.setState({ dataHaberler: this.state.dataHaberler.concat(item) });
+        }
+        //console.log(item.links[0].url);
     });
-    //console.log(this.state.dataDuyurular);
-    //console.log(this.state.dataEtkinlikler);
-    //console.log(this.state.dataHaberler);
+    console.log(this.state.dataDuyurular);
+    console.log(this.state.dataEtkinlikler);
+    console.log(this.state.dataHaberler);
     this.setState({ loading: false });
     //console.log(JSON.stringify(response));
     //console.log(this.state.data);
   }
-  renderData() {
-    return this.state.data.map((responseData, Id) => (
+  renderDataDuyurular = () => {
+    return this.state.dataDuyurular.map((responseData, Id) => (
+      <DetailNews key={Id} data={responseData} />
+    ));
+  }
+  renderDataEtkinlikler = () => {
+    return this.state.dataHaberler.map((responseData, Id) => (
+      <DetailNews key={Id} data={responseData} />
+    ));
+  }
+  renderDataHaberler = () => {
+    return this.state.dataEtkinlikler.map((responseData, Id) => (
       <DetailNews key={Id} data={responseData} />
     ));
   }
@@ -83,22 +110,25 @@ class News extends Component {
       return <Spinner size={"large"} />;
     } else {
       return (
-        <View style={styles.container}>
-          <ScrollView>
-            <View style={styles.subContainer} >{this.renderData()}</View>
-          </ScrollView>
-        </View>
+            <View style={styles.container}>
+                <ScrollView 
+                scrollEnabled={false}
+                >
+                    <HorizontalList Data={this.renderDataDuyurular} title={"Duyurular"} />
+                    <HorizontalList Data={this.renderDataEtkinlikler} title={"Etkinlikler"} />
+                    <HorizontalList Data={this.renderDataHaberler} title={"Haberler"} />
+                </ScrollView>
+            </View>
       );
     }
   }
 }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "space-between",
-    alignItems: "center",
-    //marginTop: 60
+    //justifyContent: "space-between",
+    //alignItems: "center",
+    marginTop: 30
   },
   text: {
     fontWeight: "bold"
@@ -106,8 +136,7 @@ const styles = StyleSheet.create({
   subContainer: {
     width: Dimensions.get("window").width / 2,
     //flexDirection: "row",
-
-  }
+  },
 });
 
 export default News;
