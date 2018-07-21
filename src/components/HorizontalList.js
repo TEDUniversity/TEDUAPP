@@ -7,7 +7,7 @@ const HorizontalList = props => (
         <ScrollView 
         horizontal={true}
         decelerationRate={0}
-        snapToInterval={325} //your element width
+        snapToInterval={245} //your element width
         snapToAlignment={"center"}
         contentInset={{
             top: 0,
