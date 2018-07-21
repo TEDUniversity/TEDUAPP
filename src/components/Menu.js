@@ -7,7 +7,9 @@
  */
 
 import React, { Component } from "react";
-import { Text, View, StyleSheet, Image, Dimensions } from "react-native";
+import { ImageBackground, TouchableOpacity, Text, View, StyleSheet, Dimensions } from "react-native";
+import Image from "react-native-scalable-image";
+
 
 class Menu extends Component {
   static navigationOptions = {
@@ -24,10 +26,36 @@ class Menu extends Component {
     const { width } = Dimensions.get("window");
     return (
       <View style={styles.container}>
-        
-        <View style={styles.subContainer}>
-          <Text style={styles.text}>This is Menu.</Text>
-        </View>
+        <TouchableOpacity style={styles.subContainer}>
+            <ImageBackground source={require("./img/subMenu/menu1.jpg")} style={{ width: Dimensions.get("window").width,height: 60  }}>
+                <Text style={styles.text}>This is Menu.</Text>
+            </ImageBackground>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.subContainer}>
+          <ImageBackground source={require("./img/subMenu/menu2.jpg")} style={{ width: Dimensions.get("window").width, height: 60 }}>
+                <Text style={styles.text}>This is Menu.</Text>
+            </ImageBackground>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.subContainer}>
+          <ImageBackground source={require("./img/subMenu/menu3.jpg")} style={{ width: Dimensions.get("window").width, height: 60 }}>
+                <Text style={styles.text}>This is Menu.</Text>
+            </ImageBackground>        
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.subContainer}>
+          <ImageBackground source={require("./img/subMenu/menu4.jpg")} style={{ width: Dimensions.get("window").width, height: 60 }}>
+                <Text style={styles.text}>This is Menu.</Text>
+            </ImageBackground>        
+          </TouchableOpacity>
+        <TouchableOpacity style={styles.subContainer}>
+          <ImageBackground source={require("./img/subMenu/menu6.png")} style={{ width: Dimensions.get("window").width, height: 60 }}>
+                <Text style={styles.text}>This is Menu.</Text>
+          </ImageBackground>        
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.subContainer}>
+          <ImageBackground source={require("./img/subMenu/menu7.png")} style={{ width: Dimensions.get("window").width, height: 60 }}>
+                <Text style={styles.text}>This is Menu.</Text>
+          </ImageBackground>        
+        </TouchableOpacity>
       </View>
     );
   }
@@ -36,16 +64,25 @@ class Menu extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "space-between",
-    alignItems: "center"
+    margin: 10,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 10,
+
   },
   text: {
-    fontWeight: "bold"
+    fontWeight: "bold",
+    color: "white",
+    alignItems: "center",
+    textAlign: 'center',
+
+
   },
   subContainer: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center"
+    marginTop: 10,
+    justifyContent: "center",
+    alignSelf: 'center',
+
   }
 });
 
