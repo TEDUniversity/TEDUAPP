@@ -24,13 +24,12 @@ const styles = {
   button: {
     alignItems: 'center',
     backgroundColor: '#DDDDDD',
+    width: Dimensions.get("window").width / 2,
     padding: 10,
     elevation: 1,
     marginLeft: 5,
     marginRight: 5,
-    marginTop: 10,
-    flexBasis: '50%'
-    
+    marginTop: 10,    
   },
 };
 /*

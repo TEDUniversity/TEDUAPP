@@ -14,7 +14,9 @@ import {
   StyleSheet,
   ActivityIndicator,
   Dimensions,
-  Animated
+  Animated,
+  FlatList,
+  ListView
 } from "react-native";
 import axios from "axios";
 import * as rssParser from "react-native-rss-parser";
@@ -38,8 +40,9 @@ class News extends Component {
   constructor(props) {
     super(props);
     this.renderData = this.renderData.bind(this);
+    this.state = { data: [], loading: true };
     }
-  state = { data: [], loading: true };
+  
 
   
   componentWillMount() {
@@ -70,43 +73,86 @@ class News extends Component {
     //console.log(JSON.stringify(response));
     //console.log(this.state.data);
   }
+
   renderData() {
     return this.state.data.map((responseData, Id) => (
-      <DetailNews key={Id} data={responseData} />
+      <DetailNews  data={responseData} />
     ));
   }
+
   render() {
     if (this.state.loading) {
       return <Spinner size={"large"} />;
     } else {
       return (
-          <ScrollView
-          onScroll={Animated.event([{ nativeEvent: { contentOffset: { y: this.animatedValue } } }])}
-          scrollEventThrottle={16}
-          contentContainerStyle={styles.container}
-          >
-            <View style={styles.subContainer} >{this.renderData()}</View>
-          </ScrollView>
+
+        <View style={styles.container}>
+            <FlatList
+                style={styles.list}
+                //contentContainerStyle=
+                data={this.state.data}
+                renderItem={({ item }) => <DetailNews data={item} />}
+                numColumns={2}
+                horizontal={false}
+                keyExtractor={item => item.title}
+            />
+         </View>
+    
       );
     }
   }
+
+  /*render() {
+    if (this.state.loading) {
+      return <Spinner size={"large"} />;
+    } else {
+      return (
+          <View>
+          <ScrollView
+          contentContainerStyle={styles.grid}
+          >
+            
+            <View style={styles.subContainer} >{this.renderData()}</View>
+          </ScrollView>
+          </View>
+      );
+    }
+  }*/
 }
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: "space-between",
-    alignItems: "center",
     marginTop: 40,
-    flexWrap: 'wrap',
+    marginRight: 5,
+    marginLeft: 5,
   },
-  subContainer: {
+  list: {
     
-    flexBasis: '50%',
-    width: Dimensions.get("window").width / 2,
+
   },
   text: {
     fontWeight: "bold"
   },
 });
+
+/*const styles = StyleSheet.create({
+    grid: {
+      marginTop: 40,
+      marginRight: 5,
+      marginLeft: 5,
+      justifyContent: 'center',
+    flexDirection: 'row',
+        flexWrap: 'wrap',
+    },
+    list: {
+      
+  
+    },
+    text: {
+      fontWeight: "bold"
+    },
+    subContainer: {
+    }
+  });*/
 
 export default News;
