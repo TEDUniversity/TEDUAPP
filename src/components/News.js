@@ -16,7 +16,8 @@ import {
   Dimensions,
   Animated,
   FlatList,
-  ListView
+  ListView,
+  ImageBackground
 } from "react-native";
 import axios from "axios";
 import * as rssParser from "react-native-rss-parser";
@@ -87,6 +88,7 @@ class News extends Component {
       return (
 
         <View style={styles.container}>
+            <ImageBackground source={require("./img/background/BACKGROUND.png")} style={{ width: Dimensions.get("window").width }}>
             <FlatList
                 //style={styles.list}
                 contentContainerStyle={styles.list}
@@ -96,6 +98,7 @@ class News extends Component {
                 horizontal={false}
                 keyExtractor={item => item.title}
             />
+                </ImageBackground>
          </View>
     
       );
@@ -123,7 +126,7 @@ class News extends Component {
 const styles = StyleSheet.create({
   container: {
     marginTop: 40,
-    marginRight: 5,
+    marginRight: 0,
     //marginLeft: 5,
   },
   list: {
