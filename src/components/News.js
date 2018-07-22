@@ -13,7 +13,8 @@ import {
   ScrollView,
   StyleSheet,
   ActivityIndicator,
-  Dimensions
+  Dimensions,
+  ImageBackground
 } from "react-native";
 import axios from "axios";
 import * as rssParser from "react-native-rss-parser";
@@ -110,6 +111,8 @@ class News extends Component {
       return <Spinner size={"large"} />;
     } else {
       return (
+        <ImageBackground source={require("./img/background/BACKGROUND.png")} style={styles.mainBackGround}>
+
             <View style={styles.container}>
                 <ScrollView 
                 scrollEnabled={false}
@@ -119,6 +122,7 @@ class News extends Component {
                     <HorizontalList Data={this.renderDataHaberler} title={"Haberler"} />
                 </ScrollView>
             </View>
+            </ImageBackground>
       );
     }
   }
@@ -137,6 +141,12 @@ const styles = StyleSheet.create({
     width: Dimensions.get("window").width / 2,
     //flexDirection: "row",
   },
+  mainBackGround: {
+      width: '100%',
+      flex: 1,
+      height: null,
+      
+  }
 });
 
 export default News;
