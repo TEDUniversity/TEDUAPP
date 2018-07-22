@@ -38,36 +38,36 @@ class Main extends Component {
       key: "NewsRouter",
       icon: "dashboard",
       label: "Dashboard",
-      barColor: "#388E3C",
-      pressColor: "rgba(255, 255, 255, 0.16)"
+      barColor: "#144d8c",
+      pressColor: "rgba(232, 36, 55, 0.16)"
     },
     {
       key: "MenuRouter",
-      icon: "movie",
-      label: "Movies & TV",
-      barColor: "#B71C1C",
-      pressColor: "rgba(255, 255, 255, 0.16)"
+      icon: "menu",
+      label: "Menu",
+      barColor: "#144d8c",
+      pressColor: "rgba(232, 36, 55, 0.16)"
     },
     {
       key: "CalendarRouter",
       icon: "music-note",
       label: "Music",
-      barColor: "#E64A19",
-      pressColor: "rgba(255, 255, 255, 0.16)"
+      barColor: "#144d8c",
+      pressColor: "rgba(232, 36, 55, 0.16)"
     },
     {
       key: "MoodleRouter",
       icon: "music-note",
       label: "Music",
-      barColor: "#A93B13",
-      pressColor: "rgba(255, 255, 255, 0.16)"
+      barColor: "#144d8c",
+      pressColor: "rgba(232, 36, 55, 0.16)"
     },
     {
       key: "CouncilRouter",
       icon: "music-note",
       label: "Music",
-      barColor: "#E46D55",
-      pressColor: "rgba(255, 255, 255, 0.16)"
+      barColor: "#144d8c",
+      pressColor: "rgba(232, 36, 55, 0.16)"
     }
   ];
   renderIcon = icon => ({ isActive }) => (
@@ -107,7 +107,7 @@ class Main extends Component {
         <View style={styles.container}>
           <View style={styles.subContainer}>{this.showTab()}</View>
         </View>
-        <Text> {this.state.activeTab}</Text>
+        
         <BottomNavigation
           //activeTab={this.state.activeTab}
           onTabPress={newTab => {

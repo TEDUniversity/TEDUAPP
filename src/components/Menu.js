@@ -26,36 +26,39 @@ class Menu extends Component {
     const { width } = Dimensions.get("window");
     return (
       <View style={styles.container}>
+        <ImageBackground source={require("./img/background/BACKGROUND.png")} style={styles.mainBackGround}>
+        
         <TouchableOpacity style={styles.subContainer}>
-            <ImageBackground source={require("./img/subMenu/menu1.jpg")} style={{ width: Dimensions.get("window").width,height: 60  }}>
-                <Text style={styles.text}>This is Menu.</Text>
+            <ImageBackground source={require("./img/subMenu/menu1.jpg")} style={{ width: Dimensions.get("window").width, height: 60  }}>
+                <Text style={styles.text}>Fitness center programme</Text>
             </ImageBackground>
         </TouchableOpacity>
         <TouchableOpacity style={styles.subContainer}>
           <ImageBackground source={require("./img/subMenu/menu2.jpg")} style={{ width: Dimensions.get("window").width, height: 60 }}>
-                <Text style={styles.text}>This is Menu.</Text>
+                <Text style={styles.text}>Cafeteria programme</Text>
             </ImageBackground>
         </TouchableOpacity>
         <TouchableOpacity style={styles.subContainer}>
           <ImageBackground source={require("./img/subMenu/menu3.jpg")} style={{ width: Dimensions.get("window").width, height: 60 }}>
-                <Text style={styles.text}>This is Menu.</Text>
+                <Text style={styles.text}>TEDU Portal</Text>
             </ImageBackground>        
         </TouchableOpacity>
         <TouchableOpacity style={styles.subContainer}>
           <ImageBackground source={require("./img/subMenu/menu4.jpg")} style={{ width: Dimensions.get("window").width, height: 60 }}>
-                <Text style={styles.text}>This is Menu.</Text>
+                <Text style={styles.text}>Karafanzin</Text>
             </ImageBackground>        
           </TouchableOpacity>
         <TouchableOpacity style={styles.subContainer}>
           <ImageBackground source={require("./img/subMenu/menu6.png")} style={{ width: Dimensions.get("window").width, height: 60 }}>
-                <Text style={styles.text}>This is Menu.</Text>
+                <Text style={styles.text}>Academic calender</Text>
           </ImageBackground>        
         </TouchableOpacity>
         <TouchableOpacity style={styles.subContainer}>
           <ImageBackground source={require("./img/subMenu/menu7.png")} style={{ width: Dimensions.get("window").width, height: 60 }}>
-                <Text style={styles.text}>This is Menu.</Text>
+                <Text style={styles.text}>Listen radio tedu</Text>
           </ImageBackground>        
         </TouchableOpacity>
+        </ImageBackground>
       </View>
     );
   }
@@ -64,11 +67,9 @@ class Menu extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    margin: 10,
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 10,
-
+    marginTop: 40,
   },
   text: {
     fontWeight: "bold",
@@ -76,6 +77,13 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     textAlignVertical: 'center',
     
+  },
+  mainBackGround: {
+    flex: 1, 
+    alignSelf: 'stretch', 
+    resizeMode: 'cover', 
+    width: null, 
+    height: null 
   },
   subContainer: {
     marginTop: 10,
