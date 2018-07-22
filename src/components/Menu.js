@@ -7,7 +7,8 @@
  */
 
 import React, { Component } from "react";
-import { ImageBackground, TouchableOpacity, Text, View, StyleSheet, Dimensions } from "react-native";
+import { ImageBackground, Linking, TouchableOpacity,
+ Text, View, StyleSheet, Dimensions, WebView } from "react-native";
 import Image from "react-native-scalable-image";
 
 
@@ -23,12 +24,12 @@ class Menu extends Component {
   };
 
   render() {
+    //Linking.openURL(`https://www.tedu.edu.tr/tr`)
     const { width } = Dimensions.get("window");
     return (
       <View style={styles.container}>
         <ImageBackground source={require("./img/background/BACKGROUND.png")} style={styles.mainBackGround}>
-        
-        <TouchableOpacity style={styles.subContainer}>
+    <TouchableOpacity style={styles.subContainer} onPress={() => { return (<WebView source={{ uri: 'https://www.tedu.edu.tr/tr' }} />); }} >
             <ImageBackground source={require("./img/subMenu/menu1.jpg")} style={{ width: Dimensions.get("window").width, height: 60  }}>
                 <Text style={styles.text}>Fitness center programme</Text>
             </ImageBackground>
