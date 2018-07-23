@@ -128,25 +128,27 @@ class News extends Component {
                                />}
             overlayColor="#144d8c"
             maxOverlayOpacity={1}
-            //scrollEnabled={false}
+            scrollEnabled={false}
             
         >
+        <View style={{ height: 500 }}>
         <ImageBackground source={require("./img/background/BACKGROUND.png")} style={styles.mainBackGround}>
         
-            
                 
                 <HorizontalList Data={this.renderDataDuyurular} title={"Duyurular"} />
                 <HorizontalList Data={this.renderDataEtkinlikler} title={"Etkinlikler"} />
                 <HorizontalList Data={this.renderDataHaberler} title={"Haberler"} />
                 
             
-        
         </ImageBackground>
-      </HeaderImageScrollView>
+        </View>
+        </HeaderImageScrollView>
+        
       );
     }
   }
 }
+
 
 const styles = StyleSheet.create({
   container: {
