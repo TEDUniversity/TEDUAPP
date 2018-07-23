@@ -39,35 +39,35 @@ class Main extends Component {
       key: "NewsRouter",
       icon: "dashboard",
       label: "Dashboard",
-      barColor: "#388E3C",
+      barColor: "#144d8c",
       pressColor: "rgba(255, 255, 255, 0.16)"
     },
     {
       key: "MenuRouter",
       icon: "movie",
       label: "Movies & TV",
-      barColor: "#B71C1C",
+      barColor: "#144d8c",
       pressColor: "rgba(255, 255, 255, 0.16)"
     },
     {
       key: "CalendarRouter",
       icon: "music-note",
       label: "Music",
-      barColor: "#E64A19",
+      barColor: "#144d8c",
       pressColor: "rgba(255, 255, 255, 0.16)"
     },
     {
       key: "MoodleRouter",
       icon: "music-note",
       label: "Music",
-      barColor: "#A93B13",
+      barColor: "#144d8c",
       pressColor: "rgba(255, 255, 255, 0.16)"
     },
     {
       key: "CouncilRouter",
       icon: "music-note",
       label: "Music",
-      barColor: "#E46D55",
+      barColor: "#144d8c",
       pressColor: "rgba(255, 255, 255, 0.16)"
     }
   ];

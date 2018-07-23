@@ -32,7 +32,7 @@ const Spinner = ({ size }) => (
   </View>
 );
 
-const MIN_HEIGHT = Header.HEIGHT;
+const MIN_HEIGHT = Header.HEIGHT - 20;
 const MAX_HEIGHT = 120;
 
 class News extends Component {
@@ -88,11 +88,10 @@ class News extends Component {
             width={Dimensions.get("window").width}
             style={StyleSheet.absoluteFill}
             style={{ }}
-            
             source={require("./img/header/anatepe2.png")}
                                />}
-            overlayColor="#4A148C"
-          maxOverlayOpacity={0.9}
+            overlayColor="#144d8c"
+            maxOverlayOpacity={1}
         >
         <ImageBackground source={require("./img/background/BACKGROUND.png")} style={{ width: Dimensions.get("window").width }}>
         
