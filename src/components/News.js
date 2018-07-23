@@ -113,6 +113,7 @@ class News extends Component {
   }
 }
 
+//other way of using custom component(header collapsible scrollview) 
 /*<HeaderImageScrollView
           maxHeight={MAX_HEIGHT}
           minHeight={MIN_HEIGHT}
