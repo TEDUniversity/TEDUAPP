@@ -28,7 +28,6 @@ const Spinner = ({ size }) => (
 );
 
 class News extends Component {
-    
   static navigationOptions = {
     title: "News",
     headerStyle: { marginTop: 0, backgroundColor: "#fff" },
@@ -41,10 +40,15 @@ class News extends Component {
     //this.renderDataDuyurular = this.renderDataDuyurular.bind(this);
     //this.renderDataEtkinlikler = this.renderDataEtkinlikler.bind(this);
     //this.renderDataHaberler = this.renderDataHaberler.bind(this);
-    }
-  state = { data: [], dataEtkinlikler: [], dataHaberler: [], dataDuyurular: [], loading: true };
+  }
+  state = {
+    data: [],
+    dataEtkinlikler: [],
+    dataHaberler: [],
+    dataDuyurular: [],
+    loading: true
+  };
 
-  
   componentWillMount() {
     //const parseString = require("xml2js").parseString;
     fetch("https://www.tedu.edu.tr/rss.xml")
@@ -53,6 +57,9 @@ class News extends Component {
       .then(rss => {
         this.whenLoaded(rss.items);
         console.log(rss.items.length);
+      })
+      .catch(e => {
+        alert("error: " + e);
       });
   }
 
@@ -74,15 +81,17 @@ class News extends Component {
         }
     }*/
     //one way of traversing an array
-    this.state.data.map((item) => {
-        if (item.links[0].url.includes("gundem/duyurular")) {
-            this.setState({ dataDuyurular: this.state.dataDuyurular.concat(item) });
-        } else if (item.links[0].url.includes("gundem/etkinlikler")) {
-            this.setState({ dataEtkinlikler: this.state.dataEtkinlikler.concat(item) });
-        } else if (item.links[0].url.includes("gundem/haberler")) {
-            this.setState({ dataHaberler: this.state.dataHaberler.concat(item) });
-        }
-        //console.log(item.links[0].url);
+    this.state.data.map(item => {
+      if (item.links[0].url.includes("gundem/duyurular")) {
+        this.setState({ dataDuyurular: this.state.dataDuyurular.concat(item) });
+      } else if (item.links[0].url.includes("gundem/etkinlikler")) {
+        this.setState({
+          dataEtkinlikler: this.state.dataEtkinlikler.concat(item)
+        });
+      } else if (item.links[0].url.includes("gundem/haberler")) {
+        this.setState({ dataHaberler: this.state.dataHaberler.concat(item) });
+      }
+      //console.log(item.links[0].url);
     });
     console.log(this.state.dataDuyurular);
     console.log(this.state.dataEtkinlikler);
@@ -95,22 +104,23 @@ class News extends Component {
     return this.state.dataDuyurular.map((responseData, Id) => (
       <DetailNews key={Id} data={responseData} />
     ));
-  }
+  };
   renderDataEtkinlikler = () => {
     return this.state.dataHaberler.map((responseData, Id) => (
       <DetailNews key={Id} data={responseData} />
     ));
-  }
+  };
   renderDataHaberler = () => {
     return this.state.dataEtkinlikler.map((responseData, Id) => (
       <DetailNews key={Id} data={responseData} />
     ));
-  }
+  };
   render() {
     if (this.state.loading) {
       return <Spinner size={"large"} />;
     } else {
       return (
+<<<<<<< HEAD
         <ImageBackground source={require("./img/background/BACKGROUND.png")} style={styles.mainBackGround}>
 
             <View style={styles.container}>
@@ -123,6 +133,21 @@ class News extends Component {
                 </ScrollView>
             </View>
             </ImageBackground>
+=======
+        <View style={styles.container}>
+          <ScrollView scrollEnabled={false}>
+            <HorizontalList
+              Data={this.renderDataDuyurular}
+              title={"Duyurular"}
+            />
+            <HorizontalList
+              Data={this.renderDataEtkinlikler}
+              title={"Etkinlikler"}
+            />
+            <HorizontalList Data={this.renderDataHaberler} title={"Haberler"} />
+          </ScrollView>
+        </View>
+>>>>>>> f585af78642aae2e41fc82d52c7abd92b2d933d0
       );
     }
   }
@@ -138,14 +163,17 @@ const styles = StyleSheet.create({
     fontWeight: "bold"
   },
   subContainer: {
-    width: Dimensions.get("window").width / 2,
+    width: Dimensions.get("window").width / 2
     //flexDirection: "row",
+<<<<<<< HEAD
   },
   mainBackGround: {
       width: '100%',
       flex: 1,
       height: null,
       
+=======
+>>>>>>> f585af78642aae2e41fc82d52c7abd92b2d933d0
   }
 });
 
