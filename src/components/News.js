@@ -13,7 +13,8 @@ import {
   ScrollView,
   StyleSheet,
   ActivityIndicator,
-  Dimensions
+  Dimensions,
+  FlatList
 } from "react-native";
 import axios from "axios";
 import * as rssParser from "react-native-rss-parser";
@@ -31,7 +32,7 @@ const Spinner = ({ size }) => (
 );
 
 const MIN_HEIGHT = Header.HEIGHT;
-const MAX_HEIGHT = 250;
+const MAX_HEIGHT = 120;
 
 class News extends Component {
     
@@ -88,11 +89,19 @@ class News extends Component {
             style={{ }}
             
             source={require("./img/header/anatepe2.png")}
-                    />}
+                               />}
         >
-        <View style={{ height: 1000 }}>
+        <View >
           <TriggeringView onHide={() => console.log('text hidden')} >
-                {this.renderData()}
+            <FlatList
+                style={styles.list}
+                contentContainerStyle={styles.list}
+                data={this.state.data}
+                renderItem={({ item }) => <DetailNews data={item} />}
+                numColumns={2}
+                horizontal={false}
+                keyExtractor={item => item.title}
+            />  
           </TriggeringView>
         </View>
       </HeaderImageScrollView>
@@ -101,6 +110,17 @@ class News extends Component {
     }
   }
 }
+
+/*<HeaderImageScrollView
+          maxHeight={MAX_HEIGHT}
+          minHeight={MIN_HEIGHT}
+          minOverlayOpacity={0.4}
+          renderHeader={() => <Image source={require('../../assets/avignon.jpg')} style={styles.image} />}
+          ScrollViewComponent={FlatList}
+          data={data}
+          keyExtractor={this._keyExtractor}
+          renderItem={this._renderItem}
+        />*/
 
 const styles = StyleSheet.create({
   container: {
@@ -118,6 +138,17 @@ const styles = StyleSheet.create({
 
   }
 });
+/*
+<FlatList
+                //style={styles.list}
+                contentContainerStyle={styles.list}
+                data={this.state.data}
+                renderItem={({ item }) => <DetailNews data={item} />}
+                numColumns={2}
+                horizontal={false}
+                keyExtractor={item => item.title}
+            />  
+*/
 /*<View style={styles.container}>
         <ScrollView>
           <View style={styles.subContainer} >{this.renderData()}</View>
