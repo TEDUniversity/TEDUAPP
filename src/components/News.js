@@ -111,9 +111,22 @@ class News extends Component {
       return <Spinner size={"large"} />;
     } else {
       return (
-        <ImageBackground source={require("./img/background/BACKGROUND.png")} style={styles.mainBackGround}>
-
-            <View style={styles.container}>
+        <HeaderImageScrollView
+        maxHeight={MAX_HEIGHT}
+        minHeight={MIN_HEIGHT}
+        renderHeader={() => <Image
+            resizeMode="stretch"
+            width={Dimensions.get("window").width}
+            style={StyleSheet.absoluteFill}
+            style={{ }}
+            source={require("./img/header/anatepe2.png")}
+                               />}
+            overlayColor="#144d8c"
+            maxOverlayOpacity={1}
+        >
+        <ImageBackground source={require("./img/background/BACKGROUND.png")} style={{ width: Dimensions.get("window").width }}>
+        
+        <View style={styles.container}>
                 <ScrollView 
                 scrollEnabled={false}
                 >
@@ -122,11 +135,14 @@ class News extends Component {
                     <HorizontalList Data={this.renderDataHaberler} title={"Haberler"} />
                 </ScrollView>
             </View>
-            </ImageBackground>
+        
+        </ImageBackground>
+      </HeaderImageScrollView>
       );
     }
   }
 }
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -150,3 +166,19 @@ const styles = StyleSheet.create({
 });
 
 export default News;
+
+
+/*
+<ImageBackground source={require("./img/background/BACKGROUND.png")} style={styles.mainBackGround}>
+
+            <View style={styles.container}>
+                <ScrollView 
+                scrollEnabled={false}
+                >
+                    <HorizontalList Data={this.renderDataDuyurular} title={"Duyurular"} />
+                    <HorizontalList Data={this.renderDataEtkinlikler} title={"Etkinlikler"} />
+                    <HorizontalList Data={this.renderDataHaberler} title={"Haberler"} />
+                </ScrollView>
+            </View>
+            </ImageBackground>
+*/
