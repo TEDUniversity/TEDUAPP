@@ -107,7 +107,6 @@ class Main extends Component {
         <View style={styles.container}>
           <View style={styles.subContainer}>{this.showTab()}</View>
         </View>
-        <Text> {this.state.activeTab}</Text>
         <BottomNavigation
           //activeTab={this.state.activeTab}
           onTabPress={newTab => {
