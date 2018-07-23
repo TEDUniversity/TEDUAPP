@@ -46,7 +46,8 @@ const styles = {
     alignItems: 'center',
     backgroundColor: '#DDDDDD',
     padding: 10,
-    flex: 1
+    flex: 1,
+    justifyContent: 'center',
   },
 };
 /*
