@@ -128,17 +128,18 @@ class News extends Component {
                                />}
             overlayColor="#144d8c"
             maxOverlayOpacity={1}
-            scrollEnabled={false}
+            //scrollEnabled={false}
+            
         >
-        <ImageBackground source={require("./img/background/BACKGROUND.png")} style={{ width: Dimensions.get("window").width }}>
+        <ImageBackground source={require("./img/background/BACKGROUND.png")} style={styles.mainBackGround}>
         
-            <View style={styles.container}>
+            
                 
                 <HorizontalList Data={this.renderDataDuyurular} title={"Duyurular"} />
                 <HorizontalList Data={this.renderDataEtkinlikler} title={"Etkinlikler"} />
                 <HorizontalList Data={this.renderDataHaberler} title={"Haberler"} />
                 
-            </View>
+            
         
         </ImageBackground>
       </HeaderImageScrollView>
@@ -152,7 +153,7 @@ const styles = StyleSheet.create({
     flex: 1,
     //justifyContent: "space-between",
     //alignItems: "center",
-    marginTop: 44
+    marginTop: 30
   },
   text: {
     fontWeight: "bold"
