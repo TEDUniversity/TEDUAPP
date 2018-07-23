@@ -18,12 +18,20 @@ import {
 import axios from "axios";
 import * as rssParser from "react-native-rss-parser";
 import DetailNews from "./DetailNews";
+import HeaderImageScrollView, { TriggeringView } from 'react-native-image-header-scroll-view';
+import { Header } from 'react-navigation';
+import Image from "react-native-scalable-image";
+
+
 
 const Spinner = ({ size }) => (
-  <View style={styles.spinnerStyle}>
+  <View >
     <ActivityIndicator size={size || "large"} />
   </View>
 );
+
+const MIN_HEIGHT = Header.HEIGHT;
+const MAX_HEIGHT = 250;
 
 class News extends Component {
     
@@ -51,7 +59,6 @@ class News extends Component {
         this.whenLoaded(rss.items);
         console.log(rss.items.length);
       });
-
    
   }
 
@@ -71,11 +78,25 @@ class News extends Component {
       return <Spinner size={"large"} />;
     } else {
       return (
-        <View style={styles.container}>
-          <ScrollView>
-            <View style={styles.subContainer} >{this.renderData()}</View>
-          </ScrollView>
+        <HeaderImageScrollView
+        maxHeight={MAX_HEIGHT}
+        minHeight={MIN_HEIGHT}
+        renderHeader={() => <Image
+            resizeMode="stretch"
+            width={Dimensions.get("window").width}
+            style={StyleSheet.absoluteFill}
+            style={{ }}
+            
+            source={require("./img/header/anatepe2.png")}
+                    />}
+        >
+        <View style={{ height: 1000 }}>
+          <TriggeringView onHide={() => console.log('text hidden')} >
+                {this.renderData()}
+          </TriggeringView>
         </View>
+      </HeaderImageScrollView>
+        
       );
     }
   }
@@ -92,10 +113,15 @@ const styles = StyleSheet.create({
     fontWeight: "bold"
   },
   subContainer: {
-    width: Dimensions.get("window").width / 2,
+    //width: Dimensions.get("window").width / 2,
     //flexDirection: "row",
 
   }
 });
+/*<View style={styles.container}>
+        <ScrollView>
+          <View style={styles.subContainer} >{this.renderData()}</View>
+        </ScrollView>
+      </View>*/
 
 export default News;

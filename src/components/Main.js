@@ -28,7 +28,8 @@ class Main extends Component {
     title: "Main",
     headerStyle: {  marginTop: 0, backgroundColor: "#fff", height: 80 },
     headerLeft: null,
-    gesturesEnabled: false
+    gesturesEnabled: false,
+    header: null
   };
 
   state = { activeTab: "NewsRouter" };
@@ -126,14 +127,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "space-between",
-    alignItems: "center"
   },
   text: {
     fontWeight: "bold"
   },
   subContainer: {
     flex: 1,
-    alignItems: "center",
     justifyContent: "center"
   }
 });
