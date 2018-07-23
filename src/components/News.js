@@ -24,16 +24,23 @@ import HeaderImageScrollView, { TriggeringView } from 'react-native-image-header
 import { Header } from 'react-navigation';
 import Image from "react-native-scalable-image";
 
-
-
 const Spinner = ({ size }) => (
   <View >
     <ActivityIndicator size={size || "large"} />
   </View>
 );
 
-const MIN_HEIGHT = Header.HEIGHT - 20;
-const MAX_HEIGHT = 120;
+const MIN_HEIGHT = Header.HEIGHT;
+const MAX_HEIGHT = 135;
+const getHeaderHeight = () => { 
+    const currHeight = Dimensions.get("window").height;
+    if (currHeight < 736) {
+        return 120;
+    } else if (currHeight >= 736) {
+        return 160;
+    }
+};
+
 
 class News extends Component {
     
@@ -76,6 +83,10 @@ class News extends Component {
     ));
   }
   render() {
+      console.log("width: " + Dimensions.get("window").width);
+      console.log("Height: " + Dimensions.get("window").height);
+      console.log("max height: " + MAX_HEIGHT);
+
     if (this.state.loading) {
       return <Spinner size={"large"} />;
     } else {
@@ -92,12 +103,14 @@ class News extends Component {
                                />}
             overlayColor="#144d8c"
             maxOverlayOpacity={1}
+            bounces={false}
+            contentOffset={ {x: 0, y:0}}
         >
-        <ImageBackground source={require("./img/background/BACKGROUND.png")} style={{ width: Dimensions.get("window").width }}>
+        <ImageBackground source={require("./img/background/BACKGROUND.png")} style={{ width: Dimensions.get("window").width }} >
         
             <FlatList
                 style={styles.list}
-                contentContainerStyle={styles.list}
+                contentContainerStyle={styles.listContent}
                 data={this.state.data}
                 renderItem={({ item }) => <DetailNews data={item} />}
                 numColumns={2}
@@ -139,6 +152,12 @@ const styles = StyleSheet.create({
     //width: Dimensions.get("window").width / 2,
     //flexDirection: "row",
 
+  },
+  list: {
+    marginBottom: 10,
+  },
+  listContent: {
+      
   }
 });
 /*
