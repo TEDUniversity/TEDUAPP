@@ -20,6 +20,9 @@ import axios from "axios";
 import * as rssParser from "react-native-rss-parser";
 import DetailNews from "./DetailNews";
 import HorizontalList from "./HorizontalList";
+import HeaderImageScrollView, { TriggeringView } from 'react-native-image-header-scroll-view';
+import { Header } from 'react-navigation';
+import Image from "react-native-scalable-image";
 
 const Spinner = ({ size }) => (
   <View style={styles.spinnerStyle}>
