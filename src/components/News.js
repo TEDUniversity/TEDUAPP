@@ -29,6 +29,8 @@ const Spinner = ({ size }) => (
     <ActivityIndicator size={size || "large"} />
   </View>
 );
+const MIN_HEIGHT = Header.HEIGHT - 20;
+const MAX_HEIGHT = 120;
 
 class News extends Component {
     
@@ -126,17 +128,16 @@ class News extends Component {
                                />}
             overlayColor="#144d8c"
             maxOverlayOpacity={1}
+            scrollEnabled={false}
         >
         <ImageBackground source={require("./img/background/BACKGROUND.png")} style={{ width: Dimensions.get("window").width }}>
         
-        <View style={styles.container}>
-                <ScrollView 
-                scrollEnabled={false}
-                >
-                    <HorizontalList Data={this.renderDataDuyurular} title={"Duyurular"} />
-                    <HorizontalList Data={this.renderDataEtkinlikler} title={"Etkinlikler"} />
-                    <HorizontalList Data={this.renderDataHaberler} title={"Haberler"} />
-                </ScrollView>
+            <View style={styles.container}>
+                
+                <HorizontalList Data={this.renderDataDuyurular} title={"Duyurular"} />
+                <HorizontalList Data={this.renderDataEtkinlikler} title={"Etkinlikler"} />
+                <HorizontalList Data={this.renderDataHaberler} title={"Haberler"} />
+                
             </View>
         
         </ImageBackground>
@@ -151,7 +152,7 @@ const styles = StyleSheet.create({
     flex: 1,
     //justifyContent: "space-between",
     //alignItems: "center",
-    marginTop: 30
+    marginTop: 44
   },
   text: {
     fontWeight: "bold"
