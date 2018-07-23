@@ -14,7 +14,8 @@ import {
   StyleSheet,
   ActivityIndicator,
   Dimensions,
-  FlatList
+  FlatList,
+  ImageBackground
 } from "react-native";
 import axios from "axios";
 import * as rssParser from "react-native-rss-parser";
@@ -90,9 +91,11 @@ class News extends Component {
             
             source={require("./img/header/anatepe2.png")}
                                />}
+            overlayColor="#4A148C"
+          maxOverlayOpacity={0.9}
         >
-        <View >
-          <TriggeringView onHide={() => console.log('text hidden')} >
+        <ImageBackground source={require("./img/background/BACKGROUND.png")} style={{ width: Dimensions.get("window").width }}>
+        
             <FlatList
                 style={styles.list}
                 contentContainerStyle={styles.list}
@@ -101,9 +104,9 @@ class News extends Component {
                 numColumns={2}
                 horizontal={false}
                 keyExtractor={item => item.title}
-            />  
-          </TriggeringView>
-        </View>
+            /> 
+        
+        </ImageBackground>
       </HeaderImageScrollView>
         
       );
