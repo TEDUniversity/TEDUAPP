@@ -120,7 +120,6 @@ class News extends Component {
       return <Spinner size={"large"} />;
     } else {
       return (
-<<<<<<< HEAD
         <ImageBackground source={require("./img/background/BACKGROUND.png")} style={styles.mainBackGround}>
 
             <View style={styles.container}>
@@ -133,21 +132,6 @@ class News extends Component {
                 </ScrollView>
             </View>
             </ImageBackground>
-=======
-        <View style={styles.container}>
-          <ScrollView scrollEnabled={false}>
-            <HorizontalList
-              Data={this.renderDataDuyurular}
-              title={"Duyurular"}
-            />
-            <HorizontalList
-              Data={this.renderDataEtkinlikler}
-              title={"Etkinlikler"}
-            />
-            <HorizontalList Data={this.renderDataHaberler} title={"Haberler"} />
-          </ScrollView>
-        </View>
->>>>>>> f585af78642aae2e41fc82d52c7abd92b2d933d0
       );
     }
   }
@@ -165,15 +149,12 @@ const styles = StyleSheet.create({
   subContainer: {
     width: Dimensions.get("window").width / 2
     //flexDirection: "row",
-<<<<<<< HEAD
   },
   mainBackGround: {
       width: '100%',
       flex: 1,
       height: null,
       
-=======
->>>>>>> f585af78642aae2e41fc82d52c7abd92b2d933d0
   }
 });
 
