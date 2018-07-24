@@ -28,7 +28,8 @@ class Main extends Component {
     title: "Main",
     headerStyle: {  marginTop: 0, backgroundColor: "#fff", height: 80 },
     headerLeft: null,
-    gesturesEnabled: false
+    gesturesEnabled: false,
+    header: null,
   };
 
   state = { activeTab: "NewsRouter" };

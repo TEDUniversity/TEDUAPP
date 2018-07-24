@@ -12,7 +12,8 @@ import { ImageBackground, Linking, TouchableOpacity,
 import Image from "react-native-scalable-image";
 import HeaderImageScrollView, { TriggeringView } from 'react-native-image-header-scroll-view';
 import { Header } from 'react-navigation';
-import Image from "react-native-scalable-image";
+
+const MIN_HEIGHT = Header.height;
 
 class Menu extends Component {
   static navigationOptions = {
@@ -24,10 +25,25 @@ class Menu extends Component {
       color: "#000000"
     }
   };
+  state={ MAX_HEIGHT: 0 }
+
+  componentWillMount(){
+    const winHeight = Dimensions.get('window').height;
+    console.log("winHeight" + winHeight);
+    
+    
+    if (winHeight < 736) {
+        console.log("device height less than 736");
+        this.setState({ MAX_HEIGHT: winHeight * 0.175 }); //20%
+    } else if (winHeight >= 736) {
+        console.log("device height greater than 736");
+        this.setState({ MAX_HEIGHT: winHeight * 0.18 }); //20%
+    }
+  }
 
   render() {
     //Linking.openURL(`https://www.tedu.edu.tr/tr`)
-    const { width } = Dimensions.get("window");
+    
     return (
       <HeaderImageScrollView
         maxHeight={this.state.MAX_HEIGHT}
@@ -37,14 +53,16 @@ class Menu extends Component {
             width={Dimensions.get("window").width}
             style={StyleSheet.absoluteFill}
             style={{ }}
-            source={require("./img/header/anatepe2.png")}
+            source={require("../../img/header/anatepe2.png")}
                                />}
             overlayColor="#144d8c"
             maxOverlayOpacity={1}
-            bounces={false}
+            bounces={true}
             contentOffset={ {x: 0, y:0}}
+            
         >
-        <ImageBackground source={require("./img/background/BACKGROUND.png")} style={{ width: Dimensions.get("window").width }} >
+        
+        <ImageBackground source={require("../../img/background/BACKGROUND.png")} style={{ width: Dimensions.get("window").width }} >
         <View style={styles.container}>
         <ImageBackground source={require("../../img/background/BACKGROUND.png")} style={styles.mainBackGround}>
         <TouchableOpacity style={styles.subContainer} onPress={() => { return (<WebView source={{ uri: 'https://www.tedu.edu.tr/tr' }} />); }} >
@@ -79,9 +97,8 @@ class Menu extends Component {
         </TouchableOpacity>
         </ImageBackground>
       </View>
-            
-        
         </ImageBackground>
+        
       </HeaderImageScrollView>
       
     );
@@ -93,7 +110,8 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 40,
+    marginTop: 0,
+    height: 493
   },
   text: {
     fontWeight: "bold",
