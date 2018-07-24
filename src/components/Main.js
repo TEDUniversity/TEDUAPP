@@ -130,7 +130,7 @@ class Main extends Component {
           //activeTab={this.state.activeTab}
           onTabPress={newTab => {
             this.setState({ activeTab: newTab.key });
-            //this.props.navigation.navigate(newTab.key);
+            //this.props.navigation.navigate(newTab.key); usage of react native navigation
           }}
           renderTab={this.renderTab}
           tabs={this.tabs}
