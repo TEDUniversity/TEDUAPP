@@ -30,7 +30,7 @@ const Spinner = ({ size }) => (
   </View>
 );
 const MIN_HEIGHT = Header.HEIGHT - 20;
-const MAX_HEIGHT = 120;
+//const MAX_HEIGHT = 120;
 
 class News extends Component {
     
@@ -47,11 +47,31 @@ class News extends Component {
     //this.renderDataEtkinlikler = this.renderDataEtkinlikler.bind(this);
     //this.renderDataHaberler = this.renderDataHaberler.bind(this);
     }
-  state = { data: [], dataEtkinlikler: [], dataHaberler: [], dataDuyurular: [], loading: true };
+  state = { data: [], dataEtkinlikler: [], dataHaberler: [], dataDuyurular: [], loading: true, MAX_HEIGHT: 0, scrollHeight: 0 };
 
   
   componentWillMount() {
     //const parseString = require("xml2js").parseString;
+
+    const winHeight = Dimensions.get('window').height;
+    console.log("winHeight" + winHeight);
+    
+    if (winHeight < 736) {
+        console.log("device height less than 736");
+        this.setState({ scrollHeight: winHeight * 0.755 }); //75.5%
+    } else if (winHeight >= 736) {
+        console.log("device height greater than 736");
+        this.setState({ scrollHeight: winHeight * 0.76 }); //76%
+    }
+
+    if (winHeight < 736) {
+        console.log("device height less than 736");
+        this.setState({ MAX_HEIGHT: winHeight * 0.175 }); //17.5%
+    } else if (winHeight >= 736) {
+        console.log("device height greater than 736");
+        this.setState({ MAX_HEIGHT: winHeight * 0.18 }); //18%
+    }
+
     fetch("https://www.tedu.edu.tr/rss.xml")
       .then(response => response.text())
       .then(responseData => rssParser.parse(responseData))
@@ -112,12 +132,13 @@ class News extends Component {
     ));
   }
   render() {
+    console.log("scrollHeigth: " + this.state.scrollHeight);
     if (this.state.loading) {
       return <Spinner size={"large"} />;
     } else {
       return (
         <HeaderImageScrollView
-        maxHeight={MAX_HEIGHT}
+        maxHeight={this.state.MAX_HEIGHT}
         minHeight={MIN_HEIGHT}
         renderHeader={() => <Image
             resizeMode="stretch"
@@ -131,7 +152,7 @@ class News extends Component {
             scrollEnabled={false}
             
         >
-        <View style={{ height: 500 }}>
+        <View height={this.state.scrollHeight}>
         <ImageBackground source={require("./img/background/BACKGROUND.png")} style={styles.mainBackGround}>
         
                 
@@ -152,10 +173,11 @@ class News extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    //flex: 1,
     //justifyContent: "space-between",
     //alignItems: "center",
-    marginTop: 30
+    //marginTop: 30,
+    height: 500,
   },
   text: {
     fontWeight: "bold"
