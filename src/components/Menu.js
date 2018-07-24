@@ -67,6 +67,7 @@ class Menu extends Component {
             bounces={false}
             contentOffset={ {x: 0, y:0}}
             scrollViewBackgroundColor="rgba(52, 52, 52, 0.40)"
+            scrollEnabled={false}
         >
         
         <ImageBackground source={require("../../img/background/BACKGROUND.png")} style={{ width: Dimensions.get("window").width }} >
