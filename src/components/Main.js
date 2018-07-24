@@ -32,13 +32,30 @@ class Main extends Component {
     header: null,
   };
 
-  state = { activeTab: "NewsRouter" };
+  state = { activeTab: "NewsRouter", menuWidth: 0 };
 
+  
+  componentWillMount() {
+    //const parseString = require("xml2js").parseString;
+
+    const winWidth = Dimensions.get('window').width;
+    console.log("winWidth" + winWidth);
+    //navigation toolbar içindeki elemanların yeri için etkisiz bir işlem
+    //sadece tüm toolbarın genişliğini etkiliyor
+    if (winWidth < 414) {
+        console.log("device width less than 414");
+        this.setState({ menuWidth: winWidth * 1 }); //75.5%
+    } else if (winWidth >= 414) {
+        console.log("device width greater than 414");
+        this.setState({ menuWidth: winWidth * 1 }); //76%
+    }
+  }
+// iphone7 width = 375, iphone7 plus width = 414
   tabs = [
     {
       key: "NewsRouter",
       icon: "dashboard",
-      label: "Dashboard",
+      label: "News",
       barColor: "#144d8c",
       pressColor: "rgba(232, 36, 55, 0.16)"
     },
@@ -117,6 +134,7 @@ class Main extends Component {
           }}
           renderTab={this.renderTab}
           tabs={this.tabs}
+          style={{ width: this.state.menuWidth, alignItems: "center", alignSelf: "center", alignContent:"center" }}
         />
       </View>
     );
