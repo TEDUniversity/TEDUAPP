@@ -64,13 +64,13 @@ class Menu extends Component {
                                />}
             overlayColor="#144d8c"
             maxOverlayOpacity={1}
-            bounces={true}
+            bounces={false}
             contentOffset={ {x: 0, y:0}}
-            
+            scrollViewBackgroundColor="rgba(52, 52, 52, 0.40)"
         >
         
         <ImageBackground source={require("../../img/background/BACKGROUND.png")} style={{ width: Dimensions.get("window").width }} >
-        <View style={styles.container}>
+        <View style={styles.container} height={this.state.scrollHeight}>
         <ImageBackground source={require("../../img/background/BACKGROUND.png")} style={styles.mainBackGround}>
         <TouchableOpacity style={styles.subContainer} onPress={() => { return (<WebView source={{ uri: 'https://www.tedu.edu.tr/tr' }} />); }} >
             <ImageBackground source={require("../../img/subMenu/menu1.jpg")} style={{ width: Dimensions.get("window").width, height: 60  }}>
@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginTop: 0,
-    height: this.state.scrollHeight,
+    
   },
   text: {
     fontWeight: "bold",
