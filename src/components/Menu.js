@@ -29,9 +29,25 @@ class Menu extends Component {
     //Linking.openURL(`https://www.tedu.edu.tr/tr`)
     const { width } = Dimensions.get("window");
     return (
-      <View style={styles.container}>
+      <HeaderImageScrollView
+        maxHeight={this.state.MAX_HEIGHT}
+        minHeight={MIN_HEIGHT}
+        renderHeader={() => <Image
+            resizeMode="stretch"
+            width={Dimensions.get("window").width}
+            style={StyleSheet.absoluteFill}
+            style={{ }}
+            source={require("./img/header/anatepe2.png")}
+                               />}
+            overlayColor="#144d8c"
+            maxOverlayOpacity={1}
+            bounces={false}
+            contentOffset={ {x: 0, y:0}}
+        >
+        <ImageBackground source={require("./img/background/BACKGROUND.png")} style={{ width: Dimensions.get("window").width }} >
+        <View style={styles.container}>
         <ImageBackground source={require("../../img/background/BACKGROUND.png")} style={styles.mainBackGround}>
-    <TouchableOpacity style={styles.subContainer} onPress={() => { return (<WebView source={{ uri: 'https://www.tedu.edu.tr/tr' }} />); }} >
+        <TouchableOpacity style={styles.subContainer} onPress={() => { return (<WebView source={{ uri: 'https://www.tedu.edu.tr/tr' }} />); }} >
             <ImageBackground source={require("../../img/subMenu/menu1.jpg")} style={{ width: Dimensions.get("window").width, height: 60  }}>
                 <Text style={styles.text}>Fitness center programme</Text>
             </ImageBackground>
@@ -63,6 +79,11 @@ class Menu extends Component {
         </TouchableOpacity>
         </ImageBackground>
       </View>
+            
+        
+        </ImageBackground>
+      </HeaderImageScrollView>
+      
     );
   }
 }
