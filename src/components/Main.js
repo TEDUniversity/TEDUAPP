@@ -22,7 +22,7 @@ class Main extends Component {
         style={StyleSheet.absoluteFill}
         style={{ marginTop: 40 }}
         
-        source={require("./img/header/anatepe2.png")}
+        source={require("../../img/header/anatepe2.png")}
       />
     ),
     title: "Main",

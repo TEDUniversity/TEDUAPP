@@ -12,11 +12,11 @@ import BottomNavigation, {
   FullTab
 } from "react-native-material-bottom-navigation";
 
-const moodleIcon = <Image source={require("./img/moodle/m3.png")} />;
+const moodleIcon = <Image source={require("../../img/moodle/m3.png")} />;
 
-const menuIcon = <Image source={require("./img/menu/me3.png")} />;
-const calendarIcon = <Image source={require("./img/calendar/t3.png")} />;
-const newsIcon = <Image source={require("./img/news/n3.png")} />;
+const menuIcon = <Image source={require("../../img/menu/me3.png")} />;
+const calendarIcon = <Image source={require("../../img/calendar/t3.png")} />;
+const newsIcon = <Image source={require("../../img/news/n3.png")} />;
 //const councilIcon = <Image source={require("./img/calendar/t1.png")} />;
 
 const councilIcon = <Icon name="code" color="red" size={30} />;
