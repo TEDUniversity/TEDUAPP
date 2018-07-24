@@ -10,7 +10,9 @@ import React, { Component } from "react";
 import { ImageBackground, Linking, TouchableOpacity,
  Text, View, StyleSheet, Dimensions, WebView } from "react-native";
 import Image from "react-native-scalable-image";
-
+import HeaderImageScrollView, { TriggeringView } from 'react-native-image-header-scroll-view';
+import { Header } from 'react-navigation';
+import Image from "react-native-scalable-image";
 
 class Menu extends Component {
   static navigationOptions = {
