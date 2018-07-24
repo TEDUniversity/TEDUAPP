@@ -25,12 +25,19 @@ class Menu extends Component {
       color: "#000000"
     }
   };
-  state={ MAX_HEIGHT: 0 }
+  state={ MAX_HEIGHT: 0, scrollHeight: 0 }
 
   componentWillMount(){
     const winHeight = Dimensions.get('window').height;
     console.log("winHeight" + winHeight);
     
+    if (winHeight < 736) {
+      console.log("device height less than 736");
+      this.setState({ scrollHeight: winHeight * 0.755 }); //75.5%
+    } else if (winHeight >= 736) {
+      console.log("device height greater than 736");
+      this.setState({ scrollHeight: winHeight * 0.76 }); //76%
+    }
     
     if (winHeight < 736) {
         console.log("device height less than 736");
@@ -111,7 +118,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginTop: 0,
-    height: 493
+    height: this.state.scrollHeight,
   },
   text: {
     fontWeight: "bold",
