@@ -31,12 +31,12 @@ const Spinner = ({ size }) => (
 );
 
 const MIN_HEIGHT = Header.HEIGHT;
-const MAX_HEIGHT = 135;
+//const MAX_HEIGHT = 135;
 const getHeaderHeight = () => { 
     const currHeight = Dimensions.get("window").height;
     if (currHeight < 736) {
         return 120;
-    } else if (currHeight >= 736) {
+    } else if (currHeight > 735) {
         return 160;
     }
 };
@@ -55,12 +55,39 @@ class News extends Component {
     super(props);
     this.renderData = this.renderData.bind(this);
     }
-  state = { data: [], loading: true };
+    
+    state = { data: [], loading: true, deviceHeight: 0, MAX_HEIGHT: 0 };
 
   
   componentWillMount() {
     //const parseString = require("xml2js").parseString;
+    //Below, i am trying to adjust header height based on different secreen heights for having responsive header but ı get "Invariant Violation: inputRange must be monotonically non-decreasing 0,NaN" error
+    /*
+    this.setState({ deviceHeight: Dimensions.get("window").height });
+    const currHeight = this.state.deviceHeight;
+    console.log("this.state.deviceHeight: " + this.state.deviceHeight);
+    if (currHeight < 736) {
+        this.setState({ MAX_HEIGHT: 120 });
+        console.log("device height less than 736");
+        console.log("currHeight: " + currHeight);
+    } else if (currHeight >= 736) {
+        console.log("device height greater than 736");
+        console.log("currHeight: " + currHeight);
+        this.setState({ MAX_HEIGHT: 140 });
+    }*/
+
+    const winHeight = Dimensions.get('window').height;
+    console.log("winHeight" + winHeight);
     
+    
+    if (winHeight < 736) {
+        console.log("device height less than 736");
+        this.setState({ MAX_HEIGHT: winHeight * 0.175 }); //20%
+    } else if (winHeight >= 736) {
+        console.log("device height greater than 736");
+        this.setState({ MAX_HEIGHT: winHeight * 0.18 }); //20%
+    }
+
     fetch("https://www.tedu.edu.tr/rss.xml")
       .then(response => response.text())
       .then(responseData => rssParser.parse(responseData))
@@ -68,8 +95,9 @@ class News extends Component {
         this.whenLoaded(rss.items);
         console.log(rss.items.length);
       });
-   
   }
+
+
 
   whenLoaded(response) {
     this.setState({ data: response });
@@ -83,16 +111,17 @@ class News extends Component {
     ));
   }
   render() {
-      console.log("width: " + Dimensions.get("window").width);
+      console.log("Width: " + Dimensions.get("window").width);
       console.log("Height: " + Dimensions.get("window").height);
-      console.log("max height: " + MAX_HEIGHT);
+      //console.log("this.state.deviceHeight:: " + this.state.deviceHeight);
+      console.log("this.state.MAX_HEIGHT:: " + this.state.MAX_HEIGHT);
 
     if (this.state.loading) {
       return <Spinner size={"large"} />;
     } else {
       return (
         <HeaderImageScrollView
-        maxHeight={MAX_HEIGHT}
+        maxHeight={this.state.MAX_HEIGHT}
         minHeight={MIN_HEIGHT}
         renderHeader={() => <Image
             resizeMode="stretch"

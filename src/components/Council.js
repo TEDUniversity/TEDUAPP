@@ -9,6 +9,8 @@
 import React, { Component } from "react";
 import { Text, View, StyleSheet, Dimensions } from "react-native";
 import Image from 'react-native-scalable-image';
+import HTML from "react-native-render-html";
+
 
 class Council extends Component {
     static navigationOptions = {
