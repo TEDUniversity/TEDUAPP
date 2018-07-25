@@ -11,7 +11,9 @@ import { Text, View, StyleSheet, Dimensions } from "react-native";
 import Image from 'react-native-scalable-image';
 import TabNavigator from 'react-native-tab-navigator';
 import Icon from "react-native-vector-icons/FontAwesome";
-
+import HeaderImageScrollView, { TriggeringView } from 'react-native-image-header-scroll-view';
+import { Header } from 'react-navigation';
+import Image from "react-native-scalable-image";
 
 class Council extends Component {
     static navigationOptions = {
