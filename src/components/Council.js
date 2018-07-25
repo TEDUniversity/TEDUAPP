@@ -28,32 +28,54 @@ class Council extends Component {
   state={ selectedTab: "" }
     render() {
     return (
-        <View style={styles.container}>
-            <View style={styles.subContainer}>
-                <Text style={styles.text}>
-                    This is Council.
-                </Text>
+        
+        <HeaderImageScrollView
+        maxHeight={this.state.MAX_HEIGHT}
+        minHeight={MIN_HEIGHT}
+        renderHeader={() => <Image
+            resizeMode="stretch"
+            width={Dimensions.get("window").width}
+            style={StyleSheet.absoluteFill}
+            style={{ }}
+            source={require("./img/header/anatepe2.png")}
+                               />}
+            overlayColor="#144d8c"
+            maxOverlayOpacity={1}
+            scrollEnabled={false}
+            
+        >
+        <View height={this.state.scrollHeight}>
+        <ImageBackground source={require("./img/background/BACKGROUND.png")} style={styles.mainBackGround}>
+        
+            <View style={styles.container}>
+                <View style={styles.subContainer}>
+                    <Text style={styles.text}>
+                        This is Council.
+                    </Text>
+                </View>
+                <TabNavigator tabBarStyle={styles.tabNav} >
+                <TabNavigator.Item
+                    selected={this.state.selectedTab === 'home'}
+                    title="Home"
+                    renderIcon={() => <Image source={require("./img/moodle/m3.png")} />}
+                    renderSelectedIcon={() => <Image source={require("./img/moodle/m3.png")} />}
+                    badgeText="1"
+                    onPress={() => this.setState({ selectedTab: 'home' })}>
+                    <Text> tab1 </Text>
+                </TabNavigator.Item>
+                <TabNavigator.Item
+                    selected={this.state.selectedTab === 'profile'}
+                    title="Profile"
+                    renderIcon={() => <Image source={require("./img/menu/me3.png")} />}
+                    renderSelectedIcon={() => <Image source={require("./img/menu/me3.png")} />}
+                    onPress={() => this.setState({ selectedTab: 'profile' })}>
+                    <Text> tab2 </Text>
+                </TabNavigator.Item>
+                </TabNavigator>
             </View>
-            <TabNavigator tabBarStyle={styles.tabNav} >
-  <TabNavigator.Item
-    selected={this.state.selectedTab === 'home'}
-    title="Home"
-    renderIcon={() => <Image source={require("./img/moodle/m3.png")} />}
-    renderSelectedIcon={() => <Image source={require("./img/moodle/m3.png")} />}
-    badgeText="1"
-    onPress={() => this.setState({ selectedTab: 'home' })}>
-    <Text> tab1 </Text>
-  </TabNavigator.Item>
-  <TabNavigator.Item
-    selected={this.state.selectedTab === 'profile'}
-    title="Profile"
-    renderIcon={() => <Image source={require("./img/menu/me3.png")} />}
-    renderSelectedIcon={() => <Image source={require("./img/menu/me3.png")} />}
-    onPress={() => this.setState({ selectedTab: 'profile' })}>
-    <Text> tab2 </Text>
-  </TabNavigator.Item>
-</TabNavigator>
+        </ImageBackground>
         </View>
+        </HeaderImageScrollView>
     );
   }
 }
