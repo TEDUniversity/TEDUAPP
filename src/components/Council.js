@@ -26,7 +26,7 @@ class Council extends Component {
         headerLeft: null,
         gesturesEnabled: false,
       };
-  state={ selectedTab: "", MAX_HEIGHT: 0 }
+  state={ selectedTab: "", MAX_HEIGHT: 0, scrollHeight: 500 }
   componentWillMount() {
     //const parseString = require("xml2js").parseString;
 
