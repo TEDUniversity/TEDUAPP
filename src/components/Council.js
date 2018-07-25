@@ -9,6 +9,9 @@
 import React, { Component } from "react";
 import { Text, View, StyleSheet, Dimensions } from "react-native";
 import Image from 'react-native-scalable-image';
+import TabNavigator from 'react-native-tab-navigator';
+import Icon from "react-native-vector-icons/FontAwesome";
+
 
 class Council extends Component {
     static navigationOptions = {
@@ -20,7 +23,7 @@ class Council extends Component {
         headerLeft: null,
         gesturesEnabled: false,
       };
-  
+  state={ selectedTab: "" }
     render() {
     return (
         <View style={styles.container}>
@@ -29,6 +32,25 @@ class Council extends Component {
                     This is Council.
                 </Text>
             </View>
+            <TabNavigator tabBarStyle={styles.tabNav} >
+  <TabNavigator.Item
+    selected={this.state.selectedTab === 'home'}
+    title="Home"
+    renderIcon={() => <Image source={require("./img/moodle/m3.png")} />}
+    renderSelectedIcon={() => <Image source={require("./img/moodle/m3.png")} />}
+    badgeText="1"
+    onPress={() => this.setState({ selectedTab: 'home' })}>
+    <Text> tab1 </Text>
+  </TabNavigator.Item>
+  <TabNavigator.Item
+    selected={this.state.selectedTab === 'profile'}
+    title="Profile"
+    renderIcon={() => <Image source={require("./img/menu/me3.png")} />}
+    renderSelectedIcon={() => <Image source={require("./img/menu/me3.png")} />}
+    onPress={() => this.setState({ selectedTab: 'profile' })}>
+    <Text> tab2 </Text>
+  </TabNavigator.Item>
+</TabNavigator>
         </View>
     );
   }
@@ -38,15 +60,20 @@ const styles = StyleSheet.create({
     container: {
       flex: 1,
       justifyContent: "space-between",
-      alignItems: "center",
     },
     text: {
         fontWeight: "bold"
     },
     subContainer: {
         flex: 1,
-        alignItems: "center",
         justifyContent: "center" 
+    },
+    tabNav: {
+        alignItems: "stretch",
+        //marginLeft: -100,
+        width: "100%",
+        flex: 1,
+        height: 30
     }
   });
 
