@@ -7,13 +7,14 @@
  */
 
 import React, { Component } from "react";
-import { Text, View, StyleSheet, Dimensions } from "react-native";
+import { Text, View, StyleSheet, Dimensions, ImageBackground } from "react-native";
 import Image from 'react-native-scalable-image';
 import TabNavigator from 'react-native-tab-navigator';
 import Icon from "react-native-vector-icons/FontAwesome";
 import HeaderImageScrollView, { TriggeringView } from 'react-native-image-header-scroll-view';
 import { Header } from 'react-navigation';
-import Image from "react-native-scalable-image";
+
+const MIN_HEIGHT = Header.height - 20;
 
 class Council extends Component {
     static navigationOptions = {
@@ -25,7 +26,21 @@ class Council extends Component {
         headerLeft: null,
         gesturesEnabled: false,
       };
-  state={ selectedTab: "" }
+  state={ selectedTab: "", MAX_HEIGHT: 0 }
+  componentWillMount() {
+    //const parseString = require("xml2js").parseString;
+
+    const winHeight = Dimensions.get('window').height;
+    console.log("winHeight" + winHeight);
+
+    if (winHeight < 736) {
+        console.log("device height less than 736");
+        this.setState({ MAX_HEIGHT: winHeight * 0.175 }); //17.5%
+    } else if (winHeight >= 736) {
+        console.log("device height greater than 736");
+        this.setState({ MAX_HEIGHT: winHeight * 0.18 }); //18%
+    }
+  }
     render() {
     return (
         
