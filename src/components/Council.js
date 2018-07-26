@@ -13,6 +13,7 @@ import TabNavigator from 'react-native-tab-navigator';
 import Icon from "react-native-vector-icons/FontAwesome";
 import HeaderImageScrollView, { TriggeringView } from 'react-native-image-header-scroll-view';
 import { Header } from 'react-navigation';
+import DetailNews from "./DetailNews";
 
 const MIN_HEIGHT = Header.height ;
 
@@ -27,6 +28,24 @@ class Council extends Component {
         gesturesEnabled: false,
       };
   state={ selectedTab: "", MAX_HEIGHT: 0, scrollHeight: 500 }
+
+
+  renderDataDuyurular = () => {
+    return this.state.dataDuyurular.map((responseData, Id) => (
+      <DetailNews key={Id} data={responseData} imgsrc={"sarı"} />
+    ));
+  }
+  renderDataEtkinlikler = () => {   
+    return this.state.dataHaberler.map((responseData, Id) => (
+      <DetailNews key={Id} data={responseData} imgsrc={"kırmızı"} />
+    ));
+  }
+  renderDataHaberler = () => {
+    return this.state.dataEtkinlikler.map((responseData, Id) => (
+        <DetailNews key={Id} data={responseData} imgsrc={"mavi"} />
+    ));
+  }
+
   componentWillMount() {
     //const parseString = require("xml2js").parseString;
 
@@ -41,6 +60,10 @@ class Council extends Component {
         this.setState({ MAX_HEIGHT: winHeight * 0.18 }); //18%
     }
   }
+
+
+
+
     render() {
     return (
         
