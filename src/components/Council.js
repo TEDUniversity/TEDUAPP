@@ -7,7 +7,7 @@
  */
 
 import React, { Component } from "react";
-import { Text, View, StyleSheet, Dimensions, ImageBackground } from "react-native";
+import { Text, View, StyleSheet, Dimensions, ImageBackground, TouchableOpacity } from "react-native";
 import Image from 'react-native-scalable-image';
 import TabNavigator from 'react-native-tab-navigator';
 import Icon from "react-native-vector-icons/FontAwesome";
@@ -86,10 +86,23 @@ class Council extends Component {
         <ImageBackground source={require("./img/background/BACKGROUND.png")} style={styles.mainBackGround}>
         
             <View style={styles.container}>
-                <View style={styles.subContainer}>
+                <View style={styles.questionContainer}>
+                    <View style={styles.question}>
                     <Text style={styles.text}>
-                        This is Council.
+                        Where do you want to go for the party?
                     </Text>
+                    </View>
+                    <View style={styles.answers} >
+                    <TouchableOpacity style={[styles.answerButton, { backgroundColor: this.state.buttonBackgroundColor1 }]} onPress={() => { this.setState({ buttonBackgroundColor1: "rgb(22,103,163)", clicked1: true }); if (this.state.clicked1) { this.setState({ buttonBackgroundColor1: "transparent", clicked1: false }); console.log(this.state.buttonBackgroundColor1); } }}>
+                        <Text> 6:45</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={[styles.answerButton, { backgroundColor: this.state.buttonBackgroundColor2 }]} onPress={() => { this.setState({ buttonBackgroundColor2: "rgb(22,103,163)", clicked2: true }); if (this.state.clicked2) { this.setState({ buttonBackgroundColor2: "transparent", clicked2: false }); console.log(this.state.buttonBackgroundColor2); } }}>
+                        <Text> Bomonti</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={[styles.answerButton, { backgroundColor: this.state.buttonBackgroundColor3 }]} onPress={() => { this.setState({ buttonBackgroundColor3: "rgb(22,103,163)", clicked3: true }); if (this.state.clicked3) { this.setState({ buttonBackgroundColor3: "transparent", clicked3: false }); console.log(this.state.buttonBackgroundColor3); } }}>
+                        <Text> Lux the mix</Text>
+                    </TouchableOpacity>
+                    </View>
                 </View>
             </View>
         </ImageBackground>
@@ -126,13 +139,31 @@ const styles = StyleSheet.create({
       flex: 1,
       justifyContent: "space-between",
     },
-    text: {
-        fontWeight: "bold"
-    },
-    subContainer: {
+    questionContainer: {
         flex: 1,
         justifyContent: "center" 
     },
+    answers: {
+        flexDirection: "row",
+        justifyContent: "space-around",
+        borderWidth: 1,
+        padding: 5,
+        margin: 5
+
+    },
+    answerButton: {
+        borderWidth: 0.5,
+        borderRadius: 5,
+        padding: 3,
+
+    },
+    question: {
+        marginLeft: "5%"
+    },
+    text: {
+        fontWeight: "bold"
+    },
+    
     tabNav: {
         //marginLeft: -100,
         width: "100%",
