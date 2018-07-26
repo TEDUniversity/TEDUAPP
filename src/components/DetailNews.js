@@ -43,7 +43,7 @@ class DetailNews extends Component {
            style={styles.button}
            onPress={() => { console.log("Pressed"); }}
           >
-          {this.render}
+          {this.renderBody()}
          </TouchableOpacity>
       </View>
     );
