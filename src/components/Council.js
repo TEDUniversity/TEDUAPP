@@ -68,29 +68,32 @@ class Council extends Component {
                         This is Council.
                     </Text>
                 </View>
-                <TabNavigator tabBarStyle={styles.tabNav} >
-                <TabNavigator.Item
-                    selected={this.state.selectedTab === 'home'}
-                    title="Home"
-                    renderIcon={() => <Image source={require("./img/moodle/m3.png")} />}
-                    renderSelectedIcon={() => <Image source={require("./img/moodle/m3.png")} />}
-                    badgeText="1"
-                    onPress={() => this.setState({ selectedTab: 'home' })}>
-                    <Text> tab1 </Text>
-                </TabNavigator.Item>
-                <TabNavigator.Item
-                    selected={this.state.selectedTab === 'profile'}
-                    title="Profile"
-                    renderIcon={() => <Image source={require("./img/menu/me3.png")} />}
-                    renderSelectedIcon={() => <Image source={require("./img/menu/me3.png")} />}
-                    onPress={() => this.setState({ selectedTab: 'profile' })}>
-                    <Text> tab2 </Text>
-                </TabNavigator.Item>
-                </TabNavigator>
             </View>
         </ImageBackground>
         </View>
+        <TabNavigator tabBarStyle={styles.tabNav} >
+                <TabNavigator.Item
+                    selected={this.state.selectedTab === 'News'}
+                    title="News"
+                    //renderIcon={() => <Image source={require("./img/moodle/m3.png")} />}
+                    //badgeText="+1"
+                    onPress={() => this.setState({ selectedTab: 'News' })}
+                    titleStyle={styles.tabNavTitle}
+                >
+                    <Text> tab1 </Text>
+                </TabNavigator.Item>
+                <TabNavigator.Item
+                    selected={this.state.selectedTab === 'Votings'}
+                    title="Votings"
+                    //renderIcon={() => <Image source={require("./img/menu/me3.png")} />}
+                    onPress={() => this.setState({ selectedTab: 'Votings' })}
+                    titleStyle={styles.tabNavTitle}
+                >
+                    <Text> tab2 </Text>
+                </TabNavigator.Item>
+        </TabNavigator>
         </HeaderImageScrollView>
+        
     );
   }
 }
@@ -108,11 +111,15 @@ const styles = StyleSheet.create({
         justifyContent: "center" 
     },
     tabNav: {
-        alignItems: "stretch",
         //marginLeft: -100,
         width: "100%",
         flex: 1,
-        height: 30
+        height: 25,
+        backgroundColor: "#373738",
+        alignItems: "center",
+    },
+    tabNavTitle: {
+        
     },
     mainBackGround: {
         flex: 1, 
