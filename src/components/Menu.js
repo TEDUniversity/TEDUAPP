@@ -25,7 +25,7 @@ class Menu extends Component {
       color: "#000000"
     }
   };
-  state={ MAX_HEIGHT: 0, scrollHeight: 0 }
+  state={ MAX_HEIGHT: 0, scrollHeight: 0, click1: false }
 
   componentWillMount(){
     const winHeight = Dimensions.get('window').height;
@@ -45,6 +45,25 @@ class Menu extends Component {
     } else if (winHeight >= 736) {
         console.log("device height greater than 736");
         this.setState({ MAX_HEIGHT: winHeight * 0.18 }); //20%
+    }
+  }
+
+  renderWebView1 = () => {
+    if (this.state.click1) {
+      return (
+        <WebView
+           source={{ uri: "https://www.tedu.edu.tr/sites/default/files/content_files/2017-2018_akademik_takvim-senato_05.07.2018_0.pdf" }}
+           style={{ marginTop: 20 }}
+        />
+      );
+    } else {
+      return (
+        <TouchableOpacity style={styles.subContainer} onPress={() => { this.setState({ click1: true }); }} >
+            <ImageBackground source={require("../../img/subMenu/menu1.jpg")} style={{ width: Dimensions.get("window").width, height: 60  }}>
+                <Text style={styles.text}>Fitness center programme</Text>
+            </ImageBackground>
+        </TouchableOpacity>
+      );
     }
   }
 
@@ -73,11 +92,7 @@ class Menu extends Component {
         <ImageBackground source={require("../../img/background/BACKGROUND.png")} style={{ width: Dimensions.get("window").width }} >
         <View style={styles.container} height={this.state.scrollHeight}>
         <ImageBackground source={require("../../img/background/BACKGROUND.png")} style={styles.mainBackGround}>
-        <TouchableOpacity style={styles.subContainer} onPress={() => { return (<WebView source={{ uri: 'https://www.tedu.edu.tr/tr' }} />); }} >
-            <ImageBackground source={require("../../img/subMenu/menu1.jpg")} style={{ width: Dimensions.get("window").width, height: 60  }}>
-                <Text style={styles.text}>Fitness center programme</Text>
-            </ImageBackground>
-        </TouchableOpacity>
+        {this.renderWebView1()}
         <TouchableOpacity style={styles.subContainer}>
           <ImageBackground source={require("../../img/subMenu/menu2.jpg")} style={{ width: Dimensions.get("window").width, height: 60 }}>
                 <Text style={styles.text}>Cafeteria programme</Text>
