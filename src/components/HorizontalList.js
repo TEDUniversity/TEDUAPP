@@ -1,5 +1,5 @@
 import React from "react";
-import { ScrollView, Text, View } from "react-native";
+import { ScrollView, Text, View, ImageBackground } from "react-native";
 
 const HorizontalList = props => (
     <View style={styles.containerStyle}>
@@ -48,7 +48,7 @@ const HorizontalList = props => (
           marginLeft: 15,
           fontSize: 18,
           fontWeight: "bold",
-        }
+        },
       };
 
 export default HorizontalList;

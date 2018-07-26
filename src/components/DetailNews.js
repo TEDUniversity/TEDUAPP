@@ -1,22 +1,55 @@
-import React from "react";
-import { Text, View, Image, Dimensions, TouchableOpacity } from "react-native";
+import React, { Component } from "react";
+import { Text, View, Image, Dimensions, TouchableOpacity, ImageBackground } from "react-native";
 import HTML from "react-native-render-html";
 
-const DetailNews = props => {
-  const { containerStyle, subContainerStyle, ImageStyle, titleStyle } = styles;
+class DetailNews extends Component {
   //   alert(JSON.stringify(props.data));
-  return (
-    <View style={containerStyle}>
-        <TouchableOpacity
-         style={styles.button}
-         onPress={() => { console.log("Pressed"); }}
-        >
-         <Text style={styles.text}> {props.data.title} </Text>
-       </TouchableOpacity>
-    </View>
-  );
-};
 
+  renderBody = () => {
+    const { containerStyle, subContainerStyle, text, BackGround } = styles;
+    if (this.props.imgsrc === "sarı") {
+      return (
+        <ImageBackground source={require("./img/newsBox/sarı.png")} style={BackGround}>
+          <View style={subContainerStyle}> 
+            <Text style={text}> {this.props.data.title} </Text>
+          </View>
+         </ImageBackground>
+      );
+    } else if (this.props.imgsrc === "mavi") {
+      return (
+        <ImageBackground source={require("./img/newsBox/mavi.png")} style={BackGround}>
+          <View style={subContainerStyle}> 
+            <Text style={text}> {this.props.data.title} </Text>
+          </View>
+         </ImageBackground>
+      );
+    } else if (this.props.imgsrc === "kırmızı") {
+      return (
+        <ImageBackground source={require("./img/newsBox/kırmızı.png")} style={BackGround}>
+          <View style={subContainerStyle}> 
+            <Text style={text}> {this.props.data.title} </Text>
+          </View>
+         </ImageBackground>
+      );
+    }
+  };
+
+  render() {
+    console.log(this.props.imgsrc);
+    const { containerStyle, subContainerStyle, text, BackGround } = styles;
+    return (
+      <View style={containerStyle}>
+          <TouchableOpacity
+           style={styles.button}
+           onPress={() => { console.log("Pressed"); }}
+          >
+          {this.render}
+         </TouchableOpacity>
+      </View>
+    );
+  }
+
+}
 
 const styles = {
   containerStyle: {
@@ -28,14 +61,11 @@ const styles = {
     
   },
   subContainerStyle: {
-    borderBottomWidth: 1,
-    padding: 5,
-    backgroundColor: "#fff",
-    justifyContent: "flex-start",
-    flexDirection: "row",
-    borderColor: "#ddd",
-    position: "relative"
-  },
+    height: 90,
+    flexWrap: "wrap",
+    justifyContent: 'center',
+
+    },
   ImageStyle: {
     height: 300,
     width: 300,
@@ -44,15 +74,24 @@ const styles = {
   text: {
     textAlign: 'center',
     textAlignVertical: 'center',
+    color: "white",
+    fontSize: 12,
+    
+
   },
   button: {
-    alignItems: 'center',
     backgroundColor: '#DDDDDD',
-    padding: 10,
-    height: 100,
-    width: 200,
-    justifyContent: 'center',
+    padding: 0,
+    height: 150,
+    width: 150,
   },
+  BackGround: {
+    flex: 1,
+    height: 150,
+    width: 150,
+    alignItems: 'center',
+    
+},
 };
 /*
 <TouchableOpacity

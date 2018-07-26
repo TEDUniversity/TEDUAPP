@@ -118,17 +118,17 @@ class News extends Component {
   }
   renderDataDuyurular = () => {
     return this.state.dataDuyurular.map((responseData, Id) => (
-      <DetailNews key={Id} data={responseData} />
+      <DetailNews key={Id} data={responseData} imgsrc={"sarı"} />
     ));
   }
-  renderDataEtkinlikler = () => {
+  renderDataEtkinlikler = () => {   
     return this.state.dataHaberler.map((responseData, Id) => (
-      <DetailNews key={Id} data={responseData} />
+      <DetailNews key={Id} data={responseData} imgsrc={"kırmızı"} />
     ));
   }
   renderDataHaberler = () => {
     return this.state.dataEtkinlikler.map((responseData, Id) => (
-      <DetailNews key={Id} data={responseData} />
+        <DetailNews key={Id} data={responseData} imgsrc={"mavi"} />
     ));
   }
   render() {
@@ -149,18 +149,15 @@ class News extends Component {
                                />}
             overlayColor="#144d8c"
             maxOverlayOpacity={1}
-            scrollEnabled={false}
-            
+            bounces={false}
         >
-        <View height={this.state.scrollHeight}>
+        <View>
         <ImageBackground source={require("./img/background/BACKGROUND.png")} style={styles.mainBackGround}>
-        
-                
+            <View style={{ marginBottom: 50 }}>
                 <HorizontalList Data={this.renderDataDuyurular} title={"Duyurular"} />
-                <HorizontalList Data={this.renderDataEtkinlikler} title={"Etkinlikler"} />
+                <HorizontalList Data={this.renderDataEtkinlikler} title={"Etkinlikler"}/>
                 <HorizontalList Data={this.renderDataHaberler} title={"Haberler"} />
-                
-            
+            </View>
         </ImageBackground>
         </View>
         </HeaderImageScrollView>
@@ -196,6 +193,9 @@ const styles = StyleSheet.create({
 
 export default News;
 
+//if you want to scroll only the content not the header, add scrollview that capsulate horizontallists
+
+//height={this.state.scrollHeight} add it to view component for responsivnes
 
 /*
 <ImageBackground source={require("./img/background/BACKGROUND.png")} style={styles.mainBackGround}>
