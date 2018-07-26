@@ -14,7 +14,7 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import HeaderImageScrollView, { TriggeringView } from 'react-native-image-header-scroll-view';
 import { Header } from 'react-navigation';
 
-const MIN_HEIGHT = Header.height - 20;
+const MIN_HEIGHT = Header.height ;
 
 class Council extends Component {
     static navigationOptions = {
@@ -113,7 +113,14 @@ const styles = StyleSheet.create({
         width: "100%",
         flex: 1,
         height: 30
-    }
+    },
+    mainBackGround: {
+        flex: 1, 
+        alignSelf: 'stretch', 
+        resizeMode: 'cover', 
+        width: null, 
+        height: null 
+      }
   });
 
   export default Council;
