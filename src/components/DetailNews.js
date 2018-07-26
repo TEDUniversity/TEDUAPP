@@ -9,7 +9,7 @@ class DetailNews extends Component {
     const { containerStyle, subContainerStyle, text, BackGround } = styles;
     if (this.props.imgsrc === "sarı") {
       return (
-        <ImageBackground source={require("./img/newsBox/sarı.png")} style={BackGround}>
+        <ImageBackground source={require("../../img/newsBox/sarı.png")} style={BackGround}>
           <View style={subContainerStyle}> 
             <Text style={text}> {this.props.data.title} </Text>
           </View>
@@ -17,7 +17,7 @@ class DetailNews extends Component {
       );
     } else if (this.props.imgsrc === "mavi") {
       return (
-        <ImageBackground source={require("./img/newsBox/mavi.png")} style={BackGround}>
+        <ImageBackground source={require("../../img/newsBox/mavi.png")} style={BackGround}>
           <View style={subContainerStyle}> 
             <Text style={text}> {this.props.data.title} </Text>
           </View>
@@ -25,7 +25,7 @@ class DetailNews extends Component {
       );
     } else if (this.props.imgsrc === "kırmızı") {
       return (
-        <ImageBackground source={require("./img/newsBox/kırmızı.png")} style={BackGround}>
+        <ImageBackground source={require("../../img/newsBox/kırmızı.png")} style={BackGround}>
           <View style={subContainerStyle}> 
             <Text style={text}> {this.props.data.title} </Text>
           </View>

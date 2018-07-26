@@ -29,11 +29,7 @@ class Main extends Component {
     headerStyle: {  marginTop: 0, backgroundColor: "#fff", height: 80 },
     headerLeft: null,
     gesturesEnabled: false,
-<<<<<<< HEAD
     header: null
-=======
-    header: null,
->>>>>>> Arda-Menu
   };
 
   state = { activeTab: "NewsRouter", menuWidth: 0 };

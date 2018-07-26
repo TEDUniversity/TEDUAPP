@@ -145,14 +145,14 @@ class News extends Component {
             width={Dimensions.get("window").width}
             style={StyleSheet.absoluteFill}
             style={{ }}
-            source={require("./img/header/anatepe2.png")}
+            source={require("../../img/header/anatepe2.png")}
                                />}
             overlayColor="#144d8c"
             maxOverlayOpacity={1}
             bounces={false}
         >
         <View>
-        <ImageBackground source={require("./img/background/BACKGROUND.png")} style={styles.mainBackGround}>
+        <ImageBackground source={require("../../img/background/BACKGROUND.png")} style={styles.mainBackGround}>
             <View style={{ marginBottom: 50 }}>
                 <HorizontalList Data={this.renderDataDuyurular} title={"Duyurular"} />
                 <HorizontalList Data={this.renderDataEtkinlikler} title={"Etkinlikler"}/>
