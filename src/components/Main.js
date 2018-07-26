@@ -22,53 +22,74 @@ class Main extends Component {
         style={StyleSheet.absoluteFill}
         style={{ marginTop: 40 }}
         
-        source={require("./img/header/anatepe2.png")}
+        source={require("../../img/header/anatepe2.png")}
       />
     ),
     title: "Main",
     headerStyle: {  marginTop: 0, backgroundColor: "#fff", height: 80 },
     headerLeft: null,
     gesturesEnabled: false,
+<<<<<<< HEAD
     header: null
+=======
+    header: null,
+>>>>>>> Arda-Menu
   };
 
-  state = { activeTab: "NewsRouter" };
+  state = { activeTab: "NewsRouter", menuWidth: 0 };
 
+  
+  componentWillMount() {
+    //const parseString = require("xml2js").parseString;
+
+    const winWidth = Dimensions.get('window').width;
+    console.log("winWidth" + winWidth);
+    //navigation toolbar içindeki elemanların yeri için etkisiz bir işlem
+    //sadece tüm toolbarın genişliğini etkiliyor
+    if (winWidth < 414) {
+        console.log("device width less than 414");
+        this.setState({ menuWidth: winWidth * 1 }); //75.5%
+    } else if (winWidth >= 414) {
+        console.log("device width greater than 414");
+        this.setState({ menuWidth: winWidth * 1 }); //76%
+    }
+  }
+// iphone7 width = 375, iphone7 plus width = 414
   tabs = [
     {
       key: "NewsRouter",
       icon: "dashboard",
-      label: "Dashboard",
-      barColor: "#388E3C",
-      pressColor: "rgba(255, 255, 255, 0.16)"
+      label: "News",
+      barColor: "#144d8c",
+      pressColor: "rgba(232, 36, 55, 0.16)"
     },
     {
       key: "MenuRouter",
-      icon: "movie",
-      label: "Movies & TV",
-      barColor: "#B71C1C",
-      pressColor: "rgba(255, 255, 255, 0.16)"
+      icon: "menu",
+      label: "Menu",
+      barColor: "#144d8c",
+      pressColor: "rgba(232, 36, 55, 0.16)"
     },
     {
       key: "CalendarRouter",
       icon: "music-note",
       label: "Music",
-      barColor: "#E64A19",
-      pressColor: "rgba(255, 255, 255, 0.16)"
+      barColor: "#144d8c",
+      pressColor: "rgba(232, 36, 55, 0.16)"
     },
     {
       key: "MoodleRouter",
       icon: "music-note",
       label: "Music",
-      barColor: "#A93B13",
-      pressColor: "rgba(255, 255, 255, 0.16)"
+      barColor: "#144d8c",
+      pressColor: "rgba(232, 36, 55, 0.16)"
     },
     {
       key: "CouncilRouter",
       icon: "music-note",
       label: "Music",
-      barColor: "#E46D55",
-      pressColor: "rgba(255, 255, 255, 0.16)"
+      barColor: "#144d8c",
+      pressColor: "rgba(232, 36, 55, 0.16)"
     }
   ];
   renderIcon = icon => ({ isActive }) => (
@@ -113,10 +134,11 @@ class Main extends Component {
           //activeTab={this.state.activeTab}
           onTabPress={newTab => {
             this.setState({ activeTab: newTab.key });
-            //this.props.navigation.navigate(newTab.key);
+            //this.props.navigation.navigate(newTab.key); usage of react native navigation
           }}
           renderTab={this.renderTab}
           tabs={this.tabs}
+          style={{ width: this.state.menuWidth, alignItems: "center", alignSelf: "center", alignContent:"center" }}
         />
       </View>
     );
