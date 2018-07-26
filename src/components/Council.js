@@ -75,7 +75,7 @@ class Council extends Component {
             width={Dimensions.get("window").width}
             style={StyleSheet.absoluteFill}
             style={{ }}
-            source={require("./img/header/anatepe2.png")}
+            source={require("../../img/header/anatepe2.png")}
                                />}
             overlayColor="#144d8c"
             maxOverlayOpacity={1}
@@ -83,7 +83,7 @@ class Council extends Component {
             
         >
         <View height={this.state.scrollHeight}>
-        <ImageBackground source={require("./img/background/BACKGROUND.png")} style={styles.mainBackGround}>
+        <ImageBackground source={require("../../img/background/BACKGROUND.png")} style={styles.mainBackGround}>
         
             <View style={styles.container}>
                 <View style={styles.questionContainer}>

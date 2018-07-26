@@ -69,21 +69,21 @@ class Main extends Component {
     {
       key: "CalendarRouter",
       icon: "music-note",
-      label: "Music",
+      label: "Calendar",
       barColor: "#144d8c",
       pressColor: "rgba(232, 36, 55, 0.16)"
     },
     {
       key: "MoodleRouter",
       icon: "music-note",
-      label: "Music",
+      label: "Moodle",
       barColor: "#144d8c",
       pressColor: "rgba(232, 36, 55, 0.16)"
     },
     {
       key: "CouncilRouter",
       icon: "music-note",
-      label: "Music",
+      label: "Council",
       barColor: "#144d8c",
       pressColor: "rgba(232, 36, 55, 0.16)"
     }
