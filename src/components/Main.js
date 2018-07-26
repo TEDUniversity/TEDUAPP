@@ -145,14 +145,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "space-between",
-    alignItems: "center"
+    //alignItems: "center"
   },
   text: {
     fontWeight: "bold"
   },
   subContainer: {
     flex: 1,
-    alignItems: "center",
     justifyContent: "center"
   }
 });
