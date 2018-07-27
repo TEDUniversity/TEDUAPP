@@ -7,7 +7,7 @@
  */
 
 import React, { Component } from "react";
-import { Text, View, StyleSheet } from "react-native";
+import { Text, View, StyleSheet, TextInput } from "react-native";
 
 class MoodleLogin extends Component {
   static navigationOptions = {
@@ -16,13 +16,36 @@ class MoodleLogin extends Component {
     headerLeft: null,
     gesturesEnabled: false
   };
-
+  state = {
+    kullaniciAdi: "",
+    sifre: ""
+  };
   render() {
     return (
-      <View style={styles.container}>
-        <View style={styles.subContainer}>
-          <Text style={styles.text}>This will be MoodleLogin.</Text>
-        </View>
+      <View style={{ padding: 10 }}>
+        <Text style={styles.text}>Kullanıcı adı: </Text>
+        <TextInput
+          style={{
+            height: 50,
+            width: 250,
+            borderColor: "gray",
+            borderWidth: 1
+          }}
+          placeholder="Kullanıcı adı!"
+          onChangeText={kullaniciAdi => this.setState({ kullaniciAdi })}
+        />
+        <Text style={styles.text}>Şifre: </Text>
+        <TextInput
+          secureTextEntry={true}
+          style={{
+            height: 50,
+            width: 250,
+            borderColor: "gray",
+            borderWidth: 1
+          }}
+          placeholder="Şifre"
+          onChangeText={sifre => this.setState({ sifre })}
+        />
       </View>
     );
   }
