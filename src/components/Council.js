@@ -14,6 +14,8 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import HeaderImageScrollView, { TriggeringView } from 'react-native-image-header-scroll-view';
 import { Header } from 'react-navigation';
 import DetailNews from "./DetailNews";
+import CouncilNews from "./CouncilNews";
+import CouncilVotings from "./CouncilVotings";
 
 const MIN_HEIGHT = Header.height ;
 
@@ -27,7 +29,7 @@ class Council extends Component {
         headerLeft: null,
         gesturesEnabled: false,
       };
-  state={ selectedTab: "", MAX_HEIGHT: 0, scrollHeight: 500 }
+  state={ selectedTab: "News", MAX_HEIGHT: 0, scrollHeight: 500 }
 
 
   renderDataDuyurular = () => {
@@ -62,7 +64,13 @@ class Council extends Component {
   }
 
 
-
+  renderBody = () => {
+      if (this.state.selectedTab === "News") {
+        return <CouncilNews />;
+      } else if (this.state.selectedTab === "Votings") {
+        return <CouncilVotings />;
+      }
+  }
 
     render() {
     return (
