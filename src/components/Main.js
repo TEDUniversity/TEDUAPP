@@ -13,7 +13,6 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import Image from "react-native-scalable-image";
 
 class Main extends Component {
-    
   static navigationOptions = {
     headerTitle: (
       <Image
@@ -21,12 +20,11 @@ class Main extends Component {
         width={Dimensions.get("window").width}
         style={StyleSheet.absoluteFill}
         style={{ marginTop: 40 }}
-        
         source={require("../../img/header/anatepe2.png")}
       />
     ),
     title: "Main",
-    headerStyle: {  marginTop: 0, backgroundColor: "#fff", height: 80 },
+    headerStyle: { marginTop: 0, backgroundColor: "#fff", height: 80 },
     headerLeft: null,
     gesturesEnabled: false,
     header: null
@@ -34,23 +32,22 @@ class Main extends Component {
 
   state = { activeTab: "NewsRouter", menuWidth: 0 };
 
-  
   componentWillMount() {
     //const parseString = require("xml2js").parseString;
 
-    const winWidth = Dimensions.get('window').width;
+    const winWidth = Dimensions.get("window").width;
     console.log("winWidth" + winWidth);
     //navigation toolbar içindeki elemanların yeri için etkisiz bir işlem
     //sadece tüm toolbarın genişliğini etkiliyor
     if (winWidth < 414) {
-        console.log("device width less than 414");
-        this.setState({ menuWidth: winWidth * 1 }); //75.5%
+      console.log("device width less than 414");
+      this.setState({ menuWidth: winWidth * 1 }); //75.5%
     } else if (winWidth >= 414) {
-        console.log("device width greater than 414");
-        this.setState({ menuWidth: winWidth * 1 }); //76%
+      console.log("device width greater than 414");
+      this.setState({ menuWidth: winWidth * 1 }); //76%
     }
   }
-// iphone7 width = 375, iphone7 plus width = 414
+  // iphone7 width = 375, iphone7 plus width = 414
   tabs = [
     {
       key: "NewsRouter",
@@ -75,7 +72,7 @@ class Main extends Component {
     },
     {
       key: "MoodleRouter",
-      icon: "music-note",
+      icon: "school",
       label: "Moodle",
       barColor: "#144d8c",
       pressColor: "rgba(232, 36, 55, 0.16)"
@@ -101,21 +98,21 @@ class Main extends Component {
   );
   showTab() {
     switch (this.state.activeTab) {
-      case 'NewsRouter':
-          return <News navOp={this.navigationOptions} />;
-          break;
-      case 'MenuRouter':
-          return <Menu navOp={this.navigationOptions} />;
-          break;
-      case 'CalendarRouter':
-          return <Calendar navOp={this.navigationOptions} />;
-          break;
-      case 'MoodleRouter':
-          return <Moodle navOp={this.navigationOptions} />;
-          break;
-      case 'CouncilRouter':
-          return <Council navOp={this.navigationOptions} />;
-          break;
+      case "NewsRouter":
+        return <News navOp={this.navigationOptions} />;
+        break;
+      case "MenuRouter":
+        return <Menu navOp={this.navigationOptions} />;
+        break;
+      case "CalendarRouter":
+        return <Calendar navOp={this.navigationOptions} />;
+        break;
+      case "MoodleRouter":
+        return <Moodle navOp={this.navigationOptions} />;
+        break;
+      case "CouncilRouter":
+        return <Council navOp={this.navigationOptions} />;
+        break;
     }
   }
 
@@ -125,7 +122,7 @@ class Main extends Component {
         <View style={styles.container}>
           <View style={styles.subContainer}>{this.showTab()}</View>
         </View>
-        
+
         <BottomNavigation
           //activeTab={this.state.activeTab}
           onTabPress={newTab => {
@@ -134,7 +131,12 @@ class Main extends Component {
           }}
           renderTab={this.renderTab}
           tabs={this.tabs}
-          style={{ width: this.state.menuWidth, alignItems: "center", alignSelf: "center", alignContent:"center" }}
+          style={{
+            width: this.state.menuWidth,
+            alignItems: "center",
+            alignSelf: "center",
+            alignContent: "center"
+          }}
         />
       </View>
     );
@@ -144,7 +146,7 @@ class Main extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "space-between",
+    justifyContent: "space-between"
     //alignItems: "center"
   },
   text: {

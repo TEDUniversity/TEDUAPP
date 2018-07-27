@@ -7,7 +7,14 @@
  */
 
 import React, { Component } from "react";
-import { Text, View, StyleSheet, TextInput } from "react-native";
+import {
+  Text,
+  View,
+  StyleSheet,
+  TextInput,
+  Button,
+  TouchableHighlight
+} from "react-native";
 
 class MoodleLogin extends Component {
   static navigationOptions = {
@@ -29,9 +36,11 @@ class MoodleLogin extends Component {
             height: 50,
             width: 250,
             borderColor: "gray",
-            borderWidth: 1
+            borderWidth: 1,
+            color: "white"
           }}
           placeholder="Kullanıcı adı!"
+          placeholderTextColor="gray"
           onChangeText={kullaniciAdi => this.setState({ kullaniciAdi })}
         />
         <Text style={styles.text}>Şifre: </Text>
@@ -41,11 +50,30 @@ class MoodleLogin extends Component {
             height: 50,
             width: 250,
             borderColor: "gray",
-            borderWidth: 1
+            borderWidth: 1,
+            color: "white"
           }}
+          placeholderTextColor="gray"
           placeholder="Şifre"
           onChangeText={sifre => this.setState({ sifre })}
         />
+        <View>
+          <TouchableHighlight
+            style={{
+              height: 40,
+              width: 250,
+              borderRadius: 10,
+              marginTop: 20
+            }}
+          >
+            <Button
+              onPress={() => {
+                alert("giriş");
+              }}
+              title="GİRİŞ"
+            />
+          </TouchableHighlight>
+        </View>
       </View>
     );
   }
@@ -58,7 +86,8 @@ const styles = StyleSheet.create({
     alignItems: "center"
   },
   text: {
-    fontWeight: "bold"
+    fontWeight: "bold",
+    color: "white"
   },
   subContainer: {
     flex: 1,
