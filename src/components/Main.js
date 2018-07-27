@@ -25,7 +25,7 @@ class Main extends Component {
       />
     ),
     title: "Main",
-    headerStyle: {  marginTop: 0, backgroundColor: "#fff", height: 80 },
+    headerStyle: { marginTop: 0, backgroundColor: "#fff", height: 80 },
     headerLeft: null,
     gesturesEnabled: false,
     header: null,

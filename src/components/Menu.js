@@ -12,6 +12,8 @@ import { ImageBackground, Linking, TouchableOpacity,
 import Image from "react-native-scalable-image";
 import HeaderImageScrollView, { TriggeringView } from 'react-native-image-header-scroll-view';
 import { Header } from 'react-navigation';
+import Icon from "react-native-vector-icons/Entypo";
+
 
 const MIN_HEIGHT = Header.height;
 
@@ -69,6 +71,18 @@ class Menu extends Component {
     }
   }
 
+
+  renderHeader = () => (
+      <View stlye={{ flexDirection: "row", alignItems: "center", justifyContent: "center", backgroundColor: "red", marginTop: 50, }}>
+        <TouchableOpacity>
+          <Icon name="login" size={30} />
+        </TouchableOpacity>
+        <TouchableOpacity>
+          <Icon name="dots-three-vertical" size={30} />
+        </TouchableOpacity>
+      </View>
+      
+    );
   render() {
     //Linking.openURL(`https://www.tedu.edu.tr/tr`)
     
@@ -89,6 +103,7 @@ class Menu extends Component {
             contentOffset={ {x: 0, y:0}}
             scrollViewBackgroundColor="rgba(52, 52, 52, 0.40)"
             scrollEnabled={false}
+            renderFixedForeground={this.renderHeader}
         >
         
         <ImageBackground source={require("../../img/background/BACKGROUND.png")} style={{ width: Dimensions.get("window").width }} >
@@ -135,6 +150,15 @@ class Menu extends Component {
                 <Text style={styles.menuText}>Listen radio tedu</Text>
           </ImageBackground>        
         </TouchableOpacity>
+
+<View stlye={{ flexDirection: "column", alignItems: "center", justifyContent: "center", backgroundColor: "red", marginTop: 0, }}>
+        <TouchableOpacity>
+        <Text>aasdasd </Text>
+        </TouchableOpacity>
+        <TouchableOpacity>
+        <Text>aasdasd </Text>
+        </TouchableOpacity>
+      </View>
 
         </ImageBackground>
       </View>
