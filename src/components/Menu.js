@@ -8,7 +8,7 @@
 
 import React, { Component } from "react";
 import { ImageBackground, Linking, TouchableOpacity,
- Text, View, StyleSheet, Dimensions, WebView } from "react-native";
+ Text, View, StyleSheet, Dimensions, WebView, Button } from "react-native";
 import Image from "react-native-scalable-image";
 import HeaderImageScrollView, { TriggeringView } from 'react-native-image-header-scroll-view';
 import { Header } from 'react-navigation';
@@ -73,15 +73,17 @@ class Menu extends Component {
 
 
   renderHeader = () => (
-      <View stlye={{ flexDirection: "row", alignItems: "center", justifyContent: "center", backgroundColor: "red", marginTop: 50, }}>
-        <TouchableOpacity>
-          <Icon name="login" size={30} />
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <Icon name="dots-three-vertical" size={30} />
-        </TouchableOpacity>
-      </View>
+    <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between", backgroundColor: "transparent", marginTop: this.state.MAX_HEIGHT - 35, }}>
+    <TouchableOpacity onPress={() => { console.log("pressed Header"); }}>
+    <Icon name="login" size={30} />
+    </TouchableOpacity>
+    <TouchableOpacity onPress={() => { console.log("pressed Header"); }}>
+    <Icon name="dots-three-vertical" size={30} />
+    </TouchableOpacity>
+    </View>
+
       
+
     );
   render() {
     //Linking.openURL(`https://www.tedu.edu.tr/tr`)
@@ -103,7 +105,7 @@ class Menu extends Component {
             contentOffset={ {x: 0, y:0}}
             scrollViewBackgroundColor="rgba(52, 52, 52, 0.40)"
             scrollEnabled={false}
-            renderFixedForeground={this.renderHeader}
+            renderForeground={this.renderHeader}
         >
         
         <ImageBackground source={require("../../img/background/BACKGROUND.png")} style={{ width: Dimensions.get("window").width }} >
@@ -150,15 +152,6 @@ class Menu extends Component {
                 <Text style={styles.menuText}>Listen radio tedu</Text>
           </ImageBackground>        
         </TouchableOpacity>
-
-<View stlye={{ flexDirection: "column", alignItems: "center", justifyContent: "center", backgroundColor: "red", marginTop: 0, }}>
-        <TouchableOpacity>
-        <Text>aasdasd </Text>
-        </TouchableOpacity>
-        <TouchableOpacity>
-        <Text>aasdasd </Text>
-        </TouchableOpacity>
-      </View>
 
         </ImageBackground>
       </View>
