@@ -14,6 +14,7 @@ import Menu from "./src/components/Menu";
 import Council from "./src/components/Council";
 import Calendar from "./src/components/Calendar";
 import Main from "./src/components/Main";
+import Webview from "./src/components/Webview";
 
 
 
@@ -35,6 +36,7 @@ const RootStack = createStackNavigator(
       CouncilRouter: Council,
       CalendarRotuer: Calendar,
       MoodleRouter: Moodle,
+      WebviewRouter: Webview,
   },
     {
       //headerMode: 'none',
