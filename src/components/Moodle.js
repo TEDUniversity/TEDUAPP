@@ -24,10 +24,11 @@ import HeaderImageScrollView, {
 import { Header } from "react-navigation";
 import DetailNews from "./DetailNews";
 import MoodleLogin from "./MoodleLogin";
+import { API_LINK } from "../util/types";
 
 const MIN_HEIGHT = Header.height;
 
-class Council extends Component {
+class Moodle extends Component {
   static navigationOptions = {
     headerTitle: (
       <Image
@@ -59,6 +60,22 @@ class Council extends Component {
     }
   }
 
+  login = () => {
+    // this.setState({ userName: userName, password: password });
+    // var moodle_client = require("moodle-client");
+    alert("userName");
+    // moodle_client.init({
+    //   wwwroot: API_LINK,
+    //   username: this.state.userName,
+    //   password: this.state.password
+    // });
+    //   .then(function(client) {
+    //     return do_something(client);
+    //   })
+    //   .catch(function(err) {
+    //     alert("Unable to initialize the client: " + err);
+    //   });
+  };
   render() {
     return (
       <HeaderImageScrollView
@@ -83,31 +100,10 @@ class Council extends Component {
             style={styles.mainBackGround}
           >
             <View style={styles.container}>
-              <MoodleLogin />
+              <MoodleLogin onPress={this.login} />
             </View>
           </ImageBackground>
         </View>
-        <TabNavigator tabBarStyle={styles.tabNav}>
-          <TabNavigator.Item
-            selected={this.state.selectedTab === "News"}
-            title="News"
-            //renderIcon={() => <Image source={require("./img/moodle/m3.png")} />}
-            //badgeText="+1"
-            onPress={() => this.setState({ selectedTab: "News" })}
-            titleStyle={styles.tabNavTitle}
-          >
-            <Text> tab1 </Text>
-          </TabNavigator.Item>
-          <TabNavigator.Item
-            selected={this.state.selectedTab === "Votings"}
-            title="Votings"
-            //renderIcon={() => <Image source={require("./img/menu/me3.png")} />}
-            onPress={() => this.setState({ selectedTab: "Votings" })}
-            titleStyle={styles.tabNavTitle}
-          >
-            <Text> tab2 </Text>
-          </TabNavigator.Item>
-        </TabNavigator>
       </HeaderImageScrollView>
     );
   }
@@ -116,7 +112,8 @@ class Council extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "space-between"
+    justifyContent: "center",
+    alignItems: "center"
   },
   questionContainer: {
     flex: 1,
@@ -159,4 +156,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Council;
+export default Moodle;

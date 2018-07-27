@@ -13,7 +13,8 @@ import {
   StyleSheet,
   TextInput,
   Button,
-  TouchableHighlight
+  TouchableHighlight,
+  Alert
 } from "react-native";
 
 class MoodleLogin extends Component {
@@ -27,6 +28,7 @@ class MoodleLogin extends Component {
     kullaniciAdi: "",
     sifre: ""
   };
+
   render() {
     return (
       <View style={{ padding: 10 }}>
@@ -66,12 +68,7 @@ class MoodleLogin extends Component {
               marginTop: 20
             }}
           >
-            <Button
-              onPress={() => {
-                alert("giriş");
-              }}
-              title="GİRİŞ"
-            />
+            <Button onPress={this.props.onPress} title="GİRİŞ" />
           </TouchableHighlight>
         </View>
       </View>
