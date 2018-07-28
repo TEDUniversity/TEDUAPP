@@ -17,7 +17,7 @@ import DetailNews from "./DetailNews";
 import CouncilNews from "./CouncilNews";
 import CouncilVotings from "./CouncilVotings";
 
-const MIN_HEIGHT = Header.height ;
+const MIN_HEIGHT = Header.height;
 
 class Council extends Component {
     static navigationOptions = {
@@ -56,7 +56,7 @@ class Council extends Component {
 
     if (winHeight < 736) {
         console.log("device height less than 736");
-        this.setState({ MAX_HEIGHT: winHeight * 0.21 }); //17.5%
+        this.setState({ MAX_HEIGHT: winHeight * 0.215 }); //17.5%
     } else if (winHeight >= 736) {
         console.log("device height greater than 736");
         this.setState({ MAX_HEIGHT: winHeight * 0.18 }); //18%
@@ -88,15 +88,17 @@ class Council extends Component {
             overlayColor="#144d8c"
             maxOverlayOpacity={1}
             bounces={false}
-            renderTouchableFixedForeground={() => { return ( 
+            scrollViewBackgroundColor="rgb(53,53,55)"
+            fadeOutForeground={true}
+            renderForeground={() => { return ( 
 
-            <TabNavigator tabBarStyle={styles.tabNav} sceneStyle={{ height: 0 }} >
+            <TabNavigator tabBarStyle={styles.tabNav} sceneStyle={{ height: 0 }} tabBarShadowStyle={{ backgroundColor: "transparent" }} >
                 <TabNavigator.Item
                     selected={this.state.selectedTab === 'News'}
                     title="News"
                     //renderIcon={() => <Image source={require("./img/moodle/m3.png")} />}
                     //badgeText="+1"
-                    onPress={() => this.setState({ selectedTab: 'News' })}
+                    onPress={() => {this.setState({ selectedTab: 'News' }); console.log(this.state.selectedTab); }}
                     titleStyle={styles.tabNavTitle}
                 >
                     <Text> tab1 </Text>
@@ -105,7 +107,7 @@ class Council extends Component {
                     selected={this.state.selectedTab === 'Votings'}
                     title="Votings"
                     //renderIcon={() => <Image source={require("./img/menu/me3.png")} />}
-                    onPress={() => this.setState({ selectedTab: 'Votings' })}
+                    onPress={() => { this.setState({ selectedTab: 'Votings' }); console.log(this.state.selectedTab); }}
                     titleStyle={styles.tabNavTitle}
                 >
                 <Text> tab2 </Text>
@@ -118,46 +120,8 @@ class Council extends Component {
         <View height={700}>
         <ImageBackground source={require("./img/background/BACKGROUND.png")} style={styles.mainBackGround}>
         <View style={styles.container}>
-                <View style={styles.questionContainer}>
-                    <View style={styles.question}>
-                    <Text style={styles.text}>
-                        Where do you want to go for the party?
-                    </Text>
-                    </View>
-                    <View style={styles.answers} >
-                    <TouchableOpacity style={[styles.answerButton, { backgroundColor: this.state.buttonBackgroundColor1 }]} onPress={() => { this.setState({ buttonBackgroundColor1: "rgb(22,103,163)", clicked1: true }); if (this.state.clicked1) { this.setState({ buttonBackgroundColor1: "transparent", clicked1: false }); console.log(this.state.clicked1); } }}>
-                        <Text> 6:45</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={[styles.answerButton, { backgroundColor: this.state.buttonBackgroundColor2 }]} onPress={() => { this.setState({ buttonBackgroundColor2: "rgb(22,103,163)", clicked2: true }); if (this.state.clicked2) { this.setState({ buttonBackgroundColor2: "transparent", clicked2: false }); console.log(this.state.clicked2); } }}>
-                        <Text> Bomonti</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={[styles.answerButton, { backgroundColor: this.state.buttonBackgroundColor3 }]} onPress={() => { this.setState({ buttonBackgroundColor3: "rgb(22,103,163)", clicked3: true }); if (this.state.clicked3) { this.setState({ buttonBackgroundColor3: "transparent", clicked3: false }); console.log(this.state.clicked3); } }}>
-                        <Text> Lux the mix</Text>
-                    </TouchableOpacity>
-                    </View>
-                </View>
-                <View style={styles.questionContainer}>
-                    <View style={styles.question}>
-                    <Text style={styles.text}>
-                        Which date do you want to have a party?
-                    </Text>
-                    </View>
-                    <View style={styles.answers} >
-                    <TouchableOpacity style={[styles.answerButton, { backgroundColor: this.state.buttonBackgroundColor1 }]} onPress={() => { this.setState({ buttonBackgroundColor1: "rgb(22,103,163)", clicked1: true }); if (this.state.clicked1) { this.setState({ buttonBackgroundColor1: "transparent", clicked1: false }); console.log(this.state.clicked1); } }}>
-                        <Text> 20-05-2019 </Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={[styles.answerButton, { backgroundColor: this.state.buttonBackgroundColor2 }]} onPress={() => { this.setState({ buttonBackgroundColor2: "rgb(22,103,163)", clicked2: true }); if (this.state.clicked2) { this.setState({ buttonBackgroundColor2: "transparent", clicked2: false }); console.log(this.state.clicked2); } }}>
-                        <Text> 15-07-2019 </Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={[styles.answerButton, { backgroundColor: this.state.buttonBackgroundColor3 }]} onPress={() => { this.setState({ buttonBackgroundColor3: "rgb(22,103,163)", clicked3: true }); if (this.state.clicked3) { this.setState({ buttonBackgroundColor3: "transparent", clicked3: false }); console.log(this.state.clicked3); } }}>
-                        <Text> 10-03-2019 </Text>
-                    </TouchableOpacity>
-                    </View>
-                </View>
-                </View>
-                
-            
-            
+                {this.renderBody()}
+        </View>
         </ImageBackground>
         </View>
         
@@ -171,6 +135,7 @@ const styles = StyleSheet.create({
     container: {
       flex: 1,
       justifyContent: "flex-start",
+      marginTop: "1%"
     },
     questionContainer: {
         //justifyContent: "center" 
@@ -202,8 +167,9 @@ const styles = StyleSheet.create({
         //justifyContent: "flex-start",
         width: "100%",
         height: 25,
-        backgroundColor: "#373738",
+        backgroundColor: "rgb(53,53,55)",
         alignItems: "center",
+        //#373738
     },
     tabNavTitle: {
         
