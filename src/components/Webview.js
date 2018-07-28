@@ -35,6 +35,7 @@ class Webview extends Component {
     }*/
 
     render() {
+        console.log(this.props.navigation.state.params.url);
         return (
             <WebView
                 source={{ uri: this.props.navigation.state.params.url }}

@@ -118,17 +118,17 @@ class News extends Component {
   }
   renderDataDuyurular = () => {
     return this.state.dataDuyurular.map((responseData, Id) => (
-      <DetailNews key={Id} data={responseData} imgsrc={"sarı"} />
+      <DetailNews navigation={this.props.navigation} key={Id} data={responseData} imgsrc={"sarı"} />
     ));
   }
   renderDataEtkinlikler = () => {   
     return this.state.dataHaberler.map((responseData, Id) => (
-      <DetailNews key={Id} data={responseData} imgsrc={"kırmızı"} />
+      <DetailNews navigation={this.props.navigation} key={Id} data={responseData} imgsrc={"kırmızı"} />
     ));
   }
   renderDataHaberler = () => {
     return this.state.dataEtkinlikler.map((responseData, Id) => (
-        <DetailNews key={Id} data={responseData} imgsrc={"mavi"} />
+        <DetailNews navigation={this.props.navigation} key={Id} data={responseData} imgsrc={"mavi"} />
     ));
   }
   render() {

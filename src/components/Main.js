@@ -102,19 +102,19 @@ class Main extends Component {
   showTab() {
     switch (this.state.activeTab) {
       case 'NewsRouter':
-          return <News navOp={this.navigationOptions} />;
+          return <News navOp={this.navigationOptions} navigation={this.props.navigation} />;
           break;
       case 'MenuRouter':
           return <Menu navOp={this.navigationOptions} navigation={this.props.navigation} />;
           break;
       case 'CalendarRouter':
-          return <Calendar navOp={this.navigationOptions} />;
+          return <Calendar navOp={this.navigationOptions} navigation={this.props.navigation} />;
           break;
       case 'MoodleRouter':
-          return <Moodle navOp={this.navigationOptions} />;
+          return <Moodle navOp={this.navigationOptions} navigation={this.props.navigation} />;
           break;
       case 'CouncilRouter':
-          return <Council navOp={this.navigationOptions} />;
+          return <Council navOp={this.navigationOptions} navigation={this.props.navigation} />;
           break;
     }
   }
