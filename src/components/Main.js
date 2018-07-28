@@ -22,12 +22,11 @@ class Main extends Component {
         width={Dimensions.get("window").width}
         style={StyleSheet.absoluteFill}
         style={{ marginTop: 40 }}
-        
         source={require("../../img/header/anatepe2.png")}
       />
     ),
     title: "Main",
-    headerStyle: {  marginTop: 0, backgroundColor: "#fff", height: 80 },
+    headerStyle: { marginTop: 0, backgroundColor: "#fff", height: 80 },
     headerLeft: null,
     gesturesEnabled: false,
     header: null
@@ -106,7 +105,7 @@ class Main extends Component {
           return <News navOp={this.navigationOptions} />;
           break;
       case 'MenuRouter':
-          return <Menu navOp={this.navigationOptions} />;
+          return <Menu navOp={this.navigationOptions} navigation={this.props.navigation} />;
           break;
       case 'CalendarRouter':
           return <Calendar navOp={this.navigationOptions} />;
@@ -126,7 +125,6 @@ class Main extends Component {
         <View style={styles.container}>
           <View style={styles.subContainer}>{this.showTab()}</View>
         </View>
-        
         <BottomNavigation
           //activeTab={this.state.activeTab}
           onTabPress={newTab => {
