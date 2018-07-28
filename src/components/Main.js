@@ -11,6 +11,7 @@ import BottomNavigation, {
 } from "react-native-material-bottom-navigation";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import Image from "react-native-scalable-image";
+import TabNavigator from 'react-native-tab-navigator';
 
 class Main extends Component {
     
@@ -153,7 +154,16 @@ const styles = StyleSheet.create({
   subContainer: {
     flex: 1,
     justifyContent: "center"
-  }
+  },
+  tabNav: {
+    //marginLeft: -100,
+    //flex: 1,
+    //justifyContent: "flex-start",
+    width: "100%",
+    height: 25,
+    backgroundColor: "#373738",
+    alignItems: "center",
+},
 });
 
 export default Main;

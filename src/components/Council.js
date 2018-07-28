@@ -14,8 +14,10 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import HeaderImageScrollView, { TriggeringView } from 'react-native-image-header-scroll-view';
 import { Header } from 'react-navigation';
 import DetailNews from "./DetailNews";
+import CouncilNews from "./CouncilNews";
+import CouncilVotings from "./CouncilVotings";
 
-const MIN_HEIGHT = Header.height ;
+const MIN_HEIGHT = Header.height;
 
 class Council extends Component {
     static navigationOptions = {
@@ -27,7 +29,7 @@ class Council extends Component {
         headerLeft: null,
         gesturesEnabled: false,
       };
-  state={ selectedTab: "", MAX_HEIGHT: 0, scrollHeight: 500 }
+  state={ selectedTab: "News", MAX_HEIGHT: 0, scrollHeight: 500 }
 
 
   renderDataDuyurular = () => {
@@ -54,7 +56,7 @@ class Council extends Component {
 
     if (winHeight < 736) {
         console.log("device height less than 736");
-        this.setState({ MAX_HEIGHT: winHeight * 0.175 }); //17.5%
+        this.setState({ MAX_HEIGHT: winHeight * 0.215 }); //17.5%
     } else if (winHeight >= 736) {
         console.log("device height greater than 736");
         this.setState({ MAX_HEIGHT: winHeight * 0.18 }); //18%
@@ -62,7 +64,13 @@ class Council extends Component {
   }
 
 
-
+  renderBody = () => {
+      if (this.state.selectedTab === "News") {
+        return <CouncilNews />;
+      } else if (this.state.selectedTab === "Votings") {
+        return <CouncilVotings />;
+      }
+  }
 
     render() {
     return (
@@ -79,6 +87,7 @@ class Council extends Component {
                                />}
             overlayColor="#144d8c"
             maxOverlayOpacity={1}
+<<<<<<< HEAD
             scrollEnabled={false}
             
         >
@@ -108,12 +117,20 @@ class Council extends Component {
         </ImageBackground>
         </View>
         <TabNavigator tabBarStyle={styles.tabNav} >
+=======
+            bounces={false}
+            scrollViewBackgroundColor="rgb(53,53,55)"
+            fadeOutForeground={true}
+            renderForeground={() => { return ( 
+
+            <TabNavigator tabBarStyle={styles.tabNav} sceneStyle={{ height: 0 }} tabBarShadowStyle={{ backgroundColor: "transparent" }} >
+>>>>>>> Arda-CouncilTabNav
                 <TabNavigator.Item
                     selected={this.state.selectedTab === 'News'}
                     title="News"
                     //renderIcon={() => <Image source={require("./img/moodle/m3.png")} />}
                     //badgeText="+1"
-                    onPress={() => this.setState({ selectedTab: 'News' })}
+                    onPress={() => {this.setState({ selectedTab: 'News' }); console.log(this.state.selectedTab); }}
                     titleStyle={styles.tabNavTitle}
                 >
                     <Text> tab1 </Text>
@@ -122,12 +139,24 @@ class Council extends Component {
                     selected={this.state.selectedTab === 'Votings'}
                     title="Votings"
                     //renderIcon={() => <Image source={require("./img/menu/me3.png")} />}
-                    onPress={() => this.setState({ selectedTab: 'Votings' })}
+                    onPress={() => { this.setState({ selectedTab: 'Votings' }); console.log(this.state.selectedTab); }}
                     titleStyle={styles.tabNavTitle}
                 >
-                    <Text> tab2 </Text>
+                <Text> tab2 </Text>
                 </TabNavigator.Item>
-        </TabNavigator>
+            </TabNavigator>
+
+            ); }}
+            
+        >
+        <View height={700}>
+        <ImageBackground source={require("./img/background/BACKGROUND.png")} style={styles.mainBackGround}>
+        <View style={styles.container}>
+                {this.renderBody()}
+        </View>
+        </ImageBackground>
+        </View>
+        
         </HeaderImageScrollView>
         
     );
@@ -137,11 +166,11 @@ class Council extends Component {
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      justifyContent: "space-between",
+      justifyContent: "flex-start",
+      marginTop: "1%"
     },
     questionContainer: {
-        flex: 1,
-        justifyContent: "center" 
+        //justifyContent: "center" 
     },
     answers: {
         flexDirection: "row",
@@ -166,11 +195,13 @@ const styles = StyleSheet.create({
     
     tabNav: {
         //marginLeft: -100,
+        //flex: 1,
+        //justifyContent: "flex-start",
         width: "100%",
-        flex: 1,
         height: 25,
-        backgroundColor: "#373738",
+        backgroundColor: "rgb(53,53,55)",
         alignItems: "center",
+        //#373738
     },
     tabNavTitle: {
         
