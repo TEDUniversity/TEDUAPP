@@ -17,7 +17,7 @@ import DetailNews from "./DetailNews";
 import CouncilNews from "./CouncilNews";
 import CouncilVotings from "./CouncilVotings";
 
-const MIN_HEIGHT = Header.height;
+const MIN_HEIGHT = Header.HEIGHT - 20;
 
 class Council extends Component {
     static navigationOptions = {
