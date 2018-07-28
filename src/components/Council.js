@@ -87,44 +87,12 @@ class Council extends Component {
                                />}
             overlayColor="#144d8c"
             maxOverlayOpacity={1}
-<<<<<<< HEAD
-            scrollEnabled={false}
-            
-        >
-        <View height={this.state.scrollHeight}>
-        <ImageBackground source={require("../../img/background/BACKGROUND.png")} style={styles.mainBackGround}>
-        
-            <View style={styles.container}>
-                <View style={styles.questionContainer}>
-                    <View style={styles.question}>
-                    <Text style={styles.text}>
-                        Where do you want to go for the party?
-                    </Text>
-                    </View>
-                    <View style={styles.answers} >
-                    <TouchableOpacity style={[styles.answerButton, { backgroundColor: this.state.buttonBackgroundColor1 }]} onPress={() => { this.setState({ buttonBackgroundColor1: "rgb(22,103,163)", clicked1: true }); if (this.state.clicked1) { this.setState({ buttonBackgroundColor1: "transparent", clicked1: false }); console.log(this.state.buttonBackgroundColor1); } }}>
-                        <Text> 6:45</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={[styles.answerButton, { backgroundColor: this.state.buttonBackgroundColor2 }]} onPress={() => { this.setState({ buttonBackgroundColor2: "rgb(22,103,163)", clicked2: true }); if (this.state.clicked2) { this.setState({ buttonBackgroundColor2: "transparent", clicked2: false }); console.log(this.state.buttonBackgroundColor2); } }}>
-                        <Text> Bomonti</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={[styles.answerButton, { backgroundColor: this.state.buttonBackgroundColor3 }]} onPress={() => { this.setState({ buttonBackgroundColor3: "rgb(22,103,163)", clicked3: true }); if (this.state.clicked3) { this.setState({ buttonBackgroundColor3: "transparent", clicked3: false }); console.log(this.state.buttonBackgroundColor3); } }}>
-                        <Text> Lux the mix</Text>
-                    </TouchableOpacity>
-                    </View>
-                </View>
-            </View>
-        </ImageBackground>
-        </View>
-        <TabNavigator tabBarStyle={styles.tabNav} >
-=======
             bounces={false}
             scrollViewBackgroundColor="rgb(53,53,55)"
             fadeOutForeground={true}
             renderForeground={() => { return ( 
 
             <TabNavigator tabBarStyle={styles.tabNav} sceneStyle={{ height: 0 }} tabBarShadowStyle={{ backgroundColor: "transparent" }} >
->>>>>>> Arda-CouncilTabNav
                 <TabNavigator.Item
                     selected={this.state.selectedTab === 'News'}
                     title="News"
