@@ -75,10 +75,10 @@ class Menu extends Component {
   renderHeader = () => (
     <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between", backgroundColor: "transparent", marginTop: this.state.MAX_HEIGHT - 35, }}>
     <TouchableOpacity onPress={() => { console.log("pressed Header"); }}>
-    <Icon name="login" size={30} />
+    <Icon name="login" size={25} style={{ color: "rgb(1, 14, 41)" }} />
     </TouchableOpacity>
     <TouchableOpacity onPress={() => { console.log("pressed Header"); }}>
-    <Icon name="dots-three-vertical" size={30} />
+    <Icon name="dots-three-vertical" size={25} style={{ color: "rgb(1, 14, 41)" }} />
     </TouchableOpacity>
     </View>
 
