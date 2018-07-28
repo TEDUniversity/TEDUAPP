@@ -118,7 +118,7 @@ class Council extends Component {
             
         >
         <View height={700}>
-        <ImageBackground source={require("./img/background/BACKGROUND.png")} style={styles.mainBackGround}>
+        <ImageBackground source={require("../../img/background/BACKGROUND.png")} style={styles.mainBackGround}>
         <View style={styles.container}>
                 {this.renderBody()}
         </View>
