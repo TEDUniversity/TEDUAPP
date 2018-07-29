@@ -68,7 +68,12 @@ class MoodleLogin extends Component {
               marginTop: 20
             }}
           >
-            <Button onPress={this.props.onPress} title="GİRİŞ" />
+            <Button
+              onPress={() => {
+                this.props.onPress(this.state.kullaniciAdi, this.state.sifre);
+              }}
+              title="GİRİŞ"
+            />
           </TouchableHighlight>
         </View>
       </View>

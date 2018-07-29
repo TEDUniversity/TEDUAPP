@@ -60,21 +60,27 @@ class Moodle extends Component {
     }
   }
 
-  login = () => {
-    // this.setState({ userName: userName, password: password });
-    // var moodle_client = require("moodle-client");
-    alert("userName");
-    // moodle_client.init({
-    //   wwwroot: API_LINK,
-    //   username: this.state.userName,
-    //   password: this.state.password
-    // });
-    //   .then(function(client) {
-    //     return do_something(client);
-    //   })
-    //   .catch(function(err) {
-    //     alert("Unable to initialize the client: " + err);
-    //   });
+  login = (user, pass) => {
+    var http = new XMLHttpRequest();
+    var url = "https://moodle.tedu.edu.tr/login/token.php";
+    var params =
+      "username=" + user + "&password=" + pass + "&service=moodle_mobile_app";
+    http.open("POST", url, true);
+
+    //Send the proper header information along with the request
+    http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+    http.onreadystatechange = function() {
+      //Call a function when the state changes.
+      if (http.readyState == 4 && http.status == 200) {
+        if (!JSON.parse(http.responseText).token) {
+          alert("Kullanıcı adı veya şifre yanlış!");
+        } else {
+          alert(JSON.parse(http.responseText).token);
+        }
+      }
+    };
+    http.send(params);
   };
   render() {
     return (
