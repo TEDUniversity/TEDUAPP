@@ -22,10 +22,7 @@ class Main extends Component {
         width={Dimensions.get("window").width}
         style={StyleSheet.absoluteFill}
         style={{ marginTop: 40 }}
-<<<<<<< HEAD
         
-=======
->>>>>>> master
         source={require("../../img/header/anatepe2.png")}
       />
     ),
@@ -103,10 +100,15 @@ class Main extends Component {
       renderIcon={this.renderIcon(tab.icon)}
     />
   );
+
+  setAlert = (val) => {
+    this.props.navigation.state.params.showAlert = val;
+  }
+
   showTab() {
     switch (this.state.activeTab) {
       case 'NewsRouter':
-          return <News navOp={this.navigationOptions} navigation={this.props.navigation} />;
+          return <News navOp={this.navigationOptions} setAlert={this.setAlert} showAlert={this.props.navigation.state.params.showAlert} navigation={this.props.navigation} />;
           break;
       case 'MenuRouter':
           return <Menu navOp={this.navigationOptions} navigation={this.props.navigation} />;

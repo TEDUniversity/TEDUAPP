@@ -112,42 +112,42 @@ class Menu extends Component {
         <View style={styles.container} height={this.state.scrollHeight}>
         <ImageBackground source={require("../../img/background/BACKGROUND.png")} style={styles.mainBackGround}>
 
-        <TouchableOpacity style={styles.subContainer} onPress={() => { this.props.navigation.navigate("WebviewRouter", { url: "https://www.tedu.edu.tr/sites/default/files/content_files/2017-2018_akademik_takvim-senato_05.07.2018_0.pdf", title: "Fitness center programme" }); }} >
+        <TouchableOpacity style={styles.subContainer} onPress={() => { this.props.navigation.navigate("WebviewRouter", { url: "https://www.tedu.edu.tr/sites/default/files/content_files/2017-2018_akademik_takvim-senato_05.07.2018_0.pdf", title: "Fitness center programme", backButton: "Menu" }); }} >
             <ImageBackground source={require("../../img/subMenu/menu1.jpg")} style={styles.subBackground}>
                 <Text style={styles.menuText}>Fitness center programme</Text>
             </ImageBackground>
         </TouchableOpacity>  
 
 
-        <TouchableOpacity style={styles.subContainer} onPress={() => { this.props.navigation.navigate("WebviewRouter", { url: "https://www.tedu.edu.tr/sites/default/files/content_files/2017-2018_akademik_takvim-senato_05.07.2018_0.pdf", title: "Cafeteria programme" }); }}>
+        <TouchableOpacity style={styles.subContainer} onPress={() => { this.props.navigation.navigate("WebviewRouter", { url: "https://www.tedu.edu.tr/sites/default/files/content_files/2017-2018_akademik_takvim-senato_05.07.2018_0.pdf", title: "Cafeteria programme", backButton: "Menu" }); }}>
           <ImageBackground source={require("../../img/subMenu/menu2.jpg")} style={styles.subBackground}>
                 <Text style={styles.menuText}>Cafeteria programme</Text>
             </ImageBackground>
         </TouchableOpacity>
 
 
-        <TouchableOpacity style={styles.subContainer} onPress={() => { this.props.navigation.navigate("WebviewRouter", { url: "https://www.tedu.edu.tr/sites/default/files/content_files/2017-2018_akademik_takvim-senato_05.07.2018_0.pdf", title: "TEDU Portal" }); }}>
+        <TouchableOpacity style={styles.subContainer} onPress={() => { this.props.navigation.navigate("WebviewRouter", { url: "https://www.tedu.edu.tr/sites/default/files/content_files/2017-2018_akademik_takvim-senato_05.07.2018_0.pdf", title: "TEDU Portal", backButton: "Menu" }); }}>
           <ImageBackground source={require("../../img/subMenu/menu3.jpg")} style={styles.subBackground}>
                 <Text style={styles.menuText}>TEDU Portal</Text>
             </ImageBackground>        
         </TouchableOpacity>
 
 
-        <TouchableOpacity style={styles.subContainer} onPress={() => { this.props.navigation.navigate("WebviewRouter", { url: "https://www.tedu.edu.tr/sites/default/files/content_files/2017-2018_akademik_takvim-senato_05.07.2018_0.pdf", title: "Karafanzin" }); }}>
+        <TouchableOpacity style={styles.subContainer} onPress={() => { this.props.navigation.navigate("WebviewRouter", { url: "https://www.tedu.edu.tr/sites/default/files/content_files/2017-2018_akademik_takvim-senato_05.07.2018_0.pdf", title: "Karafanzin", backButton: "Menu" }); }}>
           <ImageBackground source={require("../../img/subMenu/menu4.jpg")} style={styles.subBackground}>
                 <Text style={styles.menuText}>Karafanzin</Text>
             </ImageBackground>        
           </TouchableOpacity>
 
 
-        <TouchableOpacity style={styles.subContainer} onPress={() => { this.props.navigation.navigate("WebviewRouter", { url: "https://www.tedu.edu.tr/sites/default/files/content_files/2017-2018_akademik_takvim-senato_05.07.2018_0.pdf", title: "Academic Calendar" }); }}>
+        <TouchableOpacity style={styles.subContainer} onPress={() => { this.props.navigation.navigate("WebviewRouter", { url: "https://www.tedu.edu.tr/sites/default/files/content_files/2017-2018_akademik_takvim-senato_05.07.2018_0.pdf", title: "Academic Calendar", backButton: "Menu" }); }}>
           <ImageBackground source={require("../../img/subMenu/menu6.png")} style={styles.subBackground}>
                 <Text style={styles.menuText}>Academic calender</Text>
           </ImageBackground>        
         </TouchableOpacity>
 
 
-        <TouchableOpacity style={styles.subContainer} onPress={() => { this.props.navigation.navigate("WebviewRouter", { url: "https://www.tedu.edu.tr/sites/default/files/content_files/2017-2018_akademik_takvim-senato_05.07.2018_0.pdf", title: "Listen radio tedu" }); }}>
+        <TouchableOpacity style={styles.subContainer} onPress={() => { this.props.navigation.navigate("WebviewRouter", { url: "https://www.tedu.edu.tr/sites/default/files/content_files/2017-2018_akademik_takvim-senato_05.07.2018_0.pdf", title: "Listen radio tedu", backButton: "Menu" }); }}>
           <ImageBackground source={require("../../img/subMenu/menu7.png")} style={styles.subBackground}>
                 <Text style={styles.menuText}>Listen radio tedu</Text>
           </ImageBackground>        

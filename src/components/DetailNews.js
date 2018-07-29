@@ -9,13 +9,10 @@ class DetailNews extends Component {
     const { containerStyle, subContainerStyle, text, BackGround } = styles;
     if (this.props.imgsrc === "sarı") {
       return (
-<<<<<<< HEAD
-=======
           <TouchableOpacity
            style={styles.button}
-           onPress={() => { this.props.navigation.navigate("WebviewRouter", { url: this.props.data.links[0].url, title: "News" }); console.log(this.props.data.link); }}
+           onPress={() => { this.props.navigation.navigate("WebviewRouter", { url: this.props.data.links[0].url, title: "News", backButton: "Home" }); console.log(this.props.data.link); }}
           >
->>>>>>> master
         <ImageBackground source={require("../../img/newsBox/sarı.png")} style={BackGround}>
           <View style={subContainerStyle}> 
             <Text style={text}> {this.props.data.title} </Text>
@@ -25,13 +22,10 @@ class DetailNews extends Component {
       );
     } else if (this.props.imgsrc === "mavi") {
       return (
-<<<<<<< HEAD
-=======
         <TouchableOpacity
            style={styles.button}
-           onPress={() => { this.props.navigation.navigate("WebviewRouter", { url: this.props.data.links[0].url, title: "News" }); console.log(this.props.data.link); }}
+           onPress={() => { this.props.navigation.navigate("WebviewRouter", { url: this.props.data.links[0].url, title: "News", backButton: "Home" }); console.log(this.props.data.link); }}
           >
->>>>>>> master
         <ImageBackground source={require("../../img/newsBox/mavi.png")} style={BackGround}>
           <View style={subContainerStyle}> 
             <Text style={text}> {this.props.data.title} </Text>
@@ -41,13 +35,10 @@ class DetailNews extends Component {
       );
     } else if (this.props.imgsrc === "kırmızı") {
       return (
-<<<<<<< HEAD
-=======
           <TouchableOpacity
            style={styles.button}
-           onPress={() => { this.props.navigation.navigate("WebviewRouter", { url: this.props.data.links[0].url, title: "News" }); console.log(this.props.data.link); }}
+           onPress={() => { this.props.navigation.navigate("WebviewRouter", { url: this.props.data.links[0].url, title: "News", backButton: "Home" }); console.log(this.props.data.link); }}
           >
->>>>>>> master
         <ImageBackground source={require("../../img/newsBox/kırmızı.png")} style={BackGround}>
           <View style={subContainerStyle}> 
             <Text style={text}> {this.props.data.title} </Text>

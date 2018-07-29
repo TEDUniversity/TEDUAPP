@@ -51,7 +51,7 @@ class News extends Component {
     //this.renderDataEtkinlikler = this.renderDataEtkinlikler.bind(this);
     //this.renderDataHaberler = this.renderDataHaberler.bind(this);
     }
-  state = { data: [], dataEtkinlikler: [], dataHaberler: [], dataDuyurular: [], loading: true, MAX_HEIGHT: 0, scrollHeight: 0, networkError: false,
+  state = { data: [], dataEtkinlikler: [], dataHaberler: [], dataDuyurular: [], loading: true, MAX_HEIGHT: 0, scrollHeight: 0, networkError: false, showAlert: this.props.showAlert,
     user: { name: "arda", surname: "tumay", age: "22", traits: { eye: "brown", tall: "185" } } };
 
   
@@ -105,19 +105,24 @@ class News extends Component {
       .then(response => response.text())
       .then(responseData => { 
                             this.storeData("teduRSS", responseData);
-                            //console.log(responseData);
+                            console.log(responseData);
                             })
       .catch(error => { 
                       console.log(error);
                       this.setState({ networkError: true });
-                      Alert.alert(
-                        "Network Error",
-                        "Please check network for latest news.",
-                        [
-                          { text: "OK", onPress: () => console.log('OK Pressed') },
-                        ],
-                        { cancelable: false }
-                      );
+                      console.log("net err" + this.state.networkError);
+                      console.log("alert err" + this.state.showAlert);
+                      if (this.state.networkError === true && this.state.showAlert === true) {
+                        Alert.alert(
+                          "Network Error",
+                          "Please check network for latest news.",
+                          [
+                            { text: "OK", onPress: () => { console.log(this.navigation.state.params.showAlert); console.log(this.state.showAlert); } },
+                          ],
+                          { cancelable: false }
+                        );
+                      }
+                      
                     });
       
 

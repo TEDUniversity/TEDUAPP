@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { ImageBackground, Linking, TouchableOpacity,
- Text, View, StyleSheet, ActivityIndicator, WebView } from "react-native";
+ Text, View, StyleSheet, ActivityIndicator, WebView, Alert } from "react-native";
 import Image from "react-native-scalable-image";
 import HeaderImageScrollView, { TriggeringView } from 'react-native-image-header-scroll-view';
 import { Header } from 'react-navigation';
@@ -21,15 +21,25 @@ class Webview extends Component {
         title: "Webview",
         headerStyle: { marginTop: 0, backgroundColor: "#144d8c", height: 35 },
         headerLeft: (
-            <TouchableOpacity style={styles.headerLeftContainer} onPress={() => { navigation.navigate("MainRouter"); }} >
+            <TouchableOpacity style={styles.headerLeftContainer} onPress={() => { navigation.navigate("MainRouter", { showAlert: false }); }} >
                 <Icon name="ios-arrow-back" size={30} />
-                <Text style={styles.headerLeftText}> Menu </Text>
+                <Text style={styles.headerLeftText}> {navigation.state.params.backButton} </Text>
             </TouchableOpacity>
         )
 
     });
     
-    
+    loadError = () => {
+        Alert.alert(
+            "Network Error",
+            "Please check network to view page.",
+            [
+              { text: "OK", onPress: () => this.props.navigation.navigate("MainRouter") },
+            ],
+            { cancelable: false }
+          );
+    }
+
     /*componentDidMount() {
         this.props.navigation.popToTop();
     }*/
@@ -40,7 +50,10 @@ class Webview extends Component {
             <WebView
                 source={{ uri: this.props.navigation.state.params.url }}
                 style={{ marginTop: 0 }}
+                startInLoadingState={true}
                 renderLoading={() => { return (<Spinner size={"large"} />); }}
+                renderError={this.loadError}
+                
             />
         );
     }

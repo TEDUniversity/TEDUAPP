@@ -30,16 +30,24 @@ export default class App extends Component {
 
 const RootStack = createStackNavigator(
   {
-      MainRouter: Main,
-      NewsRouter: News,
-      MenuRouter: Menu,
-      CouncilRouter: Council,
-      CalendarRotuer: Calendar,
-      MoodleRouter: Moodle,
-      WebviewRouter: Webview,
+
+    MainRouter: {
+      screen: Main,
+      
+    },
+    NewsRouter: News,
+    MenuRouter: Menu,
+    CouncilRouter: Council,
+    CalendarRotuer: Calendar,
+    MoodleRouter: Moodle,
+    WebviewRouter: Webview,
   },
     {
       //headerMode: 'none',
       initialRouteName: "MainRouter",
+      initialRouteParams: { showAlert: true, },
     }
 );
+
+
+//() => <Main showAlert={true} />
