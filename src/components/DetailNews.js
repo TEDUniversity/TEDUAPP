@@ -16,55 +16,80 @@ class DetailNews extends Component {
     const { containerStyle, subContainerStyle, text, BackGround } = styles;
     if (this.props.imgsrc === "sarı") {
       return (
-        <ImageBackground
-          source={require("../../img/newsBox/sarı.png")}
-          style={BackGround}
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => {
+            this.props.navigation.navigate("WebviewRouter", {
+              url: this.props.data.links[0].url,
+              title: "News",
+              backButton: "Home"
+            });
+            console.log(this.props.data.link);
+          }}
         >
-          <View style={subContainerStyle}>
-            <Text style={text}> {this.props.data.title} </Text>
-          </View>
-        </ImageBackground>
+          <ImageBackground
+            source={require("../../img/newsBox/sarı.png")}
+            style={BackGround}
+          >
+            <View style={subContainerStyle}>
+              <Text style={text}> {this.props.data.title} </Text>
+            </View>
+          </ImageBackground>
+        </TouchableOpacity>
       );
     } else if (this.props.imgsrc === "mavi") {
       return (
-        <ImageBackground
-          source={require("../../img/newsBox/mavi.png")}
-          style={BackGround}
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => {
+            this.props.navigation.navigate("WebviewRouter", {
+              url: this.props.data.links[0].url,
+              title: "News",
+              backButton: "Home"
+            });
+            console.log(this.props.data.link);
+          }}
         >
-          <View style={subContainerStyle}>
-            <Text style={text}> {this.props.data.title} </Text>
-          </View>
-        </ImageBackground>
+          <ImageBackground
+            source={require("../../img/newsBox/mavi.png")}
+            style={BackGround}
+          >
+            <View style={subContainerStyle}>
+              <Text style={text}> {this.props.data.title} </Text>
+            </View>
+          </ImageBackground>
+        </TouchableOpacity>
       );
     } else if (this.props.imgsrc === "kırmızı") {
       return (
-        <ImageBackground
-          source={require("../../img/newsBox/kırmızı.png")}
-          style={BackGround}
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => {
+            this.props.navigation.navigate("WebviewRouter", {
+              url: this.props.data.links[0].url,
+              title: "News",
+              backButton: "Home"
+            });
+            console.log(this.props.data.link);
+          }}
         >
-          <View style={subContainerStyle}>
-            <Text style={text}> {this.props.data.title} </Text>
-          </View>
-        </ImageBackground>
+          <ImageBackground
+            source={require("../../img/newsBox/kırmızı.png")}
+            style={BackGround}
+          >
+            <View style={subContainerStyle}>
+              <Text style={text}> {this.props.data.title} </Text>
+            </View>
+          </ImageBackground>
+        </TouchableOpacity>
       );
     }
   };
 
   render() {
-    console.log(this.props.imgsrc);
+    //console.log(this.props.data.links[0].url);
     const { containerStyle, subContainerStyle, text, BackGround } = styles;
-    return (
-      <View style={containerStyle}>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => {
-            console.log("Pressed");
-          }}
-        >
-          {this.renderBody()}
-        </TouchableOpacity>
-      </View>
-    );
+    return <View style={containerStyle}>{this.renderBody()}</View>;
   }
 }
 

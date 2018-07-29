@@ -11,6 +11,7 @@ import BottomNavigation, {
 } from "react-native-material-bottom-navigation";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import Image from "react-native-scalable-image";
+import TabNavigator from "react-native-tab-navigator";
 
 class Main extends Component {
   static navigationOptions = {
@@ -96,22 +97,54 @@ class Main extends Component {
       renderIcon={this.renderIcon(tab.icon)}
     />
   );
+
+  setAlert = val => {
+    this.props.navigation.state.params.showAlert = val;
+  };
+
   showTab() {
     switch (this.state.activeTab) {
       case "NewsRouter":
-        return <News navOp={this.navigationOptions} />;
+        return (
+          <News
+            navOp={this.navigationOptions}
+            setAlert={this.setAlert}
+            showAlert={this.props.navigation.state.params.showAlert}
+            navigation={this.props.navigation}
+          />
+        );
         break;
       case "MenuRouter":
-        return <Menu navOp={this.navigationOptions} />;
+        return (
+          <Menu
+            navOp={this.navigationOptions}
+            navigation={this.props.navigation}
+          />
+        );
         break;
       case "CalendarRouter":
-        return <Calendar navOp={this.navigationOptions} />;
+        return (
+          <Calendar
+            navOp={this.navigationOptions}
+            navigation={this.props.navigation}
+          />
+        );
         break;
       case "MoodleRouter":
-        return <Moodle navOp={this.navigationOptions} />;
+        return (
+          <Moodle
+            navOp={this.navigationOptions}
+            navigation={this.props.navigation}
+          />
+        );
         break;
       case "CouncilRouter":
-        return <Council navOp={this.navigationOptions} />;
+        return (
+          <Council
+            navOp={this.navigationOptions}
+            navigation={this.props.navigation}
+          />
+        );
         break;
     }
   }
@@ -122,7 +155,6 @@ class Main extends Component {
         <View style={styles.container}>
           <View style={styles.subContainer}>{this.showTab()}</View>
         </View>
-
         <BottomNavigation
           //activeTab={this.state.activeTab}
           onTabPress={newTab => {
@@ -155,6 +187,15 @@ const styles = StyleSheet.create({
   subContainer: {
     flex: 1,
     justifyContent: "center"
+  },
+  tabNav: {
+    //marginLeft: -100,
+    //flex: 1,
+    //justifyContent: "flex-start",
+    width: "100%",
+    height: 25,
+    backgroundColor: "#373738",
+    alignItems: "center"
   }
 });
 
