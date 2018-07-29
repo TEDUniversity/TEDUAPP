@@ -13,7 +13,7 @@ import Image from 'react-native-scalable-image';
 class Council extends Component {
     static navigationOptions = {
         headerTitle: (
-            <Image resizeMode="contain" width={Dimensions.get('window').width} style={{ marginTop: 40 }} source={require("./img/header/anatepe2.png")} />
+            <Image resizeMode="contain" width={Dimensions.get('window').width} style={{ marginTop: 40 }} source={require("../../img/header/anatepe2.png")} />
         ),
         title: "Council",
         headerStyle: { marginTop: 0, backgroundColor: "#fff" },
