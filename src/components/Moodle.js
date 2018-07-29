@@ -25,9 +25,9 @@ import { Header } from "react-navigation";
 import DetailNews from "./DetailNews";
 import MoodleLogin from "./MoodleLogin";
 import { API_LINK } from "../util/types";
+import MoodleDersListesi from "./MoodleDersListesi";
 
 const MIN_HEIGHT = Header.height;
-
 class Moodle extends Component {
   static navigationOptions = {
     headerTitle: (
@@ -43,7 +43,13 @@ class Moodle extends Component {
     headerLeft: null,
     gesturesEnabled: false
   };
-  state = { selectedTab: "", MAX_HEIGHT: 0, scrollHeight: 500 };
+  state = {
+    selectedTab: "",
+    MAX_HEIGHT: 0,
+    scrollHeight: 500,
+    loggedin: false,
+    token: ""
+  };
 
   componentWillMount() {
     //const parseString = require("xml2js").parseString;
@@ -60,6 +66,30 @@ class Moodle extends Component {
     }
   }
 
+  getDersler = () => {
+    let url = "https://moodle.tedu.edu.tr/webservice/rest/server.php";
+    var http = new XMLHttpRequest();
+    http.open("POST", url, true);
+
+    //Send the proper header information along with the request
+    http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+    var params =
+      "?moodlewsrestformat=json&wsfunction=core_enrol_get_users_courses&wstoken=" +
+      "cbaaa0cbb4d776470707a2fd1aa3a453" +
+      "&userid=" +
+      "1";
+
+    http.onreadystatechange = () => {
+      //Call a function when the state changes.
+      if (http.readyState == 4 && http.status == 200) {
+        alert(http.responseText);
+      }
+    };
+
+    http.send(params);
+  };
+
   login = (user, pass) => {
     var http = new XMLHttpRequest();
     var url = "https://moodle.tedu.edu.tr/login/token.php";
@@ -70,18 +100,25 @@ class Moodle extends Component {
     //Send the proper header information along with the request
     http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
-    http.onreadystatechange = function() {
+    http.onreadystatechange = () => {
       //Call a function when the state changes.
       if (http.readyState == 4 && http.status == 200) {
         if (!JSON.parse(http.responseText).token) {
           alert("Kullanıcı adı veya şifre yanlış!");
         } else {
           alert(JSON.parse(http.responseText).token);
+          this.setState({ token: JSON.parse(http.responseText).token });
+          //   this.setState({
+          //     token: JSON.parse(http.responseText).token + "",
+          //     loggedin: true
+          //   });
+          this.getDersler();
         }
       }
     };
     http.send(params);
   };
+
   render() {
     return (
       <HeaderImageScrollView
@@ -107,6 +144,7 @@ class Moodle extends Component {
           >
             <View style={styles.container}>
               <MoodleLogin onPress={this.login} />
+              <Text selectable={true}>cbaaa0cbb4d776470707a2fd1aa3a453</Text>
             </View>
           </ImageBackground>
         </View>
