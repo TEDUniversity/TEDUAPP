@@ -11,6 +11,7 @@ import {
   Text,
   View,
   ScrollView,
+  Alert,
   StyleSheet,
   ActivityIndicator,
   Dimensions,
@@ -33,6 +34,8 @@ const Spinner = ({ size }) => (
 const MIN_HEIGHT = Header.HEIGHT - 20;
 //const MAX_HEIGHT = 120;
 
+
+
 class News extends Component {
     
   static navigationOptions = {
@@ -48,7 +51,7 @@ class News extends Component {
     //this.renderDataEtkinlikler = this.renderDataEtkinlikler.bind(this);
     //this.renderDataHaberler = this.renderDataHaberler.bind(this);
     }
-  state = { data: [], dataEtkinlikler: [], dataHaberler: [], dataDuyurular: [], loading: true, MAX_HEIGHT: 0, scrollHeight: 0, 
+  state = { data: [], dataEtkinlikler: [], dataHaberler: [], dataDuyurular: [], loading: true, MAX_HEIGHT: 0, scrollHeight: 0, networkError: false,
     user: { name: "arda", surname: "tumay", age: "22", traits: { eye: "brown", tall: "185" } } };
 
   
@@ -62,7 +65,7 @@ class News extends Component {
 
     retrieveData = async (key) => {
         try {
-          const value = await AsyncStorage.getItem(key);
+          const value = await AsyncStorage.getItem(key).catch(error => console.log(error));
           if (value !== null) {
             // We have data!!
             //console.log(value);
@@ -70,8 +73,10 @@ class News extends Component {
           }
          } catch (error) {
            // Error retrieving data
+           console.log(error);
          }
       }
+    
   componentWillMount() {
     //AsyncStorage.setItem("user", JSON.stringify(this.state.user), () => { AsyncStorage.getItem("user", (err, result) => { console.log(result); }); }); DENEME
 
@@ -99,10 +104,21 @@ class News extends Component {
     fetch("https://www.tedu.edu.tr/rss.xml")
       .then(response => response.text())
       .then(responseData => { 
-                            //this.storeData("teduRSS", responseData);
-                            console.log(responseData);
+                            this.storeData("teduRSS", responseData);
+                            //console.log(responseData);
                             })
-      .catch(error => console.log(error));
+      .catch(error => { 
+                      console.log(error);
+                      this.setState({ networkError: true });
+                      Alert.alert(
+                        "Network Error",
+                        "Please check network for latest news.",
+                        [
+                          { text: "OK", onPress: () => console.log('OK Pressed') },
+                        ],
+                        { cancelable: false }
+                      );
+                    });
       
 
       //AsyncStorage.getItem("teduRSS", (err, result) => rssParser.parse(result))
@@ -110,13 +126,22 @@ class News extends Component {
                      //this.whenLoaded(rss.items);
                      //console.log(rss.items.length); 
                     //});
-    AsyncStorage.removeItem("teduRSS");
+    /*this.retrieveData("teduRSS").then(result => { 
+                                        if (result === undefined) {
+                                          console.log("result undefined");
+                                        } else { 
+                                          console.log("not undefined");
+                                        } 
+                                        }).catch(error => console.log(error));*/
+    //AsyncStorage.removeItem("teduRSS");
     this.retrieveData("teduRSS")
     .then(RSS => rssParser.parse(RSS))
+    .catch(error => console.log(error))
     .then(result => { 
         this.whenLoaded(result.items); 
         console.log(result.items); 
-                    });
+                    })
+    .catch(error => console.log(error));
   }
 
   whenLoaded(response) {
