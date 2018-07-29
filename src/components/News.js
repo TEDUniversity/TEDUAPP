@@ -77,6 +77,13 @@ class News extends Component {
          }
       }
     
+      //not used. for editind navigation parameters.
+      setNavParams = (props) => {
+        props.navigation.setParams({ 
+          showAlert: false
+         });
+      }
+
   componentWillMount() {
     //AsyncStorage.setItem("user", JSON.stringify(this.state.user), () => { AsyncStorage.getItem("user", (err, result) => { console.log(result); }); }); DENEME
 
@@ -117,7 +124,7 @@ class News extends Component {
                           "Network Error",
                           "Please check network for latest news.",
                           [
-                            { text: "OK", onPress: () => { console.log(this.navigation.state.params.showAlert); console.log(this.state.showAlert); } },
+                            { text: "OK", onPress: () => { this.props.navigation.state.params.showAlert = false; console.log(this.props.navigation.state.params.showAlert); console.log(this.state.showAlert); } },
                           ],
                           { cancelable: false }
                         );
