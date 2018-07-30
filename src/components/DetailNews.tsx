@@ -5,11 +5,18 @@ import {
   Image,
   Dimensions,
   TouchableOpacity,
-  ImageBackground
+  ImageBackground,
+  StyleSheet
 } from "react-native";
 import HTML from "react-native-render-html";
 
-class DetailNews extends Component {
+interface IProps {
+  imgsrc: string;
+  navigation?: any;
+  data: any;
+}
+
+class DetailNews extends Component<IProps> {
   //   alert(JSON.stringify(props.data));
 
   renderBody = () => {
@@ -93,7 +100,7 @@ class DetailNews extends Component {
   }
 }
 
-const styles = {
+const styles = StyleSheet.create({
   containerStyle: {
     elevation: 1,
     marginLeft: 5,
@@ -129,7 +136,7 @@ const styles = {
     width: 150,
     alignItems: "center"
   }
-};
+});
 /*
 <TouchableOpacity
          style={styles.button}

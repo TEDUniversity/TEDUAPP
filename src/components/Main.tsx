@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { Text, View, StyleSheet, Dimensions } from "react-native";
-import News from "./News";
-import Moodle from "./Moodle";
-import Menu from "./Menu";
-import Council from "./Council";
-import Calendar from "./Calendar";
+import News from "../screens/News";
+import Moodle from "../screens/Moodle";
+import Menu from "../screens/Menu";
+import Council from "../screens/Council";
+import Calendar from "../screens/Calendar";
 import { createStackNavigator, StackNavigator } from "react-navigation";
 import BottomNavigation, {
   FullTab
@@ -13,14 +13,17 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import Image from "react-native-scalable-image";
 import TabNavigator from "react-native-tab-navigator";
 
-class Main extends Component {
-  static navigationOptions = {
+interface IProp {
+  navigation: any;
+}
+class Main extends Component<IProp> {
+  navigationOptions = {
     headerTitle: (
       <Image
         resizeMode="contain"
         width={Dimensions.get("window").width}
         style={StyleSheet.absoluteFill}
-        style={{ marginTop: 40 }}
+        // style={{ marginTop: 40 }}
         source={require("../../img/header/anatepe2.png")}
       />
     ),

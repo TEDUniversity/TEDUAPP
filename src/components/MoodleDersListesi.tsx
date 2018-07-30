@@ -9,7 +9,11 @@
 import React, { Component } from "react";
 import { Text, View, StyleSheet } from "react-native";
 
-class MoodleDersListesi extends Component {
+interface IProps {
+  token: string;
+  uid: string;
+}
+class MoodleDersListesi extends Component<IProps> {
   state = {
     dersler: []
   };
@@ -39,7 +43,7 @@ class MoodleDersListesi extends Component {
         alert(this.responseText);
       }
     };
-    http.send(params);
+    // http.send(params); //???
   };
 
   componentDidMount() {

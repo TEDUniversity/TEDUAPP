@@ -22,13 +22,18 @@ import HeaderImageScrollView, {
   TriggeringView
 } from "react-native-image-header-scroll-view";
 import { Header } from "react-navigation";
-import DetailNews from "./DetailNews";
-import MoodleLogin from "./MoodleLogin";
+import DetailNews from "../components/DetailNews";
+import MoodleLogin from "../components/MoodleLogin";
 import { API_LINK } from "../util/types";
-import MoodleDersListesi from "./MoodleDersListesi";
+import MoodleDersListesi from "../components/MoodleDersListesi";
 
 const MIN_HEIGHT = Header.height;
-class Moodle extends Component {
+
+interface IProp {
+  navOp: any;
+  navigation: any;
+}
+class Moodle extends Component<IProp> {
   static navigationOptions = {
     headerTitle: (
       <Image
@@ -129,7 +134,6 @@ class Moodle extends Component {
             resizeMode="stretch"
             width={Dimensions.get("window").width}
             style={StyleSheet.absoluteFill}
-            style={{}}
             source={require("../../img/header/anatepe2.png")}
           />
         )}
@@ -144,7 +148,7 @@ class Moodle extends Component {
           >
             <View style={styles.container}>
               <MoodleLogin onPress={this.login} />
-              <Text selectable={true}>cbaaa0cbb4d776470707a2fd1aa3a453</Text>
+              <Text selectable={true}>token</Text>
             </View>
           </ImageBackground>
         </View>
@@ -194,9 +198,7 @@ const styles = StyleSheet.create({
   mainBackGround: {
     flex: 1,
     alignSelf: "stretch",
-    resizeMode: "cover",
-    width: null,
-    height: null
+    resizeMode: "cover"
   }
 });
 

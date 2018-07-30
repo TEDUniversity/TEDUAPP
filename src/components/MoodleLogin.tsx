@@ -17,7 +17,10 @@ import {
   Alert
 } from "react-native";
 
-class MoodleLogin extends Component {
+interface IProp {
+  onPress: (kullaniciAdi: string, sifre: string) => void;
+}
+class MoodleLogin extends Component<IProp> {
   static navigationOptions = {
     title: "Calendar",
     headerStyle: { marginTop: 0, backgroundColor: "#fff" },
