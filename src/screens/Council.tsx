@@ -30,7 +30,6 @@ import CouncilVotings from "../components/CouncilVotings";
 const MIN_HEIGHT = (Header as any).HEIGHT - 20;
 
 interface IProp {
-  navOp: any;
   navigation: any;
 }
 

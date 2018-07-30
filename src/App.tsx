@@ -13,7 +13,7 @@ import Moodle from "./screens/Moodle";
 import Menu from "./screens/Menu";
 import Council from "./screens/Council";
 import Calendar from "./screens/Calendar";
-import Main from "./components/Main";
+import Main from "./screens/Main";
 import Webview from "./components/Webview";
 
 export default class App extends Component {

@@ -30,7 +30,6 @@ import MoodleDersListesi from "../components/MoodleDersListesi";
 const MIN_HEIGHT = (Header as any).height;
 
 interface IProp {
-  navOp: any;
   navigation: any;
 }
 class Moodle extends Component<IProp> {

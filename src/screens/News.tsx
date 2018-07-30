@@ -39,15 +39,16 @@ const MIN_HEIGHT = (Header as any).HEIGHT - 20;
 interface IProp {
   showAlert: any;
   navigation: any;
-  navOp: any;
-  setAlert: any;
 }
+
 class News extends Component<IProp> {
+  
   static navigationOptions = {
     title: "News",
     headerStyle: { marginTop: 0, backgroundColor: "#fff" },
     headerLeft: null,
-    gesturesEnabled: false
+    gesturesEnabled: false,
+    header: null,
   };
 
   constructor(props) {

@@ -27,7 +27,6 @@ const MIN_HEIGHT = (Header as any).height;
 
 interface IProp {
   navigation: any;
-  navOp: any;
 }
 class Menu extends Component<IProp> {
   static navigationOptions = {
@@ -64,6 +63,7 @@ class Menu extends Component<IProp> {
     }
   }
 
+  //this is only a prototype for webview component. Not used.
   renderWebView1 = () => {
     if (this.state.click1) {
       return (

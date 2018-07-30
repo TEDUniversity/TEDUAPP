@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { Text, View, StyleSheet, Dimensions } from "react-native";
-import News from "../screens/News";
-import Moodle from "../screens/Moodle";
-import Menu from "../screens/Menu";
-import Council from "../screens/Council";
-import Calendar from "../screens/Calendar";
+import News from "./News";
+import Moodle from "./Moodle";
+import Menu from "./Menu";
+import Council from "./Council";
+import Calendar from "./Calendar";
 import { createStackNavigator, StackNavigator } from "react-navigation";
 import BottomNavigation, {
   FullTab
@@ -17,7 +17,7 @@ interface IProp {
   navigation: any;
 }
 class Main extends Component<IProp> {
-  navigationOptions = {
+  static navigationOptions = {
     headerTitle: (
       <Image
         resizeMode="contain"
@@ -101,17 +101,12 @@ class Main extends Component<IProp> {
     />
   );
 
-  setAlert = val => {
-    this.props.navigation.state.params.showAlert = val;
-  };
 
   showTab() {
     switch (this.state.activeTab) {
       case "NewsRouter":
         return (
-          <News
-            navOp={this.navigationOptions}
-            setAlert={this.setAlert}
+          <News           
             showAlert={this.props.navigation.state.params.showAlert}
             navigation={this.props.navigation}
           />
@@ -120,7 +115,6 @@ class Main extends Component<IProp> {
       case "MenuRouter":
         return (
           <Menu
-            navOp={this.navigationOptions}
             navigation={this.props.navigation}
           />
         );
@@ -128,7 +122,6 @@ class Main extends Component<IProp> {
       case "CalendarRouter":
         return (
           <Calendar
-            navOp={this.navigationOptions}
             navigation={this.props.navigation}
           />
         );
@@ -136,7 +129,6 @@ class Main extends Component<IProp> {
       case "MoodleRouter":
         return (
           <Moodle
-            navOp={this.navigationOptions}
             navigation={this.props.navigation}
           />
         );
@@ -144,7 +136,6 @@ class Main extends Component<IProp> {
       case "CouncilRouter":
         return (
           <Council
-            navOp={this.navigationOptions}
             navigation={this.props.navigation}
           />
         );
