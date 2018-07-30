@@ -27,7 +27,7 @@ import CouncilNews from "../components/CouncilNews";
 import CouncilVotings from "../components/CouncilVotings";
 // import { ADDRGETNETWORKPARAMS } from "dns";
 
-const MIN_HEIGHT = Header.HEIGHT - 20;
+const MIN_HEIGHT = (Header as any).HEIGHT - 20;
 
 interface IProp {
   navOp: any;

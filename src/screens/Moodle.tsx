@@ -27,7 +27,7 @@ import MoodleLogin from "../components/MoodleLogin";
 import { API_LINK } from "../util/types";
 import MoodleDersListesi from "../components/MoodleDersListesi";
 
-const MIN_HEIGHT = Header.height;
+const MIN_HEIGHT = (Header as any).height;
 
 interface IProp {
   navOp: any;

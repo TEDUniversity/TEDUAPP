@@ -23,7 +23,7 @@ import HeaderImageScrollView from "react-native-image-header-scroll-view";
 import { Header } from "react-navigation";
 import Icon from "react-native-vector-icons/Entypo";
 
-const MIN_HEIGHT = Header.height;
+const MIN_HEIGHT = (Header as any).height;
 
 interface IProp {
   navigation: any;

@@ -33,7 +33,7 @@ const Spinner = ({ size }) => (
     <ActivityIndicator size={size || "large"} />
   </View>
 );
-const MIN_HEIGHT = Header.HEIGHT - 20;
+const MIN_HEIGHT = (Header as any).HEIGHT - 20;
 //const MAX_HEIGHT = 120;
 
 interface IProp {

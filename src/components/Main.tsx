@@ -164,7 +164,7 @@ class Main extends Component<IProp> {
             this.setState({ activeTab: newTab.key });
             //this.props.navigation.navigate(newTab.key); usage of react native navigation
           }}
-          renderTab={this.renderTab}
+          renderTab={this.renderTab as any}
           tabs={this.tabs}
           style={{
             width: this.state.menuWidth,

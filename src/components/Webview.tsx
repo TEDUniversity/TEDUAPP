@@ -57,6 +57,7 @@ class Webview extends React.Component<IProp> {
       ],
       { cancelable: false }
     );
+    return <View />;
   };
 
   /*componentDidMount() {
@@ -74,6 +75,7 @@ class Webview extends React.Component<IProp> {
           return <Spinner size={"large"} />;
         }}
         renderError={this.loadError}
+        // onError
       />
     );
   }
