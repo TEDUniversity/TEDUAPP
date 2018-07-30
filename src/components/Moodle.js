@@ -76,7 +76,7 @@ class Moodle extends Component {
 
     var params =
       "?moodlewsrestformat=json&wsfunction=core_enrol_get_users_courses&wstoken=" +
-      "cbaaa0cbb4d776470707a2fd1aa3a453" +
+      this.state.token +
       "&userid=" +
       "1";
 
