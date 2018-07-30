@@ -1,28 +1,29 @@
 import React, { Component } from "react";
 import { Text, View, StyleSheet, Dimensions } from "react-native";
-import News from "./News";
-import Moodle from "./Moodle";
-import Menu from "./Menu";
-import Council from "./Council";
-import Calendar from "./Calendar";
+import News from "../screens/News";
+import Moodle from "../screens/Moodle";
+import Menu from "../screens/Menu";
+import Council from "../screens/Council";
+import Calendar from "../screens/Calendar";
 import { createStackNavigator, StackNavigator } from "react-navigation";
 import BottomNavigation, {
   FullTab
 } from "react-native-material-bottom-navigation";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import Image from "react-native-scalable-image";
-import TabNavigator from 'react-native-tab-navigator';
+import TabNavigator from "react-native-tab-navigator";
 
-class Main extends Component {
-    
-  static navigationOptions = {
+interface IProp {
+  navigation: any;
+}
+class Main extends Component<IProp> {
+  navigationOptions = {
     headerTitle: (
       <Image
         resizeMode="contain"
         width={Dimensions.get("window").width}
         style={StyleSheet.absoluteFill}
-        style={{ marginTop: 40 }}
-        
+        // style={{ marginTop: 40 }}
         source={require("../../img/header/anatepe2.png")}
       />
     ),
@@ -35,23 +36,22 @@ class Main extends Component {
 
   state = { activeTab: "NewsRouter", menuWidth: 0 };
 
-  
   componentWillMount() {
     //const parseString = require("xml2js").parseString;
 
-    const winWidth = Dimensions.get('window').width;
+    const winWidth = Dimensions.get("window").width;
     console.log("winWidth" + winWidth);
     //navigation toolbar içindeki elemanların yeri için etkisiz bir işlem
     //sadece tüm toolbarın genişliğini etkiliyor
     if (winWidth < 414) {
-        console.log("device width less than 414");
-        this.setState({ menuWidth: winWidth * 1 }); //75.5%
+      console.log("device width less than 414");
+      this.setState({ menuWidth: winWidth * 1 }); //75.5%
     } else if (winWidth >= 414) {
-        console.log("device width greater than 414");
-        this.setState({ menuWidth: winWidth * 1 }); //76%
+      console.log("device width greater than 414");
+      this.setState({ menuWidth: winWidth * 1 }); //76%
     }
   }
-// iphone7 width = 375, iphone7 plus width = 414
+  // iphone7 width = 375, iphone7 plus width = 414
   tabs = [
     {
       key: "NewsRouter",
@@ -76,7 +76,7 @@ class Main extends Component {
     },
     {
       key: "MoodleRouter",
-      icon: "music-note",
+      icon: "school",
       label: "Moodle",
       barColor: "#144d8c",
       pressColor: "rgba(232, 36, 55, 0.16)"
@@ -101,27 +101,54 @@ class Main extends Component {
     />
   );
 
-  setAlert = (val) => {
+  setAlert = val => {
     this.props.navigation.state.params.showAlert = val;
-  }
+  };
 
   showTab() {
     switch (this.state.activeTab) {
-      case 'NewsRouter':
-          return <News navOp={this.navigationOptions} setAlert={this.setAlert} showAlert={this.props.navigation.state.params.showAlert} navigation={this.props.navigation} />;
-          break;
-      case 'MenuRouter':
-          return <Menu navOp={this.navigationOptions} navigation={this.props.navigation} />;
-          break;
-      case 'CalendarRouter':
-          return <Calendar navOp={this.navigationOptions} navigation={this.props.navigation} />;
-          break;
-      case 'MoodleRouter':
-          return <Moodle navOp={this.navigationOptions} navigation={this.props.navigation} />;
-          break;
-      case 'CouncilRouter':
-          return <Council navOp={this.navigationOptions} navigation={this.props.navigation} />;
-          break;
+      case "NewsRouter":
+        return (
+          <News
+            navOp={this.navigationOptions}
+            setAlert={this.setAlert}
+            showAlert={this.props.navigation.state.params.showAlert}
+            navigation={this.props.navigation}
+          />
+        );
+        break;
+      case "MenuRouter":
+        return (
+          <Menu
+            navOp={this.navigationOptions}
+            navigation={this.props.navigation}
+          />
+        );
+        break;
+      case "CalendarRouter":
+        return (
+          <Calendar
+            navOp={this.navigationOptions}
+            navigation={this.props.navigation}
+          />
+        );
+        break;
+      case "MoodleRouter":
+        return (
+          <Moodle
+            navOp={this.navigationOptions}
+            navigation={this.props.navigation}
+          />
+        );
+        break;
+      case "CouncilRouter":
+        return (
+          <Council
+            navOp={this.navigationOptions}
+            navigation={this.props.navigation}
+          />
+        );
+        break;
     }
   }
 
@@ -137,9 +164,14 @@ class Main extends Component {
             this.setState({ activeTab: newTab.key });
             //this.props.navigation.navigate(newTab.key); usage of react native navigation
           }}
-          renderTab={this.renderTab}
+          renderTab={this.renderTab as any}
           tabs={this.tabs}
-          style={{ width: this.state.menuWidth, alignItems: "center", alignSelf: "center", alignContent:"center" }}
+          style={{
+            width: this.state.menuWidth,
+            alignItems: "center",
+            alignSelf: "center",
+            alignContent: "center"
+          }}
         />
       </View>
     );
@@ -149,7 +181,7 @@ class Main extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "space-between",
+    justifyContent: "space-between"
     //alignItems: "center"
   },
   text: {
@@ -166,8 +198,8 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 25,
     backgroundColor: "#373738",
-    alignItems: "center",
-},
+    alignItems: "center"
+  }
 });
 
 export default Main;
