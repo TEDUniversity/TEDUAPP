@@ -24,6 +24,8 @@ import HeaderImageScrollView, {
 import { Header } from "react-navigation";
 import DetailNews from "./DetailNews";
 import CouncilNews from "./CouncilNews";
+import Answer from "./Survey/Answer";
+import Question from "./Survey/Question";
 
 class CouncilVotings extends Component {
   state = {
@@ -32,163 +34,32 @@ class CouncilVotings extends Component {
     buttonBackgroundColor2: "",
     clicked2: false,
     buttonBackgroundColor3: "",
-    clicked3: false
+    clicked3: false,
+    questions: [{ question: "Where do you want to go for the party?", answers: ["The lux", "6:45", "Bomonti"]}, {question: "hi", answers: ["11", "22", "33"]}]
   };
+
+
+  renderQuestions = () => {
+    return this.state.questions.map((item, id) => (
+      <Question
+      question={item}
+      key={id}
+      />
+    ));
+  }
 
   render() {
     return (
       <View style={styles.container}>
         <TouchableOpacity style={styles.button}>
           <Text style={{ color: "rgb(66,103,178)", marginLeft: "-5%" }}>
-            {" "}
-            Orientation party!{" "}
+            
+            Orientation party!
           </Text>
           <Icon size={25} color="rgb(66,103,178)" name={"arrow-right"} />
         </TouchableOpacity>
-        <View style={styles.questionContainer}>
-          <View style={styles.question}>
-            <Text style={styles.text}>
-              Where do you want to go for the party?
-            </Text>
-          </View>
-          <View style={styles.answers}>
-            <TouchableOpacity
-              style={[
-                styles.answerButton,
-                { backgroundColor: this.state.buttonBackgroundColor1 }
-              ]}
-              onPress={() => {
-                this.setState({
-                  buttonBackgroundColor1: "rgb(22,103,163)",
-                  clicked1: true
-                });
-                if (this.state.clicked1) {
-                  this.setState({
-                    buttonBackgroundColor1: "transparent",
-                    clicked1: false
-                  });
-                  console.log(this.state.clicked1);
-                }
-              }}
-            >
-              <Text> 6:45</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={[
-                styles.answerButton,
-                { backgroundColor: this.state.buttonBackgroundColor2 }
-              ]}
-              onPress={() => {
-                this.setState({
-                  buttonBackgroundColor2: "rgb(22,103,163)",
-                  clicked2: true
-                });
-                if (this.state.clicked2) {
-                  this.setState({
-                    buttonBackgroundColor2: "transparent",
-                    clicked2: false
-                  });
-                  console.log(this.state.clicked2);
-                }
-              }}
-            >
-              <Text> Bomonti</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={[
-                styles.answerButton,
-                { backgroundColor: this.state.buttonBackgroundColor3 }
-              ]}
-              onPress={() => {
-                this.setState({
-                  buttonBackgroundColor3: "rgb(22,103,163)",
-                  clicked3: true
-                });
-                if (this.state.clicked3) {
-                  this.setState({
-                    buttonBackgroundColor3: "transparent",
-                    clicked3: false
-                  });
-                  console.log(this.state.clicked3);
-                }
-              }}
-            >
-              <Text> Lux the mix</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-        <View style={styles.questionContainer}>
-          <View style={styles.question}>
-            <Text style={styles.text}>
-              Which date do you want to have a party?
-            </Text>
-          </View>
-          <View style={styles.answers}>
-            <TouchableOpacity
-              style={[
-                styles.answerButton,
-                { backgroundColor: this.state.buttonBackgroundColor1 }
-              ]}
-              onPress={() => {
-                this.setState({
-                  buttonBackgroundColor1: "rgb(22,103,163)",
-                  clicked1: true
-                });
-                if (this.state.clicked1) {
-                  this.setState({
-                    buttonBackgroundColor1: "transparent",
-                    clicked1: false
-                  });
-                  console.log(this.state.clicked1);
-                }
-              }}
-            >
-              <Text> 20-05-2019 </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={[
-                styles.answerButton,
-                { backgroundColor: this.state.buttonBackgroundColor2 }
-              ]}
-              onPress={() => {
-                this.setState({
-                  buttonBackgroundColor2: "rgb(22,103,163)",
-                  clicked2: true
-                });
-                if (this.state.clicked2) {
-                  this.setState({
-                    buttonBackgroundColor2: "transparent",
-                    clicked2: false
-                  });
-                  console.log(this.state.clicked2);
-                }
-              }}
-            >
-              <Text> 15-07-2019 </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={[
-                styles.answerButton,
-                { backgroundColor: this.state.buttonBackgroundColor3 }
-              ]}
-              onPress={() => {
-                this.setState({
-                  buttonBackgroundColor3: "rgb(22,103,163)",
-                  clicked3: true
-                });
-                if (this.state.clicked3) {
-                  this.setState({
-                    buttonBackgroundColor3: "transparent",
-                    clicked3: false
-                  });
-                  console.log(this.state.clicked3);
-                }
-              }}
-            >
-              <Text> 10-03-2019 </Text>
-            </TouchableOpacity>
-          </View>
-        </View>
+        
+        {this.renderQuestions()}
       </View>
     );
   }
