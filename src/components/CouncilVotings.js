@@ -23,8 +23,14 @@ class CouncilVotings extends Component {
   
     render() {
     return (
+
+        
         
         <View style={styles.container}>
+                <TouchableOpacity style={styles.button} >
+                    <Text style={{ color: "rgb(66,103,178)", marginLeft: "-5%" }} > Orientation party! </Text>
+                    <Icon size={25} color="rgb(66,103,178)" name={"arrow-right"} />
+                </TouchableOpacity>
                 <View style={styles.questionContainer}>
                     <View style={styles.question}>
                     <Text style={styles.text}>
@@ -97,14 +103,16 @@ const styles = StyleSheet.create({
         fontWeight: "bold"
     },
     
-    tabNav: {
+    button: {
         //marginLeft: -100,
         //flex: 1,
-        //justifyContent: "flex-start",
-        width: "100%",
-        height: 25,
-        backgroundColor: "rgb(53,53,55)",
+        
+        flexDirection: "row",
+        //width: "100%",
+        height: 35,
+        backgroundColor: "rgb(12,57,98)",
         alignItems: "center",
+        justifyContent: "space-around",
         //#373738
     },
     tabNavTitle: {

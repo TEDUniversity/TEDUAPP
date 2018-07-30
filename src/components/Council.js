@@ -16,8 +16,9 @@ import { Header } from 'react-navigation';
 import DetailNews from "./DetailNews";
 import CouncilNews from "./CouncilNews";
 import CouncilVotings from "./CouncilVotings";
+import { ADDRGETNETWORKPARAMS } from "dns";
 
-const MIN_HEIGHT = Header.height;
+const MIN_HEIGHT = Header.HEIGHT - 20;
 
 class Council extends Component {
     static navigationOptions = {
