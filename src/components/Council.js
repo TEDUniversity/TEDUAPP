@@ -23,7 +23,7 @@ const MIN_HEIGHT = Header.HEIGHT - 20;
 class Council extends Component {
     static navigationOptions = {
         headerTitle: (
-            <Image resizeMode="contain" width={Dimensions.get('window').width} style={{ marginTop: 40 }} source={require("./img/header/anatepe2.png")} />
+            <Image resizeMode="contain" width={Dimensions.get('window').width} style={{ marginTop: 40 }} source={require("../../img/header/anatepe2.png")} />
         ),
         title: "Council",
         headerStyle: { marginTop: 0, backgroundColor: "#fff" },
@@ -84,7 +84,7 @@ class Council extends Component {
             width={Dimensions.get("window").width}
             style={StyleSheet.absoluteFill}
             style={{ }}
-            source={require("./img/header/anatepe2.png")}
+            source={require("../../img/header/anatepe2.png")}
                                />}
             overlayColor="#144d8c"
             maxOverlayOpacity={1}
@@ -119,7 +119,7 @@ class Council extends Component {
             
         >
         <View height={700}>
-        <ImageBackground source={require("./img/background/BACKGROUND.png")} style={styles.mainBackGround}>
+        <ImageBackground source={require("../../img/background/BACKGROUND.png")} style={styles.mainBackGround}>
         <View style={styles.container}>
                 {this.renderBody()}
         </View>

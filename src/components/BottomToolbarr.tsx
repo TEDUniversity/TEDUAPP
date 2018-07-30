@@ -6,7 +6,7 @@
 
 import React, { Component } from "react";
 import Icon from "react-native-vector-icons/FontAwesome";
-// import BottomToolbar from "react-native-bottom-toolbar";
+import BottomToolbar from "react-native-bottom-toolbar"; //=???????
 import { Image } from "react-native";
 import BottomNavigation, {
   FullTab
@@ -21,7 +21,10 @@ const newsIcon = <Image source={require("./img/news/n3.png")} />;
 
 const councilIcon = <Icon name="code" color="red" size={30} />;
 
-class bottomToolbar extends Component {
+interface Prop {
+  navigation: any;
+}
+class bottomToolbar extends Component<Prop> {
   render() {
     return (
       <BottomToolbar

@@ -7,26 +7,24 @@
  */
 
 import React, { Component } from "react";
-import { Text, View, StyleSheet, Image, Dimensions } from "react-native";
+import { Text, View, StyleSheet } from "react-native";
 
-class Menu extends Component {
+interface IProp {
+  navigation: any;
+}
+class Calendar extends Component<IProp> {
   static navigationOptions = {
-    title: "Menu",
+    title: "Calendar",
     headerStyle: { marginTop: 0, backgroundColor: "#fff" },
     headerLeft: null,
-    gesturesEnabled: false,
-    style: {
-      color: "#000000"
-    }
+    gesturesEnabled: false
   };
 
   render() {
-    const { width } = Dimensions.get("window");
     return (
       <View style={styles.container}>
-        
         <View style={styles.subContainer}>
-          <Text style={styles.text}>This is Menu.</Text>
+          <Text style={styles.text}>This is calender.</Text>
         </View>
       </View>
     );
@@ -49,4 +47,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Menu;
+export default Calendar;
