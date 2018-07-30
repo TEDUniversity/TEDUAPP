@@ -26,40 +26,66 @@ import DetailNews from "./DetailNews";
 import CouncilNews from "./CouncilNews";
 import Answer from "./Survey/Answer";
 import Question from "./Survey/Question";
+import Survey from "./Survey/Survey";
 
 class CouncilVotings extends Component {
   state = {
-    buttonBackgroundColor1: "",
-    clicked1: false,
-    buttonBackgroundColor2: "",
-    clicked2: false,
-    buttonBackgroundColor3: "",
-    clicked3: false,
+    selectedSurey: "",
+    surveys: 
+    [
+      {//survey#1
+        name:"orientationParty", 
+        questions:
+        [
+          {question: "Where do you want to go for the party?", answers: ["The lux", "6:45", "Bomonti"]}, 
+          {question: "Choose a date", answers: ["11-05-2019", "22-05-2018", "05-07-2018"]}
+        ]
+      },
+      {//survey#2
+        name:"SpringParty", 
+        questions:
+        [
+          {question: "Where do you want to go for the party?", answers: ["Keçi", "Kite", "Ses"]}, 
+          {question: "hi", answers: ["11", "22", "33"]}
+        ]
+      },
+      
+    
+    ],
+    
+    
+    
+    
     questions: [{ question: "Where do you want to go for the party?", answers: ["The lux", "6:45", "Bomonti"]}, {question: "hi", answers: ["11", "22", "33"]}]
   };
 
 
-  renderQuestions = () => {
-    return this.state.questions.map((item, id) => (
-      <Question
-      question={item}
-      key={id}
-      />
-    ));
+  renderSurvey = () => {
+     return this.state.surveys.map((item, id) => {
+      if(item.name === this.state.selectedSurey){
+        console.log(item);
+        return <Survey key={id} surveyData={item} />
+      }
+    })
   }
 
   render() {
     return (
       <View style={styles.container}>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button} onPress={() => (this.setState({selectedSurey: "orientationParty"}))}>
           <Text style={{ color: "rgb(66,103,178)", marginLeft: "-5%" }}>
-            
             Orientation party!
           </Text>
           <Icon size={25} color="rgb(66,103,178)" name={"arrow-right"} />
         </TouchableOpacity>
-        
-        {this.renderQuestions()}
+        <TouchableOpacity style={styles.button} onPress={() => (this.setState({selectedSurey: "SpringParty"}))}>
+          <Text style={{ color: "rgb(66,103,178)", marginLeft: "-5%" }}>
+            Spring party!
+          </Text>
+          <Icon size={25} color="rgb(66,103,178)" name={"arrow-right"} />
+        </TouchableOpacity>
+        {console.log("selected Survey:" + this.state.selectedSurey)}
+        {this.renderSurvey()}
       </View>
     );
   }
@@ -69,7 +95,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "flex-start",
-    marginTop: "1%"
+    //marginTop: "1%"
   },
   questionContainer: {
     //justifyContent: "center"
@@ -84,7 +110,8 @@ const styles = StyleSheet.create({
   answerButton: {
     borderWidth: 0.5,
     borderRadius: 5,
-    padding: 3
+    padding: 3,
+    
   },
   question: {
     marginLeft: "5%"
@@ -102,8 +129,9 @@ const styles = StyleSheet.create({
     height: 35,
     backgroundColor: "rgb(12,57,98)",
     alignItems: "center",
-    justifyContent: "space-around"
+    justifyContent: "space-around",
     //#373738
+    marginTop: "1%"
   },
   tabNavTitle: {},
   mainBackGround: {
