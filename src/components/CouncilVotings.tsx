@@ -13,7 +13,8 @@ import {
   StyleSheet,
   Dimensions,
   ImageBackground,
-  TouchableOpacity
+  TouchableOpacity,
+  ActivityIndicator
 } from "react-native";
 import Image from "react-native-scalable-image";
 import TabNavigator from "react-native-tab-navigator";
@@ -27,14 +28,27 @@ import CouncilNews from "./CouncilNews";
 import Answer from "./Survey/Answer";
 import Question from "./Survey/Question";
 import Survey from "./Survey/Survey";
+import firebase from "firebase";
 
-class CouncilVotings extends Component {
+
+const Spinner = ({ size }) => (
+  <View>
+    <ActivityIndicator size={size || "large"} />
+  </View>
+);
+
+interface IProps {
+  navigation: any;
+}
+
+class CouncilVotings extends Component<IProps> {
   state = {
     selectedSurey: "",
+    loading: true,
     surveys: 
     [
       {//survey#1
-        name:"orientationParty", 
+        name:"OrientationParty", 
         questions:
         [
           {question: "Where do you want to go for the party?", answers: ["The lux", "6:45", "Bomonti"]}, 
@@ -49,45 +63,87 @@ class CouncilVotings extends Component {
           {question: "hi", answers: ["11", "22", "33"]}
         ]
       },
+      {//survey#3
+        name:"WinterParty", 
+        questions:
+        [
+          {question: "Where do you want to go for the party?", answers: ["Suite 34", "Magazin", "The house"]}, 
+          {question: "Choose a date", answers: ["11", "22", "33"]}
+        ]
+      },
       
     
     ],
     
-    
+    firebase: "",
     
     
     questions: [{ question: "Where do you want to go for the party?", answers: ["The lux", "6:45", "Bomonti"]}, {question: "hi", answers: ["11", "22", "33"]}]
   };
 
+  componentWillMount(){
+    this.readSurveyData();
+  }
 
-  renderSurvey = () => {
-     return this.state.surveys.map((item, id) => {
-      if(item.name === this.state.selectedSurey){
-        console.log(item);
-        return <Survey key={id} surveyData={item} />
+  writeSurveyData = (surveys) => {
+    firebase.database().ref('/').set({
+      surveys
+    }).then((data)=>{
+        //success callback
+        console.log('data ' , data);
+    }).catch((error)=>{
+        //error callback
+        console.log('error ' , error);
+    })
+  }
+
+
+  readSurveyData() {
+    firebase.database().ref('/').on('value', (response) => { this.setState({firebase: response.val(), loading: false });  console.log(this.state.firebase); })
+  }
+
+  renderSurvey = (surveyName) => {
+    //this.setState({selectedSurey: surveyName});//for rendering survey on same page
+     return this.state.firebase.surveys.map((item, id) => {
+      if(item.name === surveyName){
+        //console.log(item);
+        this.props.navigation.navigate("SurveyRouter", {
+          title: surveyName,
+          backButton: "Votings",
+          surveyData: item
+        });
+        //return <Survey key={id} surveyData={item} />
       }
     })
   }
 
+  renderSurveyButtons = () => {
+    return this.state.firebase.surveys.map((item, id) => {
+      return (
+        <TouchableOpacity key={id} style={styles.button} onPress={ () => this.renderSurvey(item.name) }>
+          <Text style={{ color: "rgb(66,103,178)", marginLeft: "-5%" }}>
+            {item.name}
+          </Text>
+          <Icon size={25} color="rgb(66,103,178)" name={"arrow-right"} />
+        </TouchableOpacity>
+      );
+    })
+  }
+
   render() {
-    return (
-      <View style={styles.container}>
-        <TouchableOpacity style={styles.button} onPress={() => (this.setState({selectedSurey: "orientationParty"}))}>
-          <Text style={{ color: "rgb(66,103,178)", marginLeft: "-5%" }}>
-            Orientation party!
-          </Text>
-          <Icon size={25} color="rgb(66,103,178)" name={"arrow-right"} />
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={() => (this.setState({selectedSurey: "SpringParty"}))}>
-          <Text style={{ color: "rgb(66,103,178)", marginLeft: "-5%" }}>
-            Spring party!
-          </Text>
-          <Icon size={25} color="rgb(66,103,178)" name={"arrow-right"} />
-        </TouchableOpacity>
-        {console.log("selected Survey:" + this.state.selectedSurey)}
-        {this.renderSurvey()}
-      </View>
-    );
+    //this.writeSurveyData(this.state.surveys)
+    if (this.state.loading) {
+      return <Spinner size={"large"} />;
+    }else{
+      return (
+        <View style={styles.container}>
+          {this.renderSurveyButtons() } 
+          {/*  (this is for rendering the survey on same page with state parameters)   this.renderSurvey()*/}
+        </View>
+      );
+    }
+      
+    
   }
 }
 

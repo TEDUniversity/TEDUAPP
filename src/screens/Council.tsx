@@ -34,6 +34,7 @@ interface IProp {
 }
 
 class Council extends Component<IProp> {
+  //not used.
   static navigationOptions = {
     headerTitle: (
       <Image
@@ -48,6 +49,7 @@ class Council extends Component<IProp> {
     headerLeft: null,
     gesturesEnabled: false
   };
+  //
   state = {
     selectedTab: "News",
     MAX_HEIGHT: 0,
@@ -90,9 +92,9 @@ class Council extends Component<IProp> {
 
   renderBody = () => {
     if (this.state.selectedTab === "News") {
-      return <CouncilNews />;
+      return <CouncilNews navigation={ this.props.navigation } />;
     } else if (this.state.selectedTab === "Votings") {
-      return <CouncilVotings />;
+      return <CouncilVotings navigation={ this.props.navigation } />;
     }
   };
 
@@ -128,7 +130,7 @@ class Council extends Component<IProp> {
                 //badgeText="+1"
                 onPress={() => {
                   this.setState({ selectedTab: "News" });
-                  console.log(this.state.selectedTab);
+                  //console.log(this.state.selectedTab);
                 }}
                 titleStyle={styles.tabNavTitle}
               >
@@ -140,7 +142,7 @@ class Council extends Component<IProp> {
                 //renderIcon={() => <Image source={require("./img/menu/me3.png")} />}
                 onPress={() => {
                   this.setState({ selectedTab: "Votings" });
-                  console.log(this.state.selectedTab);
+                  //console.log(this.state.selectedTab);
                 }}
                 titleStyle={styles.tabNavTitle}
               >

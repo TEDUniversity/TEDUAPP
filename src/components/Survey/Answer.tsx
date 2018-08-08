@@ -26,9 +26,19 @@ import { Header } from "react-navigation";
 
 interface IProp {
     text: string;
+    answer: any;
+    unClickAnswer: any;
+    
   }
 
 class Answer extends Component<IProp> {
+  
+
+  constructor(props: IProp){
+    super(props);
+    
+  }
+  
   state = {
     buttonBackgroundColor: "",
     clicked: false,
@@ -36,8 +46,49 @@ class Answer extends Component<IProp> {
     
   };
 
+  onClick = () => {
+    //debugger;
+    this.setState({
+      buttonBackgroundColor: "rgb(22,103,163)",
+      borderBottomWidth: 0,
+      clicked: true
+    });
+    if (this.state.clicked) {
+      this.setState({
+        buttonBackgroundColor: "transparent",
+        borderBottomWidth: 0.5,
+        clicked: false
+      });
+      //console.log("during update component" + this.state.clicked);
+    }
+  }
+ 
+  componentDidUpdate(){
+    
+    if(this.state.clicked == true){
+      this.props.answer(this.props.text);
+    } else {
+      this.props.answer("not " + this.props.text);
+    }
+    
+  }
+
+  componentWillMount(){
+    console.log("txt: " +this.props.text)
+    if( this.props.unClickAnswer == this.props.text) {
+      console.log("unclick: " +this.props.unClickAnswer)
+      this.setState({
+        buttonBackgroundColor: "transparent",
+        borderBottomWidth: 0.5,
+        clicked: false
+      });
+    }
+  }
+
   render() {
       //console.log(this.props.text);
+      //console.log("after setting state and renderind screen" + this.state.clicked);
+      
     return (
         <TouchableOpacity
               style={[
@@ -46,21 +97,7 @@ class Answer extends Component<IProp> {
                   borderBottomWidth: this.state.borderBottomWidth,
                 }
               ]}
-              onPress={() => {
-                this.setState({
-                  buttonBackgroundColor: "rgb(22,103,163)",
-                  borderBottomWidth: 0,
-                  clicked: true
-                });
-                if (this.state.clicked) {
-                  this.setState({
-                    buttonBackgroundColor: "transparent",
-                    borderBottomWidth: 0.5,
-                    clicked: false
-                  });
-                  console.log(this.state.clicked);
-                }
-              }}
+              onPress={this.onClick}
             >
               <Text> {this.props.text} </Text>
         </TouchableOpacity>

@@ -26,27 +26,84 @@ import Answer from "./Answer";
 
 interface IProp {
     question: any;
+    getAnswers: any;
+    sendParent: any;
+    set: any;
   }
 
 class Question extends Component<IProp> {
   state = {
-    buttonBackgroundColor: "",
-    clicked: false,
-    borderBottomWidth: 0.5
-    
+    answers: [],
+    prevAnswers: [],
+        
   };
   
+  setAnswers = (val) => {
+    if(val.includes("not")) {
+      var splitted = val.split(' ').slice(1).join(' ');
+      this.state.answers = this.state.answers.filter(function(item) { 
+        return item !== splitted
+      })
+      //console.log(splitted);
+    } else {
+      this.state.answers.push(val);
+    }
+    this.props.getAnswers(this.state.answers);
+  };
+
+  setAnswersSingle = (val) => {
+    if(val.includes("not")) {
+      var splitted = val.split(' ').slice(1).join(' ');
+      this.state.answers = this.state.answers.filter(function(item) { 
+        return item !== splitted
+    })
+      //console.log(splitted);
+    }else{
+      //debugger;
+      var popped = this.state.answers.pop();
+      //console.log(popped)
+      if(popped == undefined){
+        this.state.answers.push(val);
+        //console.log("popped undefined");
+      }else{
+        this.state.prevAnswers.pop();
+        this.state.prevAnswers.push(popped);
+        this.state.answers.push(val);
+        //console.log("popped not undefined: " + popped);
+      }
+    }
+    if(this.props.sendParent){
+      //debugger;
+      //console.log(this.state.answers)
+      //console.log(this.props.text)
+      this.sentAnswersToParent();
+    }
+  };
+
+  sentAnswersToParent = () => {
+    //console.log(this.state.answers)
+  debugger;
+    this.state.answers.map((item) => {
+      if(item != undefined){
+        this.props.getAnswers(item);
+      }
+    });
+    this.props.set(false);
+  }
+
   renderAnswers = () => {
       return this.props.question.answers.map((item, id) => (
         <Answer 
         text={item}
         key={id}
+        answer={ this.setAnswersSingle }
+        unClickAnswer={ this.state.prevAnswers }
         />
       ));
   }
 
   render() {
-    console.log(this.props.question);
+    //console.log(this.props.question);
     return (
         <View style={styles.questionContainer}>
           <View style={styles.question}>
@@ -57,6 +114,10 @@ class Question extends Component<IProp> {
           <View style={styles.answers}>
             {this.renderAnswers()}
           </View>
+          <TouchableOpacity onPress={() => (console.log(this.state.answers))}>
+            <Text> show results </Text>
+          </TouchableOpacity>
+          
         </View>
     );
   }
@@ -75,8 +136,10 @@ const styles = StyleSheet.create({
       flexDirection: "row",
       justifyContent: "space-around",
       borderWidth: 1,
+      borderRadius: 5,
       padding: 5,
-      margin: 5
+      margin: 5,
+      
     },
     answerButton: {
       borderWidth: 0.5,

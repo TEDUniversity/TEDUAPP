@@ -33,6 +33,7 @@ const Spinner = ({ size }) => (
     <ActivityIndicator size={size || "large"} />
   </View>
 );
+
 const MIN_HEIGHT = (Header as any).HEIGHT - 20;
 //const MAX_HEIGHT = 120;
 
@@ -83,7 +84,7 @@ class News extends Component<IProp> {
     }
   };
 
-  retrieveData = async key => {
+  retrieveData = async (key) => {
     try {
       const value = await AsyncStorage.getItem(key).catch(error =>
         console.log(error)
@@ -113,7 +114,6 @@ class News extends Component<IProp> {
 
     const winHeight = Dimensions.get("window").height;
     console.log("winHeight" + winHeight);
-
     if (winHeight < 736) {
       //console.log("device height less than 736");
       this.setState({ scrollHeight: winHeight * 0.755 }); //75.5%
