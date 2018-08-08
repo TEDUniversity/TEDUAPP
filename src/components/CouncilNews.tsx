@@ -23,8 +23,10 @@ import HeaderImageScrollView, {
 } from "react-native-image-header-scroll-view";
 // import { Header } from "react-navigation";
 // import DetailNews from "./DetailNews";
-
-class CouncilNews extends Component {
+interface IProps {
+  navigation: any;
+}
+class CouncilNews extends Component<IProps> {
   render() {
     return (
       <View style={styles.container}>

@@ -15,8 +15,19 @@ import Council from "./screens/Council";
 import Calendar from "./screens/Calendar";
 import Main from "./screens/Main";
 import Webview from "./components/Webview";
+import Survey from "./components/Survey/Survey";
+import firebase from "firebase";
 
 export default class App extends Component {
+  constructor(){
+    var config = {
+      databaseURL: "https://teduapp-210c9.firebaseio.com",
+      projectId: "teduapp-210c9",
+    };
+    firebase.initializeApp(config);
+  }
+  
+
   render() {
     return <RootStack />;
   }
@@ -24,15 +35,14 @@ export default class App extends Component {
 
 const RootStack = createStackNavigator(
   {
-    MainRouter: {
-      screen: Main
-    },
+    MainRouter: Main,
     NewsRouter: News,
     MenuRouter: Menu,
     CouncilRouter: Council,
     CalendarRotuer: Calendar,
     MoodleRouter: Moodle,
-    WebviewRouter: Webview
+    WebviewRouter: Webview,
+    SurveyRouter: Survey,
   },
   {
     //headerMode: 'none',
@@ -42,3 +52,19 @@ const RootStack = createStackNavigator(
 );
 
 //() => <Main showAlert={true} />
+/*
+
+<script src="https://www.gstatic.com/firebasejs/5.3.1/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyA1mZtQ1X-R-ftJKSHPoHXydyzetDkfnow",
+    authDomain: "teduapp-210c9.firebaseapp.com",
+    databaseURL: "https://teduapp-210c9.firebaseio.com",
+    projectId: "teduapp-210c9",
+    storageBucket: "teduapp-210c9.appspot.com",
+    messagingSenderId: "1003884632988"
+  };
+  firebase.initializeApp(config);
+</script>
+*/

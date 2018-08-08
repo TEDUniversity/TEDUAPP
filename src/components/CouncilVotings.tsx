@@ -13,7 +13,8 @@ import {
   StyleSheet,
   Dimensions,
   ImageBackground,
-  TouchableOpacity
+  TouchableOpacity,
+  ActivityIndicator
 } from "react-native";
 import Image from "react-native-scalable-image";
 import TabNavigator from "react-native-tab-navigator";
@@ -24,173 +25,125 @@ import HeaderImageScrollView, {
 import { Header } from "react-navigation";
 import DetailNews from "./DetailNews";
 import CouncilNews from "./CouncilNews";
+import Answer from "./Survey/Answer";
+import Question from "./Survey/Question";
+import Survey from "./Survey/Survey";
+import firebase from "firebase";
 
-class CouncilVotings extends Component {
+
+const Spinner = ({ size }) => (
+  <View>
+    <ActivityIndicator size={size || "large"} />
+  </View>
+);
+
+interface IProps {
+  navigation: any;
+}
+
+class CouncilVotings extends Component<IProps> {
   state = {
-    buttonBackgroundColor1: "",
-    clicked1: false,
-    buttonBackgroundColor2: "",
-    clicked2: false,
-    buttonBackgroundColor3: "",
-    clicked3: false
+    selectedSurey: "",
+    loading: true,
+    surveys: 
+    [
+      {//survey#1
+        name:"OrientationParty", 
+        questions:
+        [
+          {question: "Where do you want to go for the party?", answers: ["The lux", "6:45", "Bomonti"]}, 
+          {question: "Choose a date", answers: ["11-05-2019", "22-05-2018", "05-07-2018"]}
+        ]
+      },
+      {//survey#2
+        name:"SpringParty", 
+        questions:
+        [
+          {question: "Where do you want to go for the party?", answers: ["Keçi", "Kite", "Ses"]}, 
+          {question: "hi", answers: ["11", "22", "33"]}
+        ]
+      },
+      {//survey#3
+        name:"WinterParty", 
+        questions:
+        [
+          {question: "Where do you want to go for the party?", answers: ["Suite 34", "Magazin", "The house"]}, 
+          {question: "Choose a date", answers: ["11", "22", "33"]}
+        ]
+      },
+      
+    
+    ],
+    
+    firebase: "",
+    
+    
+    questions: [{ question: "Where do you want to go for the party?", answers: ["The lux", "6:45", "Bomonti"]}, {question: "hi", answers: ["11", "22", "33"]}]
   };
 
-  render() {
-    return (
-      <View style={styles.container}>
-        <TouchableOpacity style={styles.button}>
+  componentWillMount(){
+    this.readSurveyData();
+  }
+
+  writeSurveyData = (surveys) => {
+    firebase.database().ref('/').set({
+      surveys
+    }).then((data)=>{
+        //success callback
+        console.log('data ' , data);
+    }).catch((error)=>{
+        //error callback
+        console.log('error ' , error);
+    })
+  }
+
+
+  readSurveyData() {
+    firebase.database().ref('/').on('value', (response) => { this.setState({firebase: response.val(), loading: false });  console.log(this.state.firebase); })
+  }
+
+  renderSurvey = (surveyName) => {
+    //this.setState({selectedSurey: surveyName});//for rendering survey on same page
+     return this.state.firebase.surveys.map((item, id) => {
+      if(item.name === surveyName){
+        //console.log(item);
+        this.props.navigation.navigate("SurveyRouter", {
+          title: surveyName,
+          backButton: "Votings",
+          surveyData: item
+        });
+        //return <Survey key={id} surveyData={item} />
+      }
+    })
+  }
+
+  renderSurveyButtons = () => {
+    return this.state.firebase.surveys.map((item, id) => {
+      return (
+        <TouchableOpacity key={id} style={styles.button} onPress={ () => this.renderSurvey(item.name) }>
           <Text style={{ color: "rgb(66,103,178)", marginLeft: "-5%" }}>
-            {" "}
-            Orientation party!{" "}
+            {item.name}
           </Text>
           <Icon size={25} color="rgb(66,103,178)" name={"arrow-right"} />
         </TouchableOpacity>
-        <View style={styles.questionContainer}>
-          <View style={styles.question}>
-            <Text style={styles.text}>
-              Where do you want to go for the party?
-            </Text>
-          </View>
-          <View style={styles.answers}>
-            <TouchableOpacity
-              style={[
-                styles.answerButton,
-                { backgroundColor: this.state.buttonBackgroundColor1 }
-              ]}
-              onPress={() => {
-                this.setState({
-                  buttonBackgroundColor1: "rgb(22,103,163)",
-                  clicked1: true
-                });
-                if (this.state.clicked1) {
-                  this.setState({
-                    buttonBackgroundColor1: "transparent",
-                    clicked1: false
-                  });
-                  console.log(this.state.clicked1);
-                }
-              }}
-            >
-              <Text> 6:45</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={[
-                styles.answerButton,
-                { backgroundColor: this.state.buttonBackgroundColor2 }
-              ]}
-              onPress={() => {
-                this.setState({
-                  buttonBackgroundColor2: "rgb(22,103,163)",
-                  clicked2: true
-                });
-                if (this.state.clicked2) {
-                  this.setState({
-                    buttonBackgroundColor2: "transparent",
-                    clicked2: false
-                  });
-                  console.log(this.state.clicked2);
-                }
-              }}
-            >
-              <Text> Bomonti</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={[
-                styles.answerButton,
-                { backgroundColor: this.state.buttonBackgroundColor3 }
-              ]}
-              onPress={() => {
-                this.setState({
-                  buttonBackgroundColor3: "rgb(22,103,163)",
-                  clicked3: true
-                });
-                if (this.state.clicked3) {
-                  this.setState({
-                    buttonBackgroundColor3: "transparent",
-                    clicked3: false
-                  });
-                  console.log(this.state.clicked3);
-                }
-              }}
-            >
-              <Text> Lux the mix</Text>
-            </TouchableOpacity>
-          </View>
+      );
+    })
+  }
+
+  render() {
+    //this.writeSurveyData(this.state.surveys)
+    if (this.state.loading) {
+      return <Spinner size={"large"} />;
+    }else{
+      return (
+        <View style={styles.container}>
+          {this.renderSurveyButtons() } 
+          {/*  (this is for rendering the survey on same page with state parameters)   this.renderSurvey()*/}
         </View>
-        <View style={styles.questionContainer}>
-          <View style={styles.question}>
-            <Text style={styles.text}>
-              Which date do you want to have a party?
-            </Text>
-          </View>
-          <View style={styles.answers}>
-            <TouchableOpacity
-              style={[
-                styles.answerButton,
-                { backgroundColor: this.state.buttonBackgroundColor1 }
-              ]}
-              onPress={() => {
-                this.setState({
-                  buttonBackgroundColor1: "rgb(22,103,163)",
-                  clicked1: true
-                });
-                if (this.state.clicked1) {
-                  this.setState({
-                    buttonBackgroundColor1: "transparent",
-                    clicked1: false
-                  });
-                  console.log(this.state.clicked1);
-                }
-              }}
-            >
-              <Text> 20-05-2019 </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={[
-                styles.answerButton,
-                { backgroundColor: this.state.buttonBackgroundColor2 }
-              ]}
-              onPress={() => {
-                this.setState({
-                  buttonBackgroundColor2: "rgb(22,103,163)",
-                  clicked2: true
-                });
-                if (this.state.clicked2) {
-                  this.setState({
-                    buttonBackgroundColor2: "transparent",
-                    clicked2: false
-                  });
-                  console.log(this.state.clicked2);
-                }
-              }}
-            >
-              <Text> 15-07-2019 </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={[
-                styles.answerButton,
-                { backgroundColor: this.state.buttonBackgroundColor3 }
-              ]}
-              onPress={() => {
-                this.setState({
-                  buttonBackgroundColor3: "rgb(22,103,163)",
-                  clicked3: true
-                });
-                if (this.state.clicked3) {
-                  this.setState({
-                    buttonBackgroundColor3: "transparent",
-                    clicked3: false
-                  });
-                  console.log(this.state.clicked3);
-                }
-              }}
-            >
-              <Text> 10-03-2019 </Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      </View>
-    );
+      );
+    }
+      
+    
   }
 }
 
@@ -198,7 +151,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "flex-start",
-    marginTop: "1%"
+    //marginTop: "1%"
   },
   questionContainer: {
     //justifyContent: "center"
@@ -213,7 +166,8 @@ const styles = StyleSheet.create({
   answerButton: {
     borderWidth: 0.5,
     borderRadius: 5,
-    padding: 3
+    padding: 3,
+    
   },
   question: {
     marginLeft: "5%"
@@ -231,8 +185,9 @@ const styles = StyleSheet.create({
     height: 35,
     backgroundColor: "rgb(12,57,98)",
     alignItems: "center",
-    justifyContent: "space-around"
+    justifyContent: "space-around",
     //#373738
+    marginTop: "1%"
   },
   tabNavTitle: {},
   mainBackGround: {
