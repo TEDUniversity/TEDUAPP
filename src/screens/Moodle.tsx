@@ -94,6 +94,35 @@ class Moodle extends Component<IProp> {
     http.send(params);
   };
 
+  getUserInfo=()=>{
+    var http = new XMLHttpRequest();
+    var url = "https://moodle.tedu.edu.tr/login/token.php";
+    var params =
+      "username=" + user + "&password=" + pass + "&service=moodle_mobile_app";
+    http.open("POST", url, true);
+
+    //Send the proper header information along with the request
+    http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+    http.onreadystatechange = () => {
+      //Call a function when the state changes.
+      if (http.readyState == 4 && http.status == 200) {
+        if (!JSON.parse(http.responseText).token) {
+          alert("Kullanıcı adı veya şifre yanlış!");
+        } else {
+          alert(JSON.parse(http.responseText).token);
+          this.setState({ token: JSON.parse(http.responseText).token });
+          //   this.setState({
+          //     token: JSON.parse(http.responseText).token + "",
+          //     loggedin: true
+          //   });
+          this.getDersler();
+        }
+      }
+    };
+    http.send(params);
+  }
+
   login = (user, pass) => {
     var http = new XMLHttpRequest();
     var url = "https://moodle.tedu.edu.tr/login/token.php";
