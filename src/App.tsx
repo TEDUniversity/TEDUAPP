@@ -18,13 +18,25 @@ import Webview from "./components/Webview";
 import Survey from "./components/Survey/Survey";
 import firebase from "firebase";
 
+
+// symbol polyfills
+global.Symbol = require('core-js/es6/symbol');
+require('core-js/fn/symbol/iterator');
+
+// collection fn polyfills
+require('core-js/fn/map');
+require('core-js/fn/set');
+require('core-js/fn/array/find');
+
 export default class App extends Component {
   constructor(){
     var config = {
       databaseURL: "https://teduapp-210c9.firebaseio.com",
       projectId: "teduapp-210c9",
     };
-    firebase.initializeApp(config);
+    if (!firebase.apps.length) {
+      firebase.initializeApp(config);
+    }
   }
   
 

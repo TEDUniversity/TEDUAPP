@@ -28,6 +28,8 @@ import HeaderImageScrollView, {
 import { Header } from "react-navigation";
 import Image from "react-native-scalable-image";
 
+
+
 const Spinner = ({ size }) => (
   <View>
     <ActivityIndicator size={size || "large"} />
@@ -205,9 +207,7 @@ class News extends Component<IProp> {
       if (item["links"][0].url.includes("gundem/duyurular")) {
         this.setState({ dataDuyurular: this.state.dataDuyurular.concat(item) });
       } else if (item["links"][0].url.includes("gundem/etkinlikler")) {
-        this.setState({
-          dataEtkinlikler: this.state.dataEtkinlikler.concat(item)
-        });
+        this.setState({dataEtkinlikler: this.state.dataEtkinlikler.concat(item)});
       } else if (item["links"][0].url.includes("gundem/haberler")) {
         this.setState({ dataHaberler: this.state.dataHaberler.concat(item) });
       }
