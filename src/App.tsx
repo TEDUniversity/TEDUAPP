@@ -9,7 +9,8 @@
 import React, { Component } from "react";
 import {
   View, 
-} from "react-native";import { createStackNavigator } from "react-navigation";
+} from "react-native";
+import { createStackNavigator } from "react-navigation";
 import News from "./screens/News";
 import Moodle from "./screens/Moodle";
 import Menu from "./screens/Menu";
