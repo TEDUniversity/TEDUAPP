@@ -43,7 +43,7 @@ const Spinner = ({ size }) => (
 
 interface ReduxProps {
   surveys?: types.Survey[];
-  updateSurveys: (surveys: types.Survey[]) => any;
+  updateSurveys?: (surveys: types.Survey[]) => any;
 }
 interface IProps {
   navigation: any;

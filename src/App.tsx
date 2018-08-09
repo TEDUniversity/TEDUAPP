@@ -7,7 +7,9 @@
  */
 
 import React, { Component } from "react";
-import { createStackNavigator } from "react-navigation";
+import {
+  View, 
+} from "react-native";import { createStackNavigator } from "react-navigation";
 import News from "./screens/News";
 import Moodle from "./screens/Moodle";
 import Menu from "./screens/Menu";
@@ -17,6 +19,19 @@ import Main from "./screens/Main";
 import Webview from "./components/Webview";
 import Survey from "./components/Survey/Survey";
 import firebase from "firebase";
+import { Provider } from "react-redux";
+import { store } from "./store";
+
+// symbol polyfills
+global.Symbol = require('core-js/es6/symbol');
+require('core-js/fn/symbol/iterator');
+
+// collection fn polyfills
+require('core-js/fn/map');
+require('core-js/fn/set');
+require('core-js/fn/array/find');
+
+
 
 export default class App extends Component {
   constructor(){
@@ -24,12 +39,23 @@ export default class App extends Component {
       databaseURL: "https://teduapp-210c9.firebaseio.com",
       projectId: "teduapp-210c9",
     };
-    firebase.initializeApp(config);
+    if (!firebase.apps.length) {
+      firebase.initializeApp(config);
+    }
   }
   
 
   render() {
-    return <RootStack />;
+    return  (
+   
+      <Provider store={store}>
+      <View style={{flex:1}}>
+        <RootStack />
+      </View>
+    </Provider>
+      ) 
+    
+    
   }
 }
 
