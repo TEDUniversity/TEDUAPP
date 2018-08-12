@@ -26,13 +26,21 @@ import DetailNews from "../components/DetailNews";
 import MoodleLogin from "../components/MoodleLogin";
 import { API_LINK } from "../util/types";
 import MoodleDersListesi from "../components/MoodleDersListesi";
+import * as types from "../store/types";
+import * as actions from "../store/actions";
+import { connect } from "react-redux";
+import { Dispatch } from "redux";
 
 const MIN_HEIGHT = (Header as any).height;
 
 interface IProp {
   navigation: any;
 }
-class Moodle extends Component<IProp> {
+interface ReduxProps {
+  User: types.User;
+  updateUser: (user: types.User) => any;
+}
+class Moodle extends Component<IProp & ReduxProps> {
   static navigationOptions = {
     headerTitle: (
       <Image
@@ -79,10 +87,10 @@ class Moodle extends Component<IProp> {
     http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
     var params =
-      "?moodlewsrestformat=json&wsfunction=core_enrol_get_users_courses&wstoken=" +
-      this.state.token +
+      "moodlewsrestformat=json&wsfunction=core_enrol_get_users_courses&wstoken=" +
+      this.props.User.token +
       "&userid=" +
-      "1";
+      this.props.User.userid;
 
     http.onreadystatechange = () => {
       //Call a function when the state changes.
@@ -94,11 +102,13 @@ class Moodle extends Component<IProp> {
     http.send(params);
   };
 
-  getUserInfo=()=>{
+  getUserInfo = () => {
     var http = new XMLHttpRequest();
-    var url = "https://moodle.tedu.edu.tr/login/token.php";
+    var url = "https://moodle.tedu.edu.tr/webservice/rest/server.php";
     var params =
-      "username=" + user + "&password=" + pass + "&service=moodle_mobile_app";
+      "wstoken=" +
+      this.state.token +
+      "&moodlewsrestformat=json&wsfunction=core_webservice_get_site_info";
     http.open("POST", url, true);
 
     //Send the proper header information along with the request
@@ -107,21 +117,20 @@ class Moodle extends Component<IProp> {
     http.onreadystatechange = () => {
       //Call a function when the state changes.
       if (http.readyState == 4 && http.status == 200) {
-        if (!JSON.parse(http.responseText).token) {
-          alert("Kullanıcı adı veya şifre yanlış!");
-        } else {
-          alert(JSON.parse(http.responseText).token);
-          this.setState({ token: JSON.parse(http.responseText).token });
-          //   this.setState({
-          //     token: JSON.parse(http.responseText).token + "",
-          //     loggedin: true
-          //   });
-          this.getDersler();
-        }
+        let u: types.User = {
+          userid: JSON.parse(http.responseText).userid,
+          token: this.state.token,
+          userName: JSON.parse(http.responseText).username,
+          firstName: JSON.parse(http.responseText).firstname,
+          lastName: JSON.parse(http.responseText).lastname,
+          userpictureurl: JSON.parse(http.responseText).userpictureurl
+        };
+        this.props.updateUser(u);
+        this.getDersler();
       }
     };
     http.send(params);
-  }
+  };
 
   login = (user, pass) => {
     var http = new XMLHttpRequest();
@@ -139,13 +148,8 @@ class Moodle extends Component<IProp> {
         if (!JSON.parse(http.responseText).token) {
           alert("Kullanıcı adı veya şifre yanlış!");
         } else {
-          alert(JSON.parse(http.responseText).token);
           this.setState({ token: JSON.parse(http.responseText).token });
-          //   this.setState({
-          //     token: JSON.parse(http.responseText).token + "",
-          //     loggedin: true
-          //   });
-          this.getDersler();
+          this.getUserInfo();
         }
       }
     };
@@ -230,4 +234,19 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Moodle;
+const mapStateToProps = (state: types.GlobalState) => {
+  return {
+    User: state.User
+  };
+};
+
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  updateUser: (user: types.User) => {
+    dispatch(actions.updateUser(user));
+  }
+});
+
+export default connect<{}, {}, ReduxProps>(
+  mapStateToProps,
+  mapDispatchToProps
+)(Moodle);

@@ -27,6 +27,7 @@ import HeaderImageScrollView, {
 } from "react-native-image-header-scroll-view";
 import { Header } from "react-navigation";
 import Image from "react-native-scalable-image";
+import { storeData, retrieveData } from "../util/helpers";
 
 const Spinner = ({ size }) => (
   <View>
@@ -43,13 +44,12 @@ interface IProp {
 }
 
 class News extends Component<IProp> {
-  
   static navigationOptions = {
     title: "News",
     headerStyle: { marginTop: 0, backgroundColor: "#fff" },
     headerLeft: null,
     gesturesEnabled: false,
-    header: null,
+    header: null
   };
 
   constructor(props) {
@@ -73,30 +73,6 @@ class News extends Component<IProp> {
       surname: "tumay",
       age: "22",
       traits: { eye: "brown", tall: "185" }
-    }
-  };
-
-  storeData = async (key, value) => {
-    try {
-      await AsyncStorage.setItem(key, value);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  retrieveData = async (key) => {
-    try {
-      const value = await AsyncStorage.getItem(key).catch(error =>
-        console.log(error)
-      );
-      if (value !== null) {
-        // We have data!!
-        //console.log(value);
-        return value;
-      }
-    } catch (error) {
-      // Error retrieving data
-      console.log(error);
     }
   };
 
@@ -133,7 +109,7 @@ class News extends Component<IProp> {
     fetch("https://www.tedu.edu.tr/rss.xml")
       .then(response => response.text())
       .then(responseData => {
-        this.storeData("teduRSS", responseData);
+        storeData("teduRSS", responseData);
         console.log(responseData);
       })
       .catch(error => {
@@ -173,7 +149,7 @@ class News extends Component<IProp> {
                                         } 
                                         }).catch(error => console.log(error));*/
     //AsyncStorage.removeItem("teduRSS");
-    this.retrieveData("teduRSS")
+    retrieveData("teduRSS")
       .then(RSS => rssParser.parse(RSS))
       .catch(error => console.log(error))
       .then(result => {

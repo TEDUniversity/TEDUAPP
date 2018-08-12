@@ -130,7 +130,7 @@ class CouncilVotings extends Component<IProps & ReduxProps> {
       .ref("/")
       .on("value", response => {
         // this.setState({ firebase: response.val(), loading: false });
-        if (!response) {
+        if (!response || !this.props.updateSurveys) {
           return;
         }
         this.props.updateSurveys(response.val().surveys);

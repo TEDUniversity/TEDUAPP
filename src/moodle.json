@@ -1,0 +1,96 @@
+{
+  "sitename": "TEDU Moodle",
+  "username": "hayri.durmaz",
+  "firstname": "HAYRi",
+  "lastname": "DURMAZ",
+  "fullname": "HAYRi DURMAZ",
+  "lang": "en",
+  "userid": 3878,
+  "siteurl": "https://moodle.tedu.edu.tr",
+  "userpictureurl": "https://moodle.tedu.edu.tr/theme/image.php/clean/core/1529997702/u/f1",
+  "functions": [
+    { "name": "core_comment_get_comments", "version": "2017111301.01" },
+    { "name": "core_group_get_course_user_groups", "version": "2017111301.01" },
+    { "name": "core_notes_get_course_notes", "version": "2017111301.01" },
+    { "name": "core_files_get_files", "version": "2017111301.01" },
+    { "name": "core_user_get_users_by_field", "version": "2017111301.01" },
+    {
+      "name": "core_user_get_course_user_profiles",
+      "version": "2017111301.01"
+    },
+    { "name": "core_user_add_user_device", "version": "2017111301.01" },
+    { "name": "core_user_remove_user_device", "version": "2017111301.01" },
+    { "name": "core_user_view_user_list", "version": "2017111301.01" },
+    { "name": "core_user_view_user_profile", "version": "2017111301.01" },
+    { "name": "core_enrol_get_enrolled_users", "version": "2017111301.01" },
+    { "name": "core_enrol_get_users_courses", "version": "2017111301.01" },
+    {
+      "name": "core_enrol_get_course_enrolment_methods",
+      "version": "2017111301.01"
+    },
+    { "name": "core_course_get_contents", "version": "2017111301.01" },
+    { "name": "core_course_get_courses", "version": "2017111301.01" },
+    { "name": "core_course_view_course", "version": "2017111301.01" },
+    { "name": "core_course_get_categories", "version": "2017111301.01" },
+    {
+      "name": "core_message_send_instant_messages",
+      "version": "2017111301.01"
+    },
+    { "name": "core_message_create_contacts", "version": "2017111301.01" },
+    { "name": "core_message_delete_contacts", "version": "2017111301.01" },
+    { "name": "core_message_block_contacts", "version": "2017111301.01" },
+    { "name": "core_message_unblock_contacts", "version": "2017111301.01" },
+    { "name": "core_message_get_contacts", "version": "2017111301.01" },
+    { "name": "core_message_search_contacts", "version": "2017111301.01" },
+    { "name": "core_message_get_messages", "version": "2017111301.01" },
+    { "name": "core_message_get_blocked_users", "version": "2017111301.01" },
+    { "name": "core_message_mark_message_read", "version": "2017111301.01" },
+    { "name": "core_notes_create_notes", "version": "2017111301.01" },
+    { "name": "core_notes_delete_notes", "version": "2017111301.01" },
+    { "name": "core_notes_view_notes", "version": "2017111301.01" },
+    { "name": "core_webservice_get_site_info", "version": "2017111301.01" },
+    { "name": "core_get_component_strings", "version": "2017111301.01" },
+    {
+      "name": "core_calendar_delete_calendar_events",
+      "version": "2017111301.01"
+    },
+    { "name": "core_calendar_get_calendar_events", "version": "2017111301.01" },
+    {
+      "name": "core_calendar_create_calendar_events",
+      "version": "2017111301.01"
+    },
+    {
+      "name": "core_completion_update_activity_completion_status_manually",
+      "version": "2017111301.01"
+    },
+    {
+      "name": "core_completion_get_activities_completion_status",
+      "version": "2017111301.01"
+    },
+    {
+      "name": "core_completion_get_course_completion_status",
+      "version": "2017111301.01"
+    },
+    { "name": "core_rating_get_item_ratings", "version": "2017111301.01" },
+    { "name": "mod_assign_get_grades", "version": "2017111300" },
+    { "name": "mod_assign_get_assignments", "version": "2017111300" },
+    { "name": "mod_assign_get_submissions", "version": "2017111300" },
+    { "name": "mod_assign_get_user_flags", "version": "2017111300" },
+    { "name": "mod_assign_set_user_flags", "version": "2017111300" },
+    { "name": "mod_assign_get_user_mappings", "version": "2017111300" },
+    {
+      "name": "mod_assign_revert_submissions_to_draft",
+      "version": "2017111300"
+    },
+    { "name": "mod_assign_lock_submissions", "version": "2017111300" },
+    { "name": "mod_assign_unlock_submissions", "version": "2017111300" },
+    { "name": "mod_assign_save_submission", "version": "2017111300" },
+    { "name": "mod_assign_submit_for_grading", "version": "2017111300" },
+    { "name": "mod_assign_save_grade", "version": "2017111300" },
+    { "name": "mod_assign_save_grades", "version": "2017111300" },
+    { "name": "mod_assign_save_user_extensions", "version": "2017111300" },
+    { "name": "mod_assign_reveal_identities", "version": "2017111300" },
+    { "name": "mod_data_get_databases_by_courses", "version": "2017111300" },
+    { "name": "mod_forum_get_forums_by_courses", "version": "2017111300" }
+  ]
+}

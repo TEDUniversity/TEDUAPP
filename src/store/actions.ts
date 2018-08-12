@@ -13,3 +13,10 @@ export function updateMoodleLoggedIn(newMoodle: boolean): types.Action {
     isMoodleLoggedIn: newMoodle
   };
 }
+
+export function updateUser(newUser: types.User): types.Action {
+  return {
+    type: types.UPDATE_USER,
+    user: newUser
+  };
+}
