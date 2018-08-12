@@ -10,51 +10,52 @@ import React, { Component } from "react";
 import { Text, View, StyleSheet } from "react-native";
 
 interface IProps {
-  token: string;
-  uid: string;
+  dersler: any;
 }
 class MoodleDersListesi extends Component<IProps> {
   state = {
     dersler: []
   };
   renderAClass = () => {
-    this.state.dersler.map((responseData, Id) => (
+    this.props.dersler.map((responseData, Id) => (
       <View>
-        <Text>{responseData}</Text>
+        <Text>{Id}</Text>
       </View>
     ));
   };
 
-  getDersler = () => {
-    let url =
-      "https://moodle.tedu.edu.tr/webservice/rest/server.php?moodlewsrestformat=json&wsfunction=core_enrol_get_users_courses&wstoken=" +
-      this.props.token +
-      "&userid=" +
-      this.props.uid;
-    var http = new XMLHttpRequest();
-    http.open("POST", url, true);
+  //   getDersler = () => {
+  //     let url =
+  //       "https://moodle.tedu.edu.tr/webservice/rest/server.php?moodlewsrestformat=json&wsfunction=core_enrol_get_users_courses&wstoken=" +
+  //       this.props.token +
+  //       "&userid=" +
+  //       this.props.uid;
+  //     var http = new XMLHttpRequest();
+  //     http.open("POST", url, true);
 
-    //Send the proper header information along with the request
-    http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  //     //Send the proper header information along with the request
+  //     http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
-    http.onreadystatechange = function() {
-      //Call a function when the state changes.
-      if (http.readyState == 4 && http.status == 200) {
-        alert(this.responseText);
-      }
-    };
-    // http.send(params); //???
-  };
+  //     http.onreadystatechange = function() {
+  //       //Call a function when the state changes.
+  //       if (http.readyState == 4 && http.status == 200) {
+  //         alert(this.responseText);
+  //       }
+  //     };
+  //     // http.send(params); //???
+  //   };
 
   componentDidMount() {
-    this.getDersler();
+    // this.getDersler();
+    // alert(this.props.dersler);
+  }
+  componentWillReceiveProps(next: IProps) {
+    // alert(next.dersler);
   }
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.subContainer}>
-          <Text style={styles.text} />
-        </View>
+        <View style={styles.subContainer}>{this.renderAClass()}</View>
       </View>
     );
   }

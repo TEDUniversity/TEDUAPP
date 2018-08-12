@@ -38,7 +38,9 @@ interface IProp {
 }
 interface ReduxProps {
   User: types.User;
+  isMoodleLoggedIn: boolean;
   updateUser: (user: types.User) => any;
+  updateIsMoodleLoggedIn: (isLoggedIn: boolean) => any;
 }
 class Moodle extends Component<IProp & ReduxProps> {
   static navigationOptions = {
@@ -60,7 +62,8 @@ class Moodle extends Component<IProp & ReduxProps> {
     MAX_HEIGHT: 0,
     scrollHeight: 500,
     loggedin: false,
-    token: ""
+    token: "",
+    dersler: []
   };
 
   componentWillMount() {
@@ -95,7 +98,11 @@ class Moodle extends Component<IProp & ReduxProps> {
     http.onreadystatechange = () => {
       //Call a function when the state changes.
       if (http.readyState == 4 && http.status == 200) {
-        alert(http.responseText);
+        let dersArr = [];
+        for (let index = 0; index < JSON.parse(http.response).length; index++) {
+          dersArr.push(JSON.parse(http.response)[index]);
+        }
+        this.setState({ dersler: dersArr });
       }
     };
 
@@ -126,6 +133,7 @@ class Moodle extends Component<IProp & ReduxProps> {
           userpictureurl: JSON.parse(http.responseText).userpictureurl
         };
         this.props.updateUser(u);
+        this.props.updateIsMoodleLoggedIn(true);
         this.getDersler();
       }
     };
@@ -157,6 +165,12 @@ class Moodle extends Component<IProp & ReduxProps> {
   };
 
   render() {
+    let moodlePage;
+    if (!this.props.isMoodleLoggedIn) {
+      moodlePage = <MoodleLogin onPress={this.login} />;
+    } else {
+      moodlePage = <MoodleDersListesi dersler={this.state.dersler} />;
+    }
     return (
       <HeaderImageScrollView
         maxHeight={this.state.MAX_HEIGHT}
@@ -178,10 +192,7 @@ class Moodle extends Component<IProp & ReduxProps> {
             source={require("../../img/background/BACKGROUND.png")}
             style={styles.mainBackGround}
           >
-            <View style={styles.container}>
-              <MoodleLogin onPress={this.login} />
-              <Text selectable={true}>token</Text>
-            </View>
+            <View style={styles.container}>{moodlePage}</View>
           </ImageBackground>
         </View>
       </HeaderImageScrollView>
@@ -236,13 +247,17 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state: types.GlobalState) => {
   return {
-    User: state.User
+    User: state.User,
+    isMoodleLoggedIn: state.isMoodleLoggedIn
   };
 };
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   updateUser: (user: types.User) => {
     dispatch(actions.updateUser(user));
+  },
+  updateIsMoodleLoggedIn: (moodleLoggedIn: boolean) => {
+    dispatch(actions.updateMoodleLoggedIn(moodleLoggedIn));
   }
 });
 

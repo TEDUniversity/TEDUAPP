@@ -27,7 +27,11 @@ import HeaderImageScrollView, {
 } from "react-native-image-header-scroll-view";
 import { Header } from "react-navigation";
 import Image from "react-native-scalable-image";
-import { storeData, retrieveData } from "../util/helpers";
+import { storeData, retrieveData, getDataAll } from "../util/helpers";
+import * as types from "../store/types";
+import * as actions from "../store/actions";
+import { connect } from "react-redux";
+import { Dispatch } from "redux";
 
 const Spinner = ({ size }) => (
   <View>
@@ -42,8 +46,11 @@ interface IProp {
   showAlert: any;
   navigation: any;
 }
+interface ReduxProps {
+  rss?: any;
+}
 
-class News extends Component<IProp> {
+class News extends Component<IProp & ReduxProps> {
   static navigationOptions = {
     title: "News",
     headerStyle: { marginTop: 0, backgroundColor: "#fff" },
@@ -149,6 +156,7 @@ class News extends Component<IProp> {
                                         } 
                                         }).catch(error => console.log(error));*/
     //AsyncStorage.removeItem("teduRSS");
+
     retrieveData("teduRSS")
       .then(RSS => rssParser.parse(RSS))
       .catch(error => console.log(error))
@@ -157,6 +165,11 @@ class News extends Component<IProp> {
         console.log(result.items);
       })
       .catch(error => console.log(error));
+
+    // getDataAll().then(response.items => {
+    //   alert(response);
+    //   this.whenLoaded(this.props.rss);
+    // });
   }
 
   whenLoaded = response => {
@@ -295,7 +308,18 @@ const styles = StyleSheet.create({
   }
 });
 
-export default News;
+const mapStateToProps = (state: types.GlobalState) => {
+  return {
+    rss: state.Rss
+  };
+};
+
+const mapDispatchToProps = (dispatch: Dispatch) => ({});
+
+export default connect<{}, {}, ReduxProps>(
+  mapStateToProps,
+  mapDispatchToProps
+)(News);
 
 //if you want to scroll only the content not the header, add scrollview that capsulate horizontallists
 

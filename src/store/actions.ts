@@ -20,3 +20,10 @@ export function updateUser(newUser: types.User): types.Action {
     user: newUser
   };
 }
+
+export function updateRss(rss: any): types.Action {
+  return {
+    type: types.UPDATE_RSS,
+    Rss: rss
+  };
+}
