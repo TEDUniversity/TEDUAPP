@@ -27,17 +27,11 @@ import HeaderImageScrollView, {
 } from "react-native-image-header-scroll-view";
 import { Header } from "react-navigation";
 import Image from "react-native-scalable-image";
-<<<<<<< HEAD
-import * as Survey from 'survey-react'; 
-
-
-=======
 import { storeData, retrieveData, getDataAll } from "../util/helpers";
 import * as types from "../store/types";
 import * as actions from "../store/actions";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
->>>>>>> moodle-implementation
 
 export const Spinner = ({ size }) => (
   <View>
@@ -124,13 +118,8 @@ class News extends Component<IProp & ReduxProps> {
     fetch("https://www.tedu.edu.tr/rss.xml")
       .then(response => response.text())
       .then(responseData => {
-<<<<<<< HEAD
-        this.storeData("teduRSS", responseData);
-        //console.log(responseData);
-=======
         storeData("teduRSS", responseData);
         console.log(responseData);
->>>>>>> moodle-implementation
       })
       .catch(error => {
         console.log(error);

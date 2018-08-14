@@ -6,12 +6,8 @@ export const UPDATE_RSS = "UPDATE_RSS";
 export interface GlobalState {
   Surveys: Survey[] | undefined;
   isMoodleLoggedIn: boolean | undefined;
-<<<<<<< HEAD
-  
-=======
   User: User;
   Rss: any;
->>>>>>> moodle-implementation
 }
 
 export interface Question {

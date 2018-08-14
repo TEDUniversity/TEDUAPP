@@ -7,17 +7,9 @@
  */
 
 import React, { Component } from "react";
-<<<<<<< HEAD
-import {
-  View, 
-} from "react-native";
-import { createStackNavigator } from "react-navigation";
-import News from "./screens/News";
-=======
 import { View, Text } from "react-native";
 import { createStackNavigator } from "react-navigation";
 import News, { Spinner } from "./screens/News";
->>>>>>> moodle-implementation
 import Moodle from "./screens/Moodle";
 import Menu from "./screens/Menu";
 import Council from "./screens/Council";
