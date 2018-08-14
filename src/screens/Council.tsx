@@ -81,12 +81,13 @@ class Council extends Component<IProp> {
     const winHeight = Dimensions.get("window").height;
     console.log("winHeight" + winHeight);
 
+    //set the header height
     if (winHeight < 736) {
       console.log("device height less than 736");
       this.setState({ MAX_HEIGHT: winHeight * 0.215 }); //17.5%
     } else if (winHeight >= 736) {
       console.log("device height greater than 736");
-      this.setState({ MAX_HEIGHT: winHeight * 0.18 }); //18%
+      this.setState({ MAX_HEIGHT: winHeight * 0.21 }); //18%
     }
   }
 
@@ -114,6 +115,7 @@ class Council extends Component<IProp> {
         overlayColor="#144d8c"
         maxOverlayOpacity={1}
         bounces={false}
+        showsVerticalScrollIndicator={false}
         scrollViewBackgroundColor="rgb(53,53,55)"
         fadeOutForeground={true}
         renderForeground={() => {

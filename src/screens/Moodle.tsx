@@ -50,7 +50,7 @@ class Moodle extends Component<IProp> {
   state = {
     selectedTab: "",
     MAX_HEIGHT: 0,
-    scrollHeight: 500,
+    scrollHeight: 0,
     loggedin: false,
     token: ""
   };
@@ -61,6 +61,7 @@ class Moodle extends Component<IProp> {
     const winHeight = Dimensions.get("window").height;
     console.log("winHeight" + winHeight);
 
+    //set header height
     if (winHeight < 736) {
       console.log("device height less than 736");
       this.setState({ MAX_HEIGHT: winHeight * 0.175 }); //17.5%
@@ -68,7 +69,17 @@ class Moodle extends Component<IProp> {
       console.log("device height greater than 736");
       this.setState({ MAX_HEIGHT: winHeight * 0.18 }); //18%
     }
+
+    //set scroll height
+    if (winHeight < 736) {
+      //console.log("device height less than 736");
+      this.setState({ scrollHeight: winHeight * 0.755 }); //75.5%
+    } else if (winHeight >= 736) {
+      //console.log("device height greater than 736");
+      this.setState({ scrollHeight: winHeight * 0.76 }); //76%
+    }
   }
+  
 
   getDersler = () => {
     let url = "https://moodle.tedu.edu.tr/webservice/rest/server.php";

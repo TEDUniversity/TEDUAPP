@@ -22,16 +22,26 @@ import HeaderImageScrollView, {
   TriggeringView
 } from "react-native-image-header-scroll-view";
 import { Header } from "react-navigation";
+import * as types from "../../store/types";
+import * as actions from "../../store/actions";
+import { connect } from "react-redux";
 
+import { Dispatch } from "redux";
 
 interface IProp {
-    text: string;
-    answer: any;
+    answer: string;
+    getAnswer: any;
+    index: number;
     unClickAnswer: any;
-    
+    isChosen: boolean;
   }
 
-class Answer extends Component<IProp> {
+  interface ReduxProps {
+    surveys?: types.Survey[];
+    updateSurveys?: (surveys: types.Survey[]) => any;
+  }
+
+class Answer extends Component<IProp & ReduxProps> {
   
 
   constructor(props: IProp){
@@ -41,39 +51,43 @@ class Answer extends Component<IProp> {
   
   state = {
     buttonBackgroundColor: "",
-    clicked: false,
     borderBottomWidth: 0.5
     
   };
 
-  onClick = () => {
-    //debugger;
-    this.setState({
-      buttonBackgroundColor: "rgb(22,103,163)",
-      borderBottomWidth: 0,
-      clicked: true
-    });
-    if (this.state.clicked) {
+  componentWillReceiveProps(next: IProp & ReduxProps ){
+    
+    if (next.isChosen) {
+      this.setState({
+        buttonBackgroundColor: "rgb(22,103,163)",
+        borderBottomWidth: 0,
+      });   
+    }else{
       this.setState({
         buttonBackgroundColor: "transparent",
         borderBottomWidth: 0.5,
-        clicked: false
       });
-      //console.log("during update component" + this.state.clicked);
     }
+  }
+
+  onClick = () => {
+    
+    this.props.getAnswer(this.props.index);
+  
   }
  
   componentDidUpdate(){
     
-    if(this.state.clicked == true){
+    /*if(this.state.clicked == true){
       this.props.answer(this.props.text);
     } else {
       this.props.answer("not " + this.props.text);
-    }
+    }*/
+
     
   }
 
-  componentWillMount(){
+  /*componentWillMount(){
     console.log("txt: " +this.props.text)
     if( this.props.unClickAnswer == this.props.text) {
       console.log("unclick: " +this.props.unClickAnswer)
@@ -83,7 +97,7 @@ class Answer extends Component<IProp> {
         clicked: false
       });
     }
-  }
+  }*/
 
   render() {
       //console.log(this.props.text);
@@ -99,7 +113,7 @@ class Answer extends Component<IProp> {
               ]}
               onPress={this.onClick}
             >
-              <Text> {this.props.text} </Text>
+              <Text> {this.props.answer.text} </Text>
         </TouchableOpacity>
     );
   }
@@ -114,4 +128,19 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Answer;
+const mapStateToProps = (state: types.GlobalState) => {
+  return {
+    surveys: state.Surveys
+  };
+};
+
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  updateSurveys: (surveys: types.Survey[]) => {
+    dispatch(actions.updateSurveys(surveys));
+  }
+});
+
+export default connect<{}, {}, ReduxProps>(
+  mapStateToProps,
+  mapDispatchToProps
+)(Answer);

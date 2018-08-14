@@ -27,6 +27,7 @@ import HeaderImageScrollView, {
 } from "react-native-image-header-scroll-view";
 import { Header } from "react-navigation";
 import Image from "react-native-scalable-image";
+import * as Survey from 'survey-react'; 
 
 
 
@@ -132,11 +133,13 @@ class News extends Component<IProp> {
       this.setState({ MAX_HEIGHT: winHeight * 0.18 }); //18%
     }
 
+    //console.log(Survey.IHttpActionResult("addb8abc-28ae-425b-a58b-99ae6b33be58"));
+
     fetch("https://www.tedu.edu.tr/rss.xml")
       .then(response => response.text())
       .then(responseData => {
         this.storeData("teduRSS", responseData);
-        console.log(responseData);
+        //console.log(responseData);
       })
       .catch(error => {
         console.log(error);
@@ -270,6 +273,8 @@ class News extends Component<IProp> {
           overlayColor="#144d8c"
           maxOverlayOpacity={1}
           bounces={false}
+          showsVerticalScrollIndicator={false}
+
         >
           <View>
             <ImageBackground

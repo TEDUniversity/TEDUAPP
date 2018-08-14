@@ -45,7 +45,8 @@ require('core-js/fn/set');
 require('core-js/fn/array/find');
 
 export default class App extends Component {
-  constructor(){
+  constructor(props){
+    super(props);
     var config = {
       databaseURL: "https://teduapp-210c9.firebaseio.com",
       projectId: "teduapp-210c9",

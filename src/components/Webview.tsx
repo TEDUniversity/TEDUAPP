@@ -74,7 +74,7 @@ class Webview extends React.Component<IProp> {
         renderLoading={() => {
           return <Spinner size={"large"} />;
         }}
-        renderError={this.loadError}
+        onError={(err) => { console.log(err); } }
         // onError
       />
     );
