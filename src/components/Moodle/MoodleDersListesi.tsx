@@ -31,7 +31,11 @@ class MoodleDersListesi extends Component<IProps> {
           <TouchableOpacity
             key={Id}
             onPress={() => {
-              this.props.navigation.navigate("DersDetayRouter");
+              this.props.navigation.navigate("DersDetayRouter", {
+                 navigationOptions: {
+                  title: "Detay",
+                }
+              });
             }}
           >
             <View style={styles.subContainer}>
