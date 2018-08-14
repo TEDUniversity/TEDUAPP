@@ -44,7 +44,7 @@ export async function getDataAll() {
 
         if (key === "teduRSS") {
           store.dispatch(actions.updateRss(value));
-          return value;
+          //   return value;
         }
         // add your data to redux store
       });

@@ -71,6 +71,7 @@ class Moodle extends Component<IProp & ReduxProps> {
 
     const winHeight = Dimensions.get("window").height;
     console.log("winHeight" + winHeight);
+    this.getDersler();
 
     if (winHeight < 736) {
       console.log("device height less than 736");

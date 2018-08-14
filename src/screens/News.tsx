@@ -33,7 +33,7 @@ import * as actions from "../store/actions";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
 
-const Spinner = ({ size }) => (
+export const Spinner = ({ size }) => (
   <View>
     <ActivityIndicator size={size || "large"} />
   </View>
@@ -161,15 +161,34 @@ class News extends Component<IProp & ReduxProps> {
       .then(RSS => rssParser.parse(RSS))
       .catch(error => console.log(error))
       .then(result => {
+        // alert(result.items);
         this.whenLoaded(result.items);
         console.log(result.items);
       })
       .catch(error => console.log(error));
 
-    // getDataAll().then(response.items => {
-    //   alert(response);
-    //   this.whenLoaded(this.props.rss);
-    // });
+    // alert(this.props.rss);
+    // retrieveData("isMoodleLoggedIn")
+    //   .then(RSS => rssParser.parse(RSS))
+    //   .catch(error => console.log(error))
+    //   .then(result => {
+    //     alert(result.items);
+    //     this.whenLoaded(result.items);
+    //     console.log(result.items);
+    //   })
+    //   .catch(error => console.log(error));
+
+    // getDataAll()
+    //   .then(RSS => {
+    //     rssParser.parse(this.props.rss);
+    //   })
+    //   .catch(error => console.log(error))
+    //   .then(result => {
+    //     alert(result.items);
+    //     this.whenLoaded(result.items);
+    //     console.log(result.items);
+    //   })
+    //   .catch(error => console.log(error));
   }
 
   whenLoaded = response => {

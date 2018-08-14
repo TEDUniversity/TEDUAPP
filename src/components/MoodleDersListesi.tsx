@@ -17,11 +17,18 @@ class MoodleDersListesi extends Component<IProps> {
     dersler: []
   };
   renderAClass = () => {
-    this.props.dersler.map((responseData, Id) => (
-      <View>
-        <Text>{Id}</Text>
-      </View>
-    ));
+    return this.props.dersler.map(
+      (responseData, Id) =>
+        responseData["visible"] === 1 ? (
+          <View key={Id}>
+            <Text>
+              {responseData["fullname"]} {responseData["summary"]}
+            </Text>
+          </View>
+        ) : (
+          <View key={Id} />
+        )
+    );
   };
 
   //   getDersler = () => {
@@ -45,13 +52,8 @@ class MoodleDersListesi extends Component<IProps> {
   //     // http.send(params); //???
   //   };
 
-  componentDidMount() {
-    // this.getDersler();
-    // alert(this.props.dersler);
-  }
-  componentWillReceiveProps(next: IProps) {
-    // alert(next.dersler);
-  }
+  componentDidMount() {}
+  componentWillReceiveProps(next: IProps) {}
   render() {
     return (
       <View style={styles.container}>
