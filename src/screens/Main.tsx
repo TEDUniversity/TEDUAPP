@@ -101,44 +101,27 @@ class Main extends Component<IProp> {
     />
   );
 
-
   showTab() {
     switch (this.state.activeTab) {
       case "NewsRouter":
         return (
-          <News           
+          <News
             showAlert={this.props.navigation.state.params.showAlert}
             navigation={this.props.navigation}
           />
         );
         break;
       case "MenuRouter":
-        return (
-          <Menu
-            navigation={this.props.navigation}
-          />
-        );
+        return <Menu navigation={this.props.navigation} />;
         break;
       case "CalendarRouter":
-        return (
-          <Calendar
-            navigation={this.props.navigation}
-          />
-        );
+        return <Calendar navigation={this.props.navigation} />;
         break;
       case "MoodleRouter":
-        return (
-          <Moodle
-            navigation={this.props.navigation}
-          />
-        );
+        return <Moodle navigation={this.props.navigation} />;
         break;
       case "CouncilRouter":
-        return (
-          <Council
-            navigation={this.props.navigation}
-          />
-        );
+        return <Council navigation={this.props.navigation} />;
         break;
     }
   }

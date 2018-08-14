@@ -70,7 +70,7 @@ const RootStack = createStackNavigator(
     DersDetayRouter: MoodleDersDetay
   },
   {
-    headerMode: "none",
+    // headerMode: "none",
     initialRouteName: "MainRouter",
     initialRouteParams: { showAlert: true }
   }
