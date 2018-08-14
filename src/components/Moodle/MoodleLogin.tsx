@@ -44,7 +44,7 @@ class MoodleLogin extends Component<IProp> {
             borderWidth: 1,
             color: "white"
           }}
-          placeholder="Kullanıcı adı!"
+          placeholder="Kullanıcı adı"
           placeholderTextColor="gray"
           onChangeText={kullaniciAdi => this.setState({ kullaniciAdi })}
         />
