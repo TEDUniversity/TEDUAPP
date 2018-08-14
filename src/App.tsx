@@ -24,7 +24,7 @@ import { PersistGate } from "redux-persist/integration/react";
 import MoodleDersDetay from "./components/Moodle/MoodleDersDetay";
 
 // symbol polyfills
-global.Symbol = require("core-js/es6/symbol");
+require("core-js/es6/symbol");
 require("core-js/fn/symbol/iterator");
 
 // collection fn polyfills
@@ -70,7 +70,7 @@ const RootStack = createStackNavigator(
     DersDetayRouter: MoodleDersDetay
   },
   {
-    //headerMode: 'none',
+    headerMode: "none",
     initialRouteName: "MainRouter",
     initialRouteParams: { showAlert: true }
   }
