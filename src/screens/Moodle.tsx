@@ -24,9 +24,9 @@ import HeaderImageScrollView, {
 } from "react-native-image-header-scroll-view";
 import { Header } from "react-navigation";
 import DetailNews from "../components/DetailNews";
-import MoodleLogin from "../components/MoodleLogin";
+import MoodleLogin from "../components/Moodle/MoodleLogin";
 import { API_LINK } from "../util/types";
-import MoodleDersListesi from "../components/MoodleDersListesi";
+import MoodleDersListesi from "../components/Moodle/MoodleDersListesi";
 import * as types from "../store/types";
 import * as actions from "../store/actions";
 import { connect } from "react-redux";
@@ -214,7 +214,12 @@ class Moodle extends Component<IProp & ReduxProps> {
     if (!this.props.isMoodleLoggedIn) {
       moodlePage = <MoodleLogin onPress={this.login} />;
     } else {
-      moodlePage = <MoodleDersListesi dersler={this.state.dersler} />;
+      moodlePage = (
+        <MoodleDersListesi
+          dersler={this.state.dersler}
+          navigation={this.props.navigation}
+        />
+      );
     }
     return (
       <HeaderImageScrollView

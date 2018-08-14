@@ -18,6 +18,7 @@ import {
 
 interface IProps {
   dersler: any;
+  navigation: any;
 }
 class MoodleDersListesi extends Component<IProps> {
   state = {
@@ -27,7 +28,12 @@ class MoodleDersListesi extends Component<IProps> {
     return this.props.dersler.map(
       (responseData, Id) =>
         responseData["visible"] === 1 ? (
-          <TouchableOpacity key={Id}>
+          <TouchableOpacity
+            key={Id}
+            onPress={() => {
+              this.props.navigation.navigate("DersDetayRouter");
+            }}
+          >
             <View style={styles.subContainer}>
               <Text
                 style={{

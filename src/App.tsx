@@ -21,6 +21,7 @@ import firebase from "firebase";
 import { Provider } from "react-redux";
 import { store, persistor } from "./store";
 import { PersistGate } from "redux-persist/integration/react";
+import MoodleDersDetay from "./components/Moodle/MoodleDersDetay";
 
 // symbol polyfills
 global.Symbol = require("core-js/es6/symbol");
@@ -31,8 +32,9 @@ require("core-js/fn/map");
 require("core-js/fn/set");
 require("core-js/fn/array/find");
 
-export default class App extends Component {
-  constructor() {
+export default class App extends Component<any> {
+  constructor(prop: any) {
+    super(prop);
     var config = {
       databaseURL: "https://teduapp-210c9.firebaseio.com",
       projectId: "teduapp-210c9"
@@ -64,7 +66,8 @@ const RootStack = createStackNavigator(
     CalendarRotuer: Calendar,
     MoodleRouter: Moodle,
     WebviewRouter: Webview,
-    SurveyRouter: Survey
+    SurveyRouter: Survey,
+    DersDetayRouter: MoodleDersDetay
   },
   {
     //headerMode: 'none',
