@@ -7,7 +7,14 @@
  */
 
 import React, { Component } from "react";
-import { Text, View, StyleSheet } from "react-native";
+import {
+  Text,
+  View,
+  StyleSheet,
+  Dimensions,
+  ScrollView,
+  TouchableOpacity
+} from "react-native";
 
 interface IProps {
   dersler: any;
@@ -20,54 +27,41 @@ class MoodleDersListesi extends Component<IProps> {
     return this.props.dersler.map(
       (responseData, Id) =>
         responseData["visible"] === 1 ? (
-          <View key={Id}>
-            <Text>
-              {responseData["fullname"]} {responseData["summary"]}
-            </Text>
-          </View>
+          <TouchableOpacity key={Id}>
+            <View style={styles.subContainer}>
+              <Text
+                style={{
+                  margin: 5,
+                  marginBottom: 0,
+                  fontSize: 20,
+                  color: "black"
+                }}
+              >
+                {responseData["fullname"]}
+              </Text>
+              <Text style={{ fontSize: 15, margin: 5 }}>
+                {responseData["summary"]}
+              </Text>
+            </View>
+          </TouchableOpacity>
         ) : (
           <View key={Id} />
         )
     );
   };
 
-  //   getDersler = () => {
-  //     let url =
-  //       "https://moodle.tedu.edu.tr/webservice/rest/server.php?moodlewsrestformat=json&wsfunction=core_enrol_get_users_courses&wstoken=" +
-  //       this.props.token +
-  //       "&userid=" +
-  //       this.props.uid;
-  //     var http = new XMLHttpRequest();
-  //     http.open("POST", url, true);
-
-  //     //Send the proper header information along with the request
-  //     http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-
-  //     http.onreadystatechange = function() {
-  //       //Call a function when the state changes.
-  //       if (http.readyState == 4 && http.status == 200) {
-  //         alert(this.responseText);
-  //       }
-  //     };
-  //     // http.send(params); //???
-  //   };
-
   componentDidMount() {}
   componentWillReceiveProps(next: IProps) {}
   render() {
     return (
-      <View style={styles.container}>
-        <View style={styles.subContainer}>{this.renderAClass()}</View>
-      </View>
+      <ScrollView style={styles.container}>{this.renderAClass()}</ScrollView>
     );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: "space-between",
-    alignItems: "center"
+    flex: 1
   },
   text: {
     fontWeight: "bold"
@@ -75,7 +69,11 @@ const styles = StyleSheet.create({
   subContainer: {
     flex: 1,
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
+    backgroundColor: "white",
+    width: Dimensions.get("window").width - 10,
+    // height: Dimensions.get("window").height / 6,
+    margin: 5
   }
 });
 

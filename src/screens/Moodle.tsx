@@ -13,11 +13,12 @@ import {
   StyleSheet,
   Dimensions,
   ImageBackground,
-  TouchableOpacity
+  TouchableOpacity,
+  Alert
 } from "react-native";
 import Image from "react-native-scalable-image";
 import TabNavigator from "react-native-tab-navigator";
-import Icon from "react-native-vector-icons/FontAwesome";
+import Icon from "react-native-vector-icons/Entypo";
 import HeaderImageScrollView, {
   TriggeringView
 } from "react-native-image-header-scroll-view";
@@ -165,6 +166,49 @@ class Moodle extends Component<IProp & ReduxProps> {
     http.send(params);
   };
 
+  renderHeader = () => {
+    let icon = <View />;
+    if (this.props.isMoodleLoggedIn) {
+      icon = (
+        <TouchableOpacity
+          onPress={() => {
+            Alert.alert(
+              "Emin Misin?",
+              "Çıkış yapmak istediğine emin misin?.",
+              [
+                {
+                  text: "Evet",
+                  onPress: () => this.props.updateIsMoodleLoggedIn(false)
+                },
+                {
+                  text: "Hayır",
+                  onPress: () => {}
+                }
+              ],
+              { cancelable: false }
+            );
+            return <View />;
+          }}
+        >
+          <Icon name="log-out" size={25} style={{ color: "rgb(1, 14, 41)" }} />
+        </TouchableOpacity>
+      );
+    }
+    return (
+      <View
+        style={{
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "space-between",
+          backgroundColor: "transparent",
+          marginTop: this.state.MAX_HEIGHT - 35
+        }}
+      >
+        {icon}
+      </View>
+    );
+  };
+
   render() {
     let moodlePage;
     if (!this.props.isMoodleLoggedIn) {
@@ -187,6 +231,7 @@ class Moodle extends Component<IProp & ReduxProps> {
         overlayColor="#144d8c"
         maxOverlayOpacity={1}
         scrollEnabled={false}
+        renderForeground={this.renderHeader}
       >
         <View height={this.state.scrollHeight}>
           <ImageBackground
