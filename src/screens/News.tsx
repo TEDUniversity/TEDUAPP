@@ -113,6 +113,8 @@ class News extends Component<IProp & ReduxProps> {
       this.setState({ MAX_HEIGHT: winHeight * 0.18 }); //18%
     }
 
+    //console.log(Survey.IHttpActionResult("addb8abc-28ae-425b-a58b-99ae6b33be58"));
+
     fetch("https://www.tedu.edu.tr/rss.xml")
       .then(response => response.text())
       .then(responseData => {
@@ -278,6 +280,7 @@ class News extends Component<IProp & ReduxProps> {
           overlayColor="#144d8c"
           maxOverlayOpacity={1}
           bounces={false}
+          showsVerticalScrollIndicator={false}
         >
           <View>
             <ImageBackground

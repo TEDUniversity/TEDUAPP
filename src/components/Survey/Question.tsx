@@ -23,22 +23,33 @@ import HeaderImageScrollView, {
 } from "react-native-image-header-scroll-view";
 import { Header } from "react-navigation";
 import Answer from "./Answer";
+import * as types from "../../store/types";
+import * as actions from "../../store/actions";
+import { connect } from "react-redux";
+import { Dispatch } from "redux";
 
 interface IProp {
     question: any;
-    getAnswers: any;
-    sendParent: any;
-    set: any;
+    questionIndex: number;
+    surveyIndex: number;
   }
 
-class Question extends Component<IProp> {
+  interface ReduxProps {
+    surveys?: types.Survey[];
+    updateSurveys?: (surveys: types.Survey[]) => any;
+  }
+
+class Question extends Component<IProp & ReduxProps> {
   state = {
-    answers: [],
-    prevAnswers: [],
-        
+    answers: [],//not working this version
+    prevAnswers: [],//not workind this versin
+    currentAnswer: "",//working in this verison
+    chosenIndex: -1,//working in this version
+
+
   };
   
-  setAnswers = (val) => {
+  /*setAnswers = (val) => {
     if(val.includes("not")) {
       var splitted = val.split(' ').slice(1).join(' ');
       this.state.answers = this.state.answers.filter(function(item) { 
@@ -57,7 +68,6 @@ class Question extends Component<IProp> {
       this.state.answers = this.state.answers.filter(function(item) { 
         return item !== splitted
     })
-      //console.log(splitted);
     }else{
       //debugger;
       var popped = this.state.answers.pop();
@@ -78,26 +88,33 @@ class Question extends Component<IProp> {
       //console.log(this.props.text)
       this.sentAnswersToParent();
     }
+  };*/
+
+
+
+  setAnswersSingle = (index:number) => {
+    if(this.state.chosenIndex != index) {
+      this.setState({chosenIndex: index}, this.UpdateGlobalState );
+    }
+    
   };
 
-  sentAnswersToParent = () => {
-    //console.log(this.state.answers)
-  debugger;
-    this.state.answers.map((item) => {
-      if(item != undefined){
-        this.props.getAnswers(item);
-      }
-    });
-    this.props.set(false);
+
+  UpdateGlobalState = () => {
+    var survey = this.props.surveys;
+    survey[this.props.surveyIndex].questions[this.props.questionIndex].currentPressedAnswers = this.state.chosenIndex;
+    this.props.updateSurveys(survey);
   }
 
   renderAnswers = () => {
       return this.props.question.answers.map((item, id) => (
         <Answer 
-        text={item}
+        index={id}
+        answer={item}
         key={id}
-        answer={ this.setAnswersSingle }
-        unClickAnswer={ this.state.prevAnswers }
+        getAnswer={ this.setAnswersSingle }
+        isChosen={this.state.chosenIndex === id}
+        //unClickAnswer={ this.state.prevAnswers }
         />
       ));
   }
@@ -114,10 +131,6 @@ class Question extends Component<IProp> {
           <View style={styles.answers}>
             {this.renderAnswers()}
           </View>
-          <TouchableOpacity onPress={() => (console.log(this.state.answers))}>
-            <Text> show results </Text>
-          </TouchableOpacity>
-          
         </View>
     );
   }
@@ -175,4 +188,21 @@ const styles = StyleSheet.create({
     }
   });
 
-export default Question;
+
+  const mapStateToProps = (state: types.GlobalState) => {
+    return {
+      surveys: state.Surveys
+    };
+  };
+  
+  const mapDispatchToProps = (dispatch: Dispatch) => ({
+    updateSurveys: (surveys: types.Survey[]) => {
+      dispatch(actions.updateSurveys(surveys));
+    }
+  });
+  
+  export default connect<{}, {}, ReduxProps>(
+    mapStateToProps,
+    mapDispatchToProps
+  )(Question);
+

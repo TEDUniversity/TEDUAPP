@@ -180,7 +180,7 @@ class Menu extends Component<IProp> {
                 onPress={() => {
                   this.props.navigation.navigate("WebviewRouter", {
                     url:
-                      "https://www.tedu.edu.tr/sites/default/files/content_files/2017-2018_akademik_takvim-senato_05.07.2018_0.pdf",
+                      "https://www.tedu.edu.tr/tr/main/akademik-takvim",
                     title: "Cafeteria programme",
                     backButton: "Menu"
                   });
@@ -199,7 +199,7 @@ class Menu extends Component<IProp> {
                 onPress={() => {
                   this.props.navigation.navigate("WebviewRouter", {
                     url:
-                      "https://www.tedu.edu.tr/sites/default/files/content_files/2017-2018_akademik_takvim-senato_05.07.2018_0.pdf",
+                      "https://my.tedu.edu.tr/sap/bc/ui5_ui5/ui2/ushell/shells/abap/FioriLaunchpad.html?sap-client=001&sap-language=TR",
                     title: "TEDU Portal",
                     backButton: "Menu"
                   });
@@ -218,7 +218,7 @@ class Menu extends Component<IProp> {
                 onPress={() => {
                   this.props.navigation.navigate("WebviewRouter", {
                     url:
-                      "https://www.tedu.edu.tr/sites/default/files/content_files/2017-2018_akademik_takvim-senato_05.07.2018_0.pdf",
+                      "https://issuu.com/tedukultursanat/docs",
                     title: "Karafanzin",
                     backButton: "Menu"
                   });
@@ -237,7 +237,7 @@ class Menu extends Component<IProp> {
                 onPress={() => {
                   this.props.navigation.navigate("WebviewRouter", {
                     url:
-                      "https://www.tedu.edu.tr/sites/default/files/content_files/2017-2018_akademik_takvim-senato_05.07.2018_0.pdf",
+                      "https://www.tedu.edu.tr/tr/main/akademik-takvim",
                     title: "Academic Calendar",
                     backButton: "Menu"
                   });
@@ -256,7 +256,7 @@ class Menu extends Component<IProp> {
                 onPress={() => {
                   this.props.navigation.navigate("WebviewRouter", {
                     url:
-                      "https://www.tedu.edu.tr/sites/default/files/content_files/2017-2018_akademik_takvim-senato_05.07.2018_0.pdf",
+                      "http://www.radiotedu.com",
                     title: "Listen radio tedu",
                     backButton: "Menu"
                   });

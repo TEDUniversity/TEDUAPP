@@ -32,7 +32,6 @@ import firebase from "firebase";
 import * as types from "../store/types";
 import * as actions from "../store/actions";
 import { connect } from "react-redux";
-
 import { Dispatch } from "redux";
 
 const Spinner = ({ size }) => (
@@ -60,11 +59,11 @@ class CouncilVotings extends Component<IProps & ReduxProps> {
         questions: [
           {
             question: "Where do you want to go for the party?",
-            answers: ["The lux", "6:45", "Bomonti"]
+            answers: [{count: 0, text: "The lux"}, {count: 0, text: "6:45"}, {count: 0, text: "Bomonti"}]
           },
           {
             question: "Choose a date",
-            answers: ["11-05-2019", "22-05-2018", "05-07-2018"]
+            answers: [{count: 0, text: "11-05-2019"}, {count: 0, text: "22-05-2018"}, {count: 0, text: "05-07-2018"}]
           }
         ]
       },
@@ -74,9 +73,9 @@ class CouncilVotings extends Component<IProps & ReduxProps> {
         questions: [
           {
             question: "Where do you want to go for the party?",
-            answers: ["Keçi", "Kite", "Ses"]
+            answers: [{count: 0, text: "Keçi"}, {count: 0, text: "Kite"}, {count: 0, text: "Sess"}]
           },
-          { question: "hi", answers: ["11", "22", "33"] }
+          { question: "hi", answers: [{count: 0, text: "Keçi"}, {count: 0, text: "Kite"}, {count: 0, text: "Sess"}] }
         ]
       },
       {
@@ -85,22 +84,13 @@ class CouncilVotings extends Component<IProps & ReduxProps> {
         questions: [
           {
             question: "Where do you want to go for the party?",
-            answers: ["Suite 34", "Magazin", "The house"]
+            answers: [{count: 0, text: "Suite 34"}, {count: 0, text: "Magazin"}, {count: 0, text: "The House"}]
           },
-          { question: "Choose a date", answers: ["11", "22", "33"] }
+          
         ]
       }
     ],
 
-    firebase: "",
-
-    questions: [
-      {
-        question: "Where do you want to go for the party?",
-        answers: ["The lux", "6:45", "Bomonti"]
-      },
-      { question: "hi", answers: ["11", "22", "33"] }
-    ]
   };
 
   componentWillMount() {
@@ -127,15 +117,16 @@ class CouncilVotings extends Component<IProps & ReduxProps> {
   readSurveyData() {
     firebase
       .database()
-      .ref("/")
+      .ref("/surveys")
       .on("value", response => {
         // this.setState({ firebase: response.val(), loading: false });
         if (!response || !this.props.updateSurveys) {
           return;
         }
-        this.props.updateSurveys(response.val().surveys);
+        //console.log("firebase data: " + response.val());
+        this.props.updateSurveys(response.val());
         this.setState({ loading: false });
-        console.log(this.state.firebase);
+        //console.log(this.props.surveys);
       });
   }
 
@@ -151,7 +142,8 @@ class CouncilVotings extends Component<IProps & ReduxProps> {
         this.props.navigation.navigate("SurveyRouter", {
           title: surveyName,
           backButton: "Votings",
-          surveyData: item
+          surveyData: item,
+          index: id
         });
         //return <Survey key={id} surveyData={item} />
       }

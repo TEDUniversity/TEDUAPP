@@ -12,7 +12,13 @@ export interface GlobalState {
 
 export interface Question {
   question: string;
-  answers: string[];
+  answers: Answer[];
+  currentPressedAnswers: number;
+}
+
+export interface Answer {
+  text: string;
+  count: number;
 }
 
 export interface Survey {
