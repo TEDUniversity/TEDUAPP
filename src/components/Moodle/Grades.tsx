@@ -28,6 +28,7 @@ interface IProp {
 interface ReduxProps {
   user: types.User;
 }
+var DomParser = require("react-native-html-parser").DOMParser;
 
 class Grades extends Component<IProp & ReduxProps> {
   state = {
@@ -97,13 +98,15 @@ class Grades extends Component<IProp & ReduxProps> {
   renderSection = () => {
     return this.state.jsonToBeParsed["tables"][0]["tabledata"].map(
       (data, Id) => {
-        let name = JSON.stringify(data["itemname"]["content"]).substring(
-          JSON.stringify(data["itemname"]["content"]).lastIndexOf(">") + 1
+        let doc = new DomParser().parseFromString(
+          data["itemname"]["content"],
+          "text/html"
         );
+        let sa = doc.getElementsByTagName("a");
         return (
           <View key={Id} style={styles.subContainer}>
             <View style={{ flex: 1, flexDirection: "row" }}>
-              <Text>{name}</Text>
+              <Text>{sa.toString()}</Text>
               {/* {this.renderElement(data["modules"])} */}
             </View>
           </View>
