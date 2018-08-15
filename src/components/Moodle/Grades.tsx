@@ -32,22 +32,24 @@ interface ReduxProps {
 class Grades extends Component<IProp & ReduxProps> {
   state = {
     isLoading: true,
-    jsonToBeParsed: {}
+    jsonToBeParsed: ""
   };
 
   componentDidMount() {
-    this.getCourseContent();
+    this.getCourseGrades();
   }
 
-  getCourseContent = () => {
+  getCourseGrades = () => {
     var http = new XMLHttpRequest();
     var url =
       "https://moodle.tedu.edu.tr/webservice/rest/server.php?" +
       "wstoken=" +
       this.props.user.token +
-      "&moodlewsrestformat=json&wsfunction=core_course_get_contents" +
+      "&moodlewsrestformat=json&wsfunction=gradereport_user_get_grades_table" +
       "&courseid=" +
-      this.props.navigation.state.params.courseId;
+      this.props.navigation.state.params.courseId +
+      "&userid=" +
+      this.props.user.userid;
     http.open("POST", url, true);
 
     //Send the proper header information along with the request
@@ -57,7 +59,7 @@ class Grades extends Component<IProp & ReduxProps> {
       //Call a function when the state changes.
       if (http.readyState == 4 && http.status == 200) {
         this.setState({
-          jsonToBeParsed: JSON.parse(http.response)[0],
+          jsonToBeParsed: JSON.parse(http.response),
           isLoading: false
         });
       }
@@ -93,18 +95,20 @@ class Grades extends Component<IProp & ReduxProps> {
   };
 
   renderSection = () => {
-    return this.state.jsonToBeParsed["modules"].map(
-      (data, Id) =>
-        data["visible"] === 1 ? (
+    return this.state.jsonToBeParsed["tables"][0]["tabledata"].map(
+      (data, Id) => {
+        let name = JSON.stringify(data["itemname"]["content"]).substring(
+          JSON.stringify(data["itemname"]["content"]).lastIndexOf(">") + 1
+        );
+        return (
           <View key={Id} style={styles.subContainer}>
             <View style={{ flex: 1, flexDirection: "row" }}>
-              <Text>{data["name"]}</Text>
+              <Text>{name}</Text>
               {/* {this.renderElement(data["modules"])} */}
             </View>
           </View>
-        ) : (
-          <View key={Id} />
-        )
+        );
+      }
     );
   };
   render() {

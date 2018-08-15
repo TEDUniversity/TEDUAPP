@@ -1,0 +1,143 @@
+{
+  "tables": [
+    {
+      "courseid": 2708,
+      "userid": 3878,
+      "userfullname": "HAYRi DURMAZ",
+      "maxdepth": 2,
+      "tabledata": [
+        {
+          "itemname": {
+            "class": "level1 levelodd oddd1 b1b b1t column-itemname",
+            "colspan": 7,
+            "content": "<img class=\"icon icon itemicon\" alt=\"Category\" title=\"Category\" src=\"https://moodle.tedu.edu.tr/theme/image.php/clean/core/1529997702/i/folder\" />2018S_CMPE382_SEC01",
+            "celltype": "th",
+            "id": "cat_3507_3878"
+          },
+          "leader": {
+            "class": "level1 levelodd oddd1 b1t b2b b1l column-leader",
+            "rowspan": 4
+          }
+        },
+        {
+          "itemname": {
+            "class": "level2 leveleven item b1b column-itemname",
+            "colspan": 1,
+            "content": "<a title=\"Link to Assignment activity PROJECT 1 \" class=\"gradeitemheader\" href=\"https://moodle.tedu.edu.tr/mod/assign/view.php?id=33729\"><img class=\"icon itemicon\" src=\"https://moodle.tedu.edu.tr/theme/image.php/clean/assign/1529997702/icon\" alt=\"Assignment\" />PROJECT 1 </a>",
+            "celltype": "th",
+            "id": "row_13919_3878"
+          },
+          "weight": {
+            "class": "level2 leveleven item b1b itemcenter  column-weight",
+            "content": "50.00 %",
+            "headers": "cat_3507_3878 row_13919_3878 weight"
+          },
+          "grade": {
+            "class": "level2 leveleven item b1b itemcenter  column-grade",
+            "content": "100.00",
+            "headers": "cat_3507_3878 row_13919_3878 grade"
+          },
+          "range": {
+            "class": "level2 leveleven item b1b itemcenter  column-range",
+            "content": "0&ndash;100",
+            "headers": "cat_3507_3878 row_13919_3878 range"
+          },
+          "percentage": {
+            "class": "level2 leveleven item b1b itemcenter  column-percentage",
+            "content": "100.00 %",
+            "headers": "cat_3507_3878 row_13919_3878 percentage"
+          },
+          "feedback": {
+            "class": "level2 leveleven item b1b feedbacktext column-feedback",
+            "content": "&nbsp;",
+            "headers": "cat_3507_3878 row_13919_3878 feedback"
+          },
+          "contributiontocoursetotal": {
+            "class": "level2 leveleven item b1b itemcenter  column-contributiontocoursetotal",
+            "content": "50.00 %",
+            "headers": "cat_3507_3878 row_13919_3878 contributiontocoursetotal"
+          }
+        },
+        {
+          "itemname": {
+            "class": "level2 leveleven item b1b column-itemname",
+            "colspan": 1,
+            "content": "<a title=\"Link to Assignment activity PROJECT 2\" class=\"gradeitemheader\" href=\"https://moodle.tedu.edu.tr/mod/assign/view.php?id=35849\"><img class=\"icon itemicon\" src=\"https://moodle.tedu.edu.tr/theme/image.php/clean/assign/1529997702/icon\" alt=\"Assignment\" />PROJECT 2</a>",
+            "celltype": "th",
+            "id": "row_14846_3878"
+          },
+          "weight": {
+            "class": "level2 leveleven item b1b itemcenter  column-weight",
+            "content": "50.00 %",
+            "headers": "cat_3507_3878 row_14846_3878 weight"
+          },
+          "grade": {
+            "class": "level2 leveleven item b1b itemcenter  column-grade",
+            "content": "100.00",
+            "headers": "cat_3507_3878 row_14846_3878 grade"
+          },
+          "range": {
+            "class": "level2 leveleven item b1b itemcenter  column-range",
+            "content": "0&ndash;100",
+            "headers": "cat_3507_3878 row_14846_3878 range"
+          },
+          "percentage": {
+            "class": "level2 leveleven item b1b itemcenter  column-percentage",
+            "content": "100.00 %",
+            "headers": "cat_3507_3878 row_14846_3878 percentage"
+          },
+          "feedback": {
+            "class": "level2 leveleven item b1b feedbacktext column-feedback",
+            "content": "&nbsp;",
+            "headers": "cat_3507_3878 row_14846_3878 feedback"
+          },
+          "contributiontocoursetotal": {
+            "class": "level2 leveleven item b1b itemcenter  column-contributiontocoursetotal",
+            "content": "50.00 %",
+            "headers": "cat_3507_3878 row_14846_3878 contributiontocoursetotal"
+          }
+        },
+        {
+          "itemname": {
+            "class": "level1 levelodd oddd1 baggt b2b column-itemname",
+            "colspan": 1,
+            "content": "<span class=\"gradeitemheader\" title=\"Course total\" tabindex=\"0\"><img class=\"icon icon itemicon\" alt=\"Natural\" title=\"Natural\" src=\"https://moodle.tedu.edu.tr/theme/image.php/clean/core/1529997702/i/agg_sum\" />Course total</span>",
+            "celltype": "th",
+            "id": "row_12121_3878"
+          },
+          "weight": {
+            "class": "level1 levelodd oddd1 baggt b2b itemcenter  column-weight",
+            "content": "-",
+            "headers": "cat_3507_3878 row_12121_3878 weight"
+          },
+          "grade": {
+            "class": "level1 levelodd oddd1 baggt b2b itemcenter  column-grade",
+            "content": "200.00",
+            "headers": "cat_3507_3878 row_12121_3878 grade"
+          },
+          "range": {
+            "class": "level1 levelodd oddd1 baggt b2b itemcenter  column-range",
+            "content": "0&ndash;200",
+            "headers": "cat_3507_3878 row_12121_3878 range"
+          },
+          "percentage": {
+            "class": "level1 levelodd oddd1 baggt b2b itemcenter  column-percentage",
+            "content": "100.00 %",
+            "headers": "cat_3507_3878 row_12121_3878 percentage"
+          },
+          "feedback": {
+            "class": "level1 levelodd oddd1 baggt b2b feedbacktext column-feedback",
+            "content": "&nbsp;",
+            "headers": "cat_3507_3878 row_12121_3878 feedback"
+          },
+          "contributiontocoursetotal": {
+            "class": "level1 levelodd oddd1 baggt b2b itemcenter  column-contributiontocoursetotal",
+            "content": "-",
+            "headers": "cat_3507_3878 row_12121_3878 contributiontocoursetotal"
+          }
+        }
+      ]
+    }
+  ],
+  "warnings": []
+}
