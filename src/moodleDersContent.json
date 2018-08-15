@@ -1,0 +1,849 @@
+[
+  {
+    "id": 41671,
+    "name": "General",
+    "visible": 1,
+    "summary": "",
+    "summaryformat": 1,
+    "section": 0,
+    "hiddenbynumsections": 0,
+    "uservisible": true,
+    "modules": [
+      {
+        "id": 27588,
+        "url": "https://moodle.tedu.edu.tr/mod/forum/view.php?id=27588",
+        "name": "Announcements",
+        "instance": 2935,
+        "visible": 1,
+        "uservisible": true,
+        "visibleoncoursepage": 1,
+        "modicon": "https://moodle.tedu.edu.tr/theme/image.php/clean/forum/1529997702/icon",
+        "modname": "forum",
+        "modplural": "Forums",
+        "indent": 0
+      }
+    ]
+  },
+  {
+    "id": 41672,
+    "name": "12 February - 18 February",
+    "visible": 1,
+    "summary": "",
+    "summaryformat": 1,
+    "section": 1,
+    "hiddenbynumsections": 0,
+    "uservisible": true,
+    "modules": [
+      {
+        "id": 29284,
+        "url": "https://moodle.tedu.edu.tr/mod/resource/view.php?id=29284",
+        "name": "CMPE382 - Syllabus",
+        "instance": 17690,
+        "visible": 1,
+        "uservisible": true,
+        "visibleoncoursepage": 1,
+        "modicon": "https://moodle.tedu.edu.tr/theme/image.php/clean/core/1529997702/f/document-24",
+        "modname": "resource",
+        "modplural": "Files",
+        "indent": 0,
+        "contents": [
+          {
+            "type": "file",
+            "filename": "CMPE382 - Syllabus.docx",
+            "filepath": "/",
+            "filesize": 17623,
+            "fileurl": "https://moodle.tedu.edu.tr/webservice/pluginfile.php/65155/mod_resource/content/0/CMPE382%20-%20Syllabus.docx?forcedownload=1",
+            "timecreated": 1518596348,
+            "timemodified": 1518596348,
+            "sortorder": 1,
+            "mimetype": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+            "isexternalfile": false,
+            "userid": 5133,
+            "author": null,
+            "license": "allrightsreserved"
+          }
+        ]
+      },
+      {
+        "id": 29252,
+        "url": "https://moodle.tedu.edu.tr/mod/resource/view.php?id=29252",
+        "name": "Tanenbaum-Modern Operating Systems-Pearson (2014)",
+        "instance": 17663,
+        "visible": 1,
+        "uservisible": true,
+        "visibleoncoursepage": 1,
+        "modicon": "https://moodle.tedu.edu.tr/theme/image.php/clean/core/1529997702/f/pdf-24",
+        "modname": "resource",
+        "modplural": "Files",
+        "indent": 0,
+        "contents": [
+          {
+            "type": "file",
+            "filename": "Tanenbaum-Modern Operating Systems-Pearson (2014).pdf",
+            "filepath": "/",
+            "filesize": 6625984,
+            "fileurl": "https://moodle.tedu.edu.tr/webservice/pluginfile.php/65116/mod_resource/content/0/Tanenbaum-Modern%20Operating%20Systems-Pearson%20%282014%29.pdf?forcedownload=1",
+            "timecreated": 1518553252,
+            "timemodified": 1518553252,
+            "sortorder": 1,
+            "mimetype": "application/pdf",
+            "isexternalfile": false,
+            "userid": 5133,
+            "author": null,
+            "license": "allrightsreserved"
+          }
+        ]
+      },
+      {
+        "id": 29253,
+        "url": "https://moodle.tedu.edu.tr/mod/resource/view.php?id=29253",
+        "name": "tutorial on C and makefiles",
+        "instance": 17664,
+        "visible": 1,
+        "uservisible": true,
+        "visibleoncoursepage": 1,
+        "modicon": "https://moodle.tedu.edu.tr/theme/image.php/clean/core/1529997702/f/pdf-24",
+        "modname": "resource",
+        "modplural": "Files",
+        "indent": 0,
+        "contents": [
+          {
+            "type": "file",
+            "filename": "tutorial on C and makefiles.pdf",
+            "filepath": "/",
+            "filesize": 63412,
+            "fileurl": "https://moodle.tedu.edu.tr/webservice/pluginfile.php/65117/mod_resource/content/0/tutorial%20on%20C%20and%20makefiles.pdf?forcedownload=1",
+            "timecreated": 1518553263,
+            "timemodified": 1518553263,
+            "sortorder": 1,
+            "mimetype": "application/pdf",
+            "isexternalfile": false,
+            "userid": 5133,
+            "author": null,
+            "license": "allrightsreserved"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 41673,
+    "name": "19 February - 25 February",
+    "visible": 1,
+    "summary": "",
+    "summaryformat": 1,
+    "section": 2,
+    "hiddenbynumsections": 0,
+    "uservisible": true,
+    "modules": [
+      {
+        "id": 29254,
+        "url": "https://moodle.tedu.edu.tr/mod/resource/view.php?id=29254",
+        "name": "Chapter01-Introduction",
+        "instance": 17665,
+        "visible": 1,
+        "uservisible": true,
+        "visibleoncoursepage": 1,
+        "modicon": "https://moodle.tedu.edu.tr/theme/image.php/clean/core/1529997702/f/powerpoint-24",
+        "modname": "resource",
+        "modplural": "Files",
+        "indent": 0,
+        "contents": [
+          {
+            "type": "file",
+            "filename": "Chapter01-Introduction.ppt",
+            "filepath": "/",
+            "filesize": 1586688,
+            "fileurl": "https://moodle.tedu.edu.tr/webservice/pluginfile.php/65118/mod_resource/content/0/Chapter01-Introduction.ppt?forcedownload=1",
+            "timecreated": 1518553341,
+            "timemodified": 1518553341,
+            "sortorder": 1,
+            "mimetype": "application/vnd.ms-powerpoint",
+            "isexternalfile": false,
+            "userid": 5133,
+            "author": null,
+            "license": "allrightsreserved"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 41674,
+    "name": "26 February - 4 March",
+    "visible": 1,
+    "summary": "",
+    "summaryformat": 1,
+    "section": 3,
+    "hiddenbynumsections": 0,
+    "uservisible": true,
+    "modules": [
+      {
+        "id": 29953,
+        "url": "https://moodle.tedu.edu.tr/mod/resource/view.php?id=29953",
+        "name": "Chapter02-Processes and Threads",
+        "instance": 18171,
+        "visible": 1,
+        "uservisible": true,
+        "visibleoncoursepage": 1,
+        "modicon": "https://moodle.tedu.edu.tr/theme/image.php/clean/core/1529997702/f/powerpoint-24",
+        "modname": "resource",
+        "modplural": "Files",
+        "indent": 0,
+        "contents": [
+          {
+            "type": "file",
+            "filename": "Chapter02-Processes and Threads.ppt",
+            "filepath": "/",
+            "filesize": 3193344,
+            "fileurl": "https://moodle.tedu.edu.tr/webservice/pluginfile.php/65978/mod_resource/content/0/Chapter02-Processes%20and%20Threads.ppt?forcedownload=1",
+            "timecreated": 1519157006,
+            "timemodified": 1519157006,
+            "sortorder": 1,
+            "mimetype": "application/vnd.ms-powerpoint",
+            "isexternalfile": false,
+            "userid": 5133,
+            "author": null,
+            "license": "allrightsreserved"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 41675,
+    "name": "5 March - 11 March",
+    "visible": 1,
+    "summary": "",
+    "summaryformat": 1,
+    "section": 4,
+    "hiddenbynumsections": 0,
+    "uservisible": true,
+    "modules": [
+      {
+        "id": 30876,
+        "url": "https://moodle.tedu.edu.tr/mod/resource/view.php?id=30876",
+        "name": "CMPE382",
+        "instance": 18812,
+        "description": "<div class=\"no-overflow\"><p>Attached you can find the codes we used in the class session<br></p></div>",
+        "visible": 1,
+        "uservisible": true,
+        "visibleoncoursepage": 1,
+        "modicon": "https://moodle.tedu.edu.tr/theme/image.php/clean/core/1529997702/f/archive-24",
+        "modname": "resource",
+        "modplural": "Files",
+        "indent": 0,
+        "contents": [
+          {
+            "type": "file",
+            "filename": "CMPE382.rar",
+            "filepath": "/",
+            "filesize": 14678,
+            "fileurl": "https://moodle.tedu.edu.tr/webservice/pluginfile.php/67033/mod_resource/content/1/CMPE382.rar?forcedownload=1",
+            "timecreated": 1519928314,
+            "timemodified": 1519928314,
+            "sortorder": 1,
+            "mimetype": "application/x-rar-compressed",
+            "isexternalfile": false,
+            "userid": 5133,
+            "author": null,
+            "license": "allrightsreserved"
+          }
+        ]
+      },
+      {
+        "id": 30877,
+        "url": "https://moodle.tedu.edu.tr/mod/resource/view.php?id=30877",
+        "name": "CMPE382 - Project #1",
+        "instance": 18813,
+        "visible": 1,
+        "uservisible": true,
+        "visibleoncoursepage": 1,
+        "modicon": "https://moodle.tedu.edu.tr/theme/image.php/clean/core/1529997702/f/document-24",
+        "modname": "resource",
+        "modplural": "Files",
+        "indent": 0,
+        "contents": [
+          {
+            "type": "file",
+            "filename": "CMPE382 - Project #1.docx",
+            "filepath": "/",
+            "filesize": 28314,
+            "fileurl": "https://moodle.tedu.edu.tr/webservice/pluginfile.php/67034/mod_resource/content/0/CMPE382%20-%20Project%20%231.docx?forcedownload=1",
+            "timecreated": 1519928363,
+            "timemodified": 1519928363,
+            "sortorder": 1,
+            "mimetype": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+            "isexternalfile": false,
+            "userid": 5133,
+            "author": null,
+            "license": "allrightsreserved"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 41676,
+    "name": "12 March - 18 March",
+    "visible": 1,
+    "summary": "",
+    "summaryformat": 1,
+    "section": 5,
+    "hiddenbynumsections": 0,
+    "uservisible": true,
+    "modules": [
+      {
+        "id": 32218,
+        "name": "MIDTERM ANNOUNCEMENT: The Midterm will be held on ...",
+        "instance": 483,
+        "description": "<div class=\"no-overflow\"><p>MIDTERM ANNOUNCEMENT: The Midterm will be held on March 22, during class hour. The topics include Chapters 1 and 2. <br></p><p><br></p><p>You are allowed to prepare a single A4 cheat sheet. The cheat sheet needs to be handwritten, no printout or photocopies are allowed. The exam will be closed book, closed slides and closed notes.<br></p></div>",
+        "visible": 1,
+        "uservisible": true,
+        "visibleoncoursepage": 1,
+        "modicon": "https://moodle.tedu.edu.tr/theme/image.php/clean/label/1529997702/icon",
+        "modname": "label",
+        "modplural": "Labels",
+        "indent": 0
+      },
+      {
+        "id": 32219,
+        "url": "https://moodle.tedu.edu.tr/mod/resource/view.php?id=32219",
+        "name": "Chapter03-Memory Management",
+        "instance": 19797,
+        "visible": 1,
+        "uservisible": true,
+        "visibleoncoursepage": 1,
+        "modicon": "https://moodle.tedu.edu.tr/theme/image.php/clean/core/1529997702/f/powerpoint-24",
+        "modname": "resource",
+        "modplural": "Files",
+        "indent": 0,
+        "contents": [
+          {
+            "type": "file",
+            "filename": "Chapter03-Memory Management.ppt",
+            "filepath": "/",
+            "filesize": 1828864,
+            "fileurl": "https://moodle.tedu.edu.tr/webservice/pluginfile.php/68438/mod_resource/content/0/Chapter03-Memory%20Management.ppt?forcedownload=1",
+            "timecreated": 1521154793,
+            "timemodified": 1521154795,
+            "sortorder": 1,
+            "mimetype": "application/vnd.ms-powerpoint",
+            "isexternalfile": false,
+            "userid": 5133,
+            "author": null,
+            "license": "allrightsreserved"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 41677,
+    "name": "19 March - 25 March",
+    "visible": 1,
+    "summary": "",
+    "summaryformat": 1,
+    "section": 6,
+    "hiddenbynumsections": 0,
+    "uservisible": true,
+    "modules": []
+  },
+  {
+    "id": 41678,
+    "name": "26 March - 1 April",
+    "visible": 1,
+    "summary": "",
+    "summaryformat": 1,
+    "section": 7,
+    "hiddenbynumsections": 0,
+    "uservisible": true,
+    "modules": []
+  },
+  {
+    "id": 41679,
+    "name": "2 April - 8 April",
+    "visible": 1,
+    "summary": "",
+    "summaryformat": 1,
+    "section": 8,
+    "hiddenbynumsections": 0,
+    "uservisible": true,
+    "modules": [
+      {
+        "id": 33692,
+        "url": "https://moodle.tedu.edu.tr/mod/resource/view.php?id=33692",
+        "name": "Grades MT1 - Moodle",
+        "instance": 20758,
+        "description": "<div class=\"no-overflow\"><p>Midterm Grades are Up! You can check your papers during April 11 (Wednesday)<br></p></div>",
+        "visible": 1,
+        "uservisible": true,
+        "visibleoncoursepage": 1,
+        "modicon": "https://moodle.tedu.edu.tr/theme/image.php/clean/core/1529997702/f/spreadsheet-24",
+        "modname": "resource",
+        "modplural": "Files",
+        "indent": 0,
+        "contents": [
+          {
+            "type": "file",
+            "filename": "Grades MT1 - Moodle.xls",
+            "filepath": "/",
+            "filesize": 18432,
+            "fileurl": "https://moodle.tedu.edu.tr/webservice/pluginfile.php/69965/mod_resource/content/1/Grades%20MT1%20-%20Moodle.xls?forcedownload=1",
+            "timecreated": 1523309238,
+            "timemodified": 1523309238,
+            "sortorder": 1,
+            "mimetype": "application/vnd.ms-excel",
+            "isexternalfile": false,
+            "userid": 5133,
+            "author": null,
+            "license": "allrightsreserved"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 41680,
+    "name": "9 April - 15 April",
+    "visible": 1,
+    "summary": "",
+    "summaryformat": 1,
+    "section": 9,
+    "hiddenbynumsections": 0,
+    "uservisible": true,
+    "modules": [
+      {
+        "id": 33729,
+        "url": "https://moodle.tedu.edu.tr/mod/assign/view.php?id=33729",
+        "name": "PROJECT 1 ",
+        "instance": 3345,
+        "description": "<div class=\"no-overflow\">You need to submit your code and documentation ( READ ME / project report ) in a compressed file (e.g., .zip file ) which has a well-designed folder.</div>",
+        "visible": 1,
+        "uservisible": true,
+        "visibleoncoursepage": 1,
+        "modicon": "https://moodle.tedu.edu.tr/theme/image.php/clean/assign/1529997702/icon",
+        "modname": "assign",
+        "modplural": "Assignments",
+        "indent": 0
+      }
+    ]
+  },
+  {
+    "id": 41681,
+    "name": "16 April - 22 April",
+    "visible": 1,
+    "summary": "",
+    "summaryformat": 1,
+    "section": 10,
+    "hiddenbynumsections": 0,
+    "uservisible": true,
+    "modules": [
+      {
+        "id": 34122,
+        "url": "https://moodle.tedu.edu.tr/mod/resource/view.php?id=34122",
+        "name": "PROJECT TEST",
+        "instance": 21007,
+        "visible": 1,
+        "uservisible": true,
+        "visibleoncoursepage": 1,
+        "modicon": "https://moodle.tedu.edu.tr/theme/image.php/clean/core/1529997702/f/archive-24",
+        "modname": "resource",
+        "modplural": "Files",
+        "indent": 0,
+        "contents": [
+          {
+            "type": "file",
+            "filename": "test.rar",
+            "filepath": "/",
+            "filesize": 11893256,
+            "fileurl": "https://moodle.tedu.edu.tr/webservice/pluginfile.php/70401/mod_resource/content/1/test.rar?forcedownload=1",
+            "timecreated": 1523865723,
+            "timemodified": 1523865735,
+            "sortorder": 1,
+            "mimetype": "application/x-rar-compressed",
+            "isexternalfile": false,
+            "userid": 5981,
+            "author": "Zeynep G\u00f6k\u00e7e",
+            "license": "allrightsreserved"
+          }
+        ]
+      },
+      {
+        "id": 34182,
+        "url": "https://moodle.tedu.edu.tr/mod/resource/view.php?id=34182",
+        "name": "Chapter04-FileSystems",
+        "instance": 21045,
+        "visible": 1,
+        "uservisible": true,
+        "visibleoncoursepage": 1,
+        "modicon": "https://moodle.tedu.edu.tr/theme/image.php/clean/core/1529997702/f/powerpoint-24",
+        "modname": "resource",
+        "modplural": "Files",
+        "indent": 0,
+        "contents": [
+          {
+            "type": "file",
+            "filename": "Chapter04-FileSystems.ppt",
+            "filepath": "/",
+            "filesize": 1837568,
+            "fileurl": "https://moodle.tedu.edu.tr/webservice/pluginfile.php/70461/mod_resource/content/0/Chapter04-FileSystems.ppt?forcedownload=1",
+            "timecreated": 1523911177,
+            "timemodified": 1523911177,
+            "sortorder": 1,
+            "mimetype": "application/vnd.ms-powerpoint",
+            "isexternalfile": false,
+            "userid": 5133,
+            "author": null,
+            "license": "allrightsreserved"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 41682,
+    "name": "23 April - 29 April",
+    "visible": 1,
+    "summary": "",
+    "summaryformat": 1,
+    "section": 11,
+    "hiddenbynumsections": 0,
+    "uservisible": true,
+    "modules": [
+      {
+        "id": 34592,
+        "url": "https://moodle.tedu.edu.tr/mod/resource/view.php?id=34592",
+        "name": "Project2 - 2018",
+        "instance": 21329,
+        "visible": 1,
+        "uservisible": true,
+        "visibleoncoursepage": 1,
+        "modicon": "https://moodle.tedu.edu.tr/theme/image.php/clean/core/1529997702/f/document-24",
+        "modname": "resource",
+        "modplural": "Files",
+        "indent": 0,
+        "contents": [
+          {
+            "type": "file",
+            "filename": "Project2 - 2018.docx",
+            "filepath": "/",
+            "filesize": 20303,
+            "fileurl": "https://moodle.tedu.edu.tr/webservice/pluginfile.php/70872/mod_resource/content/0/Project2%20-%202018.docx?forcedownload=1",
+            "timecreated": 1524646736,
+            "timemodified": 1524646736,
+            "sortorder": 1,
+            "mimetype": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+            "isexternalfile": false,
+            "userid": 5133,
+            "author": null,
+            "license": "allrightsreserved"
+          }
+        ]
+      },
+      {
+        "id": 34593,
+        "url": "https://moodle.tedu.edu.tr/mod/resource/view.php?id=34593",
+        "name": "Chapter05-Input-Output",
+        "instance": 21330,
+        "visible": 1,
+        "uservisible": true,
+        "visibleoncoursepage": 1,
+        "modicon": "https://moodle.tedu.edu.tr/theme/image.php/clean/core/1529997702/f/powerpoint-24",
+        "modname": "resource",
+        "modplural": "Files",
+        "indent": 0,
+        "contents": [
+          {
+            "type": "file",
+            "filename": "Chapter05-Input-Output.ppt",
+            "filepath": "/",
+            "filesize": 2566656,
+            "fileurl": "https://moodle.tedu.edu.tr/webservice/pluginfile.php/70873/mod_resource/content/0/Chapter05-Input-Output.ppt?forcedownload=1",
+            "timecreated": 1524646835,
+            "timemodified": 1524646835,
+            "sortorder": 1,
+            "mimetype": "application/vnd.ms-powerpoint",
+            "isexternalfile": false,
+            "userid": 5133,
+            "author": null,
+            "license": "allrightsreserved"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 41683,
+    "name": "30 April - 6 May",
+    "visible": 1,
+    "summary": "",
+    "summaryformat": 1,
+    "section": 12,
+    "hiddenbynumsections": 0,
+    "uservisible": true,
+    "modules": [
+      {
+        "id": 34871,
+        "name": "MIDTERM ANNOUNCEMENT: The Second Midterm will be h...",
+        "instance": 560,
+        "description": "<div class=\"no-overflow\"><p><p>MIDTERM ANNOUNCEMENT: The Second Midterm will be held on May 3 Thursday, during class hour. The topics include Chapters 3,4, and partially chapter 5 (up to the point that we have covered). <br></p><p><br></p><p>You\r\n are allowed to prepare a single A4 cheat sheet. The cheat sheet needs \r\nto be handwritten, no printout or photocopies are allowed. The exam will\r\n be closed book, closed slides and closed notes.</p><br></p></div>",
+        "visible": 1,
+        "uservisible": true,
+        "visibleoncoursepage": 1,
+        "modicon": "https://moodle.tedu.edu.tr/theme/image.php/clean/label/1529997702/icon",
+        "modname": "label",
+        "modplural": "Labels",
+        "indent": 0
+      },
+      {
+        "id": 34883,
+        "name": "ANNOUNCEMENT: Due to medical reasons (flu) I could...",
+        "instance": 561,
+        "description": "<div class=\"no-overflow\"><p>ANNOUNCEMENT: Due to medical reasons (flu) I could not attend tomorrows lecture. Thus, I have to cancel tomorrow's lecture (May 2).<br></p></div>",
+        "visible": 1,
+        "uservisible": true,
+        "visibleoncoursepage": 1,
+        "modicon": "https://moodle.tedu.edu.tr/theme/image.php/clean/label/1529997702/icon",
+        "modname": "label",
+        "modplural": "Labels",
+        "indent": 0
+      },
+      {
+        "id": 34885,
+        "url": "https://moodle.tedu.edu.tr/mod/resource/view.php?id=34885",
+        "name": "exam prep questions",
+        "instance": 21558,
+        "visible": 1,
+        "uservisible": true,
+        "visibleoncoursepage": 1,
+        "modicon": "https://moodle.tedu.edu.tr/theme/image.php/clean/core/1529997702/f/document-24",
+        "modname": "resource",
+        "modplural": "Files",
+        "indent": 0,
+        "contents": [
+          {
+            "type": "file",
+            "filename": "exam prep questions.docx",
+            "filepath": "/",
+            "filesize": 13766,
+            "fileurl": "https://moodle.tedu.edu.tr/webservice/pluginfile.php/71171/mod_resource/content/0/exam%20prep%20questions.docx?forcedownload=1",
+            "timecreated": 1525213906,
+            "timemodified": 1525213906,
+            "sortorder": 1,
+            "mimetype": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+            "isexternalfile": false,
+            "userid": 5133,
+            "author": null,
+            "license": "allrightsreserved"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 41684,
+    "name": "7 May - 13 May",
+    "visible": 1,
+    "summary": "",
+    "summaryformat": 1,
+    "section": 13,
+    "hiddenbynumsections": 0,
+    "uservisible": true,
+    "modules": [
+      {
+        "id": 34931,
+        "name": "Midterm Announcement: Due to insurmountable reques...",
+        "instance": 562,
+        "description": "<div class=\"no-overflow\"><p><b>Midterm Announcement:</b> Due to insurmountable requests, I have decided to postpone the midterm Exam. <br></p><p><br></p><p>The midterm exam will be held on May 5th (saturday) in the regular class, from 13:00 to 15:00. However since I have not booked the class yet, please be on the lookout for a classroom chance announcement in the last minute.<br></p></div>",
+        "visible": 1,
+        "uservisible": true,
+        "visibleoncoursepage": 1,
+        "modicon": "https://moodle.tedu.edu.tr/theme/image.php/clean/label/1529997702/icon",
+        "modname": "label",
+        "modplural": "Labels",
+        "indent": 0
+      }
+    ]
+  },
+  {
+    "id": 41685,
+    "name": "14 May - 20 May",
+    "visible": 1,
+    "summary": "",
+    "summaryformat": 1,
+    "section": 14,
+    "hiddenbynumsections": 0,
+    "uservisible": true,
+    "modules": [
+      {
+        "id": 35776,
+        "url": "https://moodle.tedu.edu.tr/mod/resource/view.php?id=35776",
+        "name": "Chapter06-Deadlocks",
+        "instance": 22155,
+        "visible": 1,
+        "uservisible": true,
+        "visibleoncoursepage": 1,
+        "modicon": "https://moodle.tedu.edu.tr/theme/image.php/clean/core/1529997702/f/powerpoint-24",
+        "modname": "resource",
+        "modplural": "Files",
+        "indent": 0,
+        "contents": [
+          {
+            "type": "file",
+            "filename": "Chapter06-Deadlocks.ppt",
+            "filepath": "/",
+            "filesize": 1054208,
+            "fileurl": "https://moodle.tedu.edu.tr/webservice/pluginfile.php/72080/mod_resource/content/0/Chapter06-Deadlocks.ppt?forcedownload=1",
+            "timecreated": 1526602315,
+            "timemodified": 1526602315,
+            "sortorder": 1,
+            "mimetype": "application/vnd.ms-powerpoint",
+            "isexternalfile": false,
+            "userid": 5133,
+            "author": null,
+            "license": "allrightsreserved"
+          }
+        ]
+      },
+      {
+        "id": 35777,
+        "url": "https://moodle.tedu.edu.tr/mod/resource/view.php?id=35777",
+        "name": "Chapter08-MultipleProcessorSystems",
+        "instance": 22156,
+        "visible": 1,
+        "uservisible": true,
+        "visibleoncoursepage": 1,
+        "modicon": "https://moodle.tedu.edu.tr/theme/image.php/clean/core/1529997702/f/powerpoint-24",
+        "modname": "resource",
+        "modplural": "Files",
+        "indent": 0,
+        "contents": [
+          {
+            "type": "file",
+            "filename": "Chapter08-MultipleProcessorSystems.ppt",
+            "filepath": "/",
+            "filesize": 2554368,
+            "fileurl": "https://moodle.tedu.edu.tr/webservice/pluginfile.php/72081/mod_resource/content/0/Chapter08-MultipleProcessorSystems.ppt?forcedownload=1",
+            "timecreated": 1526602327,
+            "timemodified": 1526602329,
+            "sortorder": 1,
+            "mimetype": "application/vnd.ms-powerpoint",
+            "isexternalfile": false,
+            "userid": 5133,
+            "author": null,
+            "license": "allrightsreserved"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 41686,
+    "name": "21 May - 27 May",
+    "visible": 1,
+    "summary": "",
+    "summaryformat": 1,
+    "section": 15,
+    "hiddenbynumsections": 0,
+    "uservisible": true,
+    "modules": [
+      {
+        "id": 35790,
+        "url": "https://moodle.tedu.edu.tr/mod/resource/view.php?id=35790",
+        "name": "Grades MT2 - Moodle",
+        "instance": 22165,
+        "visible": 1,
+        "uservisible": true,
+        "visibleoncoursepage": 1,
+        "modicon": "https://moodle.tedu.edu.tr/theme/image.php/clean/core/1529997702/f/spreadsheet-24",
+        "modname": "resource",
+        "modplural": "Files",
+        "indent": 0,
+        "contents": [
+          {
+            "type": "file",
+            "filename": "Grades MT2 - Moodle.xls",
+            "filepath": "/",
+            "filesize": 19456,
+            "fileurl": "https://moodle.tedu.edu.tr/webservice/pluginfile.php/72094/mod_resource/content/0/Grades%20MT2%20-%20Moodle.xls?forcedownload=1",
+            "timecreated": 1526643709,
+            "timemodified": 1526643709,
+            "sortorder": 1,
+            "mimetype": "application/vnd.ms-excel",
+            "isexternalfile": false,
+            "userid": 5133,
+            "author": null,
+            "license": "allrightsreserved"
+          }
+        ]
+      },
+      {
+        "id": 35849,
+        "url": "https://moodle.tedu.edu.tr/mod/assign/view.php?id=35849",
+        "name": "PROJECT 2",
+        "instance": 3655,
+        "description": "<div class=\"no-overflow\"><p>You need to submit your code and documentation ( READ ME &amp; project report ) in a compressed file (e.g., .zip file ) which has a well-designed folder.<br></p><p><b>Due date is 29/05/18&nbsp;</b></p></div>",
+        "visible": 1,
+        "uservisible": true,
+        "visibleoncoursepage": 1,
+        "modicon": "https://moodle.tedu.edu.tr/theme/image.php/clean/assign/1529997702/icon",
+        "modname": "assign",
+        "modplural": "Assignments",
+        "indent": 0
+      },
+      {
+        "id": 35851,
+        "name": "Label",
+        "instance": 591,
+        "description": "",
+        "visible": 1,
+        "uservisible": true,
+        "visibleoncoursepage": 1,
+        "modicon": "https://moodle.tedu.edu.tr/theme/image.php/clean/label/1529997702/icon",
+        "modname": "label",
+        "modplural": "Labels",
+        "indent": 0
+      },
+      {
+        "id": 35850,
+        "name": "ANNOUNCEMENT !!!&nbsp;Grades of Project 1 and Proj...",
+        "instance": 590,
+        "description": "<div class=\"no-overflow\"><p><b>ANNOUNCEMENT !!!&nbsp;</b></p><p><b>Grades of Project 1 and Project 2</b>&nbsp;are&nbsp;<u>available.&nbsp;</u>&nbsp;You can check your grades on <b>Grades</b> section.</p></div>",
+        "visible": 1,
+        "uservisible": true,
+        "visibleoncoursepage": 1,
+        "modicon": "https://moodle.tedu.edu.tr/theme/image.php/clean/label/1529997702/icon",
+        "modname": "label",
+        "modplural": "Labels",
+        "indent": 0
+      },
+      {
+        "id": 36254,
+        "name": "Label",
+        "instance": 597,
+        "description": "",
+        "visible": 1,
+        "uservisible": true,
+        "visibleoncoursepage": 1,
+        "modicon": "https://moodle.tedu.edu.tr/theme/image.php/clean/label/1529997702/icon",
+        "modname": "label",
+        "modplural": "Labels",
+        "indent": 0
+      },
+      {
+        "id": 35895,
+        "name": "ANNOUNCEMENT: The instructor/course feedback forms...",
+        "instance": 592,
+        "description": "<div class=\"no-overflow\"><p><b>ANNOUNCEMENT:</b> The instructor/course feedback forms are open in (mytedu.edu.tr) univeristy Webpage. Please take 5 minutes of your time and evaluate the course so that we can improve it in further iterations. Thank you.<br></p></div>",
+        "visible": 1,
+        "uservisible": true,
+        "visibleoncoursepage": 1,
+        "modicon": "https://moodle.tedu.edu.tr/theme/image.php/clean/label/1529997702/icon",
+        "modname": "label",
+        "modplural": "Labels",
+        "indent": 0
+      }
+    ]
+  }
+]

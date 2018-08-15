@@ -15,32 +15,19 @@ import {
 } from "react-navigation";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import Moodle from "../../screens/Moodle";
+import * as types from "../../store/types";
+import * as actions from "../../store/actions";
+import { connect } from "react-redux";
+import { Dispatch } from "redux";
+import Detay from "./CourseContent";
+import Grades from "./Grades";
 
 interface IProp {
   navigation: any;
   courseId: string;
 }
-
-
-class Detay extends Component<IProp> {
-  static navigationOptions = {
-    title: "Detay",
-    headerStyle: { marginTop: 0, backgroundColor: "#fff" },
-    headerLeft: null,
-    gesturesEnabled: false
-  };
-
-  render() {
-    return (
-      <View style={styles.container}>
-        <View style={styles.subContainer}>
-          <Text style={styles.text}>
-            {this.props.navigation.state.params.courseId}
-          </Text>
-        </View>
-      </View>
-    );
-  }
+interface ReduxProps {
+  token: string;
 }
 
 class Forum extends Component<IProp> {
@@ -61,44 +48,6 @@ class Forum extends Component<IProp> {
     );
   }
 }
-
-class Grades extends Component<IProp> {
-  static navigationOptions = {
-    title: "Notlar",
-    headerStyle: { marginTop: 0, backgroundColor: "#fff" },
-    headerLeft: null,
-    gesturesEnabled: false
-  };
-
-  render() {
-    return (
-      <View style={styles.container}>
-        <View style={styles.subContainer}>
-          <Text style={styles.text}>This is ders detay.</Text>
-        </View>
-      </View>
-    );
-  }
-}
-
-/*class back extends Component<IProp> {
-  static navigationOptions = {
-    title: "Forum",
-    headerStyle: { marginTop: 0, backgroundColor: "#fff" },
-    headerLeft: null,
-    gesturesEnabled: false
-  };
-
-  render() {
-    return (
-      <View style={styles.container}>
-        <View style={styles.subContainer}>
-          <Text style={styles.text}>This is ders detay.</Text>
-        </View>
-      </View>
-    );
-  }
-}*/
 
 const styles = StyleSheet.create({
   container: {
@@ -122,7 +71,7 @@ const hScreen = createMaterialTopTabNavigator(
       screen: Detay,
       navigationOptions: {
         tabBarLabel: "Home Page",
-        tabBarIcon: ({ tintColor }) => <Icon name="file-document" size={25} />,
+        tabBarIcon: ({ tintColor }) => <Icon name="file-document" size={25} />
       }
     },
     Forum: {
