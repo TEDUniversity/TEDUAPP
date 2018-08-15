@@ -21,6 +21,7 @@ interface IProp {
   courseId: string;
 }
 
+
 class Detay extends Component<IProp> {
   static navigationOptions = {
     title: "Detay",
@@ -80,7 +81,7 @@ class Grades extends Component<IProp> {
   }
 }
 
-class back extends Component<IProp> {
+/*class back extends Component<IProp> {
   static navigationOptions = {
     title: "Forum",
     headerStyle: { marginTop: 0, backgroundColor: "#fff" },
@@ -97,7 +98,7 @@ class back extends Component<IProp> {
       </View>
     );
   }
-}
+}*/
 
 const styles = StyleSheet.create({
   container: {
@@ -121,7 +122,7 @@ const hScreen = createMaterialTopTabNavigator(
       screen: Detay,
       navigationOptions: {
         tabBarLabel: "Home Page",
-        tabBarIcon: ({ tintColor }) => <Icon name="file-document" size={25} />
+        tabBarIcon: ({ tintColor }) => <Icon name="file-document" size={25} />,
       }
     },
     Forum: {

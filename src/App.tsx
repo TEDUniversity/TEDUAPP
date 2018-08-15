@@ -7,7 +7,7 @@
  */
 
 import React, { Component } from "react";
-import { View } from "react-native";
+import { View, Text } from "react-native";
 import { createStackNavigator } from "react-navigation";
 import News, { Spinner } from "./screens/News";
 import Moodle from "./screens/Moodle";
@@ -31,6 +31,8 @@ require("core-js/fn/symbol/iterator");
 require("core-js/fn/map");
 require("core-js/fn/set");
 require("core-js/fn/array/find");
+
+
 
 export default class App extends Component<any> {
   constructor(prop: any) {
@@ -67,7 +69,13 @@ const RootStack = createStackNavigator(
     MoodleRouter: Moodle,
     WebviewRouter: Webview,
     SurveyRouter: Survey,
-    DersDetayRouter: MoodleDersDetay
+    DersDetayRouter: {
+      screen: MoodleDersDetay,
+      navigationOptions: {
+        headerStyle: { marginTop: 0, backgroundColor: "#144d8c", height: 30 },
+        title: "Moodle"
+      }
+    }
   },
   {
     // headerMode: "none",
