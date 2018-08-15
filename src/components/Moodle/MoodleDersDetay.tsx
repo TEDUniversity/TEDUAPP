@@ -18,6 +18,7 @@ import Moodle from "../../screens/Moodle";
 
 interface IProp {
   navigation: any;
+  courseId: string;
 }
 
 class Detay extends Component<IProp> {
@@ -32,7 +33,9 @@ class Detay extends Component<IProp> {
     return (
       <View style={styles.container}>
         <View style={styles.subContainer}>
-          <Text style={styles.text}>This is ders detay.</Text>
+          <Text style={styles.text}>
+            {this.props.navigation.state.params.courseId}
+          </Text>
         </View>
       </View>
     );
