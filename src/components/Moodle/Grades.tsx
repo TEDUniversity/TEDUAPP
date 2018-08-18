@@ -69,45 +69,32 @@ class Grades extends Component<IProp & ReduxProps> {
     http.send();
   };
 
-  renderElement = (elements: any) => {
-    return elements.map(
-      (data, Id) =>
-        data["visible"] === 1 ? (
-          <View>
-            <Image
-              style={{ alignSelf: "center", width: 20, height: 20 }}
-              source={{ uri: data["modicon"] }}
-            />
-            <Text
-              style={{
-                margin: 5,
-                marginBottom: 0,
-                fontSize: 10,
-                color: "black"
-              }}
-            >
-              {data["name"]}
-            </Text>
-            <Text style={{ fontSize: 15, margin: 5 }}>{data["summary"]}</Text>
-          </View>
-        ) : (
-          <View key={Id} />
-        )
-    );
-  };
-
   renderSection = () => {
     return this.state.jsonToBeParsed["tables"][0]["tabledata"].map(
       (data, Id) => {
-        let str = data["itemname"]["content"];
+        let str;
+        if (data["itemname"]) {
+          str = data["itemname"]["content"];
+        } else {
+          return;
+        }
         str = strip(str);
+
+        let percentage = "",
+          grade = "";
+        if (data["percentage"] !== undefined && data["grade"] !== undefined) {
+          str = "\t\t" + str + ":\t\t\t\t\t\t\t";
+          percentage = data["percentage"]["content"] + "\t\t\t\t\t\t";
+          grade = data["grade"]["content"];
+        }
 
         return (
           <View key={Id} style={styles.subContainer}>
-            <View style={{ flex: 1, flexDirection: "row" }}>
-              <Text>{str}</Text>
-              {/* {this.renderElement(data["modules"])} */}
-            </View>
+            <Text style={styles.txt}>
+              {str}
+              {percentage}
+            </Text>
+            <Text style={{ color: "white", right: 0 }}>{grade}</Text>
           </View>
         );
       }
@@ -152,12 +139,17 @@ const styles = StyleSheet.create({
   },
   subContainer: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "white",
     width: Dimensions.get("window").width - 10,
     // height: Dimensions.get("window").height / 6,
-    margin: 5
+    margin: 5,
+    flexDirection: "row",
+    alignContent: "space-between",
+    textAlign: "right",
+    alignSelf: "stretch"
+  },
+  txt: {
+    color: "white",
+    textAlign: "justify"
   }
 });
 
