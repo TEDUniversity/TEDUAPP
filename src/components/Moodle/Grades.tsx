@@ -21,6 +21,7 @@ import * as actions from "../../store/actions";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
 import { Spinner } from "../../screens/News";
+import { strip } from "../../util/helpers";
 
 interface IProp {
   navigation: any;
@@ -98,15 +99,13 @@ class Grades extends Component<IProp & ReduxProps> {
   renderSection = () => {
     return this.state.jsonToBeParsed["tables"][0]["tabledata"].map(
       (data, Id) => {
-        let doc = new DomParser().parseFromString(
-          data["itemname"]["content"],
-          "text/html"
-        );
-        let sa = doc.getElementsByTagName("a");
+        let str = data["itemname"]["content"];
+        str = strip(str);
+
         return (
           <View key={Id} style={styles.subContainer}>
             <View style={{ flex: 1, flexDirection: "row" }}>
-              <Text>{sa.toString()}</Text>
+              <Text>{str}</Text>
               {/* {this.renderElement(data["modules"])} */}
             </View>
           </View>
