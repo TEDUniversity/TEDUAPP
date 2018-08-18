@@ -46,7 +46,7 @@ class Survey extends Component<IProp & ReduxProps> {
   state = {
     answers: [],
     currentSurvey: this.props.surveys[this.props.navigation.state.params.index],
-    dataValid: false
+    dataValid: true
   };
 
   static navigationOptions = ({ navigation }) => ({

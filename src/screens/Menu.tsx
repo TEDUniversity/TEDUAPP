@@ -171,7 +171,7 @@ class Menu extends Component<IProp> {
                   source={require("../../img/subMenu/menu1.jpg")}
                   style={styles.subBackground}
                 >
-                  <Text style={styles.menuText}>Fitness center programme</Text>
+                  <Text style={styles.menuText}>Fitness Center Programme</Text>
                 </ImageBackground>
               </TouchableOpacity>
 
@@ -190,7 +190,7 @@ class Menu extends Component<IProp> {
                   source={require("../../img/subMenu/menu2.jpg")}
                   style={styles.subBackground}
                 >
-                  <Text style={styles.menuText}>Cafeteria programme</Text>
+                  <Text style={styles.menuText}>Cafeteria Programme</Text>
                 </ImageBackground>
               </TouchableOpacity>
 
@@ -209,7 +209,7 @@ class Menu extends Component<IProp> {
                   source={require("../../img/subMenu/menu3.jpg")}
                   style={styles.subBackground}
                 >
-                  <Text style={styles.menuText}>TEDU Portal</Text>
+                  <Text style={styles.menuText}>MyTEDU Portal</Text>
                 </ImageBackground>
               </TouchableOpacity>
 
@@ -247,7 +247,7 @@ class Menu extends Component<IProp> {
                   source={require("../../img/subMenu/menu6.png")}
                   style={styles.subBackground}
                 >
-                  <Text style={styles.menuText}>Academic calender</Text>
+                  <Text style={styles.menuText}>Academic Calender</Text>
                 </ImageBackground>
               </TouchableOpacity>
 
@@ -266,7 +266,7 @@ class Menu extends Component<IProp> {
                   source={require("../../img/subMenu/menu7.png")}
                   style={styles.subBackground}
                 >
-                  <Text style={styles.menuText}>Listen radio tedu</Text>
+                  <Text style={styles.menuText}>RadioTEDÜ</Text>
                 </ImageBackground>
               </TouchableOpacity>
             </ImageBackground>
