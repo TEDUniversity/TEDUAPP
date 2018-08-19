@@ -51,3 +51,7 @@ export async function getDataAll() {
     });
   });
 }
+
+export function strip(html) {
+  return html.replace(/<(?:.|\n)*?>/gm, "");
+}

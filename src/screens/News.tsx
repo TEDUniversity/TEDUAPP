@@ -215,7 +215,9 @@ class News extends Component<IProp & ReduxProps> {
       if (item["links"][0].url.includes("gundem/duyurular")) {
         this.setState({ dataDuyurular: this.state.dataDuyurular.concat(item) });
       } else if (item["links"][0].url.includes("gundem/etkinlikler")) {
-        this.setState({dataEtkinlikler: this.state.dataEtkinlikler.concat(item)});
+        this.setState({
+          dataEtkinlikler: this.state.dataEtkinlikler.concat(item)
+        });
       } else if (item["links"][0].url.includes("gundem/haberler")) {
         this.setState({ dataHaberler: this.state.dataHaberler.concat(item) });
       }
@@ -279,7 +281,6 @@ class News extends Component<IProp & ReduxProps> {
           maxOverlayOpacity={1}
           bounces={false}
           showsVerticalScrollIndicator={false}
-
         >
           <View>
             <ImageBackground

@@ -32,8 +32,9 @@ class MoodleDersListesi extends Component<IProps> {
             key={Id}
             onPress={() => {
               this.props.navigation.navigate("DersDetayRouter", {
-                 navigationOptions: {
-                  title: "Detay",
+                courseId: responseData["id"],
+                navigationOptions: {
+                  title: "Detay"
                 }
               });
             }}
