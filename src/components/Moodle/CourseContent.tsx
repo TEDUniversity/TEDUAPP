@@ -82,10 +82,12 @@ class Detay extends Component<IProp & ReduxProps> {
             <View style={{ flex: 1, flexDirection: "column" }}>
               <TouchableOpacity
                 onPress={() => {
-                  this.props.navigation.navigate("WebviewRouter", {
-                    url: data["url"],
-                    title: data["name"]
-                  });
+                  if (data["url"]) {
+                    this.props.navigation.navigate("WebviewRouter", {
+                      url: data["url"],
+                      title: data["name"]
+                    });
+                  }
                 }}
               >
                 <Text

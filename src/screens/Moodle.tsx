@@ -31,6 +31,7 @@ import * as types from "../store/types";
 import * as actions from "../store/actions";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
+import { Spinner } from "./News";
 
 const MIN_HEIGHT = (Header as any).height;
 
@@ -64,7 +65,8 @@ class Moodle extends Component<IProp & ReduxProps> {
     scrollHeight: 0,
     loggedin: false,
     token: "",
-    dersler: []
+    dersler: [],
+    isLoading: true
   };
 
   componentWillMount() {
@@ -92,7 +94,6 @@ class Moodle extends Component<IProp & ReduxProps> {
       this.setState({ scrollHeight: winHeight * 0.76 }); //76%
     }
   }
-  
 
   getDersler = () => {
     let url = "https://moodle.tedu.edu.tr/webservice/rest/server.php";
@@ -115,7 +116,7 @@ class Moodle extends Component<IProp & ReduxProps> {
         for (let index = 0; index < JSON.parse(http.response).length; index++) {
           dersArr.push(JSON.parse(http.response)[index]);
         }
-        this.setState({ dersler: dersArr });
+        this.setState({ dersler: dersArr, isLoading: false });
       }
     };
 
@@ -225,12 +226,16 @@ class Moodle extends Component<IProp & ReduxProps> {
     if (!this.props.isMoodleLoggedIn) {
       moodlePage = <MoodleLogin onPress={this.login} />;
     } else {
-      moodlePage = (
-        <MoodleDersListesi
-          dersler={this.state.dersler}
-          navigation={this.props.navigation}
-        />
-      );
+      if (this.state.isLoading) {
+        moodlePage = <Spinner size="large" />;
+      } else {
+        moodlePage = (
+          <MoodleDersListesi
+            dersler={this.state.dersler}
+            navigation={this.props.navigation}
+          />
+        );
+      }
     }
     return (
       <HeaderImageScrollView
