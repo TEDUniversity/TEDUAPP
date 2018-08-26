@@ -19,6 +19,7 @@ import {
 
 interface IProp {
   onPress: (kullaniciAdi: string, sifre: string) => void;
+  style?: any;
 }
 class MoodleLogin extends Component<IProp> {
   static navigationOptions = {
@@ -34,7 +35,7 @@ class MoodleLogin extends Component<IProp> {
 
   render() {
     return (
-      <View style={{ padding: 10 }}>
+      <View style={[{ padding: 10 }, this.props.style]}>
         <Text style={styles.text}>Kullanıcı adı: </Text>
         <TextInput
           style={{

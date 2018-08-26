@@ -32,7 +32,6 @@ require("core-js/fn/map");
 require("core-js/fn/set");
 require("core-js/fn/array/find");
 
-<<<<<<< HEAD
 
 
 
@@ -46,8 +45,6 @@ require('core-js/fn/set');
 require('core-js/fn/array/find');
 
 
-=======
->>>>>>> master
 export default class App extends Component<any> {
   constructor(prop: any) {
     super(prop);

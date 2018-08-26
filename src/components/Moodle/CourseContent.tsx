@@ -22,6 +22,7 @@ import { connect } from "react-redux";
 import { Dispatch } from "redux";
 import { Spinner } from "../../screens/News";
 import { strip } from "../../util/helpers";
+import { database } from "../../../node_modules/firebase";
 
 interface IProp {
   navigation: any;
@@ -33,11 +34,27 @@ interface ReduxProps {
 class Detay extends Component<IProp & ReduxProps> {
   state = {
     isLoading: true,
-    jsonToBeParsed: {}
+    jsonToBeParsed: [],
+    courseContent: []
   };
 
-  componentDidMount() {
+  componentWillMount() {
     this.getCourseContent();
+    
+  }
+
+  parseResponse = ( parse: any ) => {
+    let CONTENT = []
+    parse.map((data, id) => {
+      if (data["visible"] === 1) {
+        CONTENT.push({
+            data: data["modules"],
+            title: data["name"],
+        })
+    }
+    })
+    //console.log(CONTENT)
+    this.setState({courseContent: CONTENT}, () => {console.log(this.state.courseContent)})
   }
 
   getCourseContent = () => {
@@ -60,7 +77,7 @@ class Detay extends Component<IProp & ReduxProps> {
         this.setState({
           jsonToBeParsed: JSON.parse(http.response),
           isLoading: false
-        });
+        },() => this.parseResponse(this.state.jsonToBeParsed));
       }
     };
     http.send();
@@ -196,3 +213,11 @@ export default connect<{}, {}, ReduxProps>(
   mapStateToProps,
   mapDispatchToProps
 )(Detay);
+
+
+/*
+<SectionList
+          sections={this.state.courseContent}
+          renderItem={({item}) => <Text >{item["name"]}</Text>}
+          renderSectionHeader={({section}) => <Text>{section.title}</Text>}
+        />*/
