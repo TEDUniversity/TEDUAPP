@@ -1,0 +1,86 @@
+{
+  "project_info": {
+    "project_number": "1003884632988",
+    "firebase_url": "https://teduapp-210c9.firebaseio.com",
+    "project_id": "teduapp-210c9",
+    "storage_bucket": "teduapp-210c9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1003884632988:android:a4be69f58dccc071",
+        "android_client_info": {
+          "package_name": "com.teduapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1003884632988-omo1qhhqrc0s5kk6hfnnj14e6jm9l30q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDfKFxbapi5j-7hGhaI9HjVDRkQxwHCg5g"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1003884632988:android:9449204b4aff5b31",
+        "android_client_info": {
+          "package_name": "tedu.edu.tr"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1003884632988-a27cmcl50kegu4acjttjv75uqt02lhmn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "tedu.edu.tr",
+            "certificate_hash": "581a5d83ed6ba1ff117655ee92f2b19eb0f0a536"
+          }
+        },
+        {
+          "client_id": "1003884632988-omo1qhhqrc0s5kk6hfnnj14e6jm9l30q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDfKFxbapi5j-7hGhaI9HjVDRkQxwHCg5g"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1003884632988-omo1qhhqrc0s5kk6hfnnj14e6jm9l30q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

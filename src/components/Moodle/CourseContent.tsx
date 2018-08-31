@@ -23,6 +23,8 @@ import { Dispatch } from "redux";
 import { Spinner } from "../../screens/News";
 import { strip } from "../../util/helpers";
 import { database } from "../../../node_modules/firebase";
+import RNFetchBlob from "rn-fetch-blob";
+import FileViewer from "react-native-file-viewer";
 
 interface IProp {
   navigation: any;
@@ -34,8 +36,9 @@ interface ReduxProps {
 class Detay extends Component<IProp & ReduxProps> {
   state = {
     isLoading: true,
-    jsonToBeParsed: [],
-    courseContent: []
+    courseContent: [],
+    jsonToBeParsed: {},
+    fileLoading: false
   };
 
   componentWillMount() {
@@ -99,10 +102,60 @@ class Detay extends Component<IProp & ReduxProps> {
             <View style={{ flex: 1, flexDirection: "column" }}>
               <TouchableOpacity
                 onPress={() => {
-                  this.props.navigation.navigate("WebviewRouter", {
-                    url: data["url"],
-                    title: data["name"]
-                  });
+                  if (
+                    data["contents"] &&
+                    data["contents"][0] &&
+                    data["contents"][0]["fileurl"]
+                  ) {
+                    this.setState({ fileLoading: true });
+                    let dirs = RNFetchBlob.fs.dirs;
+                    RNFetchBlob.config({
+                      // add this option that makes response data to be stored as a file,
+                      // this is much more performant.
+                      fileCache: true,
+                      path:
+                        dirs.DocumentDir +
+                        "/" +
+                        data["contents"][0]["filename"].replace(/ /g, "")
+                    })
+                      .fetch(
+                        "GET",
+                        data["contents"][0]["fileurl"] +
+                          "&token=" +
+                          this.props.user.token,
+                        {
+                          //some headers ..
+                        }
+                      )
+                      .then(res => {
+                        // the temp file path
+                        this.setState({ fileLoading: false });
+                        console.log("The file saved to ", res.path());
+                        FileViewer.open(res.path())
+                          .then(() => {
+                            console.log("success");
+                          })
+                          .catch(error => {
+                            console.log(error);
+                            alert(
+                              "Bir hata oluştu: lütfen bir office programı indirin!"
+                            );
+                          });
+                      });
+                  }
+                  //   if (
+                  //     data["contents"] &&
+                  //     data["contents"][0] &&
+                  //     data["contents"][0]["fileurl"]
+                  //   ) {
+                  //     this.props.navigation.navigate("WebviewRouter", {
+                  //       url:
+                  //         data["contents"][0]["fileurl"] +
+                  //         "&token=" +
+                  //         this.props.user.token,
+                  //       title: data["name"]
+                  //     });
+                  //   }
                 }}
               >
                 <Text
@@ -156,7 +209,7 @@ class Detay extends Component<IProp & ReduxProps> {
     );
   };
   render() {
-    if (this.state.isLoading) {
+    if (this.state.isLoading || this.state.fileLoading) {
       return <Spinner size={"large"} />;
     } else {
       return (
