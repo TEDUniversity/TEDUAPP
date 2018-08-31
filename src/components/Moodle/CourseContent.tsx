@@ -101,7 +101,7 @@ class Detay extends Component<IProp & ReduxProps> {
             />
             <View style={{ flex: 1, flexDirection: "column" }}>
               <TouchableOpacity
-                onPress={() => {
+                /*onPress={() => {
                   if (
                     data["contents"] &&
                     data["contents"][0] &&
@@ -156,7 +156,7 @@ class Detay extends Component<IProp & ReduxProps> {
                   //       title: data["name"]
                   //     });
                   //   }
-                }}
+                }}*/
               >
                 <Text
                   style={{
