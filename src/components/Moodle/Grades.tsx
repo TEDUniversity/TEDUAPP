@@ -83,18 +83,28 @@ class Grades extends Component<IProp & ReduxProps> {
         let percentage = "",
           grade = "";
         if (data["percentage"] !== undefined && data["grade"] !== undefined) {
-          str = "\t\t" + str + ":\t\t\t\t\t\t\t";
-          percentage = data["percentage"]["content"] + "\t\t\t\t\t\t";
+          str = "\t\t" + str + ":";
+          percentage = data["percentage"]["content"] + "";
           grade = data["grade"]["content"];
         }
 
         return (
           <View key={Id} style={styles.subContainer}>
+            <View  style={styles.textContainer} >
             <Text style={styles.txt}>
               {str}
-              {percentage}
-            </Text>
-            <Text style={{ color: "white", right: 0 }}>{grade}</Text>
+              </Text>
+            </View>
+            
+            <View style={styles.textContainer}>
+            <Text style={styles.txt} > {percentage} </Text> 
+              </View>
+            
+          
+            <View style={styles.textContainer}>
+            <Text style={styles.txt}>{grade}</Text>
+              </View>
+            
           </View>
         );
       }
@@ -137,6 +147,12 @@ const styles = StyleSheet.create({
   text: {
     fontWeight: "bold"
   },
+  textContainer: {
+    //flex:1,
+    //textAlign: 'center',
+    //flexWrap: 'wrap'
+
+  },
   subContainer: {
     flex: 1,
     width: Dimensions.get("window").width - 10,
@@ -144,12 +160,14 @@ const styles = StyleSheet.create({
     margin: 5,
     flexDirection: "row",
     alignContent: "space-between",
+    justifyContent: "space-between",
     textAlign: "right",
     alignSelf: "stretch"
   },
   txt: {
     color: "white",
-    textAlign: "justify"
+    textAlign: "justify",
+    
   }
 });
 

@@ -36,23 +36,27 @@
 		2DF0FFEE2056DD460020B375 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3EA31DF850E9000B6D8A /* libReact.a */; };
 		39703FA6D5624103BE793817 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 03ABD7D31460439AA25D7C04 /* Foundation.ttf */; };
 		3AB8E0739B6B4A91BE1C5B83 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5D21D522699B4D82900588E3 /* MaterialIcons.ttf */; };
+		45E57B2016D44B9C95535E05 /* libRNFetchBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DBA4621823814C18A71D91F9 /* libRNFetchBlob.a */; };
+		476BDE4C3BDA45E499E05B89 /* libRNFirebase.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B0F283906094556BE31826B /* libRNFirebase.a */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		7440EE943DAA404BAEEE7588 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DD52B24D7D8F4C41A944E8A7 /* Entypo.ttf */; };
 		7A0CEB56FD6940379027AA43 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4EEA8E728E5248628575A3A7 /* EvilIcons.ttf */; };
 		7B6AC41F946245649DE1B585 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8B8A94364F1F4F51AD5FEF82 /* Octicons.ttf */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
+		8DEB0393B44D438F8FBE706E /* libRNFileViewer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B263FC4F68104569966C1AB5 /* libRNFileViewer.a */; };
 		901E57D3E0AB4621991D88A8 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 117ECE8C3F974F84B6195C15 /* Zocial.ttf */; };
+		952343DC21399B0E00470C8A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 952343DB21399B0E00470C8A /* GoogleService-Info.plist */; };
+		955C1012C3734EB3BEAF32E4 /* libRNRandomBytes.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BB90AA4C62874B94B56863F5 /* libRNRandomBytes.a */; };
+		A105F098C6B51DC7820405C2 /* libPods-TeduAppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CB30B722A16132B34044FD73 /* libPods-TeduAppTests.a */; };
+		A5E65AC3D700883B4A6F5333 /* libPods-TeduApp-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DCEA380AC5D05C2184C2185 /* libPods-TeduApp-tvOSTests.a */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
 		C4DB79EFD55E464683C8D252 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D0AFF1274B6C496A8A8B5E5B /* Ionicons.ttf */; };
 		CE88CFDDA8FF470E94210386 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F103F37AF4FD4E7180379C9B /* SimpleLineIcons.ttf */; };
 		D0AC3156AFB2448E9C845379 /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ECEB05DF863F42288F96612C /* libRNVectorIcons.a */; };
+		D45E0F8DED20FD299D1995CA /* libPods-TeduApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E3B48C28AC70B947830FD426 /* libPods-TeduApp.a */; };
 		EA0A67D98A2345948E1BCE9F /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BAE1D51C7EB74404A9F2FBA7 /* MaterialCommunityIcons.ttf */; };
 		F2E561142CC54F65A4AFAAE2 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AF62BD146E7942E1A1C3A546 /* Feather.ttf */; };
 		F62ABA206266494E9561CC3D /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B3837DDD2D4941FF8A42F18C /* FontAwesome.ttf */; };
-		476BDE4C3BDA45E499E05B89 /* libRNFirebase.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B0F283906094556BE31826B /* libRNFirebase.a */; };
-		955C1012C3734EB3BEAF32E4 /* libRNRandomBytes.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BB90AA4C62874B94B56863F5 /* libRNRandomBytes.a */; };
-		45E57B2016D44B9C95535E05 /* libRNFetchBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DBA4621823814C18A71D91F9 /* libRNFetchBlob.a */; };
-		8DEB0393B44D438F8FBE706E /* libRNFileViewer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B263FC4F68104569966C1AB5 /* libRNFileViewer.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -322,6 +326,34 @@
 			remoteGlobalIDString = 58B5119B1A9E6C1200147676;
 			remoteInfo = RCTText;
 		};
+		952343C7213999A600470C8A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 582BDE1578E54E2FB9CB24DF /* RNFirebase.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RNFirebase;
+		};
+		952343CC213999A600470C8A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AAE70AC107604C4AA3D53781 /* RNFileViewer.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RNFileViewer;
+		};
+		952343D1213999A600470C8A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E64CA4D712B846CABFFE402A /* RNFetchBlob.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A15C300E1CD25C330074CB35;
+			remoteInfo = RNFetchBlob;
+		};
+		952343D6213999A600470C8A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D5B05A56219845069F9696E8 /* RNRandomBytes.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 73EEC9391BFE4B1D00D468EB;
+			remoteInfo = RNRandomBytes;
+		};
 		95A506E120FE485200EBF00A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 315ECCA9DDDB47C4A06C5796 /* RNVectorIcons.xcodeproj */;
@@ -360,32 +392,43 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = TeduApp/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = TeduApp/main.m; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
+		1DCEA380AC5D05C2184C2185 /* libPods-TeduApp-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TeduApp-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E47B1E0B4A5D006451C7 /* TeduApp-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TeduApp-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* TeduApp-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "TeduApp-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D16E6891FA4F8E400B85C8A /* libReact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReact.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		315ECCA9DDDB47C4A06C5796 /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
+		32F2B59B4F3F3203289729E4 /* Pods-TeduAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TeduAppTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TeduAppTests/Pods-TeduAppTests.release.xcconfig"; sourceTree = "<group>"; };
 		4EEA8E728E5248628575A3A7 /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
+		514B81B6C3C0B96F5368E6A9 /* Pods-TeduApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TeduApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TeduApp/Pods-TeduApp.debug.xcconfig"; sourceTree = "<group>"; };
+		582BDE1578E54E2FB9CB24DF /* RNFirebase.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNFirebase.xcodeproj; path = "../node_modules/react-native-firebase/ios/RNFirebase.xcodeproj"; sourceTree = "<group>"; };
 		5D21D522699B4D82900588E3 /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
+		7B0F283906094556BE31826B /* libRNFirebase.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNFirebase.a; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		8B8A94364F1F4F51AD5FEF82 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
+		952343D821399A1300470C8A /* TeduApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = TeduApp.entitlements; path = TeduApp/TeduApp.entitlements; sourceTree = "<group>"; };
+		952343DB21399B0E00470C8A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "TeduApp/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		97D5E5D55B732D6DF0C0653E /* Pods-TeduAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TeduAppTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TeduAppTests/Pods-TeduAppTests.debug.xcconfig"; sourceTree = "<group>"; };
+		AAE70AC107604C4AA3D53781 /* RNFileViewer.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNFileViewer.xcodeproj; path = "../node_modules/react-native-file-viewer/ios/RNFileViewer.xcodeproj"; sourceTree = "<group>"; };
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
 		AF62BD146E7942E1A1C3A546 /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
+		B263FC4F68104569966C1AB5 /* libRNFileViewer.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNFileViewer.a; sourceTree = "<group>"; };
 		B3837DDD2D4941FF8A42F18C /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 		BAE1D51C7EB74404A9F2FBA7 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
+		BB90AA4C62874B94B56863F5 /* libRNRandomBytes.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNRandomBytes.a; sourceTree = "<group>"; };
+		C0466445EEDFBC94D475F19A /* Pods-TeduApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TeduApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-TeduApp/Pods-TeduApp.release.xcconfig"; sourceTree = "<group>"; };
+		C3589198E1830EBF04A7D656 /* Pods-TeduApp-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TeduApp-tvOSTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TeduApp-tvOSTests/Pods-TeduApp-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		CB30B722A16132B34044FD73 /* libPods-TeduAppTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TeduAppTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0AFF1274B6C496A8A8B5E5B /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
+		D5B05A56219845069F9696E8 /* RNRandomBytes.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNRandomBytes.xcodeproj; path = "../node_modules/react-native-randombytes/RNRandomBytes.xcodeproj"; sourceTree = "<group>"; };
+		DBA4621823814C18A71D91F9 /* libRNFetchBlob.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNFetchBlob.a; sourceTree = "<group>"; };
 		DD52B24D7D8F4C41A944E8A7 /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
+		DF5E202730E53D86C2E1345E /* Pods-TeduApp-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TeduApp-tvOSTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TeduApp-tvOSTests/Pods-TeduApp-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
+		E3B48C28AC70B947830FD426 /* libPods-TeduApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TeduApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E64CA4D712B846CABFFE402A /* RNFetchBlob.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNFetchBlob.xcodeproj; path = "../node_modules/rn-fetch-blob/ios/RNFetchBlob.xcodeproj"; sourceTree = "<group>"; };
 		ECEB05DF863F42288F96612C /* libRNVectorIcons.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNVectorIcons.a; sourceTree = "<group>"; };
 		F103F37AF4FD4E7180379C9B /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
-		582BDE1578E54E2FB9CB24DF /* RNFirebase.xcodeproj */ = {isa = PBXFileReference; name = "RNFirebase.xcodeproj"; path = "../node_modules/react-native-firebase/ios/RNFirebase.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
-		7B0F283906094556BE31826B /* libRNFirebase.a */ = {isa = PBXFileReference; name = "libRNFirebase.a"; path = "libRNFirebase.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
-		D5B05A56219845069F9696E8 /* RNRandomBytes.xcodeproj */ = {isa = PBXFileReference; name = "RNRandomBytes.xcodeproj"; path = "../node_modules/react-native-randombytes/RNRandomBytes.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
-		BB90AA4C62874B94B56863F5 /* libRNRandomBytes.a */ = {isa = PBXFileReference; name = "libRNRandomBytes.a"; path = "libRNRandomBytes.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
-		E64CA4D712B846CABFFE402A /* RNFetchBlob.xcodeproj */ = {isa = PBXFileReference; name = "RNFetchBlob.xcodeproj"; path = "../node_modules/rn-fetch-blob/ios/RNFetchBlob.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
-		DBA4621823814C18A71D91F9 /* libRNFetchBlob.a */ = {isa = PBXFileReference; name = "libRNFetchBlob.a"; path = "libRNFetchBlob.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
-		AAE70AC107604C4AA3D53781 /* RNFileViewer.xcodeproj */ = {isa = PBXFileReference; name = "RNFileViewer.xcodeproj"; path = "../node_modules/react-native-file-viewer/ios/RNFileViewer.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
-		B263FC4F68104569966C1AB5 /* libRNFileViewer.a */ = {isa = PBXFileReference; name = "libRNFileViewer.a"; path = "libRNFileViewer.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -394,6 +437,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				140ED2AC1D01E1AD002B40FF /* libReact.a in Frameworks */,
+				A105F098C6B51DC7820405C2 /* libPods-TeduAppTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -419,6 +463,7 @@
 				955C1012C3734EB3BEAF32E4 /* libRNRandomBytes.a in Frameworks */,
 				45E57B2016D44B9C95535E05 /* libRNFetchBlob.a in Frameworks */,
 				8DEB0393B44D438F8FBE706E /* libRNFileViewer.a in Frameworks */,
+				D45E0F8DED20FD299D1995CA /* libPods-TeduApp.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -442,6 +487,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2DF0FFEE2056DD460020B375 /* libReact.a in Frameworks */,
+				A5E65AC3D700883B4A6F5333 /* libPods-TeduApp-tvOSTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -530,6 +576,8 @@
 		13B07FAE1A68108700A75B9A /* TeduApp */ = {
 			isa = PBXGroup;
 			children = (
+				952343DB21399B0E00470C8A /* GoogleService-Info.plist */,
+				952343D821399A1300470C8A /* TeduApp.entitlements */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -568,6 +616,9 @@
 			isa = PBXGroup;
 			children = (
 				2D16E6891FA4F8E400B85C8A /* libReact.a */,
+				E3B48C28AC70B947830FD426 /* libPods-TeduApp.a */,
+				1DCEA380AC5D05C2184C2185 /* libPods-TeduApp-tvOSTests.a */,
+				CB30B722A16132B34044FD73 /* libPods-TeduAppTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -651,6 +702,7 @@
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				5C30D894920B43C58771E2AB /* Resources */,
 				95A506B820FE484F00EBF00A /* Recovered References */,
+				E8C9C7FAEC44D2C7258129C7 /* Pods */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -668,10 +720,46 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		952343C4213999A600470C8A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				952343C8213999A600470C8A /* libRNFirebase.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		952343C9213999A600470C8A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				952343CD213999A600470C8A /* libRNFileViewer.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		952343CE213999A600470C8A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				952343D2213999A600470C8A /* libRNFetchBlob.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		952343D3213999A600470C8A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				952343D7213999A600470C8A /* libRNRandomBytes.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		95A506B820FE484F00EBF00A /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
 				ECEB05DF863F42288F96612C /* libRNVectorIcons.a */,
+				7B0F283906094556BE31826B /* libRNFirebase.a */,
+				BB90AA4C62874B94B56863F5 /* libRNRandomBytes.a */,
+				DBA4621823814C18A71D91F9 /* libRNFetchBlob.a */,
+				B263FC4F68104569966C1AB5 /* libRNFileViewer.a */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -693,6 +781,19 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		E8C9C7FAEC44D2C7258129C7 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				514B81B6C3C0B96F5368E6A9 /* Pods-TeduApp.debug.xcconfig */,
+				C0466445EEDFBC94D475F19A /* Pods-TeduApp.release.xcconfig */,
+				C3589198E1830EBF04A7D656 /* Pods-TeduApp-tvOSTests.debug.xcconfig */,
+				DF5E202730E53D86C2E1345E /* Pods-TeduApp-tvOSTests.release.xcconfig */,
+				97D5E5D55B732D6DF0C0653E /* Pods-TeduAppTests.debug.xcconfig */,
+				32F2B59B4F3F3203289729E4 /* Pods-TeduAppTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -700,6 +801,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "TeduAppTests" */;
 			buildPhases = (
+				33C4CFAC1486BEA684555D40 /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
@@ -718,6 +820,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "TeduApp" */;
 			buildPhases = (
+				288614AD0A77B059B4F15FC2 /* [CP] Check Pods Manifest.lock */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
@@ -754,6 +857,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "TeduApp-tvOSTests" */;
 			buildPhases = (
+				0380F5882717E2BD61902E02 /* [CP] Check Pods Manifest.lock */,
 				2D02E48C1E0B4A5D006451C7 /* Sources */,
 				2D02E48D1E0B4A5D006451C7 /* Frameworks */,
 				2D02E48E1E0B4A5D006451C7 /* Resources */,
@@ -779,7 +883,22 @@
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
+						DevelopmentTeam = T946WA6TW3;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
+					};
+					13B07F861A680F5B00A75B9A = {
+						DevelopmentTeam = T946WA6TW3;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -851,6 +970,22 @@
 				{
 					ProductGroup = 146834001AC3E56700842450 /* Products */;
 					ProjectRef = 146833FF1AC3E56700842450 /* React.xcodeproj */;
+				},
+				{
+					ProductGroup = 952343CE213999A600470C8A /* Products */;
+					ProjectRef = E64CA4D712B846CABFFE402A /* RNFetchBlob.xcodeproj */;
+				},
+				{
+					ProductGroup = 952343C9213999A600470C8A /* Products */;
+					ProjectRef = AAE70AC107604C4AA3D53781 /* RNFileViewer.xcodeproj */;
+				},
+				{
+					ProductGroup = 952343C4213999A600470C8A /* Products */;
+					ProjectRef = 582BDE1578E54E2FB9CB24DF /* RNFirebase.xcodeproj */;
+				},
+				{
+					ProductGroup = 952343D3213999A600470C8A /* Products */;
+					ProjectRef = D5B05A56219845069F9696E8 /* RNRandomBytes.xcodeproj */;
 				},
 				{
 					ProductGroup = 95A506DE20FE485100EBF00A /* Products */;
@@ -1120,6 +1255,34 @@
 			remoteRef = 832341B41AAA6A8300B99B32 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		952343C8213999A600470C8A /* libRNFirebase.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNFirebase.a;
+			remoteRef = 952343C7213999A600470C8A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		952343CD213999A600470C8A /* libRNFileViewer.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNFileViewer.a;
+			remoteRef = 952343CC213999A600470C8A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		952343D2213999A600470C8A /* libRNFetchBlob.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNFetchBlob.a;
+			remoteRef = 952343D1213999A600470C8A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		952343D7213999A600470C8A /* libRNRandomBytes.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNRandomBytes.a;
+			remoteRef = 952343D6213999A600470C8A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		95A506E220FE485200EBF00A /* libRNVectorIcons.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1161,6 +1324,7 @@
 				7B6AC41F946245649DE1B585 /* Octicons.ttf in Resources */,
 				CE88CFDDA8FF470E94210386 /* SimpleLineIcons.ttf in Resources */,
 				901E57D3E0AB4621991D88A8 /* Zocial.ttf in Resources */,
+				952343DC21399B0E00470C8A /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1196,6 +1360,42 @@
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
 		};
+		0380F5882717E2BD61902E02 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TeduApp-tvOSTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		288614AD0A77B059B4F15FC2 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TeduApp-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		2D02E4CB1E0B4B27006451C7 /* Bundle React Native Code And Images */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1209,6 +1409,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
+		};
+		33C4CFAC1486BEA684555D40 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TeduAppTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1277,8 +1495,10 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 97D5E5D55B732D6DF0C0653E /* Pods-TeduAppTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = T946WA6TW3;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -1313,9 +1533,11 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 32F2B59B4F3F3203289729E4 /* Pods-TeduAppTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = T946WA6TW3;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
@@ -1346,10 +1568,13 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 514B81B6C3C0B96F5368E6A9 /* Pods-TeduApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = TeduApp/TeduApp.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
+				DEVELOPMENT_TEAM = T946WA6TW3;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
@@ -1357,6 +1582,7 @@
 					"$(SRCROOT)/../node_modules/react-native-randombytes",
 					"$(SRCROOT)/../node_modules/rn-fetch-blob/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-file-viewer/ios",
+					"$(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase/messaging/**",
 				);
 				INFOPLIST_FILE = TeduApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1365,6 +1591,7 @@
 					"-ObjC",
 					"-lc++",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.tedu.TeduApp;
 				PRODUCT_NAME = TeduApp;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1372,9 +1599,12 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C0466445EEDFBC94D475F19A /* Pods-TeduApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = TeduApp/TeduApp.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = T946WA6TW3;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
@@ -1390,6 +1620,7 @@
 					"-ObjC",
 					"-lc++",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.tedu.TeduApp;
 				PRODUCT_NAME = TeduApp;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1481,6 +1712,7 @@
 		};
 		2D02E4991E0B4A5E006451C7 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C3589198E1830EBF04A7D656 /* Pods-TeduApp-tvOSTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1522,6 +1754,7 @@
 		};
 		2D02E49A1E0B4A5E006451C7 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DF5E202730E53D86C2E1345E /* Pods-TeduApp-tvOSTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;

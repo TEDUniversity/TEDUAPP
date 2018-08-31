@@ -18,6 +18,8 @@ import Main from "./screens/Main";
 import Webview from "./components/Webview";
 import Survey from "./components/Survey/Survey";
 import firebase from "firebase";
+import firebasee from 'react-native-firebase';
+
 import { Provider } from "react-redux";
 import { store, persistor } from "./store";
 import { PersistGate } from "redux-persist/integration/react";
@@ -56,6 +58,27 @@ export default class App extends Component<any> {
       firebase.initializeApp(config);
     }
   }
+
+  componentDidMount() {
+      firebasee.messaging().hasPermission()
+        .then(enabled => {
+          if (enabled) {
+            firebase.messaging().getToken().then(token => {
+              console.log("LOG: ", token);
+            })
+            // user has permissions
+          } else {
+            firebasee.messaging().requestPermission()
+              .then(() => {
+                alert("User Now Has Permission")
+              })
+              .catch(error => {
+                alert("Error", error)
+                // User has rejected permissions
+              });
+          }
+        });
+    }
 
   render() {
     return (
