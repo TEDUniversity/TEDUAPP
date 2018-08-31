@@ -67,13 +67,7 @@ class Main extends Component<IProp> {
       barColor: "#144d8c",
       pressColor: "rgba(232, 36, 55, 0.16)"
     },
-    {
-      key: "CalendarRouter",
-      icon: "music-note",
-      label: "Calendar",
-      barColor: "#144d8c",
-      pressColor: "rgba(232, 36, 55, 0.16)"
-    },
+    
     {
       key: "MoodleRouter",
       icon: "school",
