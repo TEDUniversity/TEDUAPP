@@ -43,22 +43,23 @@ class Detay extends Component<IProp & ReduxProps> {
 
   componentWillMount() {
     this.getCourseContent();
-    
   }
 
-  parseResponse = ( parse: any ) => {
-    let CONTENT = []
+  parseResponse = (parse: any) => {
+    let CONTENT = [];
     parse.map((data, id) => {
       if (data["visible"] === 1) {
         CONTENT.push({
-            data: data["modules"],
-            title: data["name"],
-        })
-    }
-    })
+          data: data["modules"],
+          title: data["name"]
+        });
+      }
+    });
     //console.log(CONTENT)
-    this.setState({courseContent: CONTENT}, () => {console.log(this.state.courseContent)})
-  }
+    this.setState({ courseContent: CONTENT }, () => {
+      console.log(this.state.courseContent);
+    });
+  };
 
   getCourseContent = () => {
     var http = new XMLHttpRequest();
@@ -77,10 +78,13 @@ class Detay extends Component<IProp & ReduxProps> {
     http.onreadystatechange = () => {
       //Call a function when the state changes.
       if (http.readyState == 4 && http.status == 200) {
-        this.setState({
-          jsonToBeParsed: JSON.parse(http.response),
-          isLoading: false
-        },() => this.parseResponse(this.state.jsonToBeParsed));
+        this.setState(
+          {
+            jsonToBeParsed: JSON.parse(http.response),
+            isLoading: false
+          },
+          () => this.parseResponse(this.state.jsonToBeParsed)
+        );
       }
     };
     http.send();
@@ -94,7 +98,7 @@ class Detay extends Component<IProp & ReduxProps> {
       }
       if (data["visible"] === 1) {
         return (
-          <View key={Id} style={{ flex: 1, flexDirection: "row" }}>
+          <View key={Id} style={{ flex: 1, flexDirection: "row", margin: 5 }}>
             <Image
               style={{ width: 20, height: 20, margin: 5 }}
               source={{ uri: data["modicon"] }}
@@ -141,6 +145,9 @@ class Detay extends Component<IProp & ReduxProps> {
                               "Bir hata oluştu: lütfen bir office programı indirin!"
                             );
                           });
+                      })
+                      .catch(err => {
+                        console.error(err);
                       });
                   }
                   //   if (
@@ -162,7 +169,7 @@ class Detay extends Component<IProp & ReduxProps> {
                   style={{
                     margin: 5,
                     marginBottom: 0,
-                    fontSize: 13,
+                    fontSize: 15,
                     color: "black"
                   }}
                 >
@@ -199,7 +206,14 @@ class Detay extends Component<IProp & ReduxProps> {
                 justifyContent: "space-between"
               }}
             >
-              <Text>{data["name"]}</Text>
+              <Text style={{ margin: 10, fontSize: 20 }}>{data["name"]}</Text>
+              <View
+                style={{
+                  backgroundColor: "black",
+                  height: 1,
+                  width: Dimensions.get("window").width - 10
+                }}
+              />
               {this.renderElement(data["modules"])}
             </View>
           </View>
@@ -250,7 +264,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     width: Dimensions.get("window").width - 10,
     // height: Dimensions.get("window").height / 6,
-    margin: 5
+    margin: 10
   }
 });
 
@@ -266,7 +280,6 @@ export default connect<{}, {}, ReduxProps>(
   mapStateToProps,
   mapDispatchToProps
 )(Detay);
-
 
 /*
 <SectionList

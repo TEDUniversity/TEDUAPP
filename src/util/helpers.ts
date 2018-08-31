@@ -30,9 +30,13 @@ export const retrieveData = async key => {
 };
 
 export function getData(key: string): any {
-  retrieveData(key).then(response => {
-    return response;
-  });
+  retrieveData(key)
+    .then(response => {
+      return response;
+    })
+    .catch(err => {
+      console.error(err);
+    });
 }
 
 export async function getDataAll() {

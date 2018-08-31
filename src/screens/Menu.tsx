@@ -179,8 +179,7 @@ class Menu extends Component<IProp> {
                 style={styles.subContainer}
                 onPress={() => {
                   this.props.navigation.navigate("WebviewRouter", {
-                    url:
-                      "https://www.tedu.edu.tr/tr/main/akademik-takvim",
+                    url: "https://www.tedu.edu.tr/tr/main/akademik-takvim",
                     title: "Cafeteria programme",
                     backButton: "Menu"
                   });
@@ -217,8 +216,7 @@ class Menu extends Component<IProp> {
                 style={styles.subContainer}
                 onPress={() => {
                   this.props.navigation.navigate("WebviewRouter", {
-                    url:
-                      "https://issuu.com/tedukultursanat/docs",
+                    url: "https://issuu.com/tedukultursanat/docs",
                     title: "Karafanzin",
                     backButton: "Menu"
                   });
@@ -236,8 +234,7 @@ class Menu extends Component<IProp> {
                 style={styles.subContainer}
                 onPress={() => {
                   this.props.navigation.navigate("WebviewRouter", {
-                    url:
-                      "https://www.tedu.edu.tr/tr/main/akademik-takvim",
+                    url: "https://www.tedu.edu.tr/tr/main/akademik-takvim",
                     title: "Academic Calendar",
                     backButton: "Menu"
                   });
@@ -255,8 +252,7 @@ class Menu extends Component<IProp> {
                 style={styles.subContainer}
                 onPress={() => {
                   this.props.navigation.navigate("WebviewRouter", {
-                    url:
-                      "http://www.radiotedu.com",
+                    url: "http://www.radiotedu.com",
                     title: "Listen radio tedu",
                     backButton: "Menu"
                   });
@@ -297,6 +293,8 @@ const styles = StyleSheet.create({
   },
   subBackground: {
     width: Dimensions.get("window").width,
+    alignItems: "center",
+    justifyContent: "center",
     height: 60
   },
   subContainer: {

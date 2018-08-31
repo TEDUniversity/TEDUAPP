@@ -18,7 +18,7 @@ import Main from "./screens/Main";
 import Webview from "./components/Webview";
 import Survey from "./components/Survey/Survey";
 import firebase from "firebase";
-import firebasee from 'react-native-firebase';
+import firebasee from "react-native-firebase";
 
 import { Provider } from "react-redux";
 import { store, persistor } from "./store";
@@ -34,18 +34,14 @@ require("core-js/fn/map");
 require("core-js/fn/set");
 require("core-js/fn/array/find");
 
-
-
-
 // symbol polyfills
-global.Symbol = require('core-js/es6/symbol');
-require('core-js/fn/symbol/iterator');
+global.Symbol = require("core-js/es6/symbol");
+require("core-js/fn/symbol/iterator");
 
 // collection fn polyfills
-require('core-js/fn/map');
-require('core-js/fn/set');
-require('core-js/fn/array/find');
-
+require("core-js/fn/map");
+require("core-js/fn/set");
+require("core-js/fn/array/find");
 
 export default class App extends Component<any> {
   constructor(prop: any) {
@@ -60,25 +56,38 @@ export default class App extends Component<any> {
   }
 
   componentDidMount() {
-      firebasee.messaging().hasPermission()
-        .then(enabled => {
-          if (enabled) {
-            firebase.messaging().getToken().then(token => {
+    firebasee
+      .messaging()
+      .hasPermission()
+      .then(enabled => {
+        if (enabled) {
+          firebase
+            .messaging()
+            .getToken()
+            .then(token => {
               console.log("LOG: ", token);
             })
-            // user has permissions
-          } else {
-            firebasee.messaging().requestPermission()
-              .then(() => {
-                alert("User Now Has Permission")
-              })
-              .catch(error => {
-                alert("Error", error)
-                // User has rejected permissions
-              });
-          }
-        });
-    }
+            .catch(er => {
+              console.log(er);
+            });
+          // user has permissions
+        } else {
+          firebasee
+            .messaging()
+            .requestPermission()
+            .then(() => {
+              alert("User Now Has Permission");
+            })
+            .catch(error => {
+              alert("Error" + error);
+              // User has rejected permissions
+            });
+        }
+      })
+      .catch(er => {
+        console.log(er);
+      });
+  }
 
   render() {
     return (
