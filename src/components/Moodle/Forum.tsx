@@ -209,7 +209,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     width: Dimensions.get("window").width - 10,
     // height: Dimensions.get("window").height / 6,
-    margin: 5
+    margin: 10
   }
 });
 

@@ -98,7 +98,7 @@ class Detay extends Component<IProp & ReduxProps> {
       }
       if (data["visible"] === 1) {
         return (
-          <View key={Id} style={{ flex: 1, flexDirection: "row" }}>
+          <View key={Id} style={{ flex: 1, flexDirection: "row", margin: 5 }}>
             <Image
               style={{ width: 20, height: 20, margin: 5 }}
               source={{ uri: data["modicon"] }}
@@ -207,6 +207,13 @@ class Detay extends Component<IProp & ReduxProps> {
               }}
             >
               <Text style={{ margin: 10, fontSize: 20 }}>{data["name"]}</Text>
+              <View
+                style={{
+                  backgroundColor: "black",
+                  height: 1,
+                  width: Dimensions.get("window").width - 10
+                }}
+              />
               {this.renderElement(data["modules"])}
             </View>
           </View>
@@ -257,7 +264,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     width: Dimensions.get("window").width - 10,
     // height: Dimensions.get("window").height / 6,
-    margin: 5
+    margin: 10
   }
 });
 
