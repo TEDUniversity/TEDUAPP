@@ -49,6 +49,7 @@ class Question extends Component<IProp & ReduxProps> {
 
   };
   
+  //prev version of the answer. not suiting for requierements
   /*setAnswers = (val) => {
     if(val.includes("not")) {
       var splitted = val.split(' ').slice(1).join(' ');

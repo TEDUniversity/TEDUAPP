@@ -29,10 +29,9 @@ import { connect } from "react-redux";
 import { Dispatch } from "redux";
 
 interface IProp {
-    answer: string;
+    answer: any;
     getAnswer: any;
     index: number;
-    unClickAnswer: any;
     isChosen: boolean;
   }
 
@@ -76,6 +75,7 @@ class Answer extends Component<IProp & ReduxProps> {
   
   }
  
+  //previous version of the answer. not working for this vers.
   componentDidUpdate(){
     
     /*if(this.state.clicked == true){

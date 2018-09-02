@@ -24,6 +24,7 @@ export interface Answer {
 export interface Survey {
   name: string;
   questions: Question[];
+  valid: Boolean;
 }
 
 export interface User {

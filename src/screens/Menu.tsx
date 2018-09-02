@@ -145,7 +145,7 @@ class Menu extends Component<IProp> {
         contentOffset={{ x: 0, y: 0 }}
         scrollViewBackgroundColor="rgba(52, 52, 52, 0.40)"
         scrollEnabled={false}
-        renderForeground={this.renderHeader}
+        //renderForeground={this.renderHeader}
       >
         <ImageBackground
           source={require("../../img/background/BACKGROUND.png")}

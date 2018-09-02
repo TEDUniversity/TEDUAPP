@@ -156,18 +156,21 @@ class CouncilVotings extends Component<IProps & ReduxProps> {
       return;
     }
     return this.props.surveys.map((item, id) => {
-      return (
-        <TouchableOpacity
-          key={id}
-          style={styles.button}
-          onPress={() => this.renderSurvey(item.name)}
-        >
-          <Text style={{ color: "rgb(66,103,178)", marginLeft: "-5%" }}>
-            {item.name}
-          </Text>
-          <Icon size={25} color="rgb(66,103,178)" name={"arrow-right"} />
-        </TouchableOpacity>
-      );
+      console.log(item.valid)
+      if(item.valid) {//if the survey is valid, publish in the app. it is come from firebase
+        return (
+          <TouchableOpacity
+            key={id}
+            style={styles.button}
+            onPress={() => this.renderSurvey(item.name)}
+          >
+            <Text style={{ color: "rgb(66,103,178)", marginLeft: "-5%" }}>
+              {item.name}
+            </Text>
+            <Icon size={25} color="rgb(66,103,178)" name={"arrow-right"} />
+          </TouchableOpacity>
+        );
+      }
     });
   };
 
