@@ -121,12 +121,14 @@ class CouncilVotings extends Component<IProps & ReduxProps> {
         //console.log("firebase data: " + response.val());
 
          //store the data returned from firebase in asyncstorage
-        storeData("CouncilVotings", JSON.stringify(response.val())).then(() => {
+        /*storeData("CouncilVotings", JSON.stringify(response.val())).then(() => {
           retrieveData("CouncilVotings").then((res:string) => {  this.updateSurvey(JSON.parse(res))})
-        });
+        });*/
         
         //this.updateSurvey(voting)
         //console.log(this.props.surveys);
+        this.props.updateSurveys(response)
+      this.setState({ loading: false })
       });
   }
 
