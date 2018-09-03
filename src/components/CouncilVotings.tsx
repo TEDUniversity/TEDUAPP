@@ -22,17 +22,12 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import HeaderImageScrollView, {
   TriggeringView
 } from "react-native-image-header-scroll-view";
-import { Header } from "react-navigation";
-import DetailNews from "./DetailNews";
-import CouncilNews from "./CouncilNews";
-import Answer from "./Survey/Answer";
-import Question from "./Survey/Question";
-import Survey from "./Survey/Survey";
 import firebase from "firebase";
 import * as types from "../store/types";
 import * as actions from "../store/actions";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
+import { storeData, retrieveData } from "../util/helpers";
 
 const Spinner = ({ size }) => (
   <View>
@@ -52,7 +47,7 @@ class CouncilVotings extends Component<IProps & ReduxProps> {
   state = {
     selectedSurey: "",
     loading: true,
-    surveys: [
+    surveys: [//example
       {
         //survey#1
         name: "OrientationParty",
@@ -124,10 +119,20 @@ class CouncilVotings extends Component<IProps & ReduxProps> {
           return;
         }
         //console.log("firebase data: " + response.val());
-        this.props.updateSurveys(response.val());
-        this.setState({ loading: false });
+
+         //store the data returned from firebase in asyncstorage
+        storeData("CouncilVotings", JSON.stringify(response.val())).then(() => {
+          retrieveData("CouncilVotings").then((res:string) => {  this.updateSurvey(JSON.parse(res))})
+        });
+        
+        //this.updateSurvey(voting)
         //console.log(this.props.surveys);
       });
+  }
+
+  updateSurvey = (councilVotings: types.Survey[]) => {
+    this.props.updateSurveys(councilVotings)
+    this.setState({ loading: false })
   }
 
   renderSurvey = surveyName => {
