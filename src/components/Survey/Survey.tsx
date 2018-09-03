@@ -46,7 +46,6 @@ interface IProp {
 class Survey extends Component<IProp & ReduxProps> {
   state = {
     answers: [],
-    voteBefore: null,
     currentSurvey: this.props.surveys[this.props.navigation.state.params.index],
   };
 
@@ -145,13 +144,13 @@ class Survey extends Component<IProp & ReduxProps> {
     //console.log(this.props.surveys)
     const surveys = this.props.surveys;
     this.setState({ currentSurvey: this.props.surveys[this.props.navigation.state.params.index] })
-    let allAnswered = true;
-    this.state.currentSurvey.questions.map((question, id) => {
+    let allAnswered = true;//control variable for questions that are not answered
+    this.state.currentSurvey.questions.map((question, id) => {//traverse the question array of the related survey and check current pressed answers. If it is undefined, question is not answered.
       if (question.currentPressedAnswers == undefined) {
         allAnswered = false;
       }
     })
-
+    //if all questions are not answered, show alert
     if (!allAnswered) {
       Alert.alert(
         "Required",
@@ -164,16 +163,16 @@ class Survey extends Component<IProp & ReduxProps> {
         ],
         { cancelable: false }
       );
+    //if all questions are answered, proceed
     } else {
 
       //check firebase to ensure that user does not vote again for same voting
       //userVoteBefore is a promise whose return value must be handled by .then
+      //userVoteBefore is a control variable for checking that user does not vote before
       const userVoteBefore = this.checkUserVote();
       userVoteBefore.then((response) => {
-        if (response) {
-          console.log("user vote before:")
-          this.setState({voteBefore : response})
-
+        if (response) {//if userVoteBefore true, this means that user did vote before
+          //console.log("user vote before:")
           Alert.alert(
             "Double Vote",
             "You cannot vote again.",
@@ -186,11 +185,9 @@ class Survey extends Component<IProp & ReduxProps> {
             { cancelable: false }
           );
 
-        } else {
-          console.log("not vote")
-          this.setState({voteBefore : response})
-
-
+        } else {//if userVoteBefore is false, this means that user did not vote before. So proceed.
+          //console.log("not vote")
+          
           let givenAnswers = []
           this.state.currentSurvey.questions.map((question, id) => {
             const pressedAnswer = question.currentPressedAnswers;
@@ -211,7 +208,7 @@ class Survey extends Component<IProp & ReduxProps> {
               });
   
             //set the global state again after updating firebase because when question.currentPressedAnswers are read to update firebase it become undefined for the next time.
-            //thats why after it becomes undefined, it is set and updated again to preserve satete
+            //thats why, after it becomes undefined, it is set and updated again to preserve satete by pressedAnswer
             surveys[this.props.navigation.state.params.index].questions[id].currentPressedAnswers = pressedAnswer;
             this.props.updateSurveys(surveys);
           })
@@ -239,14 +236,6 @@ class Survey extends Component<IProp & ReduxProps> {
 
         }
       });
-
-      //console.log(this.state.voteBefore)
-      if (this.state.voteBefore) {
-        
-      } else {
-        
-      }
-
     }
 
   }

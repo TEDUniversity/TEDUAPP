@@ -121,14 +121,13 @@ class CouncilVotings extends Component<IProps & ReduxProps> {
         //console.log("firebase data: " + response.val());
 
          //store the data returned from firebase in asyncstorage
-        /*storeData("CouncilVotings", JSON.stringify(response.val())).then(() => {
-          retrieveData("CouncilVotings").then((res:string) => {  this.updateSurvey(JSON.parse(res))})
-        });*/
+        storeData("CouncilVotings", JSON.stringify(response.val())).then(() => {
+          //it is casted to string because it is stored as string in local storage. After getting is parse it as json.
+          retrieveData("CouncilVotings").then((res:string) => {  this.updateSurvey(JSON.parse(res))})          
+        });
         
         //this.updateSurvey(voting)
         //console.log(this.props.surveys);
-        this.props.updateSurveys(response)
-      this.setState({ loading: false })
       });
   }
 
@@ -145,6 +144,12 @@ class CouncilVotings extends Component<IProps & ReduxProps> {
     }
     return this.props.surveys.map((item, id) => {
       if (item.name === surveyName) {
+        //traverse the question array of the related survey and set all currentPressedAnswers to UNDEFINED before navigating to survey
+        //Reason is that if a user pressed answers but not submit the survey, the given answers is preserved in the global state and when user 
+        //opens the related survey for sending again it sent with previos answer state. 
+        item.questions.map((question) => {
+          question.currentPressedAnswers = undefined;
+        })
         //console.log(item);
         this.props.navigation.navigate("SurveyRouter", {
           title: surveyName,
