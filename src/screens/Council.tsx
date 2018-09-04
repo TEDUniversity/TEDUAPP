@@ -285,7 +285,7 @@ class Council extends Component<IProp & ReduxProps>{
             source={require("../../img/header/anatepe2.png")}
           />
         )}
-        overlayColor="#144d8c"
+        overlayColor="rgb(231,231,232)"
         maxOverlayOpacity={1}
         bounces={false}
         showsVerticalScrollIndicator={false}

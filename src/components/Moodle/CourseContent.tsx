@@ -261,7 +261,8 @@ const styles = StyleSheet.create({
   },
   subContainer: {
     flex: 1,
-    backgroundColor: "white",
+    backgroundColor: "transparent",
+
     width: Dimensions.get("window").width - 10,
     // height: Dimensions.get("window").height / 6,
     margin: 10

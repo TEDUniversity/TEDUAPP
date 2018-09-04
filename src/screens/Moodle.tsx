@@ -254,7 +254,7 @@ class Moodle extends Component<IProp & ReduxProps> {
         scrollEnabled={false}
         renderForeground={this.renderHeader}
       >
-        <View height={this.state.scrollHeight}>
+        <View height={this.state.scrollHeight} width= {Dimensions.get("window").width} >
           <ImageBackground
             source={require("../../img/background/BACKGROUND.png")}
             style={styles.mainBackGround}
@@ -308,7 +308,8 @@ const styles = StyleSheet.create({
   mainBackGround: {
     flex: 1,
     alignSelf: "stretch",
-    resizeMode: "cover"
+    resizeMode: "repeat",
+    
   }
 });
 
