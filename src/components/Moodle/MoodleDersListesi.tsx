@@ -21,7 +21,7 @@ interface IProps {
   navigation: any;
 }
 
-let deviceWidth = Dimensions.get("window").width
+let deviceWidth = Dimensions.get("window").width;
 
 class MoodleDersListesi extends Component<IProps> {
   state = {
@@ -54,7 +54,9 @@ class MoodleDersListesi extends Component<IProps> {
               >
                 {responseData["fullname"]}
               </Text>
-              <Text style={{ fontSize: deviceWidth / 25, margin: deviceWidth / 75 }}>
+              <Text
+                style={{ fontSize: deviceWidth / 25, margin: deviceWidth / 75 }}
+              >
                 {responseData["summary"]}
               </Text>
             </View>
@@ -85,16 +87,16 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "white",
+    backgroundColor: "#006AB3",
     width: Dimensions.get("window").width - 10,
     // height: Dimensions.get("window").height / 6,
     margin: 5
   },
   button: {
-    height: deviceWidth / 5.76,
+    height: deviceWidth / 5.76
     //height: deviceWidth/2.5,
     //width: deviceWidth/2.5,
-  },
+  }
 });
 
 export default MoodleDersListesi;
