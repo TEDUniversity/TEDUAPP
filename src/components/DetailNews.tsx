@@ -8,13 +8,14 @@ import {
   ImageBackground,
   StyleSheet
 } from "react-native";
-import HTML from "react-native-render-html";
 
 interface IProps {
   imgsrc: string;
   navigation?: any;
   data: any;
 }
+
+let deviceWidth = Dimensions.get('window').width;
 
 class DetailNews extends Component<IProps> {
   //   alert(JSON.stringify(props.data));
@@ -123,13 +124,15 @@ const styles = StyleSheet.create({
     textAlign: "center",
     textAlignVertical: "center",
     color: "black",
-    fontSize: 14
+    fontSize: deviceWidth / 26.5,
   },
   button: {
     backgroundColor: "#DDDDDD",
     padding: 0,
     height: 150,
-    width: 150
+    width: 150,
+    //height: deviceWidth/2.5,
+    //width: deviceWidth/2.5,
   },
   BackGround: {
     flex: 1,

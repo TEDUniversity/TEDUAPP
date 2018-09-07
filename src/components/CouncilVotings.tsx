@@ -43,6 +43,8 @@ interface IProps {
   navigation: any;
 }
 
+let deviceWidth = Dimensions.get("window").width
+
 class CouncilVotings extends Component<IProps & ReduxProps> {
   state = {
     selectedSurey: "",
@@ -125,10 +127,11 @@ class CouncilVotings extends Component<IProps & ReduxProps> {
           //it is casted to string because it is stored as string in local storage. After getting is parse it as json.
           retrieveData("CouncilVotings").then((res: string) => { this.updateSurvey(JSON.parse(res)) })
         });
-
         //this.updateSurvey(voting)
         //console.log(this.props.surveys);
       });
+      retrieveData("CouncilVotings").then((res: string) => { this.updateSurvey(JSON.parse(res)) })
+
   }
 
   updateSurvey = (councilVotings: types.Survey[]) => {
@@ -235,7 +238,7 @@ const styles = StyleSheet.create({
 
     flexDirection: "row",
     //width: "100%",
-    height: 35,
+    height: deviceWidth / 10.5 ,
     backgroundColor: "rgb(12,57,98)",
     alignItems: "center",
     justifyContent: "space-around",

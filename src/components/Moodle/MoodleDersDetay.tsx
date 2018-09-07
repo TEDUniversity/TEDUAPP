@@ -7,7 +7,7 @@
  */
 
 import React, { Component } from "react";
-import { Text, View, StyleSheet } from "react-native";
+import { Text, View, StyleSheet, Dimensions } from "react-native";
 import {
   StackNavigator,
   createMaterialTopTabNavigator,
@@ -23,27 +23,29 @@ import Detay from "./CourseContent";
 import Grades from "./Grades";
 import Forum from "./Forum";
 
+let deviceWidth = Dimensions.get("window").width
+
 const hScreen = createMaterialTopTabNavigator(
   {
     Detay: {
       screen: Detay,
       navigationOptions: {
         tabBarLabel: "Home Page",
-        tabBarIcon: ({ tintColor }) => <Icon name="file-document" size={25} />
+        tabBarIcon: ({ tintColor }) => <Icon name="file-document" size={deviceWidth/15} />
       }
     },
     Forum: {
       screen: Forum,
       navigationOptions: {
         tabBarLabel: "Forum",
-        tabBarIcon: ({ tintColor }) => <Icon name="forum" size={25} />
+        tabBarIcon: ({ tintColor }) => <Icon name="forum" size={deviceWidth/15} />
       }
     },
     Grades: {
       screen: Grades,
       navigationOptions: {
         tabBarLabel: "Grades",
-        tabBarIcon: ({ tintColor }) => <Icon name="contact-mail" size={25} />
+        tabBarIcon: ({ tintColor }) => <Icon name="contact-mail" size={deviceWidth/15} />
       }
     }
   },
@@ -57,7 +59,7 @@ const hScreen = createMaterialTopTabNavigator(
       },
       activeTintColor: "white",
       inactiveTintColor: "gray",
-      labelStyle: { fontSize: 20 },
+      labelStyle: { fontSize: deviceWidth / 18.75 },
       indicatorStyle: { backgroundColor: "black" }
     }
   }

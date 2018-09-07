@@ -4,7 +4,8 @@ import {
   Text,
   View,
   ImageBackground,
-  StyleSheet
+  StyleSheet,
+  Dimensions
 } from "react-native";
 
 
@@ -13,6 +14,8 @@ interface IProp {
   Data: () => JSX.Element[];
   style?: any;
 }
+
+let deviceWidth = Dimensions.get("window").width;
 
 class HorizontalList extends React.Component<IProp> {
   
@@ -75,7 +78,7 @@ const styles = StyleSheet.create({
   },
   textStyle: {
     marginLeft: 15,
-    fontSize: 18,
+    fontSize: deviceWidth / 20.833333333,
     fontWeight: "bold"
   },
   warningText: {

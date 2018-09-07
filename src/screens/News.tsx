@@ -91,7 +91,11 @@ class News extends Component<IProp & ReduxProps> {
     //AsyncStorage.getItem("user", (err, result) => { console.log(result); }); DENEME
 
     const winHeight = Dimensions.get("window").height;
-    console.log("winHeight" + winHeight);
+    const winWidth = Dimensions.get("window").width;
+
+    console.log("winHeight" + winHeight); 
+    console.log("winWidth" + winWidth); 
+
     
     //adjust header height according to different device sizes
     if (winHeight < 736) {
@@ -215,7 +219,7 @@ class News extends Component<IProp & ReduxProps> {
     //console.log("haber"+this.state.dataHaberler.length);
     let emptyData = false;
     //required for adjusting body height according to horizontallists. if one array is empty that means one horizontal list is absent
-    if (this.state.dataDuyurular.length === 0 || this.state.dataHaberler.length === 0 || this.state.dataEtkinlikler.length === 0) {
+    if (this.state.dataDuyurular.length === 0 || this.state.dataHaberler.length === 0 ) {
       emptyData = true;
     }
 
@@ -225,7 +229,10 @@ class News extends Component<IProp & ReduxProps> {
     const winHeight = Dimensions.get("window").height;
     if (!emptyData) {
       //adjust body height according to different device heights with none of the horizontal list is empty
-      if (winHeight < 736) {
+      if(winHeight <= 568) {//5s height
+        this.setState({ scrollHeight: winHeight * 1.15 }); //75.5%
+      }
+      else if ( winHeight > 568 && winHeight < 736) {//plus height
         //console.log("device height less than 736");
         this.setState({ scrollHeight: winHeight * 0.97 }); //75.5%
       } else if (winHeight >= 736) {
@@ -234,7 +241,10 @@ class News extends Component<IProp & ReduxProps> {
       }
     } else if (emptyData) {
       //adjust body height according to different device heights with one of the horizontal list is empty
-      if (winHeight < 736) {
+      if(winHeight <= 568) {//5s height
+        this.setState({ scrollHeight: winHeight * 0.90 }); //75.5%
+      }
+      else if (winHeight < 736) {
         //console.log("device height less than 736");
         this.setState({ scrollHeight: winHeight * 0.7435 }); //75.5%
       } else if (winHeight >= 736) {
@@ -311,7 +321,7 @@ class News extends Component<IProp & ReduxProps> {
                   style={{ marginTop: this.state.horizontalMarginTop }}
                 />
                 <HorizontalList
-                  Data={this.renderDataEtkinlikler}
+                  Data={this.renderDataHaberler}
                   title={"Etkinlikler"}
                   style={{ marginTop: this.state.horizontalMarginTop }}
                 />

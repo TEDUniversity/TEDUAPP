@@ -58,18 +58,23 @@ class CouncilNews extends Component<IProps> {
       .database()
       .ref("/councilNews")
       .on("value", response => {
-        //console.log("response "+JSON.stringify(response.val()));
         response.forEach(child => {
           news.push(child.val());
         })
 
-        this.setState({ data: news }, () => {
-          this.whenLoaded();
-          //console.log(this.state.data);
-        });
+        storeData("CouncilNews", JSON.stringify(news))
+        //this.setState({ data: news }, () => {
+        //this.whenLoaded();
+        //console.log(this.state.data);
+        //});
       });
 
 
+    retrieveData("CouncilNews").then((response) => {
+      this.setState({ data: JSON.parse(response) }, () => {
+        this.whenLoaded();
+      });
+    })
 
     /* firebase
      .database()
@@ -122,7 +127,10 @@ class CouncilNews extends Component<IProps> {
       const winHeight = Dimensions.get("window").height;
       if (!emptyData) {
         //adjust body height according to different device heights with none of the horizontal list is empty
-        if (winHeight < 736) {
+        if(winHeight <= 568) {//5s height
+          this.setState({ scrollHeight: winHeight * 1.15 }); //75.5%
+        }
+        else if ( winHeight > 568 && winHeight < 736) {
           //console.log("device height less than 736");
           this.setState({ scrollHeight: winHeight * 0.97 }); //75.5%
         } else if (winHeight >= 736) {
@@ -131,7 +139,10 @@ class CouncilNews extends Component<IProps> {
         }
       } else if (emptyData) {
         //adjust body height according to different device heights with one of the horizontal list is empty
-        if (winHeight < 736) {
+        if(winHeight <= 568) {//5s height
+          this.setState({ scrollHeight: winHeight * 0.90 }); //75.5%
+        }
+        else if ( winHeight > 568 && winHeight < 736) {
           //console.log("device height less than 736");
           this.setState({ scrollHeight: winHeight * 0.7435 }); //75.5%
         } else if (winHeight >= 736) {

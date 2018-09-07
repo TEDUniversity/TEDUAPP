@@ -43,7 +43,7 @@ class MoodleLogin extends Component<IProp> {
             width: 250,
             borderColor: "gray",
             borderWidth: 1,
-            color: "white"
+            color: "black"
           }}
           placeholder="Kullanıcı adı"
           placeholderTextColor="gray"
@@ -57,7 +57,7 @@ class MoodleLogin extends Component<IProp> {
             width: 250,
             borderColor: "gray",
             borderWidth: 1,
-            color: "white"
+            color: "black"
           }}
           placeholderTextColor="gray"
           placeholder="Şifre"
@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontWeight: "bold",
-    color: "white"
+    color: "black"
   },
   subContainer: {
     flex: 1,

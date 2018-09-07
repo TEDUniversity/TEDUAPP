@@ -20,6 +20,9 @@ interface IProps {
   dersler: any;
   navigation: any;
 }
+
+let deviceWidth = Dimensions.get("window").width
+
 class MoodleDersListesi extends Component<IProps> {
   state = {
     dersler: []
@@ -29,6 +32,7 @@ class MoodleDersListesi extends Component<IProps> {
       (responseData, Id) =>
         responseData["visible"] === 1 ? (
           <TouchableOpacity
+            style={styles.button}
             key={Id}
             onPress={() => {
               this.props.navigation.navigate("DersDetayRouter", {
@@ -42,15 +46,15 @@ class MoodleDersListesi extends Component<IProps> {
             <View style={styles.subContainer}>
               <Text
                 style={{
-                  margin: 5,
+                  margin: deviceWidth / 75,
                   marginBottom: 0,
-                  fontSize: 20,
+                  fontSize: deviceWidth / 18.75,
                   color: "black"
                 }}
               >
                 {responseData["fullname"]}
               </Text>
-              <Text style={{ fontSize: 15, margin: 5 }}>
+              <Text style={{ fontSize: deviceWidth / 25, margin: deviceWidth / 75 }}>
                 {responseData["summary"]}
               </Text>
             </View>
@@ -85,7 +89,12 @@ const styles = StyleSheet.create({
     width: Dimensions.get("window").width - 10,
     // height: Dimensions.get("window").height / 6,
     margin: 5
-  }
+  },
+  button: {
+    height: deviceWidth / 5.76,
+    //height: deviceWidth/2.5,
+    //width: deviceWidth/2.5,
+  },
 });
 
 export default MoodleDersListesi;

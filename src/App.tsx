@@ -7,7 +7,7 @@
  */
 
 import React, { Component } from "react";
-import { View, Text } from "react-native";
+import { View, Text, Dimensions } from "react-native";
 import { createStackNavigator } from "react-navigation";
 import News, { Spinner } from "./screens/News";
 import Moodle from "./screens/Moodle";
@@ -26,6 +26,8 @@ import { Provider } from "react-redux";
 import { store, persistor } from "./store";
 import { PersistGate } from "redux-persist/integration/react";
 import MoodleDersDetay from "./components/Moodle/MoodleDersDetay";
+
+let deviceWidth = Dimensions.get("window").width
 
 // symbol polyfills
 require("core-js/es6/symbol");
@@ -118,7 +120,7 @@ const RootStack = createStackNavigator(
     DersDetayRouter: {
       screen: MoodleDersDetay,
       navigationOptions: {
-        headerStyle: { marginTop: 0, backgroundColor: "#144d8c", height: 30 },
+        headerStyle: { marginTop: 0, backgroundColor: "#144d8c", height: deviceWidth / 12.5 },
         title: "Moodle"
       }
     }

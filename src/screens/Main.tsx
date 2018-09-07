@@ -40,14 +40,14 @@ class Main extends Component<IProp> {
     //const parseString = require("xml2js").parseString;
 
     const winWidth = Dimensions.get("window").width;
-    console.log("winWidth" + winWidth);
+    //console.log("winWidth" + winWidth);
     //navigation toolbar içindeki elemanların yeri için etkisiz bir işlem
     //sadece tüm toolbarın genişliğini etkiliyor
     if (winWidth < 414) {
-      console.log("device width less than 414");
+      //console.log("device width less than 414");
       this.setState({ menuWidth: winWidth * 1 }); //75.5%
     } else if (winWidth >= 414) {
-      console.log("device width greater than 414");
+      //console.log("device width greater than 414");
       this.setState({ menuWidth: winWidth * 1 }); //76%
     }
   }

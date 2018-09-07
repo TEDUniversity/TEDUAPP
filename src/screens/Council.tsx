@@ -40,6 +40,8 @@ interface IProp {
   navigation: any;
 }
 
+let deviceWidth = Dimensions.get("window").width
+
 interface ReduxProps {
   User: types.User;
   isMoodleLoggedIn: boolean;
@@ -367,7 +369,7 @@ const styles = StyleSheet.create({
     //flex: 1,
     //justifyContent: "flex-start",
     width: "100%",
-    height: 25,
+    height: deviceWidth / 15,
     backgroundColor: "rgb(41,48,109)",
     alignItems: "center"
     //#373738

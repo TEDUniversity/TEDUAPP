@@ -33,6 +33,8 @@ interface ReduxProps {
   user: types.User;
 }
 
+let deviceWidth = Dimensions.get("window").width
+
 class Detay extends Component<IProp & ReduxProps> {
   state = {
     isLoading: true,
@@ -98,9 +100,9 @@ class Detay extends Component<IProp & ReduxProps> {
       }
       if (data["visible"] === 1) {
         return (
-          <View key={Id} style={{ flex: 1, flexDirection: "row", margin: 5 }}>
+          <View key={Id} style={{ flex: 1, flexDirection: "row", margin: deviceWidth / 75, alignItems: "center" }}>
             <Image
-              style={{ width: 20, height: 20, margin: 5 }}
+              style={{ width: deviceWidth / 10.75, height: deviceWidth / 10.75, margin: deviceWidth / 75 }}
               source={{ uri: data["modicon"] }}
             />
             <View style={{ flex: 1, flexDirection: "column" }}>
@@ -167,9 +169,9 @@ class Detay extends Component<IProp & ReduxProps> {
               >
                 <Text
                   style={{
-                    margin: 5,
+                    margin: deviceWidth / 75,
                     marginBottom: 0,
-                    fontSize: 15,
+                    fontSize: deviceWidth / 25,
                     color: "black"
                   }}
                 >
@@ -178,7 +180,7 @@ class Detay extends Component<IProp & ReduxProps> {
               </TouchableOpacity>
               <Text
                 style={{
-                  fontSize: 10,
+                  fontSize: deviceWidth / 37.5,
                   color: "black"
                 }}
               >
@@ -206,7 +208,7 @@ class Detay extends Component<IProp & ReduxProps> {
                 justifyContent: "space-between"
               }}
             >
-              <Text style={{ margin: 10, fontSize: 20 }}>{data["name"]}</Text>
+              <Text style={{ margin: 10, fontSize: deviceWidth / 18.75 }}>{data["name"]}</Text>
               <View
                 style={{
                   backgroundColor: "black",

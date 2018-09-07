@@ -24,11 +24,15 @@ import HeaderImageScrollView from "react-native-image-header-scroll-view";
 import { Header } from "react-navigation";
 import Icon from "react-native-vector-icons/Entypo";
 
-const MIN_HEIGHT = (Header as any).height;
 
 interface IProp {
   navigation: any;
 }
+
+let deviceWidth = Dimensions.get('window').width;
+const MIN_HEIGHT = (Header as any).height;
+
+
 class Menu extends Component<IProp> {
   static navigationOptions = {
     title: "Menu",
@@ -135,7 +139,7 @@ class Menu extends Component<IProp> {
         renderHeader={() => (
           <Image
             resizeMode="stretch"
-            width={Dimensions.get("window").width}
+            width={deviceWidth}
             style={StyleSheet.absoluteFill}
             source={require("../../img/header/anatepe2.png")}
           />
@@ -148,14 +152,14 @@ class Menu extends Component<IProp> {
         scrollEnabled={false}
       //renderForeground={this.renderHeader}
       >
-        
-          <View style={styles.container} height={this.state.scrollHeight}>
-            <ImageBackground
-              source={require("../../img/background/BACKGROUND.png")}
-              style={styles.mainBackGround}
-            >
-            <ScrollView  contentContainerStyle={{flex:1,justifyContent: "space-around"}} >
-              
+
+        <View style={styles.container} height={this.state.scrollHeight}>
+          <ImageBackground
+            source={require("../../img/background/BACKGROUND.png")}
+            style={styles.mainBackGround}
+          >
+            <ScrollView contentContainerStyle={{ flex: 1, justifyContent: "space-around" }} >
+
 
               <TouchableOpacity
                 style={styles.subContainer}
@@ -169,7 +173,7 @@ class Menu extends Component<IProp> {
                 }}
               >
                 <View
-                  style={[styles.subBackground, {backgroundColor: "rgb(194,170,36)"} ]}
+                  style={[styles.subBackground, { backgroundColor: "rgb(194,170,36)" }]}
                 >
                   <Text style={styles.menuText}>MyTEDU Portal</Text>
                 </View>
@@ -186,7 +190,7 @@ class Menu extends Component<IProp> {
                 }}
               >
                 <View
-                  style={[styles.subBackground, {backgroundColor: "rgb(158,183,57)"} ]}
+                  style={[styles.subBackground, { backgroundColor: "rgb(158,183,57)" }]}
                 >
                   <Text style={styles.menuText}>Karafanzin</Text>
                 </View>
@@ -203,7 +207,7 @@ class Menu extends Component<IProp> {
                 }}
               >
                 <View
-                  style={[styles.subBackground, {backgroundColor: "rgb(35,49,126)"} ]}
+                  style={[styles.subBackground, { backgroundColor: "rgb(35,49,126)" }]}
                 >
                   <Text style={styles.menuText}>Academic Calender</Text>
                 </View>
@@ -220,14 +224,14 @@ class Menu extends Component<IProp> {
                 }}
               >
                 <View
-                  style={[styles.subBackground, {backgroundColor: "rgb(24,154,208)"} ]}
+                  style={[styles.subBackground, { backgroundColor: "rgb(24,154,208)" }]}
                 >
                   <Text style={styles.menuText}>RadioTEDÜ</Text>
                 </View>
               </TouchableOpacity>
-              </ScrollView>
-            </ImageBackground>
-          </View>
+            </ScrollView>
+          </ImageBackground>
+        </View>
       </HeaderImageScrollView>
     );
   }
@@ -244,7 +248,8 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "white",
     textAlign: "center",
-    textAlignVertical: "center"
+    textAlignVertical: "center",
+    fontSize: deviceWidth / 26.5,
   },
   mainBackGround: {
     flex: 1,
@@ -252,10 +257,10 @@ const styles = StyleSheet.create({
     resizeMode: "cover"
   },
   subBackground: {
-    width: Dimensions.get("window").width,
+    width: deviceWidth,
     alignItems: "center",
     justifyContent: "center",
-    height: 60,
+    height: deviceWidth / 6.25,
   },
   subContainer: {
     //marginTop: 10,

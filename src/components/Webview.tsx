@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import {
   ImageBackground,
-  Linking,
+  Dimensions,
   TouchableOpacity,
   Text,
   View,
@@ -22,13 +22,16 @@ const Spinner = ({ size }) => <ActivityIndicator size={size || "large"} />;
 interface IProp {
   navigation: any;
 }
+
+let deviceWidth = Dimensions.get('window').width;
+
 class Webview extends React.Component<IProp> {
   static navigationOptions = ({ navigation }) => ({
     headerTitle: (
       <Text style={styles.headerTitle}> {navigation.state.params.title} </Text>
     ),
     title: "Webview",
-    headerStyle: { marginTop: 0, backgroundColor: "#144d8c", height: 35 },
+    headerStyle: { marginTop: 0, backgroundColor: "#144d8c", height: deviceWidth / 10.7 },
     headerLeft: (
       <TouchableOpacity
         style={styles.headerLeftContainer}
@@ -38,8 +41,7 @@ class Webview extends React.Component<IProp> {
       >
         <Icon name="ios-arrow-back" size={30} />
         <Text style={styles.headerLeftText}>
-          {" "}
-          {navigation.state.params.backButton}{" "}
+          {navigation.state.params.backButton}
         </Text>
       </TouchableOpacity>
     )
@@ -74,7 +76,7 @@ class Webview extends React.Component<IProp> {
         renderLoading={() => {
           return <Spinner size={"large"} />;
         }}
-        onError={(err) => { console.log(err); } }
+        onError={(err) => { this.loadError() } }
         // onError
       />
     );
@@ -85,7 +87,8 @@ export default Webview;
 
 const styles = StyleSheet.create({
   headerTitle: {
-    fontWeight: "bold"
+    fontWeight: "bold",
+    fontSize: deviceWidth / 22,
   },
   headerLeftContainer: {
     flexDirection: "row",
@@ -96,7 +99,7 @@ const styles = StyleSheet.create({
   headerLeftText: {
     alignItems: "center",
     justifyContent: "center",
-    fontSize: 15,
+    fontSize: deviceWidth / 26.45,
     fontWeight: "400"
   }
 });
