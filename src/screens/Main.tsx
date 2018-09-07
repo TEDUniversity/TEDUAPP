@@ -67,7 +67,7 @@ class Main extends Component<IProp> {
       barColor: "#006AB3",
       pressColor: "rgba(232, 36, 55, 0.16)"
     },
-    
+
     {
       key: "MoodleRouter",
       icon: "school",
@@ -77,7 +77,7 @@ class Main extends Component<IProp> {
     },
     {
       key: "CouncilRouter",
-      icon: "music-note",
+      icon: "people",
       label: "Council",
       barColor: "#006AB3",
       pressColor: "rgba(232, 36, 55, 0.16)"
@@ -148,7 +148,7 @@ class Main extends Component<IProp> {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 1
     //justifyContent: "space-between"
     //alignItems: "center"
   },

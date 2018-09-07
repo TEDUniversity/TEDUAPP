@@ -40,7 +40,7 @@ interface IProp {
   navigation: any;
 }
 
-let deviceWidth = Dimensions.get("window").width
+let deviceWidth = Dimensions.get("window").width;
 
 interface ReduxProps {
   User: types.User;
@@ -49,7 +49,7 @@ interface ReduxProps {
   updateIsMoodleLoggedIn: (isLoggedIn: boolean) => any;
 }
 
-class Council extends Component<IProp & ReduxProps>{
+class Council extends Component<IProp & ReduxProps> {
   //not used.
   static navigationOptions = {
     headerTitle: (
@@ -72,8 +72,7 @@ class Council extends Component<IProp & ReduxProps>{
     dataDuyurular: [],
     dataHaberler: [],
     dataEtkinlikler: [],
-    token: "",
-
+    token: ""
   };
 
   renderDataDuyurular = () => {
@@ -104,12 +103,18 @@ class Council extends Component<IProp & ReduxProps>{
     }
     else if (winHeight > 568 && winHeight < 736) {
       //console.log("device height less than 736");
+<<<<<<< HEAD
       this.setState({ MAX_HEIGHT: winHeight * 0.233 }); //17.5%
     } else if (winHeight >= 736) {
       //console.log("device height greater than 736");
       this.setState({ MAX_HEIGHT: winHeight * 0.230 }); //18%
+=======
+      this.setState({ MAX_HEIGHT: winHeight * 0.22 }); //17.5%
+    } else if (winHeight >= 736) {
+      //console.log("device height greater than 736");
+      this.setState({ MAX_HEIGHT: winHeight * 0.22 }); //18%
+>>>>>>> 1c6594a85a05a96ec96ab1efa7151afdff813e63
     }
-
   }
 
   renderBody = () => {
@@ -137,7 +142,7 @@ class Council extends Component<IProp & ReduxProps>{
                   },
                   {
                     text: "Hayır",
-                    onPress: () => { }
+                    onPress: () => {}
                   }
                 ],
                 { cancelable: false }
@@ -145,7 +150,11 @@ class Council extends Component<IProp & ReduxProps>{
               return <View />;
             }}
           >
-            <Icon name="log-out" size={25} style={{ color: "rgb(1, 14, 41)" }} />
+            <Icon
+              name="log-out"
+              size={25}
+              style={{ color: "rgb(1, 14, 41)" }}
+            />
           </TouchableOpacity>
 
           <TabNavigator
@@ -164,7 +173,7 @@ class Council extends Component<IProp & ReduxProps>{
               }}
               titleStyle={styles.tabNavTitle}
             >
-              <Text> tab1 </Text>
+              <Text> </Text>
             </TabNavigator.Item>
             <TabNavigator.Item
               selected={this.state.selectedTab === "Votings"}
@@ -176,7 +185,7 @@ class Council extends Component<IProp & ReduxProps>{
               }}
               titleStyle={styles.tabNavTitle}
             >
-              <Text> tab2 </Text>
+              <Text> </Text>
             </TabNavigator.Item>
           </TabNavigator>
         </View>
@@ -250,31 +259,27 @@ class Council extends Component<IProp & ReduxProps>{
     let moodlePage;
     if (!this.props.isMoodleLoggedIn) {
       moodlePage = (
-        <View >
+        <View>
           <ImageBackground
             source={require("../../img/background/BACKGROUND.png")}
             style={styles.mainBackGround}
           >
-            <View style={styles.MoodleContainer} >
+            <View style={styles.MoodleContainer}>
               <MoodleLogin onPress={this.login} />
             </View>
           </ImageBackground>
         </View>
-
       );
     } else {
       moodlePage = (
-        <View >
+        <View>
           <ImageBackground
             source={require("../../img/background/BACKGROUND.png")}
             style={styles.mainBackGround}
           >
-            <View >
-              {this.renderBody()}
-            </View>
+            <View>{this.renderBody()}</View>
           </ImageBackground>
         </View>
-
       );
     }
     return (
@@ -317,7 +322,7 @@ class Council extends Component<IProp & ReduxProps>{
                   }}
                   titleStyle={styles.tabNavTitle}
                 >
-                  <Text> tab1 </Text>
+                  <Text> </Text>
                 </TabNavigator.Item>
                 <TabNavigator.Item
                   selected={this.state.selectedTab === "Votings"}
@@ -329,16 +334,14 @@ class Council extends Component<IProp & ReduxProps>{
                   }}
                   titleStyle={styles.tabNavTitle}
                 >
-                  <Text> tab2 </Text>
+                  <Text> </Text>
                 </TabNavigator.Item>
               </TabNavigator>
             );
           }
         }}
       >
-
         {moodlePage}
-
       </HeaderImageScrollView>
     );
   }
@@ -353,7 +356,7 @@ const styles = StyleSheet.create({
   MoodleContainer: {
     justifyContent: "center",
     alignItems: "center",
-    flex: 1,
+    flex: 1
   },
   questionContainer: {
     //justifyContent: "center"
@@ -389,8 +392,7 @@ const styles = StyleSheet.create({
   },
   tabNavTitle: {
     fontSize: 11,
-    fontWeight: "600",
-
+    fontWeight: "600"
   },
   mainBackGround: {
     flex: 1,
@@ -400,7 +402,6 @@ const styles = StyleSheet.create({
     // height: null
   }
 });
-
 
 const mapStateToProps = (state: types.GlobalState) => {
   return {
@@ -422,4 +423,3 @@ export default connect<{}, {}, ReduxProps>(
   mapStateToProps,
   mapDispatchToProps
 )(Council);
-
