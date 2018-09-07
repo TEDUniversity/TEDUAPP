@@ -59,12 +59,15 @@ class Menu extends Component<IProp> {
       this.setState({ scrollHeight: winHeight * 0.76 }); //76%
     }
 
-    if (winHeight < 736) {
+    if (winHeight <= 568) {//5s height
+      this.setState({ MAX_HEIGHT: winHeight * 0.196 }); //75.5%
+    }
+    else if (winHeight > 568 && winHeight < 736) {
       console.log("device height less than 736");
-      this.setState({ MAX_HEIGHT: winHeight * 0.183 }); //20%
+      this.setState({ MAX_HEIGHT: winHeight * 0.196 }); //20%
     } else if (winHeight >= 736) {
       console.log("device height greater than 736");
-      this.setState({ MAX_HEIGHT: winHeight * 0.18 }); //20%
+      this.setState({ MAX_HEIGHT: winHeight * 0.194 }); //20%
     }
   }
 
@@ -130,19 +133,26 @@ class Menu extends Component<IProp> {
     </View>
   );
   render() {
-    //Linking.openURL(`https://www.tedu.edu.tr/tr`)
-
+    let winHeight = Dimensions.get("window").height
+    let headerMarginTop = 0//header margin for iphone X
+    if (winHeight >= 812) {
+      headerMarginTop = 25
+    }else{
+      headerMarginTop = 9
+    }
     return (
       <HeaderImageScrollView
         maxHeight={this.state.MAX_HEIGHT}
         minHeight={MIN_HEIGHT}
         renderHeader={() => (
-          <Image
-            resizeMode="stretch"
-            width={deviceWidth}
-            style={StyleSheet.absoluteFill}
-            source={require("../../img/header/anatepe2.png")}
-          />
+          <View style={{ backgroundColor: "rgb(15, 108, 177)", height: 50 }}>
+            <Image
+              resizeMode="stretch"
+              width={Dimensions.get("window").width}
+              style={[StyleSheet.absoluteFill, { marginTop: headerMarginTop }]}
+              source={require("../../img/header/anatepe2.png")}
+            />
+          </View>
         )}
         overlayColor="#006AB3"
         maxOverlayOpacity={1}

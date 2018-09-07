@@ -44,6 +44,9 @@ interface ReduxProps {
   updateUser: (user: types.User) => any;
   updateIsMoodleLoggedIn: (isLoggedIn: boolean) => any;
 }
+
+let deviceWidth = Dimensions.get("window").width
+
 class Moodle extends Component<IProp & ReduxProps> {
   static navigationOptions = {
     headerTitle: (
@@ -77,12 +80,15 @@ class Moodle extends Component<IProp & ReduxProps> {
     this.getDersler();
 
     //set header height
-    if (winHeight < 736) {
+    if (winHeight <= 568) {//5s height
+      this.setState({ MAX_HEIGHT: winHeight * 0.196 }); //75.5%
+    }
+    else if (winHeight > 568 && winHeight < 736) {
       console.log("device height less than 736");
-      this.setState({ MAX_HEIGHT: winHeight * 0.183 }); //17.5%
+      this.setState({ MAX_HEIGHT: winHeight * 0.195 }); //17.5%
     } else if (winHeight >= 736) {
       console.log("device height greater than 736");
-      this.setState({ MAX_HEIGHT: winHeight * 0.18 }); //18%
+      this.setState({ MAX_HEIGHT: winHeight * 0.194 }); //18%
     }
 
     //set scroll height
@@ -202,7 +208,7 @@ class Moodle extends Component<IProp & ReduxProps> {
             return <View />;
           }}
         >
-          <Icon name="log-out" size={25} style={{ color: "rgb(1, 14, 41)" }} />
+          <Icon name="log-out" size={deviceWidth / 15} style={{ color: "rgb(1, 14, 41)" }} />
         </TouchableOpacity>
       );
     }
@@ -222,6 +228,13 @@ class Moodle extends Component<IProp & ReduxProps> {
   };
 
   render() {
+    let winHeight = Dimensions.get("window").height
+    let headerMarginTop = 0//header margin for iphone X
+    if (winHeight >= 812) {
+      headerMarginTop = 25
+    }else{
+      headerMarginTop = 9
+    }
     let moodlePage;
     if (!this.props.isMoodleLoggedIn) {
       moodlePage = <MoodleLogin onPress={this.login} />;
@@ -242,12 +255,14 @@ class Moodle extends Component<IProp & ReduxProps> {
         maxHeight={this.state.MAX_HEIGHT}
         minHeight={MIN_HEIGHT}
         renderHeader={() => (
-          <Image
-            resizeMode="stretch"
-            width={Dimensions.get("window").width}
-            style={StyleSheet.absoluteFill}
-            source={require("../../img/header/anatepe2.png")}
-          />
+          <View style={{ backgroundColor: "rgb(15, 108, 177)", height: 50 }}>
+              <Image
+                resizeMode="stretch"
+                width={Dimensions.get("window").width}
+                style={[StyleSheet.absoluteFill, { marginTop: headerMarginTop }]}
+                source={require("../../img/header/anatepe2.png")}
+              />
+          </View>
         )}
         overlayColor="#006AB3"
         maxOverlayOpacity={1}

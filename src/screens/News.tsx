@@ -93,17 +93,20 @@ class News extends Component<IProp & ReduxProps> {
     const winHeight = Dimensions.get("window").height;
     const winWidth = Dimensions.get("window").width;
 
-    console.log("winHeight" + winHeight); 
-    console.log("winWidth" + winWidth); 
+    console.log("winHeight" + winHeight);
+    console.log("winWidth" + winWidth);
 
-    
+
     //adjust header height according to different device sizes
-    if (winHeight < 736) {
+    if (winHeight <= 568) {//5s height
+      this.setState({ MAX_HEIGHT: winHeight * 0.196 }); //75.5%
+    }
+    else if (winHeight > 568 && winHeight < 736) {
       //console.log("device height less than 736");
-      this.setState({ MAX_HEIGHT: winHeight * 0.183 }); //17.5%
+      this.setState({ MAX_HEIGHT: winHeight * 0.195 }); //17.5%
     } else if (winHeight >= 736) {
       //console.log("device height greater than 736");
-      this.setState({ MAX_HEIGHT: winHeight * 0.18 }); //18%
+      this.setState({ MAX_HEIGHT: winHeight * 0.194 }); //18%
     }
 
     fetch("https://www.tedu.edu.tr/rss.xml")
@@ -219,7 +222,7 @@ class News extends Component<IProp & ReduxProps> {
     //console.log("haber"+this.state.dataHaberler.length);
     let emptyData = false;
     //required for adjusting body height according to horizontallists. if one array is empty that means one horizontal list is absent
-    if (this.state.dataDuyurular.length === 0 || this.state.dataHaberler.length === 0 ) {
+    if (this.state.dataDuyurular.length === 0 || this.state.dataHaberler.length === 0) {
       emptyData = true;
     }
 
@@ -229,10 +232,10 @@ class News extends Component<IProp & ReduxProps> {
     const winHeight = Dimensions.get("window").height;
     if (!emptyData) {
       //adjust body height according to different device heights with none of the horizontal list is empty
-      if(winHeight <= 568) {//5s height
+      if (winHeight <= 568) {//5s height
         this.setState({ scrollHeight: winHeight * 1.15 }); //75.5%
       }
-      else if ( winHeight > 568 && winHeight < 736) {//plus height
+      else if (winHeight > 568 && winHeight < 736) {//plus height
         //console.log("device height less than 736");
         this.setState({ scrollHeight: winHeight * 0.97 }); //75.5%
       } else if (winHeight >= 736) {
@@ -241,10 +244,10 @@ class News extends Component<IProp & ReduxProps> {
       }
     } else if (emptyData) {
       //adjust body height according to different device heights with one of the horizontal list is empty
-      if(winHeight <= 568) {//5s height
+      if (winHeight <= 568) {//5s height
         this.setState({ scrollHeight: winHeight * 0.90 }); //75.5%
       }
-      else if (winHeight < 736) {
+      else if (winHeight > 568 && winHeight < 736) {
         //console.log("device height less than 736");
         this.setState({ scrollHeight: winHeight * 0.7435 }); //75.5%
       } else if (winHeight >= 736) {
@@ -288,7 +291,15 @@ class News extends Component<IProp & ReduxProps> {
     ));
   };
   render() {
+
     //console.log("scrollHeigth: " + this.state.scrollHeight);
+    let winHeight = Dimensions.get("window").height
+    let headerMarginTop = 0//header image margin for iphone X
+    if (winHeight >= 812) {
+      headerMarginTop = 25
+    }else{//aditional 7 pixel margintop for header image to make clock visible
+      headerMarginTop = 9
+    }
     if (this.state.loading) {
       return <Spinner size={"large"} />;
     } else {
@@ -297,12 +308,14 @@ class News extends Component<IProp & ReduxProps> {
           maxHeight={this.state.MAX_HEIGHT}
           minHeight={MIN_HEIGHT}
           renderHeader={() => (
-            <Image
-              resizeMode="stretch"
-              width={Dimensions.get("window").width}
-              style={StyleSheet.absoluteFill}
-              source={require("../../img/header/anatepe2.png")}
-            />
+            <View style={{ backgroundColor: "rgb(15, 108, 177)", height: 50 }}>
+              <Image
+                resizeMode="stretch"
+                width={Dimensions.get("window").width}
+                style={[StyleSheet.absoluteFill, { marginTop: headerMarginTop }]}
+                source={require("../../img/header/anatepe2.png")}
+              />
+            </View>
           )}
           overlayColor="#006AB3"
           maxOverlayOpacity={1}
