@@ -103,17 +103,10 @@ class Council extends Component<IProp & ReduxProps> {
     }
     else if (winHeight > 568 && winHeight < 736) {
       //console.log("device height less than 736");
-<<<<<<< HEAD
       this.setState({ MAX_HEIGHT: winHeight * 0.233 }); //17.5%
     } else if (winHeight >= 736) {
       //console.log("device height greater than 736");
       this.setState({ MAX_HEIGHT: winHeight * 0.230 }); //18%
-=======
-      this.setState({ MAX_HEIGHT: winHeight * 0.22 }); //17.5%
-    } else if (winHeight >= 736) {
-      //console.log("device height greater than 736");
-      this.setState({ MAX_HEIGHT: winHeight * 0.22 }); //18%
->>>>>>> 1c6594a85a05a96ec96ab1efa7151afdff813e63
     }
   }
 
@@ -252,7 +245,7 @@ class Council extends Component<IProp & ReduxProps> {
     let winHeight = Dimensions.get("window").height
     let headerMarginTop = 0//header margin for iphone X
     if (winHeight >= 812) {
-      headerMarginTop = 29
+      headerMarginTop = 37
     }else{
       headerMarginTop = 9
     }

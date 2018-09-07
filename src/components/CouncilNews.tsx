@@ -112,7 +112,7 @@ class CouncilNews extends Component<IProps> {
       } else if (item.type.includes("etkinlik")) {
         etkinlik.push(item)
       } else if (item.type.includes("haber")) {
-        haber.push(item)
+        //haber.push(item)
       }
 
       let emptyData = false;
@@ -133,9 +133,11 @@ class CouncilNews extends Component<IProps> {
         else if ( winHeight > 568 && winHeight < 736) {
           //console.log("device height less than 736");
           this.setState({ scrollHeight: winHeight * 0.97 }); //75.5%
-        } else if (winHeight >= 736) {
+        } else if (winHeight >= 736 && winHeight < 812) {
           //console.log("device height greater than 736");
           this.setState({ scrollHeight: winHeight * 0.94, horizontalMarginTop: 30 }); //76%
+        }if (winHeight >= 812) {
+          this.setState({ scrollHeight: winHeight * 0.85, horizontalMarginTop: 30 }); //76%
         }
       } else if (emptyData) {
         //adjust body height according to different device heights with one of the horizontal list is empty
@@ -145,9 +147,11 @@ class CouncilNews extends Component<IProps> {
         else if ( winHeight > 568 && winHeight < 736) {
           //console.log("device height less than 736");
           this.setState({ scrollHeight: winHeight * 0.7435 }); //75.5%
-        } else if (winHeight >= 736) {
+        } else if (winHeight >= 736 && winHeight < 812) {
           //console.log("device height greater than 736");
           this.setState({ scrollHeight: winHeight * 0.7533, horizontalMarginTop: 30 }); //76%
+        }if (winHeight >= 812) {
+          this.setState({ scrollHeight: winHeight * 0.68, horizontalMarginTop: 30 }); //76%
         }
       }
 

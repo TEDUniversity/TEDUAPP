@@ -222,7 +222,7 @@ class News extends Component<IProp & ReduxProps> {
     //console.log("haber"+this.state.dataHaberler.length);
     let emptyData = false;
     //required for adjusting body height according to horizontallists. if one array is empty that means one horizontal list is absent
-    if (this.state.dataDuyurular.length === 0 || this.state.dataHaberler.length === 0) {
+    if (this.state.dataDuyurular.length === 0 || this.state.dataHaberler.length === 0 || this.state.dataEtkinlikler.length === 0 ) {
       emptyData = true;
     }
 
@@ -238,21 +238,25 @@ class News extends Component<IProp & ReduxProps> {
       else if (winHeight > 568 && winHeight < 736) {//plus height
         //console.log("device height less than 736");
         this.setState({ scrollHeight: winHeight * 0.97 }); //75.5%
-      } else if (winHeight >= 736) {
+      } else if (winHeight >= 736 && winHeight < 812) {
         //console.log("device height greater than 736");
-        this.setState({ scrollHeight: winHeight * 0.94, horizontalMarginTop: 30 }); //76%
+        this.setState({ scrollHeight: winHeight * 0.7533, horizontalMarginTop: 30 }); //76%
+      }if (winHeight >= 812) {
+        this.setState({ scrollHeight: winHeight * 0.85, horizontalMarginTop: 30 }); //76%
       }
     } else if (emptyData) {
       //adjust body height according to different device heights with one of the horizontal list is empty
       if (winHeight <= 568) {//5s height
         this.setState({ scrollHeight: winHeight * 0.90 }); //75.5%
       }
-      else if (winHeight > 568 && winHeight < 736) {
+      else if (winHeight > 568 && winHeight < 736) {//not plus phones
         //console.log("device height less than 736");
-        this.setState({ scrollHeight: winHeight * 0.7435 }); //75.5%
-      } else if (winHeight >= 736) {
+        this.setState({ scrollHeight: winHeight * 0.73 }); //75.5%
+      } else if (winHeight >= 736 && winHeight < 812) {//plus phones
         //console.log("device height greater than 736");
-        this.setState({ scrollHeight: winHeight * 0.7533, horizontalMarginTop: 30 }); //76%
+        this.setState({ scrollHeight: winHeight * 0.74, horizontalMarginTop: 30 }); //76%
+      }if (winHeight >= 812) {//iphone X
+        this.setState({ scrollHeight: winHeight * 0.7153, horizontalMarginTop: 30 }); //76%
       }
     }
     //console.log("scrollheight" + this.state.scrollHeight)
@@ -296,7 +300,7 @@ class News extends Component<IProp & ReduxProps> {
     let winHeight = Dimensions.get("window").height
     let headerMarginTop = 0//header image margin for iphone X
     if (winHeight >= 812) {
-      headerMarginTop = 25
+      headerMarginTop = 32
     }else{//aditional 7 pixel margintop for header image to make clock visible
       headerMarginTop = 9
     }
@@ -334,7 +338,7 @@ class News extends Component<IProp & ReduxProps> {
                   style={{ marginTop: this.state.horizontalMarginTop }}
                 />
                 <HorizontalList
-                  Data={this.renderDataHaberler}
+                  Data={this.renderDataEtkinlikler}
                   title={"Etkinlikler"}
                   style={{ marginTop: this.state.horizontalMarginTop }}
                 />

@@ -231,7 +231,7 @@ class Moodle extends Component<IProp & ReduxProps> {
     let winHeight = Dimensions.get("window").height
     let headerMarginTop = 0//header margin for iphone X
     if (winHeight >= 812) {
-      headerMarginTop = 25
+      headerMarginTop = 32
     }else{
       headerMarginTop = 9
     }
