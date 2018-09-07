@@ -19,7 +19,7 @@ const calendarIcon = <Image source={require("./img/calendar/t3.png")} />;
 const newsIcon = <Image source={require("./img/news/n3.png")} />;
 //const councilIcon = <Image source={require("./img/calendar/t1.png")} />;
 
-const councilIcon = <Icon name="code" color="red" size={30} />;
+const councilIcon = <Icon name="user-friend" color="red" size={30} />;
 
 interface Prop {
   navigation: any;
