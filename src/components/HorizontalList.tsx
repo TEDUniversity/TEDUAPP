@@ -11,6 +11,7 @@ import {
 interface IProp {
   title: string;
   Data: () => JSX.Element[];
+  style?: any;
 }
 
 class HorizontalList extends React.Component<IProp> {
@@ -24,7 +25,7 @@ class HorizontalList extends React.Component<IProp> {
       news = this.props.Data()
     }
   return(
-      <View style = { containerStyle } >
+      <View style = { [containerStyle, this.props.style] } >
       <Text style={textStyle}> {this.props.title} </Text>
       <ScrollView
         horizontal={true}
@@ -61,7 +62,7 @@ const styles = StyleSheet.create({
     elevation: 100,
     marginLeft: 12,
     marginRight: 5,
-    marginTop: 20
+    //marginTop: 20 commented out to adjusted from news.js with prop. If required it can uncommented.
   },
   subContainerStyle: {
     borderBottomWidth: 1,

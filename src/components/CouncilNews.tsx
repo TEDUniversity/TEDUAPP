@@ -42,13 +42,16 @@ class CouncilNews extends Component<IProps> {
     dataHaberler: [],
     dataDuyurular: [],
     loading: true,
+    horizontalMarginTop: 20,
+    scrollHeight: 0,
+
   }
 
   componentWillMount() {
     this.readCouncilNewsData();
   }
 
-  
+
   readCouncilNewsData = () => {
     let news = [];
     firebase
@@ -68,28 +71,28 @@ class CouncilNews extends Component<IProps> {
 
 
 
-     /* firebase
-      .database()
-      .ref("/councilNews")
-      .on("value", response => {
-        //console.log("response "+JSON.stringify(response.val()));
-        response.forEach(child => {
-          news.push(child.val());
-        })
+    /* firebase
+     .database()
+     .ref("/councilNews")
+     .on("value", response => {
+       //console.log("response "+JSON.stringify(response.val()));
+       response.forEach(child => {
+         news.push(child.val());
+       })
 
-        storeData("CouncilNews", JSON.stringify(news)).then(() => {
-          //it is casted to string because it is stored as string in local storage. After getting is parse it as json.
-          
-        });
+       storeData("CouncilNews", JSON.stringify(news)).then(() => {
+         //it is casted to string because it is stored as string in local storage. After getting is parse it as json.
+         
+       });
 
 
-      });
-      retrieveData("CouncilNews").then((response) => {
-        this.setState({ data: response }, () => {
-          this.whenLoaded();
-          //console.log(this.state.data);
-        });
-      })*/
+     });
+     retrieveData("CouncilNews").then((response) => {
+       this.setState({ data: response }, () => {
+         this.whenLoaded();
+         //console.log(this.state.data);
+       });
+     })*/
 
 
 
@@ -106,14 +109,45 @@ class CouncilNews extends Component<IProps> {
       } else if (item.type.includes("haber")) {
         haber.push(item)
       }
+
+      let emptyData = false;
+      //required for adjusting body height according to horizontallists. if one array is empty that means one horizontal list is absent
+      if (duyuru.length === 0 || haber.length === 0 || etkinlik.length === 0) {
+        emptyData = true;
+      }
+
+      //the code below is run within the whenLoaded method rather than the componentWillMount
+      //because body height depends on the content rendered within the body
+      //which means that body height must be defined after all content data is loading which is here
+      const winHeight = Dimensions.get("window").height;
+      if (!emptyData) {
+        //adjust body height according to different device heights with none of the horizontal list is empty
+        if (winHeight < 736) {
+          //console.log("device height less than 736");
+          this.setState({ scrollHeight: winHeight * 0.97 }); //75.5%
+        } else if (winHeight >= 736) {
+          //console.log("device height greater than 736");
+          this.setState({ scrollHeight: winHeight * 0.94, horizontalMarginTop: 30 }); //76%
+        }
+      } else if (emptyData) {
+        //adjust body height according to different device heights with one of the horizontal list is empty
+        if (winHeight < 736) {
+          //console.log("device height less than 736");
+          this.setState({ scrollHeight: winHeight * 0.7435 }); //75.5%
+        } else if (winHeight >= 736) {
+          //console.log("device height greater than 736");
+          this.setState({ scrollHeight: winHeight * 0.7533, horizontalMarginTop: 30 }); //76%
+        }
+      }
+
       this.setState({
         dataDuyurular: duyuru,
         dataHaberler: haber,
         dataEtkinlikler: etkinlik,
         loading: false
-      }, () => {
-
       });
+
+
     });
   }
 
@@ -156,18 +190,21 @@ class CouncilNews extends Component<IProps> {
     } else {
       return (
 
-        <View style={{ marginBottom: 50 }}  >
+        <View height={this.state.scrollHeight} >
           <HorizontalList
             Data={this.renderDataDuyurular}
             title={"Duyurular"}
+            style={{ marginTop: this.state.horizontalMarginTop }}
           />
           <HorizontalList
             Data={this.renderDataEtkinlikler}
             title={"Etkinlikler"}
+            style={{ marginTop: this.state.horizontalMarginTop }}
           />
           <HorizontalList
             Data={this.renderDataHaberler}
             title={"Haberler"}
+            style={{ marginTop: this.state.horizontalMarginTop }}
           />
         </View>
 

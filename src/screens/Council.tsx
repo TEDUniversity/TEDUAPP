@@ -67,7 +67,6 @@ class Council extends Component<IProp & ReduxProps>{
   state = {
     selectedTab: "News",
     MAX_HEIGHT: 0,
-    scrollHeight:0,
     dataDuyurular: [],
     dataHaberler: [],
     dataEtkinlikler: [],
@@ -103,16 +102,9 @@ class Council extends Component<IProp & ReduxProps>{
       this.setState({ MAX_HEIGHT: winHeight * 0.220 }); //17.5%
     } else if (winHeight >= 736) {
       //console.log("device height greater than 736");
-      this.setState({ MAX_HEIGHT: winHeight * 0.18 }); //18%
+      this.setState({ MAX_HEIGHT: winHeight * 0.220 }); //18%
     }
 
-    if (winHeight < 736) {
-      //console.log("device height less than 736");
-      this.setState({ scrollHeight: winHeight * 0.800 }); //75.5%
-    } else if (winHeight >= 736) {
-      //console.log("device height greater than 736");
-      this.setState({ scrollHeight: winHeight * 0.76 }); //76%
-    }
   }
 
   renderBody = () => {
@@ -376,7 +368,7 @@ const styles = StyleSheet.create({
     //justifyContent: "flex-start",
     width: "100%",
     height: 25,
-    backgroundColor: "rgb(15,108,177)",
+    backgroundColor: "rgb(41,48,109)",
     alignItems: "center"
     //#373738
   },

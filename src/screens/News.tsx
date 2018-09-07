@@ -75,12 +75,7 @@ class News extends Component<IProp & ReduxProps> {
     scrollHeight: 0,
     networkError: false,
     showAlert: this.props.showAlert,
-    user: {
-      name: "arda",
-      surname: "tumay",
-      age: "22",
-      traits: { eye: "brown", tall: "185" }
-    }
+    horizontalMarginTop: 20
   };
 
   //not used. for editind navigation parameters.
@@ -97,14 +92,8 @@ class News extends Component<IProp & ReduxProps> {
 
     const winHeight = Dimensions.get("window").height;
     console.log("winHeight" + winHeight);
-    if (winHeight < 736) {
-      //console.log("device height less than 736");
-      this.setState({ scrollHeight: winHeight * 0.755 }); //75.5%
-    } else if (winHeight >= 736) {
-      //console.log("device height greater than 736");
-      this.setState({ scrollHeight: winHeight * 0.76 }); //76%
-    }
-
+    
+    //adjust header height according to different device sizes
     if (winHeight < 736) {
       //console.log("device height less than 736");
       this.setState({ MAX_HEIGHT: winHeight * 0.183 }); //17.5%
@@ -112,8 +101,6 @@ class News extends Component<IProp & ReduxProps> {
       //console.log("device height greater than 736");
       this.setState({ MAX_HEIGHT: winHeight * 0.18 }); //18%
     }
-
-    //console.log(Survey.IHttpActionResult("addb8abc-28ae-425b-a58b-99ae6b33be58"));
 
     fetch("https://www.tedu.edu.tr/rss.xml")
       .then(response => response.text())
@@ -165,7 +152,7 @@ class News extends Component<IProp & ReduxProps> {
       .then(result => {
         // alert(result.items);
         this.whenLoaded(result.items);
-        console.log(result.items);
+        //console.log(result.items);
       })
       .catch(error => console.log(error));
 
@@ -223,9 +210,39 @@ class News extends Component<IProp & ReduxProps> {
       }
       //console.log(item.links[0].url);
     });
-    //console.log(this.state.dataDuyurular);
-    //console.log(this.state.dataEtkinlikler);
-    //console.log(this.state.dataHaberler);
+    //console.log("duyuru"+this.state.dataDuyurular.length);
+    //console.log("etkinlik"+this.state.dataEtkinlikler.length);
+    //console.log("haber"+this.state.dataHaberler.length);
+    let emptyData = false;
+    //required for adjusting body height according to horizontallists. if one array is empty that means one horizontal list is absent
+    if (this.state.dataDuyurular.length === 0 || this.state.dataHaberler.length === 0 || this.state.dataEtkinlikler.length === 0) {
+      emptyData = true;
+    }
+
+    //the code below is run within the whenLoaded method rather than the componentWillMount
+    //because body height depends on the content rendered within the body
+    //which means that body height must be defined after all content data is loading which is here
+    const winHeight = Dimensions.get("window").height;
+    if (!emptyData) {
+      //adjust body height according to different device heights with none of the horizontal list is empty
+      if (winHeight < 736) {
+        //console.log("device height less than 736");
+        this.setState({ scrollHeight: winHeight * 0.97 }); //75.5%
+      } else if (winHeight >= 736) {
+        //console.log("device height greater than 736");
+        this.setState({ scrollHeight: winHeight * 0.94, horizontalMarginTop: 30 }); //76%
+      }
+    } else if (emptyData) {
+      //adjust body height according to different device heights with one of the horizontal list is empty
+      if (winHeight < 736) {
+        //console.log("device height less than 736");
+        this.setState({ scrollHeight: winHeight * 0.7435 }); //75.5%
+      } else if (winHeight >= 736) {
+        //console.log("device height greater than 736");
+        this.setState({ scrollHeight: winHeight * 0.7533, horizontalMarginTop: 30 }); //76%
+      }
+    }
+    //console.log("scrollheight" + this.state.scrollHeight)
     this.setState({ loading: false });
     //console.log(JSON.stringify(response));
     //console.log(this.state.data);
@@ -241,22 +258,22 @@ class News extends Component<IProp & ReduxProps> {
     ));
   };
   renderDataEtkinlikler = () => {
-    return this.state.dataHaberler.map((responseData, Id) => (
-      <DetailNews
-        navigation={this.props.navigation}
-        key={Id}
-        data={responseData}
-        imgsrc={"kırmızı"}
-      />
-    ));
-  };
-  renderDataHaberler = () => {
     return this.state.dataEtkinlikler.map((responseData, Id) => (
       <DetailNews
         navigation={this.props.navigation}
         key={Id}
         data={responseData}
         imgsrc={"mavi"}
+      />
+    ));
+  };
+  renderDataHaberler = () => {
+    return this.state.dataHaberler.map((responseData, Id) => (
+      <DetailNews
+        navigation={this.props.navigation}
+        key={Id}
+        data={responseData}
+        imgsrc={"kırmızı"}
       />
     ));
   };
@@ -282,7 +299,7 @@ class News extends Component<IProp & ReduxProps> {
           bounces={false}
           showsVerticalScrollIndicator={false}
         >
-          <View >
+          <View height={this.state.scrollHeight}>
             <ImageBackground
               source={require("../../img/background/BACKGROUND.png")}
               style={styles.mainBackGround}
@@ -291,14 +308,17 @@ class News extends Component<IProp & ReduxProps> {
                 <HorizontalList
                   Data={this.renderDataDuyurular}
                   title={"Duyurular"}
+                  style={{ marginTop: this.state.horizontalMarginTop }}
                 />
                 <HorizontalList
                   Data={this.renderDataEtkinlikler}
                   title={"Etkinlikler"}
+                  style={{ marginTop: this.state.horizontalMarginTop }}
                 />
                 <HorizontalList
                   Data={this.renderDataHaberler}
                   title={"Haberler"}
+                  style={{ marginTop: this.state.horizontalMarginTop }}
                 />
               </View>
             </ImageBackground>

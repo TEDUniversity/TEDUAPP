@@ -249,7 +249,7 @@ class Moodle extends Component<IProp & ReduxProps> {
             source={require("../../img/header/anatepe2.png")}
           />
         )}
-        overlayColor="#144d8c"
+        overlayColor="#006AB3"
         maxOverlayOpacity={1}
         scrollEnabled={false}
         renderForeground={this.renderHeader}

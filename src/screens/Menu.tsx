@@ -140,7 +140,7 @@ class Menu extends Component<IProp> {
             source={require("../../img/header/anatepe2.png")}
           />
         )}
-        overlayColor="#144d8c"
+        overlayColor="#006AB3"
         maxOverlayOpacity={1}
         bounces={false}
         contentOffset={{ x: 0, y: 0 }}

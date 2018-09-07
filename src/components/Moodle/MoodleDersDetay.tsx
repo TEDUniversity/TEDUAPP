@@ -52,7 +52,8 @@ const hScreen = createMaterialTopTabNavigator(
       showIcon: true,
       showLabel: false,
       style: {
-        backgroundColor: "#144d8c"
+        backgroundColor: "#144d8c",
+        
       },
       activeTintColor: "white",
       inactiveTintColor: "gray",
