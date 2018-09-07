@@ -111,7 +111,8 @@ const styles = StyleSheet.create({
   subContainerStyle: {
     height: 90,
     flexWrap: "wrap",
-    justifyContent: "center"
+    justifyContent: "center",
+    padding: 5
   },
   ImageStyle: {
     height: 300,
@@ -121,8 +122,8 @@ const styles = StyleSheet.create({
   text: {
     textAlign: "center",
     textAlignVertical: "center",
-    color: "white",
-    fontSize: 12
+    color: "black",
+    fontSize: 14
   },
   button: {
     backgroundColor: "#DDDDDD",

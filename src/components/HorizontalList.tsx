@@ -7,25 +7,47 @@ import {
   StyleSheet
 } from "react-native";
 
-const HorizontalList = props => (
-  <View style={styles.containerStyle}>
-    <Text style={styles.textStyle}> {props.title} </Text>
-    <ScrollView
-      horizontal={true}
-      decelerationRate={0}
-      snapToInterval={245} //your element width
-      snapToAlignment={"center"}
-      contentInset={{
-        top: 0,
-        left: 0,
-        bottom: 0,
-        right: 35
-      }}
-    >
-      {props.Data()}
-    </ScrollView>
-  </View>
-);
+
+interface IProp {
+  title: string;
+  Data: () => JSX.Element[];
+}
+
+class HorizontalList extends React.Component<IProp> {
+  
+  render() {
+    const {warningText, textStyle, subContainerStyle, containerStyle} = styles;
+    let news;
+    if(this.props.Data().length === 0){
+      news = <Text style={ warningText } > Updated soon. </Text>
+    }else{
+      news = this.props.Data()
+    }
+  return(
+      <View style = { containerStyle } >
+      <Text style={textStyle}> {this.props.title} </Text>
+      <ScrollView
+        horizontal={true}
+        decelerationRate={0}
+        snapToInterval={245} //your element width
+        snapToAlignment={"center"}
+        contentInset={{
+          top: 0,
+          left: 0,
+          bottom: 0,
+          right: 35
+        }}
+      >
+        
+        {news}
+
+      </ScrollView>
+      </View>
+    );
+
+}
+  
+};
 
 const styles = StyleSheet.create({
   containerStyle: {
@@ -53,6 +75,13 @@ const styles = StyleSheet.create({
   textStyle: {
     marginLeft: 15,
     fontSize: 18,
+    fontWeight: "bold"
+  },
+  warningText: {
+    marginLeft: 20,
+    marginTop: 10,
+    fontStyle: 'italic',
+    //fontSize: 18,
     fontWeight: "bold"
   }
 });

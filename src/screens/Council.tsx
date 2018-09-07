@@ -67,7 +67,7 @@ class Council extends Component<IProp & ReduxProps>{
   state = {
     selectedTab: "News",
     MAX_HEIGHT: 0,
-    scrollHeight: 500,
+    scrollHeight:0,
     dataDuyurular: [],
     dataHaberler: [],
     dataEtkinlikler: [],
@@ -100,7 +100,7 @@ class Council extends Component<IProp & ReduxProps>{
     //set the header height
     if (winHeight < 736) {
       //console.log("device height less than 736");
-      this.setState({ MAX_HEIGHT: winHeight * 0.213 }); //17.5%
+      this.setState({ MAX_HEIGHT: winHeight * 0.220 }); //17.5%
     } else if (winHeight >= 736) {
       //console.log("device height greater than 736");
       this.setState({ MAX_HEIGHT: winHeight * 0.18 }); //18%
@@ -108,7 +108,7 @@ class Council extends Component<IProp & ReduxProps>{
 
     if (winHeight < 736) {
       //console.log("device height less than 736");
-      this.setState({ scrollHeight: winHeight * 0.750 }); //75.5%
+      this.setState({ scrollHeight: winHeight * 0.800 }); //75.5%
     } else if (winHeight >= 736) {
       //console.log("device height greater than 736");
       this.setState({ scrollHeight: winHeight * 0.76 }); //76%
@@ -246,7 +246,7 @@ class Council extends Component<IProp & ReduxProps>{
     let moodlePage;
     if (!this.props.isMoodleLoggedIn) {
       moodlePage = (
-        <View height={this.state.scrollHeight}>
+        <View >
           <ImageBackground
             source={require("../../img/background/BACKGROUND.png")}
             style={styles.mainBackGround}
@@ -260,12 +260,12 @@ class Council extends Component<IProp & ReduxProps>{
       );
     } else {
       moodlePage = (
-        <View height={this.state.scrollHeight * 1.4736}>
+        <View >
           <ImageBackground
             source={require("../../img/background/BACKGROUND.png")}
             style={styles.mainBackGround}
           >
-            <View style={styles.container}>
+            <View >
               {this.renderBody()}
             </View>
           </ImageBackground>
@@ -285,11 +285,11 @@ class Council extends Component<IProp & ReduxProps>{
             source={require("../../img/header/anatepe2.png")}
           />
         )}
-        overlayColor="rgb(231,231,232)"
+        overlayColor="#006AB3"
         maxOverlayOpacity={1}
         bounces={false}
         showsVerticalScrollIndicator={false}
-        scrollViewBackgroundColor="rgb(53,53,55)"
+        scrollViewBackgroundColor="rgb(231,231,232)"
         fadeOutForeground={true}
         renderForeground={() => {
           if (this.props.isMoodleLoggedIn) {
@@ -376,11 +376,15 @@ const styles = StyleSheet.create({
     //justifyContent: "flex-start",
     width: "100%",
     height: 25,
-    backgroundColor: "rgb(53,53,55)",
+    backgroundColor: "rgb(15,108,177)",
     alignItems: "center"
     //#373738
   },
-  tabNavTitle: {},
+  tabNavTitle: {
+    fontSize: 11,
+    fontWeight: "600",
+
+  },
   mainBackGround: {
     flex: 1,
     alignSelf: "stretch",

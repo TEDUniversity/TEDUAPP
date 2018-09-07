@@ -17,8 +17,10 @@ import Calendar from "./screens/Calendar";
 import Main from "./screens/Main";
 import Webview from "./components/Webview";
 import Survey from "./components/Survey/Survey";
+import CouncilNewsContent from "./components/CouncilNewsContent";
 import firebase from "firebase";
 import firebasee from "react-native-firebase";
+
 
 import { Provider } from "react-redux";
 import { store, persistor } from "./store";
@@ -35,7 +37,7 @@ require("core-js/fn/set");
 require("core-js/fn/array/find");
 
 // symbol polyfills
-global.Symbol = require("core-js/es6/symbol");
+require("core-js/es6/symbol");
 require("core-js/fn/symbol/iterator");
 
 // collection fn polyfills
@@ -112,6 +114,7 @@ const RootStack = createStackNavigator(
     MoodleRouter: Moodle,
     WebviewRouter: Webview,
     SurveyRouter: Survey,
+    CouncilContentRouter: CouncilNewsContent,
     DersDetayRouter: {
       screen: MoodleDersDetay,
       navigationOptions: {

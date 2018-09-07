@@ -16,7 +16,8 @@ import {
   StyleSheet,
   Dimensions,
   WebView,
-  Button
+  Button,
+  ScrollView
 } from "react-native";
 import Image from "react-native-scalable-image";
 import HeaderImageScrollView from "react-native-image-header-scroll-view";
@@ -56,7 +57,7 @@ class Menu extends Component<IProp> {
 
     if (winHeight < 736) {
       console.log("device height less than 736");
-      this.setState({ MAX_HEIGHT: winHeight * 0.175 }); //20%
+      this.setState({ MAX_HEIGHT: winHeight * 0.183 }); //20%
     } else if (winHeight >= 736) {
       console.log("device height greater than 736");
       this.setState({ MAX_HEIGHT: winHeight * 0.18 }); //20%
@@ -145,18 +146,134 @@ class Menu extends Component<IProp> {
         contentOffset={{ x: 0, y: 0 }}
         scrollViewBackgroundColor="rgba(52, 52, 52, 0.40)"
         scrollEnabled={false}
-        //renderForeground={this.renderHeader}
+      //renderForeground={this.renderHeader}
       >
-        <ImageBackground
-          source={require("../../img/background/BACKGROUND.png")}
-          style={{ width: Dimensions.get("window").width }}
-        >
+        
           <View style={styles.container} height={this.state.scrollHeight}>
             <ImageBackground
               source={require("../../img/background/BACKGROUND.png")}
               style={styles.mainBackGround}
             >
+            <ScrollView  contentContainerStyle={{flex:1,justifyContent: "space-around"}} >
+              
+
               <TouchableOpacity
+                style={styles.subContainer}
+                onPress={() => {
+                  this.props.navigation.navigate("WebviewRouter", {
+                    url:
+                      "https://my.tedu.edu.tr/sap/bc/ui5_ui5/ui2/ushell/shells/abap/FioriLaunchpad.html?sap-client=001&sap-language=TR",
+                    title: "TEDU Portal",
+                    backButton: "Menu"
+                  });
+                }}
+              >
+                <View
+                  style={[styles.subBackground, {backgroundColor: "rgb(194,170,36)"} ]}
+                >
+                  <Text style={styles.menuText}>MyTEDU Portal</Text>
+                </View>
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                style={styles.subContainer}
+                onPress={() => {
+                  this.props.navigation.navigate("WebviewRouter", {
+                    url: "https://issuu.com/tedukultursanat/docs",
+                    title: "Karafanzin",
+                    backButton: "Menu"
+                  });
+                }}
+              >
+                <View
+                  style={[styles.subBackground, {backgroundColor: "rgb(158,183,57)"} ]}
+                >
+                  <Text style={styles.menuText}>Karafanzin</Text>
+                </View>
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                style={styles.subContainer}
+                onPress={() => {
+                  this.props.navigation.navigate("WebviewRouter", {
+                    url: "https://www.tedu.edu.tr/tr/main/akademik-takvim",
+                    title: "Academic Calendar",
+                    backButton: "Menu"
+                  });
+                }}
+              >
+                <View
+                  style={[styles.subBackground, {backgroundColor: "rgb(35,49,126)"} ]}
+                >
+                  <Text style={styles.menuText}>Academic Calender</Text>
+                </View>
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                style={styles.subContainer}
+                onPress={() => {
+                  this.props.navigation.navigate("WebviewRouter", {
+                    url: "http://www.radiotedu.com",
+                    title: "Listen radio tedu",
+                    backButton: "Menu"
+                  });
+                }}
+              >
+                <View
+                  style={[styles.subBackground, {backgroundColor: "rgb(24,154,208)"} ]}
+                >
+                  <Text style={styles.menuText}>RadioTEDÜ</Text>
+                </View>
+              </TouchableOpacity>
+              </ScrollView>
+            </ImageBackground>
+          </View>
+      </HeaderImageScrollView>
+    );
+  }
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "space-between",
+    //alignItems: "center",
+    marginTop: 0
+  },
+  menuText: {
+    fontWeight: "bold",
+    color: "white",
+    textAlign: "center",
+    textAlignVertical: "center"
+  },
+  mainBackGround: {
+    flex: 1,
+    alignSelf: "stretch",
+    resizeMode: "cover"
+  },
+  subBackground: {
+    width: Dimensions.get("window").width,
+    alignItems: "center",
+    justifyContent: "center",
+    height: 60,
+  },
+  subContainer: {
+    //marginTop: 10,
+    justifyContent: "center",
+    alignItems: "center",
+  }
+});
+
+export default Menu;
+
+//HOW TO PASS PARAMETERS WITH REACT NATIVE NAVIGATION:
+//this.props.navigation.navigate("WebviewRouter", { url: "https://www.tedu.edu.tr/sites/default/files/content_files/2017-2018_akademik_takvim-senato_05.07.2018_0.pdf" });
+//ACCESS PAREMETERS IN TARGET PAGE LIKE THAT:
+//this.props.navigation.state.params.url
+
+
+/*
+<TouchableOpacity
                 style={styles.subContainer}
                 onPress={() => {
                   this.props.navigation.navigate("WebviewRouter", {
@@ -192,121 +309,4 @@ class Menu extends Component<IProp> {
                   <Text style={styles.menuText}>Cafeteria Programme</Text>
                 </ImageBackground>
               </TouchableOpacity>
-
-              <TouchableOpacity
-                style={styles.subContainer}
-                onPress={() => {
-                  this.props.navigation.navigate("WebviewRouter", {
-                    url:
-                      "https://my.tedu.edu.tr/sap/bc/ui5_ui5/ui2/ushell/shells/abap/FioriLaunchpad.html?sap-client=001&sap-language=TR",
-                    title: "TEDU Portal",
-                    backButton: "Menu"
-                  });
-                }}
-              >
-                <ImageBackground
-                  source={require("../../img/subMenu/menu3.jpg")}
-                  style={styles.subBackground}
-                >
-                  <Text style={styles.menuText}>MyTEDU Portal</Text>
-                </ImageBackground>
-              </TouchableOpacity>
-
-              <TouchableOpacity
-                style={styles.subContainer}
-                onPress={() => {
-                  this.props.navigation.navigate("WebviewRouter", {
-                    url: "https://issuu.com/tedukultursanat/docs",
-                    title: "Karafanzin",
-                    backButton: "Menu"
-                  });
-                }}
-              >
-                <ImageBackground
-                  source={require("../../img/subMenu/menu4.jpg")}
-                  style={styles.subBackground}
-                >
-                  <Text style={styles.menuText}>Karafanzin</Text>
-                </ImageBackground>
-              </TouchableOpacity>
-
-              <TouchableOpacity
-                style={styles.subContainer}
-                onPress={() => {
-                  this.props.navigation.navigate("WebviewRouter", {
-                    url: "https://www.tedu.edu.tr/tr/main/akademik-takvim",
-                    title: "Academic Calendar",
-                    backButton: "Menu"
-                  });
-                }}
-              >
-                <ImageBackground
-                  source={require("../../img/subMenu/menu6.png")}
-                  style={styles.subBackground}
-                >
-                  <Text style={styles.menuText}>Academic Calender</Text>
-                </ImageBackground>
-              </TouchableOpacity>
-
-              <TouchableOpacity
-                style={styles.subContainer}
-                onPress={() => {
-                  this.props.navigation.navigate("WebviewRouter", {
-                    url: "http://www.radiotedu.com",
-                    title: "Listen radio tedu",
-                    backButton: "Menu"
-                  });
-                }}
-              >
-                <ImageBackground
-                  source={require("../../img/subMenu/menu7.png")}
-                  style={styles.subBackground}
-                >
-                  <Text style={styles.menuText}>RadioTEDÜ</Text>
-                </ImageBackground>
-              </TouchableOpacity>
-            </ImageBackground>
-          </View>
-        </ImageBackground>
-      </HeaderImageScrollView>
-    );
-  }
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: 0
-  },
-  menuText: {
-    fontWeight: "bold",
-    color: "white",
-    textAlign: "center",
-    textAlignVertical: "center"
-  },
-  mainBackGround: {
-    flex: 1,
-    alignSelf: "stretch",
-    resizeMode: "cover"
-  },
-  subBackground: {
-    width: Dimensions.get("window").width,
-    alignItems: "center",
-    justifyContent: "center",
-    height: 60
-  },
-  subContainer: {
-    marginTop: 10,
-    justifyContent: "center",
-    alignItems: "center"
-  }
-});
-
-export default Menu;
-
-//HOW TO PASS PARAMETERS WITH REACT NATIVE NAVIGATION:
-//this.props.navigation.navigate("WebviewRouter", { url: "https://www.tedu.edu.tr/sites/default/files/content_files/2017-2018_akademik_takvim-senato_05.07.2018_0.pdf" });
-//ACCESS PAREMETERS IN TARGET PAGE LIKE THAT:
-//this.props.navigation.state.params.url
+*/

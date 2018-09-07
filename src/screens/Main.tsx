@@ -57,14 +57,14 @@ class Main extends Component<IProp> {
       key: "NewsRouter",
       icon: "dashboard",
       label: "News",
-      barColor: "#144d8c",
+      barColor: "#006AB3",
       pressColor: "rgba(232, 36, 55, 0.16)"
     },
     {
       key: "MenuRouter",
       icon: "menu",
       label: "Menu",
-      barColor: "#144d8c",
+      barColor: "#006AB3",
       pressColor: "rgba(232, 36, 55, 0.16)"
     },
     
@@ -72,14 +72,14 @@ class Main extends Component<IProp> {
       key: "MoodleRouter",
       icon: "school",
       label: "Moodle",
-      barColor: "#144d8c",
+      barColor: "#006AB3",
       pressColor: "rgba(232, 36, 55, 0.16)"
     },
     {
       key: "CouncilRouter",
       icon: "music-note",
       label: "Council",
-      barColor: "#144d8c",
+      barColor: "#006AB3",
       pressColor: "rgba(232, 36, 55, 0.16)"
     }
   ];
@@ -149,7 +149,7 @@ class Main extends Component<IProp> {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "space-between"
+    //justifyContent: "space-between"
     //alignItems: "center"
   },
   text: {

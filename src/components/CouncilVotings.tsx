@@ -54,11 +54,11 @@ class CouncilVotings extends Component<IProps & ReduxProps> {
         questions: [
           {
             question: "Where do you want to go for the party?",
-            answers: [{count: 0, text: "The lux"}, {count: 0, text: "6:45"}, {count: 0, text: "Bomonti"}]
+            answers: [{ count: 0, text: "The lux" }, { count: 0, text: "6:45" }, { count: 0, text: "Bomonti" }]
           },
           {
             question: "Choose a date",
-            answers: [{count: 0, text: "11-05-2019"}, {count: 0, text: "22-05-2018"}, {count: 0, text: "05-07-2018"}]
+            answers: [{ count: 0, text: "11-05-2019" }, { count: 0, text: "22-05-2018" }, { count: 0, text: "05-07-2018" }]
           }
         ]
       },
@@ -68,9 +68,9 @@ class CouncilVotings extends Component<IProps & ReduxProps> {
         questions: [
           {
             question: "Where do you want to go for the party?",
-            answers: [{count: 0, text: "Keçi"}, {count: 0, text: "Kite"}, {count: 0, text: "Sess"}]
+            answers: [{ count: 0, text: "Keçi" }, { count: 0, text: "Kite" }, { count: 0, text: "Sess" }]
           },
-          { question: "hi", answers: [{count: 0, text: "Keçi"}, {count: 0, text: "Kite"}, {count: 0, text: "Sess"}] }
+          { question: "hi", answers: [{ count: 0, text: "Keçi" }, { count: 0, text: "Kite" }, { count: 0, text: "Sess" }] }
         ]
       },
       {
@@ -79,9 +79,9 @@ class CouncilVotings extends Component<IProps & ReduxProps> {
         questions: [
           {
             question: "Where do you want to go for the party?",
-            answers: [{count: 0, text: "Suite 34"}, {count: 0, text: "Magazin"}, {count: 0, text: "The House"}]
+            answers: [{ count: 0, text: "Suite 34" }, { count: 0, text: "Magazin" }, { count: 0, text: "The House" }]
           },
-          
+
         ]
       }
     ],
@@ -120,12 +120,12 @@ class CouncilVotings extends Component<IProps & ReduxProps> {
         }
         //console.log("firebase data: " + response.val());
 
-         //store the data returned from firebase in asyncstorage
+        //store the data returned from firebase in asyncstorage
         storeData("CouncilVotings", JSON.stringify(response.val())).then(() => {
           //it is casted to string because it is stored as string in local storage. After getting is parse it as json.
-          retrieveData("CouncilVotings").then((res:string) => {  this.updateSurvey(JSON.parse(res))})          
+          retrieveData("CouncilVotings").then((res: string) => { this.updateSurvey(JSON.parse(res)) })
         });
-        
+
         //this.updateSurvey(voting)
         //console.log(this.props.surveys);
       });
@@ -169,7 +169,7 @@ class CouncilVotings extends Component<IProps & ReduxProps> {
     }
     return this.props.surveys.map((item, id) => {
       console.log(item.valid)
-      if(item.valid) {//if the survey is valid, publish in the app. it is come from firebase
+      if (item.valid) {//if the survey is valid, publish in the app. it is come from firebase
         return (
           <TouchableOpacity
             key={id}

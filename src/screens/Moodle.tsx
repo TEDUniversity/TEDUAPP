@@ -79,7 +79,7 @@ class Moodle extends Component<IProp & ReduxProps> {
     //set header height
     if (winHeight < 736) {
       console.log("device height less than 736");
-      this.setState({ MAX_HEIGHT: winHeight * 0.175 }); //17.5%
+      this.setState({ MAX_HEIGHT: winHeight * 0.183 }); //17.5%
     } else if (winHeight >= 736) {
       console.log("device height greater than 736");
       this.setState({ MAX_HEIGHT: winHeight * 0.18 }); //18%

@@ -107,7 +107,7 @@ class News extends Component<IProp & ReduxProps> {
 
     if (winHeight < 736) {
       //console.log("device height less than 736");
-      this.setState({ MAX_HEIGHT: winHeight * 0.175 }); //17.5%
+      this.setState({ MAX_HEIGHT: winHeight * 0.183 }); //17.5%
     } else if (winHeight >= 736) {
       //console.log("device height greater than 736");
       this.setState({ MAX_HEIGHT: winHeight * 0.18 }); //18%
@@ -119,7 +119,7 @@ class News extends Component<IProp & ReduxProps> {
       .then(response => response.text())
       .then(responseData => {
         storeData("teduRSS", responseData);
-        console.log(responseData);
+        //console.log(responseData);
       })
       .catch(error => {
         console.log(error);
@@ -223,9 +223,9 @@ class News extends Component<IProp & ReduxProps> {
       }
       //console.log(item.links[0].url);
     });
-    console.log(this.state.dataDuyurular);
-    console.log(this.state.dataEtkinlikler);
-    console.log(this.state.dataHaberler);
+    //console.log(this.state.dataDuyurular);
+    //console.log(this.state.dataEtkinlikler);
+    //console.log(this.state.dataHaberler);
     this.setState({ loading: false });
     //console.log(JSON.stringify(response));
     //console.log(this.state.data);
@@ -277,12 +277,12 @@ class News extends Component<IProp & ReduxProps> {
               source={require("../../img/header/anatepe2.png")}
             />
           )}
-          overlayColor="#144d8c"
+          overlayColor="#006AB3"
           maxOverlayOpacity={1}
           bounces={false}
           showsVerticalScrollIndicator={false}
         >
-          <View>
+          <View >
             <ImageBackground
               source={require("../../img/background/BACKGROUND.png")}
               style={styles.mainBackGround}
