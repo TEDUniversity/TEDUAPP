@@ -21,13 +21,12 @@ import CouncilNewsContent from "./components/CouncilNewsContent";
 import firebase from "firebase";
 import firebasee from "react-native-firebase";
 
-
 import { Provider } from "react-redux";
 import { store, persistor } from "./store";
 import { PersistGate } from "redux-persist/integration/react";
 import MoodleDersDetay from "./components/Moodle/MoodleDersDetay";
 
-let deviceWidth = Dimensions.get("window").width
+let deviceWidth = Dimensions.get("window").width;
 
 // symbol polyfills
 require("core-js/es6/symbol");
@@ -60,7 +59,10 @@ export default class App extends Component<any> {
   }
 
   componentDidMount() {
+    firebasee.messaging().subscribeToTopic("pushNotifications");
+
     firebasee
+      .app()
       .messaging()
       .hasPermission()
       .then(enabled => {
@@ -120,7 +122,11 @@ const RootStack = createStackNavigator(
     DersDetayRouter: {
       screen: MoodleDersDetay,
       navigationOptions: {
-        headerStyle: { marginTop: 0, backgroundColor: "#144d8c", height: deviceWidth / 12.5 },
+        headerStyle: {
+          marginTop: 0,
+          backgroundColor: "#144d8c",
+          height: deviceWidth / 12.5
+        },
         title: "Moodle"
       }
     }
