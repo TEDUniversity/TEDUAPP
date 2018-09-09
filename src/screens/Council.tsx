@@ -271,7 +271,7 @@ class Council extends Component<IProp & ReduxProps> {
             source={require("../../img/background/BACKGROUND.png")}
             style={styles.mainBackGround}
           >
-            <View>{this.renderBody()}</View>
+            {this.renderBody()}
           </ImageBackground>
         </View>
       );

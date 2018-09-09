@@ -14,7 +14,8 @@ import {
   Dimensions,
   ImageBackground,
   TouchableOpacity,
-  ActivityIndicator
+  ActivityIndicator,
+  ScrollView
 } from "react-native";
 import Image from "react-native-scalable-image";
 import TabNavigator from "react-native-tab-navigator";
@@ -224,9 +225,9 @@ class CouncilVotings extends Component<IProps & ReduxProps> {
       return <Spinner size={"large"} />;
     } else {
       return (
-        <View style={styles.container}>
-          {this.renderSurveyButtons()}
-          {/*  (this is for rendering the survey on same page with state parameters)   this.renderSurvey()*/}
+        <View style={styles.container} height={Dimensions.get("window").height} >
+            {this.renderSurveyButtons()}
+            {/*  (this is for rendering the survey on same page with state parameters)   this.renderSurvey()*/}
         </View>
       );
     }
@@ -236,7 +237,8 @@ class CouncilVotings extends Component<IProps & ReduxProps> {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "flex-start"
+    justifyContent: "flex-start",
+
     //marginTop: "1%"
   },
   questionContainer: {
