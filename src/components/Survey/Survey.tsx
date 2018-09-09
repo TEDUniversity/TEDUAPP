@@ -14,7 +14,8 @@ import {
   Dimensions,
   ImageBackground,
   TouchableOpacity,
-  Alert
+  Alert,
+  Platform
 } from "react-native";
 import Image from "react-native-scalable-image";
 import TabNavigator from "react-native-tab-navigator";
@@ -51,7 +52,7 @@ class Survey extends Component<IProp & ReduxProps> {
 
   static navigationOptions = ({ navigation }) => ({
     headerTitle: (
-      <Text style={styles.headerTitle}> {navigation.state.params.title} </Text>
+      <Text style={styles.headerTitle}> { Platform.OS === 'ios' ? navigation.state.params.title : " " } </Text>
     ),
     //title: "Webview",
     headerStyle: { marginTop: 0, backgroundColor: "#144d8c", height: 35 },

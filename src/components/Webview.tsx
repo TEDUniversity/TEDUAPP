@@ -8,7 +8,8 @@ import {
   StyleSheet,
   ActivityIndicator,
   WebView,
-  Alert
+  Alert,
+  Platform
 } from "react-native";
 import Image from "react-native-scalable-image";
 import HeaderImageScrollView, {
@@ -25,11 +26,17 @@ interface IProp {
 
 let deviceWidth = Dimensions.get('window').width;
 
+
+const navTitle = Platform.OS === 'ios' ? 200 : 100;
+
+
 class Webview extends React.Component<IProp> {
+  
   static navigationOptions = ({ navigation }) => ({
     headerTitle: (
-      <Text style={styles.headerTitle}> {navigation.state.params.title} </Text>
+      <Text style={styles.headerTitle}> { Platform.OS === 'ios' ? navigation.state.params.title : " " } </Text>
     ),
+    
     title: "Webview",
     headerStyle: { marginTop: 0, backgroundColor: "#144d8c", height: deviceWidth / 10.7 },
     headerLeft: (
