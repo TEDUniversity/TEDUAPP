@@ -18,6 +18,7 @@ import Main from "./screens/Main";
 import Webview from "./components/Webview";
 import Survey from "./components/Survey/Survey";
 import CouncilNewsContent from "./components/CouncilNewsContent";
+import Credits from "./components/Credits";
 import firebase from "firebase";
 import firebasee from "react-native-firebase";
 
@@ -119,6 +120,7 @@ const RootStack = createStackNavigator(
     WebviewRouter: Webview,
     SurveyRouter: Survey,
     CouncilContentRouter: CouncilNewsContent,
+    CreditsRouter: Credits,
     DersDetayRouter: {
       screen: MoodleDersDetay,
       navigationOptions: {

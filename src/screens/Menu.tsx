@@ -243,9 +243,10 @@ class Menu extends Component<IProp> {
               <TouchableOpacity
                 style={styles.subContainer}
                 onPress={() => {
-                  this.props.navigation.navigate("WebviewRouter", {
+                  console.log("credits")
+                  this.props.navigation.navigate("CreditsRouter", {
                     url: "http://www.radiotedu.com",
-                    title: "Listen radio tedu",
+                    title: "Credits",
                     backButton: "Menu"
                   });
                 }}

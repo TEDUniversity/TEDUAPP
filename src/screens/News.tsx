@@ -249,7 +249,7 @@ class News extends Component<IProp & ReduxProps> {
 
       } else if (winHeight >= 736 && winHeight < 812) { //iPhone plus
         //console.log("device height greater than 736");
-        this.setState({ scrollHeight: winHeight * 0.7533, horizontalMarginTop: 30 }); //76%
+        this.setState({ scrollHeight: winHeight * 0.94, horizontalMarginTop: 30 }); //76%
       } if (winHeight >= 812) { //iPhone X
         this.setState({ scrollHeight: winHeight * 0.85, horizontalMarginTop: 30 }); //76%
       }

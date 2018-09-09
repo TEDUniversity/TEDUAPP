@@ -134,7 +134,7 @@ class CouncilNews extends Component<IProps> {
           if (winHeight === 692) {//samsung s8
             console.log("HERE21")
             this.setState({ scrollHeight: winHeight * 0.95 });
-          } else if (winHeight === 640) {//samsung s7
+          } else if (winHeight === 640) {//samsung s7 && samsung s6
             console.log("HERE22")
             this.setState({ scrollHeight: winHeight * 0.99 });
           } else if (winHeight === 667) {//iPhone 6
@@ -207,7 +207,6 @@ class CouncilNews extends Component<IProps> {
   };
   render() {
 
-    //console.log("scrollHeigth: " + this.state.scrollHeight);
     if (this.state.loading) {
       return <Spinner size={"large"} />;
     } else {
@@ -220,12 +219,12 @@ class CouncilNews extends Component<IProps> {
             style={{ marginTop: this.state.horizontalMarginTop }}
           />
           <HorizontalList
-            Data={this.renderDataDuyurular}
+            Data={this.renderDataEtkinlikler}
             title={"Etkinlikler"}
             style={{ marginTop: this.state.horizontalMarginTop }}
           />
           <HorizontalList
-            Data={this.renderDataDuyurular}
+            Data={this.renderDataHaberler}
             title={"Haberler"}
             style={{ marginTop: this.state.horizontalMarginTop }}
           />
