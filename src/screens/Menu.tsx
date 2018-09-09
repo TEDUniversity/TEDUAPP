@@ -16,7 +16,7 @@ import {
   StyleSheet,
   Dimensions,
   WebView,
-  Button,
+  Platform,
   ScrollView
 } from "react-native";
 import Image from "react-native-scalable-image";
@@ -145,7 +145,7 @@ class Menu extends Component<IProp> {
         maxHeight={this.state.MAX_HEIGHT}
         minHeight={MIN_HEIGHT}
         renderHeader={() => (
-          <View style={{ backgroundColor: "rgb(15, 108, 177)", height: 50 }}>
+          <View style={{ backgroundColor: "rgb(15, 108, 177)", height: Platform.OS === 'ios' ? 50 : 135, }}>
             <Image
               resizeMode="stretch"
               width={Dimensions.get("window").width}
@@ -168,7 +168,7 @@ class Menu extends Component<IProp> {
             source={require("../../img/background/BACKGROUND.png")}
             style={styles.mainBackGround}
           >
-            <ScrollView contentContainerStyle={{ flex: 1, justifyContent: "space-around" }} >
+            <ScrollView contentContainerStyle={{ flex: 1, justifyContent: "flex-start" }} >
 
 
               <TouchableOpacity
@@ -239,6 +239,24 @@ class Menu extends Component<IProp> {
                   <Text style={styles.menuText}>RadioTEDÜ</Text>
                 </View>
               </TouchableOpacity>
+
+              <TouchableOpacity
+                style={styles.subContainer}
+                onPress={() => {
+                  this.props.navigation.navigate("WebviewRouter", {
+                    url: "http://www.radiotedu.com",
+                    title: "Listen radio tedu",
+                    backButton: "Menu"
+                  });
+                }}
+              >
+                <View
+                  style={[styles.subBackground, { backgroundColor: "rgb(146,24,27)" }]}
+                >
+                  <Text style={styles.menuText}>Credits</Text>
+                </View>
+              </TouchableOpacity>
+
             </ScrollView>
           </ImageBackground>
         </View>
@@ -273,7 +291,7 @@ const styles = StyleSheet.create({
     height: deviceWidth / 6.25,
   },
   subContainer: {
-    //marginTop: 10,
+    marginTop: 20,
     justifyContent: "center",
     alignItems: "center",
   }

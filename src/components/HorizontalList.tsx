@@ -18,39 +18,39 @@ interface IProp {
 let deviceWidth = Dimensions.get("window").width;
 
 class HorizontalList extends React.Component<IProp> {
-  
+
   render() {
-    const {warningText, textStyle, subContainerStyle, containerStyle} = styles;
+    const { warningText, textStyle, subContainerStyle, containerStyle, warningView } = styles;
     let news;
-    if(this.props.Data().length === 0){
-      news = <Text style={ warningText } > Updated soon. </Text>
-    }else{
+    if (this.props.Data().length === 0) {
+      news = <View style={warningView} ><Text style={warningText} > Updated soon. </Text></View>
+    } else {
       news = this.props.Data()
     }
-  return(
-      <View style = { [containerStyle, this.props.style] } >
-      <Text style={textStyle}> {this.props.title} </Text>
-      <ScrollView
-        horizontal={true}
-        decelerationRate={0}
-        snapToInterval={245} //your element width
-        snapToAlignment={"center"}
-        contentInset={{
-          top: 0,
-          left: 0,
-          bottom: 0,
-          right: 35
-        }}
-      >
-        
-        {news}
+    return (
+      <View style={[containerStyle, this.props.style]} >
+        <Text style={textStyle}> {this.props.title} </Text>
+        <ScrollView
+          horizontal={true}
+          decelerationRate={0}
+          snapToInterval={245} //your element width
+          snapToAlignment={"center"}
+          contentInset={{
+            top: 0,
+            left: 0,
+            bottom: 0,
+            right: 35
+          }}
+        >
 
-      </ScrollView>
+          {news}
+
+        </ScrollView>
       </View>
     );
 
-}
-  
+  }
+
 };
 
 const styles = StyleSheet.create({
@@ -86,8 +86,15 @@ const styles = StyleSheet.create({
     marginTop: 10,
     fontStyle: 'italic',
     //fontSize: 18,
-    fontWeight: "bold"
-  }
+
+    fontWeight: "bold",
+  },
+  warningView: {
+    height: 130,
+    width: 150,
+    justifyContent: "center",
+    alignContent: "center"
+  },
 });
 
 export default HorizontalList;

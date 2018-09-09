@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     textAlignVertical: "center",
     color: "black",
-    fontSize: deviceWidth / 26.5,
+    fontSize: deviceWidth / 28,
   },
   button: {
     backgroundColor: "#DDDDDD",

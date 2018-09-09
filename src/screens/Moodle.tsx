@@ -14,7 +14,8 @@ import {
   Dimensions,
   ImageBackground,
   TouchableOpacity,
-  Alert
+  Alert,
+  Platform
 } from "react-native";
 import Image from "react-native-scalable-image";
 import TabNavigator from "react-native-tab-navigator";
@@ -255,7 +256,7 @@ class Moodle extends Component<IProp & ReduxProps> {
         maxHeight={this.state.MAX_HEIGHT}
         minHeight={MIN_HEIGHT}
         renderHeader={() => (
-          <View style={{ backgroundColor: "rgb(15, 108, 177)", height: 50 }}>
+          <View style={{ backgroundColor: "rgb(15, 108, 177)", height: Platform.OS === 'ios' ? 50 : 135 }}>
               <Image
                 resizeMode="stretch"
                 width={Dimensions.get("window").width}

@@ -16,7 +16,7 @@ import {
   ActivityIndicator,
   Dimensions,
   ImageBackground,
-  AsyncStorage
+  Platform
 } from "react-native";
 import axios from "axios";
 import * as rssParser from "react-native-rss-parser";
@@ -100,12 +100,10 @@ class News extends Component<IProp & ReduxProps> {
     //adjust header height according to different device sizes
     if (winHeight <= 568) {//5s height
       this.setState({ MAX_HEIGHT: winHeight * 0.196 }); //75.5%
-    }
-    else if (winHeight > 568 && winHeight < 736) {
-      //console.log("device height less than 736");
-      this.setState({ MAX_HEIGHT: winHeight * 0.195 }); //17.5%
+    } else if (winHeight > 568 && winHeight < 736) {
+      let deviceSpecificMultiplier = Platform.OS === 'ios' ? 0.195 : 0.195;
+      this.setState({ MAX_HEIGHT: winHeight * deviceSpecificMultiplier }); //17.5%
     } else if (winHeight >= 736) {
-      //console.log("device height greater than 736");
       this.setState({ MAX_HEIGHT: winHeight * 0.194 }); //18%
     }
 
@@ -222,8 +220,8 @@ class News extends Component<IProp & ReduxProps> {
     //console.log("haber"+this.state.dataHaberler.length);
     let emptyData = false;
     //required for adjusting body height according to horizontallists. if one array is empty that means one horizontal list is absent
-    if (this.state.dataDuyurular.length === 0 || this.state.dataHaberler.length === 0 || this.state.dataEtkinlikler.length === 0 ) {
-      emptyData = true;
+    if (this.state.dataDuyurular.length === 0 || this.state.dataHaberler.length === 0 || this.state.dataEtkinlikler.length === 0) {
+      emptyData = false;
     }
 
     //the code below is run within the whenLoaded method rather than the componentWillMount
@@ -237,11 +235,22 @@ class News extends Component<IProp & ReduxProps> {
       }
       else if (winHeight > 568 && winHeight < 736) {//plus height
         //console.log("device height less than 736");
-        this.setState({ scrollHeight: winHeight * 0.97 }); //75.5%
-      } else if (winHeight >= 736 && winHeight < 812) {
+
+        if (winHeight === 692) {//samsung s8
+          console.log("HERE21")
+          this.setState({ scrollHeight: winHeight * 0.87 });
+        } else if (winHeight === 640) {//samsung s7
+          console.log("HERE22")
+          this.setState({ scrollHeight: winHeight * 0.93 });
+        } else if (winHeight === 667) {//iPhone 6
+          console.log("HERE23")
+          this.setState({ scrollHeight: winHeight * 0.97 });
+        }
+
+      } else if (winHeight >= 736 && winHeight < 812) { //iPhone plus
         //console.log("device height greater than 736");
         this.setState({ scrollHeight: winHeight * 0.7533, horizontalMarginTop: 30 }); //76%
-      }if (winHeight >= 812) {
+      } if (winHeight >= 812) { //iPhone X
         this.setState({ scrollHeight: winHeight * 0.85, horizontalMarginTop: 30 }); //76%
       }
     } else if (emptyData) {
@@ -251,11 +260,20 @@ class News extends Component<IProp & ReduxProps> {
       }
       else if (winHeight > 568 && winHeight < 736) {//not plus phones
         //console.log("device height less than 736");
-        this.setState({ scrollHeight: winHeight * 0.73 }); //75.5%
+        if (winHeight === 692) {//samsung s8
+          console.log("HERE21")
+          this.setState({ scrollHeight: winHeight * 0.97 });
+        } else if (winHeight === 640) {//samsung s7
+          console.log("HERE22")
+          this.setState({ scrollHeight: winHeight * 0.85 });
+        } else if (winHeight === 667) {//iPhone 6
+          console.log("HERE23")
+          this.setState({ scrollHeight: winHeight * 0.85 });
+        }
       } else if (winHeight >= 736 && winHeight < 812) {//plus phones
         //console.log("device height greater than 736");
         this.setState({ scrollHeight: winHeight * 0.74, horizontalMarginTop: 30 }); //76%
-      }if (winHeight >= 812) {//iphone X
+      } if (winHeight >= 812) {//iphone X
         this.setState({ scrollHeight: winHeight * 0.7153, horizontalMarginTop: 30 }); //76%
       }
     }
@@ -301,7 +319,7 @@ class News extends Component<IProp & ReduxProps> {
     let headerMarginTop = 0//header image margin for iphone X
     if (winHeight >= 812) {
       headerMarginTop = 32
-    }else{//aditional 7 pixel margintop for header image to make clock visible
+    } else {//aditional 9 pixel margintop for header image to make clock visible
       headerMarginTop = 9
     }
     if (this.state.loading) {
@@ -312,7 +330,7 @@ class News extends Component<IProp & ReduxProps> {
           maxHeight={this.state.MAX_HEIGHT}
           minHeight={MIN_HEIGHT}
           renderHeader={() => (
-            <View style={{ backgroundColor: "rgb(15, 108, 177)", height: 50 }}>
+            <View style={{ backgroundColor: "rgb(15, 108, 177)", height: Platform.OS === 'ios' ? 50 : 135, }}>
               <Image
                 resizeMode="stretch"
                 width={Dimensions.get("window").width}

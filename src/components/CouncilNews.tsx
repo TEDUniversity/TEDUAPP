@@ -118,7 +118,7 @@ class CouncilNews extends Component<IProps> {
       let emptyData = false;
       //required for adjusting body height according to horizontallists. if one array is empty that means one horizontal list is absent
       if (duyuru.length === 0 || haber.length === 0 || etkinlik.length === 0) {
-        emptyData = true;
+        emptyData = false;
       }
 
       //the code below is run within the whenLoaded method rather than the componentWillMount
@@ -131,8 +131,16 @@ class CouncilNews extends Component<IProps> {
           this.setState({ scrollHeight: winHeight * 1.15 }); //75.5%
         }
         else if ( winHeight > 568 && winHeight < 736) {
-          //console.log("device height less than 736");
-          this.setState({ scrollHeight: winHeight * 0.97 }); //75.5%
+          if (winHeight === 692) {//samsung s8
+            console.log("HERE21")
+            this.setState({ scrollHeight: winHeight * 0.95 });
+          } else if (winHeight === 640) {//samsung s7
+            console.log("HERE22")
+            this.setState({ scrollHeight: winHeight * 0.99 });
+          } else if (winHeight === 667) {//iPhone 6
+            console.log("HERE23")
+            this.setState({ scrollHeight: winHeight * 0.97 });
+          }
         } else if (winHeight >= 736 && winHeight < 812) {
           //console.log("device height greater than 736");
           this.setState({ scrollHeight: winHeight * 0.94, horizontalMarginTop: 30 }); //76%
@@ -212,12 +220,12 @@ class CouncilNews extends Component<IProps> {
             style={{ marginTop: this.state.horizontalMarginTop }}
           />
           <HorizontalList
-            Data={this.renderDataEtkinlikler}
+            Data={this.renderDataDuyurular}
             title={"Etkinlikler"}
             style={{ marginTop: this.state.horizontalMarginTop }}
           />
           <HorizontalList
-            Data={this.renderDataHaberler}
+            Data={this.renderDataDuyurular}
             title={"Haberler"}
             style={{ marginTop: this.state.horizontalMarginTop }}
           />
