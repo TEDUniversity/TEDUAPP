@@ -109,10 +109,14 @@ class News extends Component<IProp & ReduxProps> {
 
     fetch("https://www.tedu.edu.tr/rss.xml")
       .then(response => response.text())
-      .then(responseData => {
-        storeData("teduRSS", responseData);
-        //console.log(responseData);
+      .then(RSS => rssParser.parse(RSS))
+      .catch(error => console.log(error))
+      .then(result => {
+        // alert(result.items);
+        this.whenLoaded(result.items);
+        //console.log(result.items);
       })
+
       .catch(error => {
         console.log(error);
         this.setState({ networkError: true });
@@ -218,6 +222,7 @@ class News extends Component<IProp & ReduxProps> {
     //console.log("duyuru"+this.state.dataDuyurular.length);
     //console.log("etkinlik"+this.state.dataEtkinlikler.length);
     //console.log("haber"+this.state.dataHaberler.length);
+
     let emptyData = false;
     //required for adjusting body height according to horizontallists. if one array is empty that means one horizontal list is absent
     if (this.state.dataDuyurular.length === 0 || this.state.dataHaberler.length === 0 || this.state.dataEtkinlikler.length === 0) {
@@ -228,6 +233,7 @@ class News extends Component<IProp & ReduxProps> {
     //because body height depends on the content rendered within the body
     //which means that body height must be defined after all content data is loading which is here
     const winHeight = Dimensions.get("window").height;
+
     if (!emptyData) {
       //adjust body height according to different device heights with none of the horizontal list is empty
       if (winHeight <= 568) {//5s height
