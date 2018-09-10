@@ -47,7 +47,8 @@ interface IProp {
   navigation: any;
 }
 interface ReduxProps {
-  rss?: any;
+  rss?: string[];
+  updateRss?: (rss: string[]) => any;
 }
 
 class News extends Component<IProp & ReduxProps> {
@@ -107,16 +108,15 @@ class News extends Component<IProp & ReduxProps> {
       this.setState({ MAX_HEIGHT: winHeight * 0.194 }); //18%
     }
 
-    fetch("https://www.tedu.edu.tr/rss.xml")
+    //eski çalışmayan hali
+    /**
+     * 
+     * fetch("https://www.tedu.edu.tr/rss.xml")
       .then(response => response.text())
-      .then(RSS => rssParser.parse(RSS))
-      .catch(error => console.log(error))
-      .then(result => {
-        // alert(result.items);
-        this.whenLoaded(result.items);
-        //console.log(result.items);
+      .then(responseData => {
+        storeData("teduRSS", responseData);
+        //console.log(responseData);
       })
-
       .catch(error => {
         console.log(error);
         this.setState({ networkError: true });
@@ -140,6 +140,78 @@ class News extends Component<IProp & ReduxProps> {
           );
         }
       });
+     */
+
+    //console.log(this.props.rss)
+    if (this.props.rss.length === 0) {
+      fetch("https://www.tedu.edu.tr/rss.xml")
+        .then(response => response.text())
+        .then(RSS => rssParser.parse(RSS))
+        .catch(error => console.log(error))
+        .then(result => {
+          //this.whenLoaded(result.items);
+          this.props.updateRss(result.items);
+        })
+        .catch(error => {
+          console.log(error);
+          this.setState({ networkError: true });
+          console.log("net err" + this.state.networkError);
+          console.log("alert err" + this.state.showAlert);
+          if (this.state.networkError === true && this.state.showAlert === true) {
+            Alert.alert(
+              "Network Error",
+              "Please check network for latest news.",
+              [
+                {
+                  text: "OK",
+                  onPress: () => {
+                    this.props.navigation.state.params.showAlert = false;
+                    console.log(this.props.navigation.state.params.showAlert);
+                    console.log(this.state.showAlert);
+                  }
+                }
+              ],
+              { cancelable: false }
+            );
+          }
+        }).then(() => {
+          this.whenLoaded(this.props.rss);
+        });
+    }else {
+      this.whenLoaded(this.props.rss);
+      fetch("https://www.tedu.edu.tr/rss.xml")
+        .then(response => response.text())
+        .then(RSS => rssParser.parse(RSS))
+        .catch(error => console.log(error))
+        .then(result => {
+          //this.whenLoaded(result.items);
+          this.props.updateRss(result.items);
+        })
+        .catch(error => {
+          console.log(error);
+          this.setState({ networkError: true });
+          console.log("net err" + this.state.networkError);
+          console.log("alert err" + this.state.showAlert);
+          if (this.state.networkError === true && this.state.showAlert === true) {
+            Alert.alert(
+              "Network Error",
+              "Please check network for latest news.",
+              [
+                {
+                  text: "OK",
+                  onPress: () => {
+                    this.props.navigation.state.params.showAlert = false;
+                    console.log(this.props.navigation.state.params.showAlert);
+                    console.log(this.state.showAlert);
+                  }
+                }
+              ],
+              { cancelable: false }
+            );
+          }
+        });
+    }
+
 
     //AsyncStorage.getItem("teduRSS", (err, result) => rssParser.parse(result))
     //.then(rss => {
@@ -155,7 +227,7 @@ class News extends Component<IProp & ReduxProps> {
                                         }).catch(error => console.log(error));*/
     //AsyncStorage.removeItem("teduRSS");
 
-    retrieveData("teduRSS")
+    /*retrieveData("teduRSS")
       .then(RSS => rssParser.parse(RSS))
       .catch(error => console.log(error))
       .then(result => {
@@ -163,7 +235,7 @@ class News extends Component<IProp & ReduxProps> {
         this.whenLoaded(result.items);
         //console.log(result.items);
       })
-      .catch(error => console.log(error));
+      .catch(error => console.log(error));*/
 
     // alert(this.props.rss);
     // retrieveData("isMoodleLoggedIn")
@@ -190,6 +262,8 @@ class News extends Component<IProp & ReduxProps> {
   }
 
   whenLoaded = response => {
+    //console.log(response);
+    let renderScreen = false;
     this.setState({ data: response });
     //other way of traversing an array
     /*const arrayLength = this.state.data.length;
@@ -206,19 +280,27 @@ class News extends Component<IProp & ReduxProps> {
             console.log("3");
         }
     }*/
+
+    let duyuru = [], haber = [], etkinlik = [];
+
     //one way of traversing an array
-    this.state.data.map(item => {
+    response.map(item => {
       if (item["links"][0].url.includes("gundem/duyurular")) {
-        this.setState({ dataDuyurular: this.state.dataDuyurular.concat(item) });
+        duyuru.push(item)
+        //this.setState({ dataDuyurular: this.state.dataDuyurular.concat(item) });
       } else if (item["links"][0].url.includes("gundem/etkinlikler")) {
-        this.setState({
-          dataEtkinlikler: this.state.dataEtkinlikler.concat(item)
-        });
+        etkinlik.push(item)
       } else if (item["links"][0].url.includes("gundem/haberler")) {
-        this.setState({ dataHaberler: this.state.dataHaberler.concat(item) });
+        haber.push(item)
       }
       //console.log(item.links[0].url);
     });
+    this.setState({
+      dataHaberler: haber,
+      dataEtkinlikler: etkinlik,
+      dataDuyurular: duyuru
+    });
+
     //console.log("duyuru"+this.state.dataDuyurular.length);
     //console.log("etkinlik"+this.state.dataEtkinlikler.length);
     //console.log("haber"+this.state.dataHaberler.length);
@@ -284,10 +366,15 @@ class News extends Component<IProp & ReduxProps> {
       }
     }
     //console.log("scrollheight" + this.state.scrollHeight)
+    //if (renderScreen) 
     this.setState({ loading: false });
+
+
     //console.log(JSON.stringify(response));
     //console.log(this.state.data);
   };
+
+
   renderDataDuyurular = () => {
     return this.state.dataDuyurular.map((responseData, Id) => (
       <DetailNews
@@ -407,7 +494,11 @@ const mapStateToProps = (state: types.GlobalState) => {
   };
 };
 
-const mapDispatchToProps = (dispatch: Dispatch) => ({});
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  updateRss: (rss: string[]) => {
+    dispatch(actions.updateRss(rss));
+  }
+});
 
 export default connect<{}, {}, ReduxProps>(
   mapStateToProps,

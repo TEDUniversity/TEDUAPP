@@ -135,7 +135,8 @@ class CouncilVotings extends Component<IProps & ReduxProps> {
   };
 
   readSurveyData() {
-    firebase
+    if (this.props.surveys.length === 0) {
+      firebase
       .database()
       .ref("/surveys")
       .on("value", response => {
@@ -156,17 +157,43 @@ class CouncilVotings extends Component<IProps & ReduxProps> {
         let arr = [];
         response.forEach(child => {
           arr.push(child.val());
-          this.props.updateSurveys(arr);
-          this.setState({ loading: false });
         });
+        this.props.updateSurveys(arr);
+        this.setState({ loading: false });
+
       });
+    } else {
+      this.setState({ loading: false });
+      firebase
+      .database()
+      .ref("/surveys")
+      .on("value", response => {
+        // this.setState({ firebase: response.val(), loading: false });
+        if (!response || !this.props.updateSurveys) {
+          return;
+        }
+        //console.log("firebase data: " + response.val());
+
+        //store the data returned from firebase in asyncstorage
+
+        // storeData("CouncilVotings", JSON.stringify(response.val())).then(() => {
+        //   //it is casted to string because it is stored as string in local storage. After getting is parse it as json.
+        //   retrieveData("CouncilVotings").then((res: string) => { this.updateSurvey(JSON.parse(res)) })
+        // });
+        //this.updateSurvey(voting)
+        //console.log(this.props.surveys);
+        let arr = [];
+        response.forEach(child => {
+          arr.push(child.val());
+        });
+        this.props.updateSurveys(arr);
+      });
+    }
+    
     //   retrieveData("CouncilVotings").then((res: string) => { this.updateSurvey(JSON.parse(res)) })
   }
 
-  updateSurvey = (councilVotings: types.Survey[]) => {
-    this.props.updateSurveys(councilVotings);
-    this.setState({ loading: false });
-  };
+
 
   renderSurvey = surveyName => {
     //this.setState({selectedSurey: surveyName});//for rendering survey on same page
@@ -200,7 +227,7 @@ class CouncilVotings extends Component<IProps & ReduxProps> {
       return;
     }
     return this.props.surveys.map((item, id) => {
-      console.log(item.valid);
+      //console.log(item.valid);
       if (item.valid) {
         //if the survey is valid, publish in the app. it is come from firebase
         return (

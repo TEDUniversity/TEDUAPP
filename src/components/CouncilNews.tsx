@@ -23,6 +23,10 @@ import HeaderImageScrollView, {
 import { storeData, retrieveData } from "../util/helpers";
 import HorizontalList from "../components/HorizontalList";
 import DetailCouncilNews from "../components/DetailCouncilNews";
+import * as types from "../store/types";
+import * as actions from "../store/actions";
+import { connect } from "react-redux";
+import { Dispatch } from "redux";
 
 
 export const Spinner = ({ size }) => (
@@ -30,14 +34,16 @@ export const Spinner = ({ size }) => (
     <ActivityIndicator size={size || "large"} />
   </View>
 );
-
+interface ReduxProps {
+  councilNews: any[];
+  updateCouncilNews: (news: any[]) => any;
+}
 interface IProps {
   navigation: any;
 }
-class CouncilNews extends Component<IProps> {
+class CouncilNews extends Component<IProps & ReduxProps> {
 
   state = {
-    data: [],
     dataEtkinlikler: [],
     dataHaberler: [],
     dataDuyurular: [],
@@ -48,33 +54,48 @@ class CouncilNews extends Component<IProps> {
   }
 
   componentWillMount() {
+    //this.whenLoaded(this.props.councilNews);
+
     this.readCouncilNewsData();
   }
 
 
   readCouncilNewsData = () => {
-    let news = [];
-    firebase
-      .database()
-      .ref("/councilNews")
-      .on("value", response => {
-        response.forEach(child => {
-          news.push(child.val());
-        })
 
-        storeData("CouncilNews", JSON.stringify(news))
-        //this.setState({ data: news }, () => {
-        //this.whenLoaded();
-        //console.log(this.state.data);
-        //});
-      });
+    if (this.props.councilNews.length === 0) {
+      let news = [];
+      firebase
+        .database()
+        .ref("/councilNews")
+        .on("value", response => {
+          response.forEach(child => {
+            news.push(child.val());
+          })
+          this.props.updateCouncilNews(news)
+          this.whenLoaded();
+          //this.setState({ data: news }, () => {
+          //this.whenLoaded();
+          //console.log(this.state.data);
+          //});
+        });
+    } else {
+      this.whenLoaded();
+      let news = [];
+      firebase
+        .database()
+        .ref("/councilNews")
+        .on("value", response => {
+          response.forEach(child => {
+            news.push(child.val());
+          })
+          this.props.updateCouncilNews(news)
+          //this.setState({ data: news }, () => {
+          //this.whenLoaded();
+          //console.log(this.state.data);
+          //});
+        });
+    }
 
-
-    retrieveData("CouncilNews").then((response) => {
-      this.setState({ data: JSON.parse(response) }, () => {
-        this.whenLoaded();
-      });
-    })
 
     /* firebase
      .database()
@@ -105,15 +126,20 @@ class CouncilNews extends Component<IProps> {
   }
 
   whenLoaded = () => {
+    console.log(this.props.councilNews)
+
     let duyuru = [], haber = [], etkinlik = [];
-    this.state.data.map(item => {
-      if (item.type.includes("duyuru")) {
-        duyuru.push(item);
-      } else if (item.type.includes("etkinlik")) {
-        etkinlik.push(item)
-      } else if (item.type.includes("haber")) {
-        //haber.push(item)
+    this.props.councilNews.map(item => {
+      if (item.valid) {
+        if (item.type.includes("duyuru")) {
+          duyuru.push(item);
+        } else if (item.type.includes("etkinlik")) {
+          etkinlik.push(item)
+        } else if (item.type.includes("haber")) {
+          haber.push(item)
+        }
       }
+
 
       let emptyData = false;
       //required for adjusting body height according to horizontallists. if one array is empty that means one horizontal list is absent
@@ -127,10 +153,10 @@ class CouncilNews extends Component<IProps> {
       const winHeight = Dimensions.get("window").height;
       if (!emptyData) {
         //adjust body height according to different device heights with none of the horizontal list is empty
-        if(winHeight <= 568) {//5s height
+        if (winHeight <= 568) {//5s height
           this.setState({ scrollHeight: winHeight * 1.15 }); //75.5%
         }
-        else if ( winHeight > 568 && winHeight < 736) {
+        else if (winHeight > 568 && winHeight < 736) {
           if (winHeight === 692) {//samsung s8
             console.log("HERE21")
             this.setState({ scrollHeight: winHeight * 0.95 });
@@ -144,21 +170,21 @@ class CouncilNews extends Component<IProps> {
         } else if (winHeight >= 736 && winHeight < 812) {
           //console.log("device height greater than 736");
           this.setState({ scrollHeight: winHeight * 0.94, horizontalMarginTop: 30 }); //76%
-        }if (winHeight >= 812) {
+        } if (winHeight >= 812) {
           this.setState({ scrollHeight: winHeight * 0.85, horizontalMarginTop: 30 }); //76%
         }
       } else if (emptyData) {
         //adjust body height according to different device heights with one of the horizontal list is empty
-        if(winHeight <= 568) {//5s height
+        if (winHeight <= 568) {//5s height
           this.setState({ scrollHeight: winHeight * 0.90 }); //75.5%
         }
-        else if ( winHeight > 568 && winHeight < 736) {
+        else if (winHeight > 568 && winHeight < 736) {
           //console.log("device height less than 736");
           this.setState({ scrollHeight: winHeight * 0.7435 }); //75.5%
         } else if (winHeight >= 736 && winHeight < 812) {
           //console.log("device height greater than 736");
           this.setState({ scrollHeight: winHeight * 0.7533, horizontalMarginTop: 30 }); //76%
-        }if (winHeight >= 812) {
+        } if (winHeight >= 812) {
           this.setState({ scrollHeight: winHeight * 0.68, horizontalMarginTop: 30 }); //76%
         }
       }
@@ -186,7 +212,7 @@ class CouncilNews extends Component<IProps> {
     ));
   };
   renderDataEtkinlikler = () => {
-    return this.state.dataHaberler.map((item, Id) => (
+    return this.state.dataEtkinlikler.map((item, Id) => (
       <DetailCouncilNews
         navigation={this.props.navigation}
         key={Id}
@@ -196,7 +222,7 @@ class CouncilNews extends Component<IProps> {
     ));
   };
   renderDataHaberler = () => {
-    return this.state.dataEtkinlikler.map((item, Id) => (
+    return this.state.dataHaberler.map((item, Id) => (
       <DetailCouncilNews
         navigation={this.props.navigation}
         key={Id}
@@ -247,4 +273,19 @@ const styles = StyleSheet.create({
   }
 });
 
-export default CouncilNews;
+const mapStateToProps = (state: types.GlobalState) => {
+  return {
+    councilNews: state.CouncilNews
+  };
+};
+
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  updateCouncilNews: (news: any[]) => {
+    dispatch(actions.updateCouncilNews(news));
+  }
+});
+
+export default connect<{}, {}, ReduxProps>(
+  mapStateToProps,
+  mapDispatchToProps
+)(CouncilNews);

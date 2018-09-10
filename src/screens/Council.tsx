@@ -20,6 +20,7 @@ import {
 import Image from "react-native-scalable-image";
 import TabNavigator from "react-native-tab-navigator";
 import Icon from "react-native-vector-icons/FontAwesome";
+import firebase from "firebase";
 import HeaderImageScrollView, {
   TriggeringView
 } from "react-native-image-header-scroll-view";
@@ -48,6 +49,7 @@ interface ReduxProps {
   isMoodleLoggedIn: boolean;
   updateUser: (user: types.User) => any;
   updateIsMoodleLoggedIn: (isLoggedIn: boolean) => any;
+  updateCouncilNews: (news: any[]) => any;
 }
 
 class Council extends Component<IProp & ReduxProps> {
@@ -95,6 +97,17 @@ class Council extends Component<IProp & ReduxProps> {
   componentWillMount() {
     //const parseString = require("xml2js").parseString;
 
+    /*let news = [];
+    firebase
+      .database()
+      .ref("/councilNews")
+      .on("value", response => {
+        response.forEach(child => {
+          news.push(child.val());
+        })
+        this.props.updateCouncilNews(news)
+      });
+*/
     const winHeight = Dimensions.get("window").height;
     console.log("winHeight" + winHeight);
 
@@ -136,7 +149,7 @@ class Council extends Component<IProp & ReduxProps> {
                   },
                   {
                     text: "Hayır",
-                    onPress: () => {}
+                    onPress: () => { }
                   }
                 ],
                 { cancelable: false }
@@ -247,13 +260,13 @@ class Council extends Component<IProp & ReduxProps> {
     let headerMarginTop = 0//header margin for iphone X
     if (winHeight >= 812) {
       headerMarginTop = 37
-    }else{
+    } else {
       headerMarginTop = 9
     }
     let moodlePage;
     if (!this.props.isMoodleLoggedIn) {
       moodlePage = (
-        <View>
+        <View height = {Dimensions.get("window").height}>
           <ImageBackground
             source={require("../../img/background/BACKGROUND.png")}
             style={styles.mainBackGround}
@@ -410,6 +423,9 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   },
   updateIsMoodleLoggedIn: (moodleLoggedIn: boolean) => {
     dispatch(actions.updateMoodleLoggedIn(moodleLoggedIn));
+  },
+  updateCouncilNews: (news: any[]) => {
+    dispatch(actions.updateCouncilNews(news));
   }
 });
 
