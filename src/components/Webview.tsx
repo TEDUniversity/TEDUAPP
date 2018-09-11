@@ -109,6 +109,7 @@ class Webview extends React.Component<IProp> {
   render() {
     console.log(this.props.navigation.state.params.url);
     return (
+
       <View style={{ flex: 1 }} >
         <WebView
           ref={(webView) => { this.webView.ref = webView; }}
@@ -139,6 +140,7 @@ class Webview extends React.Component<IProp> {
 
         </View>
       </View>
+
 
     );
   }
