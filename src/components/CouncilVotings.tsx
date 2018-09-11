@@ -202,7 +202,9 @@ class CouncilVotings extends Component<IProps & ReduxProps> {
       return;
     }
     return this.props.surveys.map((item, id) => {
+
       if (item.name === surveyName) {
+
         //traverse the question array of the related survey and set all currentPressedAnswers to UNDEFINED before navigating to survey
         //Reason is that if a user pressed answers but not submit the survey, the given answers is preserved in the global state and when user
         //opens the related survey for sending again it sent with previos answer state.
@@ -214,7 +216,7 @@ class CouncilVotings extends Component<IProps & ReduxProps> {
           title: surveyName,
           backButton: "Votings",
           surveyData: item,
-          index: id
+          index: item.id
         });
         //return <Survey key={id} surveyData={item} />
       }
@@ -222,6 +224,7 @@ class CouncilVotings extends Component<IProps & ReduxProps> {
   };
 
   renderSurveyButtons = () => {
+
     if (!this.props.surveys) {
       alert("surveys undefined");
       return;

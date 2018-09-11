@@ -257,6 +257,7 @@ class Survey extends Component<IProp & ReduxProps> {
   }
 
   renderQuestions = () => {
+    
     return this.props.navigation.state.params.surveyData.questions.map((item, id) => (
       <Question
         question={item}
@@ -269,7 +270,7 @@ class Survey extends Component<IProp & ReduxProps> {
 
 
   render() {
-    //console.log("survey data" + this.props.navigation.state.params.surveyData);
+    console.log(this.props.navigation.state.params.surveyData);
     return (
       <ImageBackground
         source={require("../../../img/background/BACKGROUND.png")}

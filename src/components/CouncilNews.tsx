@@ -80,7 +80,7 @@ class CouncilNews extends Component<IProps & ReduxProps> {
               this.props.updateCouncilNews(news)
               this.whenLoaded();
               
-              console.log(news)
+              //console.log(news)
 
             })
             news = []
@@ -125,7 +125,7 @@ class CouncilNews extends Component<IProps & ReduxProps> {
   }
 
   whenLoaded = () => {
-    console.log(this.props.councilNews)
+    //console.log(this.props.councilNews)
 
     let duyuru = [], haber = [], etkinlik = [];
     this.props.councilNews.map(item => {
@@ -157,13 +157,13 @@ class CouncilNews extends Component<IProps & ReduxProps> {
       }
       else if (winHeight > 568 && winHeight < 736) {
         if (winHeight === 692) {//samsung s8
-          console.log("HERE21")
+          //console.log("HERE21")
           this.setState({ scrollHeight: winHeight * 0.95 });
         } else if (winHeight === 640) {//samsung s7 && samsung s6
-          console.log("HERE22")
+          //console.log("HERE22")
           this.setState({ scrollHeight: winHeight * 0.99 });
         } else if (winHeight === 667) {//iPhone 6
-          console.log("HERE23")
+          //console.log("HERE23")
           this.setState({ scrollHeight: winHeight * 0.97 });
         }
       } else if (winHeight >= 736 && winHeight < 812) {

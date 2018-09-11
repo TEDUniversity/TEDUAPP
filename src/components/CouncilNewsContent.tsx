@@ -6,7 +6,8 @@ import {
   Dimensions,
   TouchableOpacity,
   ImageBackground,
-  StyleSheet
+  StyleSheet,
+  ScrollView
 } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 
@@ -47,11 +48,26 @@ class CouncilNewsContent extends Component<IProps> {
   }
   render() {
 
-    return <View >
-      <Text> {this.props.navigation.state.params.content} </Text>
-      <Text> {this.props.navigation.state.params.author} </Text>
-      <Text> {this.props.navigation.state.params.date} </Text>
-      <Text> News content </Text>
+    return <View style={{ flex: 1 }} >
+      <ImageBackground
+        source={require("../../img/background/BACKGROUND.png")}
+        style={styles.mainBackGround}
+      >
+        <ScrollView>
+          <Text style={{ margin: 10, fontSize: 15, fontWeight: "300", lineHeight: 20 }} >
+            {this.props.navigation.state.params.content}
+          </Text>
+        </ScrollView>
+        <View style={{marginBottom: 7, marginTop: 5}} >
+        <View style={{ alignItems: "flex-end", marginRight: 13 }} >
+          <Text style={{}}> {this.props.navigation.state.params.author} </Text>
+        </View>
+        <View style={{ alignItems: "flex-end", marginRight: 13, marginTop: 2 }} >
+          <Text style={{}}> {this.props.navigation.state.params.date} </Text>
+        </View>
+        </View>
+        
+      </ImageBackground>
     </View>;
   }
 }
@@ -72,6 +88,13 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     fontSize: deviceWidth / 26.45,
     fontWeight: "400"
+  },
+  mainBackGround: {
+    flex: 1,
+    alignSelf: "stretch",
+    resizeMode: "cover"
+    // width: null,
+    // height: null
   }
 });
 /*
