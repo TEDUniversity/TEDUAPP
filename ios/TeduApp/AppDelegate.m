@@ -23,7 +23,7 @@
     [RNFirebaseNotifications configure];
     NSURL *jsCodeLocation;
   //[[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
-    jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
+    jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
   //[[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
     RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
                                                         moduleName:@"TeduApp"
@@ -52,4 +52,5 @@ fetchCompletionHandler:(nonnull void (^)(UIBackgroundFetchResult))completionHand
 - (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings {
     [[RNFirebaseMessaging instance] didRegisterUserNotificationSettings:notificationSettings];
 }
+
 @end
