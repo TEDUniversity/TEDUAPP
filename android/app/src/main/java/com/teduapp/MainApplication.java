@@ -13,7 +13,7 @@ import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
 import io.invertase.firebase.messaging.RNFirebaseMessagingPackage;
-
+import io.invertase.firebase.notifications.RNFirebaseNotificationsPackage; // <-- Add this line
 import java.util.Arrays;
 import java.util.List;
 
@@ -27,10 +27,9 @@ public class MainApplication extends Application implements ReactApplication {
 
         @Override
         protected List<ReactPackage> getPackages() {
-            return Arrays.<ReactPackage>asList(new MainReactPackage(),
-            new RNFileViewerPackage(), new RNFetchBlobPackage(),
-                    new VectorIconsPackage(), new RandomBytesPackage(), new RNFirebasePackage(),
-                    new RNFirebaseMessagingPackage());
+            return Arrays.<ReactPackage>asList(new MainReactPackage(), new RNFileViewerPackage(),
+                    new RNFetchBlobPackage(), new VectorIconsPackage(), new RandomBytesPackage(),
+                    new RNFirebasePackage(), new RNFirebaseMessagingPackage(), new RNFirebaseNotificationsPackage());
         }
 
         @Override

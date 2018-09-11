@@ -58,9 +58,43 @@ export default class App extends Component<any> {
       firebase.initializeApp(config);
     }
   }
+  notificationDisplayedListener: any;
+  notificationListener: any;
+
+  componentWillUnmount() {
+    this.notificationDisplayedListener();
+    this.notificationListener();
+  }
 
   componentDidMount() {
     firebasee.messaging().subscribeToTopic("pushNotifications");
+    firebasee
+      .notifications()
+      .android.createChannel(
+        new firebasee.notifications.Android.Channel(
+          "daily",
+          "Reminders",
+          firebasee.notifications.Android.Importance.High
+        ).setDescription("Reminds you....")
+      );
+    this.notificationDisplayedListener = firebasee
+      .app()
+      .notifications()
+      .onNotificationDisplayed((notification: any) => {
+        // Process your notification as required
+        // ANDROID: Remote notifications do not contain the channel ID. You will have to specify this manually if you'd like to re-display the notification.
+        console.log("then notification", notification);
+        // firebasee.notifications().displayNotification(notification);
+      });
+    this.notificationListener = firebasee
+      .app()
+      .notifications()
+      .onNotification((notification: any) => {
+        notification.android.setChannelId("daily");
+        // Process your notification as required
+        console.log("then notificationListener", notification);
+        firebasee.notifications().displayNotification(notification);
+      });
 
     firebasee
       .app()
