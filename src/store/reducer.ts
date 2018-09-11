@@ -4,7 +4,8 @@ import { retrieveData, getData } from "../util/helpers";
 const initialState: types.GlobalState = {
   Surveys: [],
   isMoodleLoggedIn: false,
-  Rss: {},
+  Rss: [],
+  CouncilNews: [],
   User: {
     userid: "",
     token: "",
@@ -29,6 +30,8 @@ export default function reducer(
       return { ...state, User: action.user };
     case types.UPDATE_RSS:
       return { ...state, Rss: action.Rss };
+    case types.UPDATE_COUNCILNEWS:
+      return { ...state, CouncilNews: action.CouncilNews };
     default: {
       return state;
     }

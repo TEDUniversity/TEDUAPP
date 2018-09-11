@@ -14,11 +14,13 @@ import {
   Dimensions,
   ImageBackground,
   TouchableOpacity,
-  Alert
+  Alert,
+  Platform
 } from "react-native";
 import Image from "react-native-scalable-image";
 import TabNavigator from "react-native-tab-navigator";
 import Icon from "react-native-vector-icons/FontAwesome";
+import firebase from "firebase";
 import HeaderImageScrollView, {
   TriggeringView
 } from "react-native-image-header-scroll-view";
@@ -40,14 +42,17 @@ interface IProp {
   navigation: any;
 }
 
+let deviceWidth = Dimensions.get("window").width;
+
 interface ReduxProps {
   User: types.User;
   isMoodleLoggedIn: boolean;
   updateUser: (user: types.User) => any;
   updateIsMoodleLoggedIn: (isLoggedIn: boolean) => any;
+  updateCouncilNews: (news: any[]) => any;
 }
 
-class Council extends Component<IProp & ReduxProps>{
+class Council extends Component<IProp & ReduxProps> {
   //not used.
   static navigationOptions = {
     headerTitle: (
@@ -67,12 +72,11 @@ class Council extends Component<IProp & ReduxProps>{
   state = {
     selectedTab: "News",
     MAX_HEIGHT: 0,
-    scrollHeight: 500,
     dataDuyurular: [],
     dataHaberler: [],
     dataEtkinlikler: [],
     token: "",
-
+    scrollHeight: Dimensions.get("window").height
   };
 
   renderDataDuyurular = () => {
@@ -94,21 +98,36 @@ class Council extends Component<IProp & ReduxProps>{
   componentWillMount() {
     //const parseString = require("xml2js").parseString;
 
+    /*let news = [];
+    firebase
+      .database()
+      .ref("/councilNews")
+      .on("value", response => {
+        response.forEach(child => {
+          news.push(child.val());
+        })
+        this.props.updateCouncilNews(news)
+      });
+*/
     const winHeight = Dimensions.get("window").height;
     console.log("winHeight" + winHeight);
 
     //set the header height
-    if (winHeight < 736) {
+    if (winHeight <= 568) {
+      //5s height
+      this.setState({ MAX_HEIGHT: winHeight * 0.234 }); //75.5%
+    } else if (winHeight > 568 && winHeight < 736) {
       //console.log("device height less than 736");
-      this.setState({ MAX_HEIGHT: winHeight * 0.213 }); //17.5%
+      this.setState({ MAX_HEIGHT: winHeight * 0.233 }); //17.5%
     } else if (winHeight >= 736) {
       //console.log("device height greater than 736");
-      this.setState({ MAX_HEIGHT: winHeight * 0.18 }); //18%
+      this.setState({ MAX_HEIGHT: winHeight * 0.23 }); //18%
     }
 
+    //set scroll height
     if (winHeight < 736) {
       //console.log("device height less than 736");
-      this.setState({ scrollHeight: winHeight * 0.750 }); //75.5%
+      this.setState({ scrollHeight: winHeight * 0.755 }); //75.5%
     } else if (winHeight >= 736) {
       //console.log("device height greater than 736");
       this.setState({ scrollHeight: winHeight * 0.76 }); //76%
@@ -140,7 +159,7 @@ class Council extends Component<IProp & ReduxProps>{
                   },
                   {
                     text: "Hayır",
-                    onPress: () => { }
+                    onPress: () => {}
                   }
                 ],
                 { cancelable: false }
@@ -148,7 +167,11 @@ class Council extends Component<IProp & ReduxProps>{
               return <View />;
             }}
           >
-            <Icon name="log-out" size={25} style={{ color: "rgb(1, 14, 41)" }} />
+            <Icon
+              name="log-out"
+              size={25}
+              style={{ color: "rgb(1, 14, 41)" }}
+            />
           </TouchableOpacity>
 
           <TabNavigator
@@ -167,7 +190,7 @@ class Council extends Component<IProp & ReduxProps>{
               }}
               titleStyle={styles.tabNavTitle}
             >
-              <Text> tab1 </Text>
+              <Text> </Text>
             </TabNavigator.Item>
             <TabNavigator.Item
               selected={this.state.selectedTab === "Votings"}
@@ -179,7 +202,7 @@ class Council extends Component<IProp & ReduxProps>{
               }}
               titleStyle={styles.tabNavTitle}
             >
-              <Text> tab2 </Text>
+              <Text> </Text>
             </TabNavigator.Item>
           </TabNavigator>
         </View>
@@ -243,34 +266,40 @@ class Council extends Component<IProp & ReduxProps>{
   };
 
   render() {
+    let winHeight = Dimensions.get("window").height;
+    let headerMarginTop = 0; //header margin for iphone X
+    if (winHeight >= 812) {
+      headerMarginTop = 37;
+    } else {
+      headerMarginTop = Platform.OS === "ios" ? 9 : 0;
+    }
     let moodlePage;
     if (!this.props.isMoodleLoggedIn) {
       moodlePage = (
-        <View height={this.state.scrollHeight}>
+        <View
+          height={this.state.scrollHeight}
+          width={Dimensions.get("window").width}
+        >
           <ImageBackground
             source={require("../../img/background/BACKGROUND.png")}
             style={styles.mainBackGround}
           >
-            <View style={styles.MoodleContainer} >
+            <View style={styles.MoodleContainer}>
               <MoodleLogin onPress={this.login} />
             </View>
           </ImageBackground>
         </View>
-
       );
     } else {
       moodlePage = (
-        <View height={this.state.scrollHeight * 1.4736}>
+        <View>
           <ImageBackground
             source={require("../../img/background/BACKGROUND.png")}
             style={styles.mainBackGround}
           >
-            <View style={styles.container}>
-              {this.renderBody()}
-            </View>
+            {this.renderBody()}
           </ImageBackground>
         </View>
-
       );
     }
     return (
@@ -278,18 +307,25 @@ class Council extends Component<IProp & ReduxProps>{
         maxHeight={this.state.MAX_HEIGHT}
         minHeight={MIN_HEIGHT}
         renderHeader={() => (
-          <Image
-            resizeMode="stretch"
-            width={Dimensions.get("window").width}
-            style={StyleSheet.absoluteFill}
-            source={require("../../img/header/anatepe2.png")}
-          />
+          <View
+            style={{
+              backgroundColor: "rgb(15, 108, 177)",
+              height: Platform.OS === "ios" ? 50 : 140
+            }}
+          >
+            <Image
+              resizeMode="stretch"
+              width={Dimensions.get("window").width}
+              style={[StyleSheet.absoluteFill, { marginTop: headerMarginTop }]}
+              source={require("../../img/header/anatepe2.png")}
+            />
+          </View>
         )}
-        overlayColor="#144d8c"
+        overlayColor="#006AB3"
         maxOverlayOpacity={1}
         bounces={false}
         showsVerticalScrollIndicator={false}
-        scrollViewBackgroundColor="rgb(53,53,55)"
+        scrollViewBackgroundColor="rgb(231,231,232)"
         fadeOutForeground={true}
         renderForeground={() => {
           if (this.props.isMoodleLoggedIn) {
@@ -310,7 +346,7 @@ class Council extends Component<IProp & ReduxProps>{
                   }}
                   titleStyle={styles.tabNavTitle}
                 >
-                  <Text> tab1 </Text>
+                  <Text> </Text>
                 </TabNavigator.Item>
                 <TabNavigator.Item
                   selected={this.state.selectedTab === "Votings"}
@@ -322,16 +358,14 @@ class Council extends Component<IProp & ReduxProps>{
                   }}
                   titleStyle={styles.tabNavTitle}
                 >
-                  <Text> tab2 </Text>
+                  <Text> </Text>
                 </TabNavigator.Item>
               </TabNavigator>
             );
           }
         }}
       >
-
         {moodlePage}
-
       </HeaderImageScrollView>
     );
   }
@@ -346,7 +380,7 @@ const styles = StyleSheet.create({
   MoodleContainer: {
     justifyContent: "center",
     alignItems: "center",
-    flex: 1,
+    flex: 1
   },
   questionContainer: {
     //justifyContent: "center"
@@ -375,12 +409,15 @@ const styles = StyleSheet.create({
     //flex: 1,
     //justifyContent: "flex-start",
     width: "100%",
-    height: 25,
-    backgroundColor: "rgb(53,53,55)",
+    height: deviceWidth / 15,
+    backgroundColor: "rgb(41,48,109)",
     alignItems: "center"
     //#373738
   },
-  tabNavTitle: {},
+  tabNavTitle: {
+    fontSize: 11,
+    fontWeight: "600"
+  },
   mainBackGround: {
     flex: 1,
     alignSelf: "stretch",
@@ -389,7 +426,6 @@ const styles = StyleSheet.create({
     // height: null
   }
 });
-
 
 const mapStateToProps = (state: types.GlobalState) => {
   return {
@@ -404,6 +440,9 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   },
   updateIsMoodleLoggedIn: (moodleLoggedIn: boolean) => {
     dispatch(actions.updateMoodleLoggedIn(moodleLoggedIn));
+  },
+  updateCouncilNews: (news: any[]) => {
+    dispatch(actions.updateCouncilNews(news));
   }
 });
 
@@ -411,4 +450,3 @@ export default connect<{}, {}, ReduxProps>(
   mapStateToProps,
   mapDispatchToProps
 )(Council);
-

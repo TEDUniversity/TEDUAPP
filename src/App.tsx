@@ -7,7 +7,7 @@
  */
 
 import React, { Component } from "react";
-import { View, Text } from "react-native";
+import { View, Text, Dimensions } from "react-native";
 import { createStackNavigator } from "react-navigation";
 import News, { Spinner } from "./screens/News";
 import Moodle from "./screens/Moodle";
@@ -17,6 +17,8 @@ import Calendar from "./screens/Calendar";
 import Main from "./screens/Main";
 import Webview from "./components/Webview";
 import Survey from "./components/Survey/Survey";
+import CouncilNewsContent from "./components/CouncilNewsContent";
+import Credits from "./components/Credits";
 import firebase from "firebase";
 import firebasee from "react-native-firebase";
 
@@ -24,6 +26,8 @@ import { Provider } from "react-redux";
 import { store, persistor } from "./store";
 import { PersistGate } from "redux-persist/integration/react";
 import MoodleDersDetay from "./components/Moodle/MoodleDersDetay";
+
+let deviceWidth = Dimensions.get("window").width;
 
 // symbol polyfills
 require("core-js/es6/symbol");
@@ -35,7 +39,7 @@ require("core-js/fn/set");
 require("core-js/fn/array/find");
 
 // symbol polyfills
-global.Symbol = require("core-js/es6/symbol");
+require("core-js/es6/symbol");
 require("core-js/fn/symbol/iterator");
 
 // collection fn polyfills
@@ -56,7 +60,10 @@ export default class App extends Component<any> {
   }
 
   componentDidMount() {
+    firebasee.messaging().subscribeToTopic("pushNotifications");
+
     firebasee
+      .app()
       .messaging()
       .hasPermission()
       .then(enabled => {
@@ -112,10 +119,16 @@ const RootStack = createStackNavigator(
     MoodleRouter: Moodle,
     WebviewRouter: Webview,
     SurveyRouter: Survey,
+    CouncilContentRouter: CouncilNewsContent,
+    CreditsRouter: Credits,
     DersDetayRouter: {
       screen: MoodleDersDetay,
       navigationOptions: {
-        headerStyle: { marginTop: 0, backgroundColor: "#144d8c", height: 30 },
+        headerStyle: {
+          marginTop: 0,
+          backgroundColor: "#144d8c",
+          height: deviceWidth / 12.5
+        },
         title: "Moodle"
       }
     }

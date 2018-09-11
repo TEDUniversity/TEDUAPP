@@ -8,6 +8,7 @@ import {
   ImageBackground,
   StyleSheet
 } from "react-native";
+import HTML from "react-native-render-html";
 
 interface IProps {
   imgsrc: string;
@@ -17,7 +18,7 @@ interface IProps {
 
 let deviceWidth = Dimensions.get('window').width;
 
-class DetailNews extends Component<IProps> {
+class DetailCouncilNews extends Component<IProps> {
   //   alert(JSON.stringify(props.data));
 
   renderBody = () => {
@@ -27,12 +28,14 @@ class DetailNews extends Component<IProps> {
         <TouchableOpacity
           style={styles.button}
           onPress={() => {
-            this.props.navigation.navigate("WebviewRouter", {
-              url: this.props.data.links[0].url,
-              title: "News",
-              backButton: "Home"
+            this.props.navigation.navigate("CouncilContentRouter", {
+              title: this.props.data.header,
+              backButton: "Home",
+              content: this.props.data.content,
+              author: this.props.data.author,
+              date: this.props.data.date,
             });
-            console.log(this.props.data.link);
+            //console.log(this.props.data);
           }}
         >
           <ImageBackground
@@ -40,7 +43,7 @@ class DetailNews extends Component<IProps> {
             style={BackGround}
           >
             <View style={subContainerStyle}>
-              <Text style={text}> {this.props.data.title} </Text>
+              <Text style={text}> {this.props.data.header} </Text>
             </View>
           </ImageBackground>
         </TouchableOpacity>
@@ -50,12 +53,15 @@ class DetailNews extends Component<IProps> {
         <TouchableOpacity
           style={styles.button}
           onPress={() => {
-            this.props.navigation.navigate("WebviewRouter", {
-              url: this.props.data.links[0].url,
-              title: "News",
-              backButton: "Home"
+            this.props.navigation.navigate("CouncilContentRouter", {
+              title: this.props.data.header,
+              backButton: "Home",
+              content: this.props.data.content,
+              author: this.props.data.author,
+              date: this.props.data.date,
+
             });
-            console.log(this.props.data.link);
+            //console.log(this.props.data);
           }}
         >
           <ImageBackground
@@ -63,7 +69,7 @@ class DetailNews extends Component<IProps> {
             style={BackGround}
           >
             <View style={subContainerStyle}>
-              <Text style={text}> {this.props.data.title} </Text>
+              <Text style={text}> {this.props.data.header} </Text>
             </View>
           </ImageBackground>
         </TouchableOpacity>
@@ -73,12 +79,14 @@ class DetailNews extends Component<IProps> {
         <TouchableOpacity
           style={styles.button}
           onPress={() => {
-            this.props.navigation.navigate("WebviewRouter", {
-              url: this.props.data.links[0].url,
-              title: "News",
-              backButton: "Home"
+            this.props.navigation.navigate("CouncilContentRouter", {
+              title: this.props.data.header,
+              backButton: "Home",
+              content: this.props.data.content,
+              author: this.props.data.author,
+              date: this.props.data.date,
             });
-            console.log(this.props.data.link);
+            console.log("pressed");
           }}
         >
           <ImageBackground
@@ -86,7 +94,7 @@ class DetailNews extends Component<IProps> {
             style={BackGround}
           >
             <View style={subContainerStyle}>
-              <Text style={text}> {this.props.data.title} </Text>
+              <Text style={text}> {this.props.data.header} </Text>
             </View>
           </ImageBackground>
         </TouchableOpacity>
@@ -130,9 +138,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#DDDDDD",
     padding: 0,
     height: 150,
-    width: 150,
-    //height: deviceWidth/2.5,
-    //width: deviceWidth/2.5,
+    width: 150
   },
   BackGround: {
     flex: 1,
@@ -150,4 +156,4 @@ const styles = StyleSheet.create({
        </TouchableOpacity>
 */
 
-export default DetailNews;
+export default DetailCouncilNews;

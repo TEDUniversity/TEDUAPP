@@ -40,14 +40,14 @@ class Main extends Component<IProp> {
     //const parseString = require("xml2js").parseString;
 
     const winWidth = Dimensions.get("window").width;
-    console.log("winWidth" + winWidth);
+    //console.log("winWidth" + winWidth);
     //navigation toolbar içindeki elemanların yeri için etkisiz bir işlem
     //sadece tüm toolbarın genişliğini etkiliyor
     if (winWidth < 414) {
-      console.log("device width less than 414");
+      //console.log("device width less than 414");
       this.setState({ menuWidth: winWidth * 1 }); //75.5%
     } else if (winWidth >= 414) {
-      console.log("device width greater than 414");
+      //console.log("device width greater than 414");
       this.setState({ menuWidth: winWidth * 1 }); //76%
     }
   }
@@ -57,29 +57,29 @@ class Main extends Component<IProp> {
       key: "NewsRouter",
       icon: "dashboard",
       label: "News",
-      barColor: "#144d8c",
+      barColor: "#006AB3",
       pressColor: "rgba(232, 36, 55, 0.16)"
     },
     {
       key: "MenuRouter",
       icon: "menu",
       label: "Menu",
-      barColor: "#144d8c",
+      barColor: "#006AB3",
       pressColor: "rgba(232, 36, 55, 0.16)"
     },
-    
+
     {
       key: "MoodleRouter",
       icon: "school",
       label: "Moodle",
-      barColor: "#144d8c",
+      barColor: "#006AB3",
       pressColor: "rgba(232, 36, 55, 0.16)"
     },
     {
       key: "CouncilRouter",
-      icon: "music-note",
+      icon: "people",
       label: "Council",
-      barColor: "#144d8c",
+      barColor: "#006AB3",
       pressColor: "rgba(232, 36, 55, 0.16)"
     }
   ];
@@ -148,8 +148,8 @@ class Main extends Component<IProp> {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: "space-between"
+    flex: 1
+    //justifyContent: "space-between"
     //alignItems: "center"
   },
   text: {

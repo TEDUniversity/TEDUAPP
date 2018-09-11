@@ -21,9 +21,16 @@ export function updateUser(newUser: types.User): types.Action {
   };
 }
 
-export function updateRss(rss: any): types.Action {
+export function updateRss(rss: string[]): types.Action {
   return {
     type: types.UPDATE_RSS,
     Rss: rss
+  };
+}
+
+export function updateCouncilNews(news: any[]): types.Action {
+  return {
+    type: types.UPDATE_COUNCILNEWS,
+    CouncilNews: news
   };
 }

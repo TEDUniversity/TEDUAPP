@@ -16,7 +16,7 @@ import {
   ActivityIndicator,
   Dimensions,
   ImageBackground,
-  AsyncStorage
+  Platform
 } from "react-native";
 import axios from "axios";
 import * as rssParser from "react-native-rss-parser";
@@ -47,7 +47,8 @@ interface IProp {
   navigation: any;
 }
 interface ReduxProps {
-  rss?: any;
+  rss?: string[];
+  updateRss?: (rss: string[]) => any;
 }
 
 class News extends Component<IProp & ReduxProps> {
@@ -72,15 +73,10 @@ class News extends Component<IProp & ReduxProps> {
     dataDuyurular: [],
     loading: true,
     MAX_HEIGHT: 0,
-    scrollHeight: 0,
+    scrollHeight: Dimensions.get("window").height,
     networkError: false,
     showAlert: this.props.showAlert,
-    user: {
-      name: "arda",
-      surname: "tumay",
-      age: "22",
-      traits: { eye: "brown", tall: "185" }
-    }
+    horizontalMarginTop: 20
   };
 
   //not used. for editind navigation parameters.
@@ -96,30 +92,30 @@ class News extends Component<IProp & ReduxProps> {
     //AsyncStorage.getItem("user", (err, result) => { console.log(result); }); DENEME
 
     const winHeight = Dimensions.get("window").height;
+    const winWidth = Dimensions.get("window").width;
+
     console.log("winHeight" + winHeight);
-    if (winHeight < 736) {
-      //console.log("device height less than 736");
-      this.setState({ scrollHeight: winHeight * 0.755 }); //75.5%
+    console.log("winWidth" + winWidth);
+
+    //adjust header height according to different device sizes
+    if (winHeight <= 568) {
+      //5s height
+      this.setState({ MAX_HEIGHT: winHeight * 0.196 }); //75.5%
+    } else if (winHeight > 568 && winHeight < 736) {
+      let deviceSpecificMultiplier = Platform.OS === "ios" ? 0.195 : 0.195;
+      this.setState({ MAX_HEIGHT: winHeight * deviceSpecificMultiplier }); //17.5%
     } else if (winHeight >= 736) {
-      //console.log("device height greater than 736");
-      this.setState({ scrollHeight: winHeight * 0.76 }); //76%
+      this.setState({ MAX_HEIGHT: winHeight * 0.194 }); //18%
     }
 
-    if (winHeight < 736) {
-      //console.log("device height less than 736");
-      this.setState({ MAX_HEIGHT: winHeight * 0.175 }); //17.5%
-    } else if (winHeight >= 736) {
-      //console.log("device height greater than 736");
-      this.setState({ MAX_HEIGHT: winHeight * 0.18 }); //18%
-    }
-
-    //console.log(Survey.IHttpActionResult("addb8abc-28ae-425b-a58b-99ae6b33be58"));
-
-    fetch("https://www.tedu.edu.tr/rss.xml")
+    //eski çalışmayan hali
+    /**
+     * 
+     * fetch("https://www.tedu.edu.tr/rss.xml")
       .then(response => response.text())
       .then(responseData => {
         storeData("teduRSS", responseData);
-        console.log(responseData);
+        //console.log(responseData);
       })
       .catch(error => {
         console.log(error);
@@ -144,6 +140,45 @@ class News extends Component<IProp & ReduxProps> {
           );
         }
       });
+     */
+
+    //console.log(this.props.rss)
+
+    fetch("https://www.tedu.edu.tr/rss.xml")
+      .then(response => response.text())
+      .then(RSS => rssParser.parse(RSS))
+      .catch(error => console.log(error))
+      .then(result => {
+        //this.whenLoaded(result.items);
+        this.props.updateRss(result.items);
+      })
+      .catch(error => {
+        console.log(error);
+        this.setState({ networkError: true });
+        console.log("net err" + this.state.networkError);
+        console.log("alert err" + this.state.showAlert);
+        this.whenLoaded(this.props.rss);
+        if (this.state.networkError === true && this.state.showAlert === true) {
+          Alert.alert(
+            "Network Error",
+            "Please check network for latest news.",
+            [
+              {
+                text: "OK",
+                onPress: () => {
+                  this.props.navigation.state.params.showAlert = false;
+                  console.log(this.props.navigation.state.params.showAlert);
+                  console.log(this.state.showAlert);
+                }
+              }
+            ],
+            { cancelable: false }
+          );
+        }
+      })
+      .then(() => {
+        this.whenLoaded(this.props.rss);
+      });
 
     //AsyncStorage.getItem("teduRSS", (err, result) => rssParser.parse(result))
     //.then(rss => {
@@ -159,15 +194,15 @@ class News extends Component<IProp & ReduxProps> {
                                         }).catch(error => console.log(error));*/
     //AsyncStorage.removeItem("teduRSS");
 
-    retrieveData("teduRSS")
+    /*retrieveData("teduRSS")
       .then(RSS => rssParser.parse(RSS))
       .catch(error => console.log(error))
       .then(result => {
         // alert(result.items);
         this.whenLoaded(result.items);
-        console.log(result.items);
+        //console.log(result.items);
       })
-      .catch(error => console.log(error));
+      .catch(error => console.log(error));*/
 
     // alert(this.props.rss);
     // retrieveData("isMoodleLoggedIn")
@@ -194,7 +229,8 @@ class News extends Component<IProp & ReduxProps> {
   }
 
   whenLoaded = response => {
-    this.setState({ data: response });
+    //console.log(response);
+    let renderScreen = false;
     //other way of traversing an array
     /*const arrayLength = this.state.data.length;
     for (let i = 0; i < arrayLength; i++) {
@@ -210,26 +246,128 @@ class News extends Component<IProp & ReduxProps> {
             console.log("3");
         }
     }*/
+
+    let duyuru = [],
+      haber = [],
+      etkinlik = [];
+
     //one way of traversing an array
-    this.state.data.map(item => {
+    response.map(item => {
       if (item["links"][0].url.includes("gundem/duyurular")) {
-        this.setState({ dataDuyurular: this.state.dataDuyurular.concat(item) });
+        duyuru.push(item);
+        //this.setState({ dataDuyurular: this.state.dataDuyurular.concat(item) });
       } else if (item["links"][0].url.includes("gundem/etkinlikler")) {
-        this.setState({
-          dataEtkinlikler: this.state.dataEtkinlikler.concat(item)
-        });
+        etkinlik.push(item);
       } else if (item["links"][0].url.includes("gundem/haberler")) {
-        this.setState({ dataHaberler: this.state.dataHaberler.concat(item) });
+        haber.push(item);
       }
       //console.log(item.links[0].url);
     });
-    console.log(this.state.dataDuyurular);
-    console.log(this.state.dataEtkinlikler);
-    console.log(this.state.dataHaberler);
+    this.setState({
+      dataHaberler: haber,
+      dataEtkinlikler: etkinlik,
+      dataDuyurular: duyuru
+    });
+
+    //console.log("duyuru"+this.state.dataDuyurular.length);
+    //console.log("etkinlik"+this.state.dataEtkinlikler.length);
+    //console.log("haber"+this.state.dataHaberler.length);
+
+    let emptyData = false;
+    //required for adjusting body height according to horizontallists. if one array is empty that means one horizontal list is absent
+    if (
+      this.state.dataDuyurular.length === 0 ||
+      this.state.dataHaberler.length === 0 ||
+      this.state.dataEtkinlikler.length === 0
+    ) {
+      emptyData = false;
+    }
+
+    //the code below is run within the whenLoaded method rather than the componentWillMount
+    //because body height depends on the content rendered within the body
+    //which means that body height must be defined after all content data is loading which is here
+    const winHeight = Dimensions.get("window").height;
+
+    if (!emptyData) {
+      //adjust body height according to different device heights with none of the horizontal list is empty
+      if (winHeight <= 568) {
+        //5s height
+        this.setState({ scrollHeight: winHeight * 1.15 }); //75.5%
+      } else if (winHeight > 568 && winHeight < 736) {
+        //console.log("device height less than 736");
+
+        if (winHeight === 692) {
+          //samsung s8
+          console.log("HERE21");
+          this.setState({ scrollHeight: winHeight * 0.87 });
+        } else if (winHeight === 640) {
+          //samsung s7
+          console.log("HERE22");
+          this.setState({ scrollHeight: winHeight * 0.93 });
+        } else if (winHeight === 667) {
+          //iPhone 6
+          console.log("HERE23");
+          this.setState({ scrollHeight: winHeight * 0.97 });
+        }
+      } else if (winHeight >= 736 && winHeight < 812) {
+        //iPhone plus
+        //console.log("device height greater than 736");
+        this.setState({
+          scrollHeight: winHeight * 0.94,
+          horizontalMarginTop: 30
+        }); //76%
+      } else if (winHeight >= 812) {
+        //iPhone X
+        this.setState({
+          scrollHeight: winHeight * 0.85,
+          horizontalMarginTop: 30
+        }); //76%
+      }
+    } else if (emptyData) {
+      //adjust body height according to different device heights with one of the horizontal list is empty
+      if (winHeight <= 568) {
+        //5s height
+        this.setState({ scrollHeight: winHeight * 0.9 }); //75.5%
+      } else if (winHeight > 568 && winHeight < 736) {
+        //not plus phones
+        //console.log("device height less than 736");
+        if (winHeight === 692) {
+          //samsung s8
+          console.log("HERE21");
+          this.setState({ scrollHeight: winHeight * 0.97 });
+        } else if (winHeight === 640) {
+          //samsung s7
+          console.log("HERE22");
+          this.setState({ scrollHeight: winHeight * 0.85 });
+        } else if (winHeight === 667) {
+          //iPhone 6
+          console.log("HERE23");
+          this.setState({ scrollHeight: winHeight * 0.85 });
+        }
+      } else if (winHeight >= 736 && winHeight < 812) {
+        //plus phones
+        //console.log("device height greater than 736");
+        this.setState({
+          scrollHeight: winHeight * 0.74,
+          horizontalMarginTop: 30
+        }); //76%
+      }
+      if (winHeight >= 812) {
+        //iphone X
+        this.setState({
+          scrollHeight: winHeight * 0.7153,
+          horizontalMarginTop: 30
+        }); //76%
+      }
+    }
+    //console.log("scrollheight" + this.state.scrollHeight)
+    //if (renderScreen)
     this.setState({ loading: false });
+
     //console.log(JSON.stringify(response));
     //console.log(this.state.data);
   };
+
   renderDataDuyurular = () => {
     return this.state.dataDuyurular.map((responseData, Id) => (
       <DetailNews
@@ -241,16 +379,6 @@ class News extends Component<IProp & ReduxProps> {
     ));
   };
   renderDataEtkinlikler = () => {
-    return this.state.dataHaberler.map((responseData, Id) => (
-      <DetailNews
-        navigation={this.props.navigation}
-        key={Id}
-        data={responseData}
-        imgsrc={"kırmızı"}
-      />
-    ));
-  };
-  renderDataHaberler = () => {
     return this.state.dataEtkinlikler.map((responseData, Id) => (
       <DetailNews
         navigation={this.props.navigation}
@@ -260,8 +388,26 @@ class News extends Component<IProp & ReduxProps> {
       />
     ));
   };
+  renderDataHaberler = () => {
+    return this.state.dataHaberler.map((responseData, Id) => (
+      <DetailNews
+        navigation={this.props.navigation}
+        key={Id}
+        data={responseData}
+        imgsrc={"kırmızı"}
+      />
+    ));
+  };
   render() {
     //console.log("scrollHeigth: " + this.state.scrollHeight);
+    let winHeight = Dimensions.get("window").height;
+    let headerMarginTop = 0; //header image margin for iphone X
+    if (winHeight >= 812) {
+      headerMarginTop = 32;
+    } else {
+      //aditional 9 pixel margintop for header image to make clock visible
+      headerMarginTop = Platform.OS === "ios" ? 9 : 0;
+    }
     if (this.state.loading) {
       return <Spinner size={"large"} />;
     } else {
@@ -270,19 +416,29 @@ class News extends Component<IProp & ReduxProps> {
           maxHeight={this.state.MAX_HEIGHT}
           minHeight={MIN_HEIGHT}
           renderHeader={() => (
-            <Image
-              resizeMode="stretch"
-              width={Dimensions.get("window").width}
-              style={StyleSheet.absoluteFill}
-              source={require("../../img/header/anatepe2.png")}
-            />
+            <View
+              style={{
+                backgroundColor: "rgb(15, 108, 177)",
+                height: Platform.OS === "ios" ? 50 : 135
+              }}
+            >
+              <Image
+                resizeMode="stretch"
+                width={Dimensions.get("window").width}
+                style={[
+                  StyleSheet.absoluteFill,
+                  { marginTop: headerMarginTop }
+                ]}
+                source={require("../../img/header/anatepe2.png")}
+              />
+            </View>
           )}
-          overlayColor="#144d8c"
+          overlayColor="#006AB3"
           maxOverlayOpacity={1}
           bounces={false}
           showsVerticalScrollIndicator={false}
         >
-          <View>
+          <View height={this.state.scrollHeight}>
             <ImageBackground
               source={require("../../img/background/BACKGROUND.png")}
               style={styles.mainBackGround}
@@ -291,14 +447,17 @@ class News extends Component<IProp & ReduxProps> {
                 <HorizontalList
                   Data={this.renderDataDuyurular}
                   title={"Duyurular"}
+                  style={{ marginTop: this.state.horizontalMarginTop }}
                 />
                 <HorizontalList
                   Data={this.renderDataEtkinlikler}
                   title={"Etkinlikler"}
+                  style={{ marginTop: this.state.horizontalMarginTop }}
                 />
                 <HorizontalList
                   Data={this.renderDataHaberler}
                   title={"Haberler"}
+                  style={{ marginTop: this.state.horizontalMarginTop }}
                 />
               </View>
             </ImageBackground>
@@ -336,7 +495,11 @@ const mapStateToProps = (state: types.GlobalState) => {
   };
 };
 
-const mapDispatchToProps = (dispatch: Dispatch) => ({});
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  updateRss: (rss: string[]) => {
+    dispatch(actions.updateRss(rss));
+  }
+});
 
 export default connect<{}, {}, ReduxProps>(
   mapStateToProps,

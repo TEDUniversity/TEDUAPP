@@ -89,22 +89,27 @@ class Grades extends Component<IProp & ReduxProps> {
         }
 
         return (
-          <View key={Id} style={styles.subContainer}>
-            <View  style={styles.textContainer} >
-            <Text style={styles.txt}>
-              {str}
-              </Text>
+          <View key={Id} style={{ marginBottom: 10 }}>
+            <View key={Id} style={styles.subContainer}>
+              <View style={styles.textContainer}>
+                <Text style={styles.txt}>{str}</Text>
+              </View>
+
+              <View style={styles.textContainer}>
+                <Text style={styles.txt}> {percentage} </Text>
+              </View>
+
+              <View style={styles.textContainer}>
+                <Text style={styles.txt}>{grade}</Text>
+              </View>
             </View>
-            
-            <View style={styles.textContainer}>
-            <Text style={styles.txt} > {percentage} </Text> 
-              </View>
-            
-          
-            <View style={styles.textContainer}>
-            <Text style={styles.txt}>{grade}</Text>
-              </View>
-            
+            <View
+              style={{
+                backgroundColor: "black",
+                height: 1,
+                width: Dimensions.get("window").width
+              }}
+            />
           </View>
         );
       }
@@ -151,7 +156,6 @@ const styles = StyleSheet.create({
     //flex:1,
     //textAlign: 'center',
     //flexWrap: 'wrap'
-
   },
   subContainer: {
     flex: 1,
@@ -165,9 +169,8 @@ const styles = StyleSheet.create({
     alignSelf: "stretch"
   },
   txt: {
-    color: "white",
-    textAlign: "justify",
-    
+    color: "black",
+    textAlign: "justify"
   }
 });
 
