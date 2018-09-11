@@ -47,7 +47,7 @@ interface IProp {
 class Survey extends Component<IProp & ReduxProps> {
   state = {
     answers: [],
-    currentSurvey: this.props.surveys[this.props.navigation.state.params.index],
+    currentSurvey: this.props.surveyData,
   };
 
   static navigationOptions = ({ navigation }) => ({
@@ -144,100 +144,137 @@ class Survey extends Component<IProp & ReduxProps> {
     //console.log(this.props.navigation.state.params.title)
     //console.log(this.props.surveys)
     const surveys = this.props.surveys;
-    this.setState({ currentSurvey: this.props.surveys[this.props.navigation.state.params.index] })
-    let allAnswered = true;//control variable for questions that are not answered
-    this.state.currentSurvey.questions.map((question, id) => {//traverse the question array of the related survey and check current pressed answers. If it is undefined, question is not answered.
-      if (question.currentPressedAnswers == undefined) {
-        allAnswered = false;
-      }
+    let survey;
+    this.props.surveys.map((item)=>{
+      if(item.id === this.props.navigation.state.params.index )
+        survey = item;
     })
-    //if all questions are not answered, show alert
-    if (!allAnswered) {
-      Alert.alert(
-        "Required",
-        "All questions must be answered.",
-        [
-          {
-            text: "OK",
-            onPress: () => { }
-          }
-        ],
-        { cancelable: false }
-      );
-    //if all questions are answered, proceed
-    } else {
+    
+    this.setState({ currentSurvey: survey }, () => {
 
-      //check firebase to ensure that user does not vote again for same voting
-      //userVoteBefore is a promise whose return value must be handled by .then
-      //userVoteBefore is a control variable for checking that user does not vote before
-      const userVoteBefore = this.checkUserVote();
-      userVoteBefore.then((response) => {
-        if (response) {//if userVoteBefore true, this means that user did vote before
-          //console.log("user vote before:")
-          Alert.alert(
-            "Double Vote",
-            "You cannot vote again.",
-            [
-              {
-                text: "OK",
-                onPress: () => { this.props.navigation.navigate("MainRouter", { showAlert: false }); }
-              }
-            ],
-            { cancelable: false }
-          );
 
-        } else {//if userVoteBefore is false, this means that user did not vote before. So proceed.
-          //console.log("not vote")
-          
-          let givenAnswers = []
-          this.state.currentSurvey.questions.map((question, id) => {
-            const pressedAnswer = question.currentPressedAnswers;
-            givenAnswers.push(pressedAnswer)//push given aswers to this array for inserting it firebase 
+
+      //console.log(this.state.currentSurvey)
+      let allAnswered = true;//control variable for questions that are not answered
+      this.state.currentSurvey.questions.map((question, id) => {//traverse the question array of the related survey and check current pressed answers. If it is undefined, question is not answered.
+        if (question.currentPressedAnswers == undefined) {
+          allAnswered = false;
+        }
+      })
+      //if all questions are not answered, show alert
+      if (!allAnswered) {
+        Alert.alert(
+          "Required",
+          "All questions must be answered.",
+          [
+            {
+              text: "OK",
+              onPress: () => { }
+            }
+          ],
+          { cancelable: false }
+        );
+      //if all questions are answered, proceed
+      } else {
   
-            //increase the counter of the pressed answers. 
-            const url = "/surveys/" + this.props.navigation.state.params.index + "/questions/" + id + "/answers/" + question.currentPressedAnswers + "/count";
-            //console.log(url)
-            var adaRankRef = firebase
+        //check firebase to ensure that user does not vote again for same voting
+        //userVoteBefore is a promise whose return value must be handled by .then
+        //userVoteBefore is a control variable for checking that user does not vote before
+        const userVoteBefore = this.checkUserVote();
+        userVoteBefore.then((response) => {
+          if (response) {//if userVoteBefore true, this means that user did vote before
+            //console.log("user vote before:")
+            Alert.alert(
+              "Double Vote",
+              "You cannot vote again.",
+              [
+                {
+                  text: "OK",
+                  onPress: () => { this.props.navigation.navigate("MainRouter", { showAlert: false }); }
+                }
+              ],
+              { 
+                cancelable: false
+               }
+            );
+  
+          } else {//if userVoteBefore is false, this means that user did not vote before. So proceed.
+            //console.log("not vote")
+            
+            let givenAnswers = []
+            this.state.currentSurvey.questions.map((question, id) => {
+              const pressedAnswer = question.currentPressedAnswers;
+              givenAnswers.push(pressedAnswer)//push given aswers to this array for inserting it firebase 
+    
+              //increase the counter of the pressed answers. 
+              const url = "/surveys/" + this.props.navigation.state.params.index + "/questions/" + id + "/answers/" + question.currentPressedAnswers + "/count";
+              //console.log(url)
+              var adaRankRef = firebase
+                .database()
+                .ref(url);
+              adaRankRef.transaction((currentCount) => {
+                // If users/ada/rank has never been set, currentCount will be `null`.
+                return currentCount + 1;
+              },
+                function (Error) {
+                  //console.log(Error);
+                });
+    
+              //set the global state again after updating firebase because when question.currentPressedAnswers are read to update firebase it become undefined for the next time.
+              //thats why, after it becomes undefined, it is set and updated again to preserve satete by pressedAnswer
+              surveys.map((item)=>{
+                if(item.id === this.props.navigation.state.params.index){
+                  item.questions[id].currentPressedAnswers = pressedAnswer;
+                  console.log(item.questions[id].currentPressedAnswers)
+                }
+              })
+              surveys.map((item)=>{
+                if(item.id === this.props.navigation.state.params.index){
+                  console.log(item)
+                }
+              })
+              
+              //surveys[this.props.navigation.state.params.index].questions[id].currentPressedAnswers = pressedAnswer;
+              this.props.updateSurveys(surveys);
+            })
+            surveys.map((item)=>{
+              if(item.id === this.props.navigation.state.params.index){
+                console.log(item)
+              }
+            })
+            
+            //insert the userid of the current user to the firebase for keeping track of who votes and who does not. Needed to prevent double voting problem.
+            const votersUrl = "/surveys/" + this.props.navigation.state.params.index + "/voters/" + this.props.user.userid;
+            const voter = {
+              id: this.props.user.userName,
+              vote: givenAnswers
+            }
+            //insert voter data to firebase
+            firebase
               .database()
-              .ref(url);
-            adaRankRef.transaction((currentCount) => {
-              // If users/ada/rank has never been set, currentCount will be `null`.
-              return currentCount + 1;
-            },
-              function (Error) {
-                //console.log(Error);
+              .ref(votersUrl)
+              .update({
+                voter
+              })
+              .then(data => {
+                //success callback
+                //console.log("data ", data);
+              })
+              .catch(error => {
+                //error callback
+                //console.log("error ", error);
               });
   
-            //set the global state again after updating firebase because when question.currentPressedAnswers are read to update firebase it become undefined for the next time.
-            //thats why, after it becomes undefined, it is set and updated again to preserve satete by pressedAnswer
-            surveys[this.props.navigation.state.params.index].questions[id].currentPressedAnswers = pressedAnswer;
-            this.props.updateSurveys(surveys);
-          })
-          //insert the userid of the current user to the firebase for keeping track of who votes and who does not. Needed to prevent double voting problem.
-          const votersUrl = "/surveys/" + this.props.navigation.state.params.index + "/voters/" + this.props.user.userid;
-          const voter = {
-            id: this.props.user.userName,
-            vote: givenAnswers
           }
-          //insert voter data to firebase
-          firebase
-            .database()
-            .ref(votersUrl)
-            .update({
-              voter
-            })
-            .then(data => {
-              //success callback
-              //console.log("data ", data);
-            })
-            .catch(error => {
-              //error callback
-              //console.log("error ", error);
-            });
+        });
+      }
 
-        }
-      });
-    }
+
+
+
+
+    })
+    
 
   }
 
@@ -270,7 +307,8 @@ class Survey extends Component<IProp & ReduxProps> {
 
 
   render() {
-    console.log(this.props.navigation.state.params.surveyData);
+    //console.log(this.props.navigation.state.params.surveyData);
+    
     return (
       <ImageBackground
         source={require("../../../img/background/BACKGROUND.png")}

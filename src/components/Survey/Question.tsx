@@ -31,7 +31,7 @@ import { Dispatch } from "redux";
 interface IProp {
     question: any;
     questionIndex: number;
-    surveyIndex: number;
+    surveyIndex: string;
   }
 
   interface ReduxProps {
@@ -102,8 +102,15 @@ class Question extends Component<IProp & ReduxProps> {
 
 
   UpdateGlobalState = () => {
+    console.log(this.props.surveyIndex)
     var survey = this.props.surveys;
-    survey[this.props.surveyIndex].questions[this.props.questionIndex].currentPressedAnswers = this.state.chosenIndex;
+    console.log(survey)
+    survey.map((item) => {
+      if (item.id === this.props.surveyIndex){
+          item.questions[this.props.questionIndex].currentPressedAnswers = this.state.chosenIndex;
+      }
+    })
+    //survey[this.props.surveyIndex].questions[this.props.questionIndex].currentPressedAnswers = this.state.chosenIndex;
     this.props.updateSurveys(survey);
   }
 
@@ -121,6 +128,7 @@ class Question extends Component<IProp & ReduxProps> {
   }
 
   render() {
+    console.log()
     //console.log(this.props.question);
     return (
         <View style={styles.questionContainer}>
