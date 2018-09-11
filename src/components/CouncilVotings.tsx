@@ -234,10 +234,10 @@ class CouncilVotings extends Component<IProps & ReduxProps> {
             style={styles.button}
             onPress={() => this.renderSurvey(item.name)}
           >
-            <Text style={{ color: "rgb(66,103,178)", marginLeft: "-5%" }}>
+            <Text style={{ color: "black", marginLeft: "-5%" }}>
               {item.name}
             </Text>
-            <Icon size={25} color="rgb(66,103,178)" name={"arrow-right"} />
+            <Icon size={25} color="black" name={"arrow-right"} />
           </TouchableOpacity>
         );
       }
@@ -295,7 +295,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     //width: "100%",
     height: deviceWidth / 10.5,
-    backgroundColor: "rgb(12,57,98)",
+    backgroundColor: "rgb(15, 108, 177)",
     alignItems: "center",
     justifyContent: "space-around",
     //#373738

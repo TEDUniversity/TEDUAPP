@@ -181,7 +181,7 @@ class Council extends Component<IProp & ReduxProps> {
           >
             <TabNavigator.Item
               selected={this.state.selectedTab === "News"}
-              title="News"
+              title="Konsey Haberleri"
               //renderIcon={() => <Image source={require("./img/moodle/m3.png")} />}
               //badgeText="+1"
               onPress={() => {
@@ -194,7 +194,7 @@ class Council extends Component<IProp & ReduxProps> {
             </TabNavigator.Item>
             <TabNavigator.Item
               selected={this.state.selectedTab === "Votings"}
-              title="Votings"
+              title="Anketler"
               //renderIcon={() => <Image source={require("./img/menu/me3.png")} />}
               onPress={() => {
                 this.setState({ selectedTab: "Votings" });
@@ -337,7 +337,7 @@ class Council extends Component<IProp & ReduxProps> {
               >
                 <TabNavigator.Item
                   selected={this.state.selectedTab === "News"}
-                  title="News"
+                  title="Konsey Haberleri"
                   //renderIcon={() => <Image source={require("./img/moodle/m3.png")} />}
                   //badgeText="+1"
                   onPress={() => {
@@ -350,7 +350,7 @@ class Council extends Component<IProp & ReduxProps> {
                 </TabNavigator.Item>
                 <TabNavigator.Item
                   selected={this.state.selectedTab === "Votings"}
-                  title="Votings"
+                  title="Anketler"
                   //renderIcon={() => <Image source={require("./img/menu/me3.png")} />}
                   onPress={() => {
                     this.setState({ selectedTab: "Votings" });
