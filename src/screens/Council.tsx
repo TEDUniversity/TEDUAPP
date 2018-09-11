@@ -181,7 +181,7 @@ class Council extends Component<IProp & ReduxProps> {
           >
             <TabNavigator.Item
               selected={this.state.selectedTab === "News"}
-              title="News"
+              title="Konsey Haberleri"
               //renderIcon={() => <Image source={require("./img/moodle/m3.png")} />}
               //badgeText="+1"
               onPress={() => {
@@ -194,7 +194,7 @@ class Council extends Component<IProp & ReduxProps> {
             </TabNavigator.Item>
             <TabNavigator.Item
               selected={this.state.selectedTab === "Votings"}
-              title="Votings"
+              title="Anketler"
               //renderIcon={() => <Image source={require("./img/menu/me3.png")} />}
               onPress={() => {
                 this.setState({ selectedTab: "Votings" });
@@ -255,7 +255,7 @@ class Council extends Component<IProp & ReduxProps> {
       //Call a function when the state changes.
       if (http.readyState == 4 && http.status == 200) {
         if (!JSON.parse(http.responseText).token) {
-          alert("Kullanıcı adı veya şifre yanlış!");
+          Alert.alert("Hata", "Kullanıcı adı veya şifre yanlış!");
         } else {
           this.setState({ token: JSON.parse(http.responseText).token });
           this.getUserInfo();
@@ -337,7 +337,7 @@ class Council extends Component<IProp & ReduxProps> {
               >
                 <TabNavigator.Item
                   selected={this.state.selectedTab === "News"}
-                  title="News"
+                  title="Konsey Haberleri"
                   //renderIcon={() => <Image source={require("./img/moodle/m3.png")} />}
                   //badgeText="+1"
                   onPress={() => {
@@ -350,7 +350,7 @@ class Council extends Component<IProp & ReduxProps> {
                 </TabNavigator.Item>
                 <TabNavigator.Item
                   selected={this.state.selectedTab === "Votings"}
-                  title="Votings"
+                  title="Anketler"
                   //renderIcon={() => <Image source={require("./img/menu/me3.png")} />}
                   onPress={() => {
                     this.setState({ selectedTab: "Votings" });

@@ -7,7 +7,8 @@ import {
   ImageBackground,
   ScrollView,
   Dimensions,
-  Image
+  Image,
+  Alert
 } from "react-native";
 import {
   StackNavigator,
@@ -33,7 +34,7 @@ interface ReduxProps {
   user: types.User;
 }
 
-let deviceWidth = Dimensions.get("window").width
+let deviceWidth = Dimensions.get("window").width;
 
 class Detay extends Component<IProp & ReduxProps> {
   state = {
@@ -100,9 +101,21 @@ class Detay extends Component<IProp & ReduxProps> {
       }
       if (data["visible"] === 1) {
         return (
-          <View key={Id} style={{ flex: 1, flexDirection: "row", margin: deviceWidth / 75, alignItems: "center" }}>
+          <View
+            key={Id}
+            style={{
+              flex: 1,
+              flexDirection: "row",
+              margin: deviceWidth / 75,
+              alignItems: "center"
+            }}
+          >
             <Image
-              style={{ width: deviceWidth / 10.75, height: deviceWidth / 10.75, margin: deviceWidth / 75 }}
+              style={{
+                width: deviceWidth / 10.75,
+                height: deviceWidth / 10.75,
+                margin: deviceWidth / 75
+              }}
               source={{ uri: data["modicon"] }}
             />
             <View style={{ flex: 1, flexDirection: "column" }}>
@@ -143,7 +156,8 @@ class Detay extends Component<IProp & ReduxProps> {
                           })
                           .catch(error => {
                             console.log(error);
-                            alert(
+                            Alert.alert(
+                              "Hata",
                               "Bir hata oluştu: lütfen bir office programı indirin!"
                             );
                           });
@@ -208,7 +222,9 @@ class Detay extends Component<IProp & ReduxProps> {
                 justifyContent: "space-between"
               }}
             >
-              <Text style={{ margin: 10, fontSize: deviceWidth / 18.75 }}>{data["name"]}</Text>
+              <Text style={{ margin: 10, fontSize: deviceWidth / 18.75 }}>
+                {data["name"]}
+              </Text>
               <View
                 style={{
                   backgroundColor: "black",

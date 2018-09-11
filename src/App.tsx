@@ -7,7 +7,7 @@
  */
 
 import React, { Component } from "react";
-import { View, Text, Dimensions } from "react-native";
+import { View, Text, Dimensions, Alert } from "react-native";
 import { createStackNavigator } from "react-navigation";
 import News, { Spinner } from "./screens/News";
 import Moodle from "./screens/Moodle";
@@ -58,9 +58,43 @@ export default class App extends Component<any> {
       firebase.initializeApp(config);
     }
   }
+  notificationDisplayedListener: any;
+  notificationListener: any;
+
+  componentWillUnmount() {
+    this.notificationDisplayedListener();
+    this.notificationListener();
+  }
 
   componentDidMount() {
     firebasee.messaging().subscribeToTopic("pushNotifications");
+    firebasee
+      .notifications()
+      .android.createChannel(
+        new firebasee.notifications.Android.Channel(
+          "daily",
+          "Reminders",
+          firebasee.notifications.Android.Importance.High
+        ).setDescription("Reminds you....")
+      );
+    this.notificationDisplayedListener = firebasee
+      .app()
+      .notifications()
+      .onNotificationDisplayed((notification: any) => {
+        // Process your notification as required
+        // ANDROID: Remote notifications do not contain the channel ID. You will have to specify this manually if you'd like to re-display the notification.
+        console.log("then notification", notification);
+        // firebasee.notifications().displayNotification(notification);
+      });
+    this.notificationListener = firebasee
+      .app()
+      .notifications()
+      .onNotification((notification: any) => {
+        notification.android.setChannelId("daily");
+        // Process your notification as required
+        console.log("then notificationListener", notification);
+        firebasee.notifications().displayNotification(notification);
+      });
 
     firebasee
       .app()
@@ -83,10 +117,10 @@ export default class App extends Component<any> {
             .messaging()
             .requestPermission()
             .then(() => {
-              alert("User Now Has Permission");
+              Alert.alert("İzin verildi");
             })
             .catch(error => {
-              alert("Error" + error);
+              Alert.alert("Hata", "Error:" + error);
               // User has rejected permissions
             });
         }
