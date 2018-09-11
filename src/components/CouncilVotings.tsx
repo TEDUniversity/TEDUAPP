@@ -51,6 +51,7 @@ class CouncilVotings extends Component<IProps & ReduxProps> {
   state = {
     selectedSurey: "",
     loading: true,
+    noValidSurvey: true,
     surveys: [
       //example
       {
@@ -116,6 +117,12 @@ class CouncilVotings extends Component<IProps & ReduxProps> {
 
   componentWillMount() {
     this.readSurveyData();
+    this.props.surveys.map((item, id) => {
+      //console.log(item.valid);
+      if (item.valid && this.state.noValidSurvey) {
+        this.setState({ noValidSurvey: false });
+      }
+    });
   }
 
   writeSurveyData = surveys => {
@@ -249,12 +256,25 @@ class CouncilVotings extends Component<IProps & ReduxProps> {
     if (this.state.loading) {
       return <Spinner size={"large"} />;
     } else {
-      return (
-        <View style={styles.container} height={Dimensions.get("window").height}>
-          {this.renderSurveyButtons()}
-          {/*  (this is for rendering the survey on same page with state parameters)   this.renderSurvey()*/}
-        </View>
-      );
+      if (this.state.noValidSurvey) {
+        return (
+          <View
+            style={{ alignItems: "center" }}
+            height={Dimensions.get("window").height}
+          >
+            <Text>Çok yakında...</Text>
+          </View>
+        );
+      } else
+        return (
+          <View
+            style={styles.container}
+            height={Dimensions.get("window").height}
+          >
+            {this.renderSurveyButtons()}
+            {/*  (this is for rendering the survey on same page with state parameters)   this.renderSurvey()*/}
+          </View>
+        );
     }
   }
 }
