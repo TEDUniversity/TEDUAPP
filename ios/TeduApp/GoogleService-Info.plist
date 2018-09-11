@@ -7,9 +7,9 @@
 	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
 	<string>ca-app-pub-3940256099942544/4411468910</string>
 	<key>CLIENT_ID</key>
-	<string>1003884632988-3nvcphggacvsvspjc0hlurk7n60c5gjd.apps.googleusercontent.com</string>
+	<string>1003884632988-36u80gdsa9iv5onbfe6l4pk7vf08ojmb.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.1003884632988-3nvcphggacvsvspjc0hlurk7n60c5gjd</string>
+	<string>com.googleusercontent.apps.1003884632988-36u80gdsa9iv5onbfe6l4pk7vf08ojmb</string>
 	<key>API_KEY</key>
 	<string>AIzaSyBPvd7Et_ns4Ojr2_3DNT1pEsN5crl-RTc</string>
 	<key>GCM_SENDER_ID</key>
@@ -17,23 +17,23 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.tedu.TeduApp</string>
+	<string>emre.final.tedu</string>
 	<key>PROJECT_ID</key>
 	<string>teduapp-210c9</string>
 	<key>STORAGE_BUCKET</key>
 	<string>teduapp-210c9.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
-	<true/>
+	<true></true>
 	<key>IS_ANALYTICS_ENABLED</key>
-	<false/>
+	<false></false>
 	<key>IS_APPINVITE_ENABLED</key>
-	<false/>
+	<false></false>
 	<key>IS_GCM_ENABLED</key>
-	<true/>
+	<true></true>
 	<key>IS_SIGNIN_ENABLED</key>
-	<true/>
+	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:1003884632988:ios:390d4bb4d2a95804</string>
+	<string>1:1003884632988:ios:80cc840dd3d3cdfb</string>
 	<key>DATABASE_URL</key>
 	<string>https://teduapp-210c9.firebaseio.com</string>
 </dict>
