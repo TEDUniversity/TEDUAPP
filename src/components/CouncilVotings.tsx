@@ -15,7 +15,8 @@ import {
   ImageBackground,
   TouchableOpacity,
   ActivityIndicator,
-  ScrollView
+  ScrollView,
+  Alert
 } from "react-native";
 import Image from "react-native-scalable-image";
 import TabNavigator from "react-native-tab-navigator";
@@ -137,74 +138,69 @@ class CouncilVotings extends Component<IProps & ReduxProps> {
   readSurveyData() {
     if (this.props.surveys.length === 0) {
       firebase
-      .database()
-      .ref("/surveys")
-      .on("value", response => {
-        // this.setState({ firebase: response.val(), loading: false });
-        if (!response || !this.props.updateSurveys) {
-          return;
-        }
-        //console.log("firebase data: " + response.val());
+        .database()
+        .ref("/surveys")
+        .on("value", response => {
+          // this.setState({ firebase: response.val(), loading: false });
+          if (!response || !this.props.updateSurveys) {
+            return;
+          }
+          //console.log("firebase data: " + response.val());
 
-        //store the data returned from firebase in asyncstorage
+          //store the data returned from firebase in asyncstorage
 
-        // storeData("CouncilVotings", JSON.stringify(response.val())).then(() => {
-        //   //it is casted to string because it is stored as string in local storage. After getting is parse it as json.
-        //   retrieveData("CouncilVotings").then((res: string) => { this.updateSurvey(JSON.parse(res)) })
-        // });
-        //this.updateSurvey(voting)
-        //console.log(this.props.surveys);
-        let arr = [];
-        response.forEach(child => {
-          arr.push(child.val());
+          // storeData("CouncilVotings", JSON.stringify(response.val())).then(() => {
+          //   //it is casted to string because it is stored as string in local storage. After getting is parse it as json.
+          //   retrieveData("CouncilVotings").then((res: string) => { this.updateSurvey(JSON.parse(res)) })
+          // });
+          //this.updateSurvey(voting)
+          //console.log(this.props.surveys);
+          let arr = [];
+          response.forEach(child => {
+            arr.push(child.val());
+          });
+          this.props.updateSurveys(arr);
+          this.setState({ loading: false });
         });
-        this.props.updateSurveys(arr);
-        this.setState({ loading: false });
-
-      });
     } else {
       this.setState({ loading: false });
       firebase
-      .database()
-      .ref("/surveys")
-      .on("value", response => {
-        // this.setState({ firebase: response.val(), loading: false });
-        if (!response || !this.props.updateSurveys) {
-          return;
-        }
-        //console.log("firebase data: " + response.val());
+        .database()
+        .ref("/surveys")
+        .on("value", response => {
+          // this.setState({ firebase: response.val(), loading: false });
+          if (!response || !this.props.updateSurveys) {
+            return;
+          }
+          //console.log("firebase data: " + response.val());
 
-        //store the data returned from firebase in asyncstorage
+          //store the data returned from firebase in asyncstorage
 
-        // storeData("CouncilVotings", JSON.stringify(response.val())).then(() => {
-        //   //it is casted to string because it is stored as string in local storage. After getting is parse it as json.
-        //   retrieveData("CouncilVotings").then((res: string) => { this.updateSurvey(JSON.parse(res)) })
-        // });
-        //this.updateSurvey(voting)
-        //console.log(this.props.surveys);
-        let arr = [];
-        response.forEach(child => {
-          arr.push(child.val());
+          // storeData("CouncilVotings", JSON.stringify(response.val())).then(() => {
+          //   //it is casted to string because it is stored as string in local storage. After getting is parse it as json.
+          //   retrieveData("CouncilVotings").then((res: string) => { this.updateSurvey(JSON.parse(res)) })
+          // });
+          //this.updateSurvey(voting)
+          //console.log(this.props.surveys);
+          let arr = [];
+          response.forEach(child => {
+            arr.push(child.val());
+          });
+          this.props.updateSurveys(arr);
         });
-        this.props.updateSurveys(arr);
-      });
     }
-    
+
     //   retrieveData("CouncilVotings").then((res: string) => { this.updateSurvey(JSON.parse(res)) })
   }
-
-
 
   renderSurvey = surveyName => {
     //this.setState({selectedSurey: surveyName});//for rendering survey on same page
     if (!this.props.surveys) {
-      alert("surveys undefined");
+      Alert.alert("Hata", "surveys undefined");
       return;
     }
     return this.props.surveys.map((item, id) => {
-
       if (item.name === surveyName) {
-
         //traverse the question array of the related survey and set all currentPressedAnswers to UNDEFINED before navigating to survey
         //Reason is that if a user pressed answers but not submit the survey, the given answers is preserved in the global state and when user
         //opens the related survey for sending again it sent with previos answer state.
@@ -224,9 +220,8 @@ class CouncilVotings extends Component<IProps & ReduxProps> {
   };
 
   renderSurveyButtons = () => {
-
     if (!this.props.surveys) {
-      alert("surveys undefined");
+      Alert.alert("Hata", "surveys undefined");
       return;
     }
     return this.props.surveys.map((item, id) => {
@@ -255,9 +250,9 @@ class CouncilVotings extends Component<IProps & ReduxProps> {
       return <Spinner size={"large"} />;
     } else {
       return (
-        <View style={styles.container} height={Dimensions.get("window").height} >
-            {this.renderSurveyButtons()}
-            {/*  (this is for rendering the survey on same page with state parameters)   this.renderSurvey()*/}
+        <View style={styles.container} height={Dimensions.get("window").height}>
+          {this.renderSurveyButtons()}
+          {/*  (this is for rendering the survey on same page with state parameters)   this.renderSurvey()*/}
         </View>
       );
     }
@@ -267,7 +262,7 @@ class CouncilVotings extends Component<IProps & ReduxProps> {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "flex-start",
+    justifyContent: "flex-start"
 
     //marginTop: "1%"
   },
