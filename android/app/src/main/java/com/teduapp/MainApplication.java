@@ -1,4 +1,4 @@
-package com.teduapp;
+package tedu.edu.tr;
 
 import android.app.Application;
 
