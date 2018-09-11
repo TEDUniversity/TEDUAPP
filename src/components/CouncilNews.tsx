@@ -14,7 +14,8 @@ import {
   Dimensions,
   ImageBackground,
   TouchableOpacity,
-  ActivityIndicator
+  ActivityIndicator,
+  NetInfo
 } from "react-native";
 import firebase from "firebase";
 import HeaderImageScrollView, {
@@ -49,7 +50,7 @@ class CouncilNews extends Component<IProps & ReduxProps> {
     dataDuyurular: [],
     loading: true,
     horizontalMarginTop: 20,
-    scrollHeight: 0,
+    scrollHeight: Dimensions.get("window").height,
 
   }
 
@@ -62,39 +63,37 @@ class CouncilNews extends Component<IProps & ReduxProps> {
 
   readCouncilNewsData = () => {
 
-    if (this.props.councilNews.length === 0) {
-      let news = [];
-      firebase
-        .database()
-        .ref("/councilNews")
-        .on("value", response => {
-          response.forEach(child => {
-            news.push(child.val());
-          })
-          this.props.updateCouncilNews(news)
+    NetInfo.getConnectionInfo().then((connectionInfo) => {
+      console.log('Initial, type: ' + connectionInfo.type + ', effectiveType: ' + connectionInfo.effectiveType);
+    });
+
+    
+      
+        let news = [];
+        firebase
+          .database()
+          .ref("/councilNews")
+          .on("value", response => {
+
+            response.forEach(child => {
+              news.push(child.val());
+              this.props.updateCouncilNews(news)
+              this.whenLoaded();
+              
+              console.log(news)
+
+            })
+            news = []
+            //this.setState({ data: news }, () => {
+            //this.whenLoaded();
+            //console.log(this.state.data);
+            //});
+          });
           this.whenLoaded();
-          //this.setState({ data: news }, () => {
-          //this.whenLoaded();
-          //console.log(this.state.data);
-          //});
-        });
-    } else {
-      this.whenLoaded();
-      let news = [];
-      firebase
-        .database()
-        .ref("/councilNews")
-        .on("value", response => {
-          response.forEach(child => {
-            news.push(child.val());
-          })
-          this.props.updateCouncilNews(news)
-          //this.setState({ data: news }, () => {
-          //this.whenLoaded();
-          //console.log(this.state.data);
-          //});
-        });
-    }
+          news = []
+
+     
+
 
 
     /* firebase
@@ -139,65 +138,65 @@ class CouncilNews extends Component<IProps & ReduxProps> {
           haber.push(item)
         }
       }
-
-
-      let emptyData = false;
-      //required for adjusting body height according to horizontallists. if one array is empty that means one horizontal list is absent
-      if (duyuru.length === 0 || haber.length === 0 || etkinlik.length === 0) {
-        emptyData = false;
-      }
-
-      //the code below is run within the whenLoaded method rather than the componentWillMount
-      //because body height depends on the content rendered within the body
-      //which means that body height must be defined after all content data is loading which is here
-      const winHeight = Dimensions.get("window").height;
-      if (!emptyData) {
-        //adjust body height according to different device heights with none of the horizontal list is empty
-        if (winHeight <= 568) {//5s height
-          this.setState({ scrollHeight: winHeight * 1.15 }); //75.5%
-        }
-        else if (winHeight > 568 && winHeight < 736) {
-          if (winHeight === 692) {//samsung s8
-            console.log("HERE21")
-            this.setState({ scrollHeight: winHeight * 0.95 });
-          } else if (winHeight === 640) {//samsung s7 && samsung s6
-            console.log("HERE22")
-            this.setState({ scrollHeight: winHeight * 0.99 });
-          } else if (winHeight === 667) {//iPhone 6
-            console.log("HERE23")
-            this.setState({ scrollHeight: winHeight * 0.97 });
-          }
-        } else if (winHeight >= 736 && winHeight < 812) {
-          //console.log("device height greater than 736");
-          this.setState({ scrollHeight: winHeight * 0.94, horizontalMarginTop: 30 }); //76%
-        } if (winHeight >= 812) {
-          this.setState({ scrollHeight: winHeight * 0.85, horizontalMarginTop: 30 }); //76%
-        }
-      } else if (emptyData) {
-        //adjust body height according to different device heights with one of the horizontal list is empty
-        if (winHeight <= 568) {//5s height
-          this.setState({ scrollHeight: winHeight * 0.90 }); //75.5%
-        }
-        else if (winHeight > 568 && winHeight < 736) {
-          //console.log("device height less than 736");
-          this.setState({ scrollHeight: winHeight * 0.7435 }); //75.5%
-        } else if (winHeight >= 736 && winHeight < 812) {
-          //console.log("device height greater than 736");
-          this.setState({ scrollHeight: winHeight * 0.7533, horizontalMarginTop: 30 }); //76%
-        } if (winHeight >= 812) {
-          this.setState({ scrollHeight: winHeight * 0.68, horizontalMarginTop: 30 }); //76%
-        }
-      }
-
-      this.setState({
-        dataDuyurular: duyuru,
-        dataHaberler: haber,
-        dataEtkinlikler: etkinlik,
-        loading: false
-      });
-
-
     });
+
+    let emptyData = false;
+    //required for adjusting body height according to horizontallists. if one array is empty that means one horizontal list is absent
+    if (duyuru.length === 0 || haber.length === 0 || etkinlik.length === 0) {
+      emptyData = false;
+    }
+
+    //the code below is run within the whenLoaded method rather than the componentWillMount
+    //because body height depends on the content rendered within the body
+    //which means that body height must be defined after all content data is loading which is here
+    const winHeight = Dimensions.get("window").height;
+    if (!emptyData) {
+      //adjust body height according to different device heights with none of the horizontal list is empty
+      if (winHeight <= 568) {//5s height
+        this.setState({ scrollHeight: winHeight * 1.15 }); //75.5%
+      }
+      else if (winHeight > 568 && winHeight < 736) {
+        if (winHeight === 692) {//samsung s8
+          console.log("HERE21")
+          this.setState({ scrollHeight: winHeight * 0.95 });
+        } else if (winHeight === 640) {//samsung s7 && samsung s6
+          console.log("HERE22")
+          this.setState({ scrollHeight: winHeight * 0.99 });
+        } else if (winHeight === 667) {//iPhone 6
+          console.log("HERE23")
+          this.setState({ scrollHeight: winHeight * 0.97 });
+        }
+      } else if (winHeight >= 736 && winHeight < 812) {
+        //console.log("device height greater than 736");
+        this.setState({ scrollHeight: winHeight * 0.94, horizontalMarginTop: 30 }); //76%
+      } if (winHeight >= 812) {
+        this.setState({ scrollHeight: winHeight * 0.85, horizontalMarginTop: 30 }); //76%
+      }
+    } else if (emptyData) {
+      //adjust body height according to different device heights with one of the horizontal list is empty
+      if (winHeight <= 568) {//5s height
+        this.setState({ scrollHeight: winHeight * 0.90 }); //75.5%
+      }
+      else if (winHeight > 568 && winHeight < 736) {
+        //console.log("device height less than 736");
+        this.setState({ scrollHeight: winHeight * 0.7435 }); //75.5%
+      } else if (winHeight >= 736 && winHeight < 812) {
+        //console.log("device height greater than 736");
+        this.setState({ scrollHeight: winHeight * 0.7533, horizontalMarginTop: 30 }); //76%
+      } if (winHeight >= 812) {
+        this.setState({ scrollHeight: winHeight * 0.68, horizontalMarginTop: 30 }); //76%
+      }
+    }
+
+    this.setState({
+      dataDuyurular: duyuru,
+      dataHaberler: haber,
+      dataEtkinlikler: etkinlik,
+      loading: false
+    });
+
+
+
   }
 
 
