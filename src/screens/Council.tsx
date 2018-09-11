@@ -75,7 +75,9 @@ class Council extends Component<IProp & ReduxProps> {
     dataDuyurular: [],
     dataHaberler: [],
     dataEtkinlikler: [],
-    token: ""
+    token: "",
+    scrollHeight: Dimensions.get("window").height,
+
   };
 
   renderDataDuyurular = () => {
@@ -121,6 +123,15 @@ class Council extends Component<IProp & ReduxProps> {
     } else if (winHeight >= 736) {
       //console.log("device height greater than 736");
       this.setState({ MAX_HEIGHT: winHeight * 0.230 }); //18%
+    }
+
+    //set scroll height
+    if (winHeight < 736) {
+      //console.log("device height less than 736");
+      this.setState({ scrollHeight: winHeight * 0.755 }); //75.5%
+    } else if (winHeight >= 736) {
+      //console.log("device height greater than 736");
+      this.setState({ scrollHeight: winHeight * 0.76 }); //76%
     }
   }
 
@@ -266,14 +277,13 @@ class Council extends Component<IProp & ReduxProps> {
     let moodlePage;
     if (!this.props.isMoodleLoggedIn) {
       moodlePage = (
-        <View height = {Dimensions.get("window").height}>
+          
+          <View height={this.state.scrollHeight} width= {Dimensions.get("window").width} >
           <ImageBackground
             source={require("../../img/background/BACKGROUND.png")}
             style={styles.mainBackGround}
           >
-            <View style={styles.MoodleContainer}>
-              <MoodleLogin onPress={this.login} />
-            </View>
+            <View style={styles.MoodleContainer}><MoodleLogin onPress={this.login} /></View>
           </ImageBackground>
         </View>
       );
