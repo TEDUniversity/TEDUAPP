@@ -117,10 +117,10 @@ export default class App extends Component<any> {
             .messaging()
             .requestPermission()
             .then(() => {
-              Alert.alert("İzin verildi");
+              //Alert.alert("İzin verildi");
             })
             .catch(error => {
-              Alert.alert("Hata", "Error:" + error);
+              //Alert.alert("Hata", "Error:" + error);
               // User has rejected permissions
             });
         }
