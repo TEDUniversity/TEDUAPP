@@ -76,8 +76,7 @@ class Council extends Component<IProp & ReduxProps> {
     dataHaberler: [],
     dataEtkinlikler: [],
     token: "",
-    scrollHeight: Dimensions.get("window").height,
-
+    scrollHeight: Dimensions.get("window").height
   };
 
   renderDataDuyurular = () => {
@@ -114,15 +113,15 @@ class Council extends Component<IProp & ReduxProps> {
     console.log("winHeight" + winHeight);
 
     //set the header height
-    if (winHeight <= 568) {//5s height
+    if (winHeight <= 568) {
+      //5s height
       this.setState({ MAX_HEIGHT: winHeight * 0.234 }); //75.5%
-    }
-    else if (winHeight > 568 && winHeight < 736) {
+    } else if (winHeight > 568 && winHeight < 736) {
       //console.log("device height less than 736");
       this.setState({ MAX_HEIGHT: winHeight * 0.233 }); //17.5%
     } else if (winHeight >= 736) {
       //console.log("device height greater than 736");
-      this.setState({ MAX_HEIGHT: winHeight * 0.230 }); //18%
+      this.setState({ MAX_HEIGHT: winHeight * 0.23 }); //18%
     }
 
     //set scroll height
@@ -160,7 +159,7 @@ class Council extends Component<IProp & ReduxProps> {
                   },
                   {
                     text: "Hayır",
-                    onPress: () => { }
+                    onPress: () => {}
                   }
                 ],
                 { cancelable: false }
@@ -267,23 +266,27 @@ class Council extends Component<IProp & ReduxProps> {
   };
 
   render() {
-    let winHeight = Dimensions.get("window").height
-    let headerMarginTop = 0//header margin for iphone X
+    let winHeight = Dimensions.get("window").height;
+    let headerMarginTop = 0; //header margin for iphone X
     if (winHeight >= 812) {
-      headerMarginTop = 37
+      headerMarginTop = 37;
     } else {
-      headerMarginTop = 9
+      headerMarginTop = Platform.OS === "ios" ? 9 : 0;
     }
     let moodlePage;
     if (!this.props.isMoodleLoggedIn) {
       moodlePage = (
-          
-          <View height={this.state.scrollHeight} width= {Dimensions.get("window").width} >
+        <View
+          height={this.state.scrollHeight}
+          width={Dimensions.get("window").width}
+        >
           <ImageBackground
             source={require("../../img/background/BACKGROUND.png")}
             style={styles.mainBackGround}
           >
-            <View style={styles.MoodleContainer}><MoodleLogin onPress={this.login} /></View>
+            <View style={styles.MoodleContainer}>
+              <MoodleLogin onPress={this.login} />
+            </View>
           </ImageBackground>
         </View>
       );
@@ -300,12 +303,16 @@ class Council extends Component<IProp & ReduxProps> {
       );
     }
     return (
-
       <HeaderImageScrollView
         maxHeight={this.state.MAX_HEIGHT}
         minHeight={MIN_HEIGHT}
         renderHeader={() => (
-          <View style={{ backgroundColor: "rgb(15, 108, 177)", height: Platform.OS === 'ios' ? 50 : 140 }}>
+          <View
+            style={{
+              backgroundColor: "rgb(15, 108, 177)",
+              height: Platform.OS === "ios" ? 50 : 140
+            }}
+          >
             <Image
               resizeMode="stretch"
               width={Dimensions.get("window").width}

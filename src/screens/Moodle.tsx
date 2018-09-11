@@ -46,7 +46,7 @@ interface ReduxProps {
   updateIsMoodleLoggedIn: (isLoggedIn: boolean) => any;
 }
 
-let deviceWidth = Dimensions.get("window").width
+let deviceWidth = Dimensions.get("window").width;
 
 class Moodle extends Component<IProp & ReduxProps> {
   static navigationOptions = {
@@ -81,10 +81,10 @@ class Moodle extends Component<IProp & ReduxProps> {
     this.getDersler();
 
     //set header height
-    if (winHeight <= 568) {//5s height
+    if (winHeight <= 568) {
+      //5s height
       this.setState({ MAX_HEIGHT: winHeight * 0.196 }); //75.5%
-    }
-    else if (winHeight > 568 && winHeight < 736) {
+    } else if (winHeight > 568 && winHeight < 736) {
       console.log("device height less than 736");
       this.setState({ MAX_HEIGHT: winHeight * 0.195 }); //17.5%
     } else if (winHeight >= 736) {
@@ -209,7 +209,11 @@ class Moodle extends Component<IProp & ReduxProps> {
             return <View />;
           }}
         >
-          <Icon name="log-out" size={deviceWidth / 15} style={{ color: "rgb(1, 14, 41)" }} />
+          <Icon
+            name="log-out"
+            size={deviceWidth / 15}
+            style={{ color: "rgb(1, 14, 41)" }}
+          />
         </TouchableOpacity>
       );
     }
@@ -229,12 +233,12 @@ class Moodle extends Component<IProp & ReduxProps> {
   };
 
   render() {
-    let winHeight = Dimensions.get("window").height
-    let headerMarginTop = 0//header margin for iphone X
+    let winHeight = Dimensions.get("window").height;
+    let headerMarginTop = 0; //header margin for iphone X
     if (winHeight >= 812) {
-      headerMarginTop = 32
-    }else{
-      headerMarginTop = 9
+      headerMarginTop = 32;
+    } else {
+      headerMarginTop = Platform.OS === "ios" ? 9 : 0;
     }
     let moodlePage;
     if (!this.props.isMoodleLoggedIn) {
@@ -256,13 +260,18 @@ class Moodle extends Component<IProp & ReduxProps> {
         maxHeight={this.state.MAX_HEIGHT}
         minHeight={MIN_HEIGHT}
         renderHeader={() => (
-          <View style={{ backgroundColor: "rgb(15, 108, 177)", height: Platform.OS === 'ios' ? 50 : 135 }}>
-              <Image
-                resizeMode="stretch"
-                width={Dimensions.get("window").width}
-                style={[StyleSheet.absoluteFill, { marginTop: headerMarginTop }]}
-                source={require("../../img/header/anatepe2.png")}
-              />
+          <View
+            style={{
+              backgroundColor: "rgb(15, 108, 177)",
+              height: Platform.OS === "ios" ? 50 : 135
+            }}
+          >
+            <Image
+              resizeMode="stretch"
+              width={Dimensions.get("window").width}
+              style={[StyleSheet.absoluteFill, { marginTop: headerMarginTop }]}
+              source={require("../../img/header/anatepe2.png")}
+            />
           </View>
         )}
         overlayColor="#006AB3"
@@ -270,7 +279,10 @@ class Moodle extends Component<IProp & ReduxProps> {
         scrollEnabled={false}
         renderForeground={this.renderHeader}
       >
-        <View height={this.state.scrollHeight} width= {Dimensions.get("window").width} >
+        <View
+          height={this.state.scrollHeight}
+          width={Dimensions.get("window").width}
+        >
           <ImageBackground
             source={require("../../img/background/BACKGROUND.png")}
             style={styles.mainBackGround}
@@ -324,8 +336,7 @@ const styles = StyleSheet.create({
   mainBackGround: {
     flex: 1,
     alignSelf: "stretch",
-    resizeMode: "repeat",
-    
+    resizeMode: "repeat"
   }
 });
 
