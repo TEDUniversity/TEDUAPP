@@ -1,4 +1,4 @@
-package com.teduapp;
+package tedu.edu.tr;
 
 import com.facebook.react.ReactActivity;
 

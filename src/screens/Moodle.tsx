@@ -175,7 +175,7 @@ class Moodle extends Component<IProp & ReduxProps> {
       //Call a function when the state changes.
       if (http.readyState == 4 && http.status == 200) {
         if (!JSON.parse(http.responseText).token) {
-          alert("Kullanıcı adı veya şifre yanlış!");
+          Alert.alert("Hata", "Kullanıcı adı veya şifre yanlış!");
         } else {
           this.setState({ token: JSON.parse(http.responseText).token });
           this.getUserInfo();
