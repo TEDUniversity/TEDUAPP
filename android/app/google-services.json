@@ -73,6 +73,13 @@
             {
               "client_id": "1003884632988-omo1qhhqrc0s5kk6hfnnj14e6jm9l30q.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "1003884632988-36u80gdsa9iv5onbfe6l4pk7vf08ojmb.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "emre.final.tedu"
+              }
             }
           ]
         },
