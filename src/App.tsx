@@ -91,6 +91,7 @@ export default class App extends Component<any> {
       .notifications()
       .onNotification((notification: any) => {
         notification.android.setChannelId("daily");
+        notification.android.setSmallIcon("@drawable/ic_stat_tedu");
         // Process your notification as required
         console.log("then notificationListener", notification);
         firebasee.notifications().displayNotification(notification);
