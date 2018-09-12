@@ -299,11 +299,11 @@ class News extends Component<IProp & ReduxProps> {
         if (winHeight === 692) {
           //samsung s8
           console.log("HERE21");
-          this.setState({ scrollHeight: winHeight * 0.87 });
+          this.setState({ scrollHeight: winHeight * 0.92 });
         } else if (winHeight === 640) {
           //samsung s7
           console.log("HERE22");
-          this.setState({ scrollHeight: winHeight * 0.93 });
+          this.setState({ scrollHeight: winHeight * 0.97 });
         } else if (winHeight === 667) {
           //iPhone 6
           console.log("HERE23");
