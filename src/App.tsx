@@ -7,7 +7,7 @@
  */
 
 import React, { Component } from "react";
-import { View, Text, Dimensions, Alert } from "react-native";
+import { View, Text, Platform, Dimensions, Alert } from "react-native";
 import { createStackNavigator } from "react-navigation";
 import News, { Spinner } from "./screens/News";
 import Moodle from "./screens/Moodle";
@@ -91,6 +91,10 @@ export default class App extends Component<any> {
       .notifications()
       .onNotification((notification: any) => {
         notification.android.setChannelId("daily");
+        if (Platform.OS === 'ios') {
+          notification
+            .ios.setBadge(1);
+        }
         notification.android.setSmallIcon("@drawable/ic_stat_tedu");
         // Process your notification as required
         console.log("then notificationListener", notification);
@@ -128,10 +132,10 @@ export default class App extends Component<any> {
             .messaging()
             .requestPermission()
             .then(() => {
-              Alert.alert("İzin verildi");
+              //Alert.alert("İzin verildi");
             })
             .catch(error => {
-              Alert.alert("Hata", "Error:" + error);
+              //Alert.alert("Hata", "Error:" + error);
               // User has rejected permissions
             });
         }
