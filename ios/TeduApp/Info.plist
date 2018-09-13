@@ -30,6 +30,13 @@
 		<true/>
 		<key>NSExceptionDomains</key>
 		<dict>
+			<key>localhost</key>
+			<dict>
+				<key>NSExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+			</dict>
+			<key>New item</key>
+			<string></string>
 			<key>NSExceptionAllowsInsecureHTTPLoads</key>
 			<true/>
 			<key>issuu.com/tedukultursanat/docs</key>
