@@ -33,6 +33,7 @@ import * as actions from "../store/actions";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
 import { Spinner } from "./News";
+import Toast from "react-native-simple-toast";
 
 const MIN_HEIGHT = (Header as any).height;
 
@@ -180,6 +181,8 @@ class Moodle extends Component<IProp & ReduxProps> {
           this.setState({ token: JSON.parse(http.responseText).token });
           this.getUserInfo();
         }
+      } else {
+        Toast.show("Ağ hatası ");
       }
     };
     http.send(params);
