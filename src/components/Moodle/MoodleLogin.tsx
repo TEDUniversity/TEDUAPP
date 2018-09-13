@@ -95,7 +95,7 @@ class MoodleLogin extends Component<IProp> {
           onPress={() => {
             Alert.alert(
               "Giriş yapmak için",
-              'Kullanıcı adınız sonunda "@" işareti olmadan mail kullanıcı adı(adınız.soyadınız), şifreniz mail şifrenizdir.'
+              'Kullanıcı adınız sonunda "@tedu.edu.tr" olmadan mail kullanıcı adı(adınız.soyadınız), şifreniz mail şifrenizdir.'
             );
           }}
           style={{

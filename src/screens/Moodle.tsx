@@ -196,12 +196,12 @@ class Moodle extends Component<IProp & ReduxProps> {
               "Çıkış yapmak istediğine emin misin?.",
               [
                 {
-                  text: "Evet",
-                  onPress: () => this.props.updateIsMoodleLoggedIn(false)
-                },
-                {
                   text: "Hayır",
                   onPress: () => {}
+                },
+                {
+                  text: "Evet",
+                  onPress: () => this.props.updateIsMoodleLoggedIn(false)
                 }
               ],
               { cancelable: false }
