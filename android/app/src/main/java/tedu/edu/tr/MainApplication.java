@@ -1,6 +1,8 @@
 package tedu.edu.tr;
 
 import android.app.Application;
+import android.content.Context;
+import android.support.multidex.MultiDex;
 
 import com.facebook.react.ReactApplication;
 import com.vinzscam.reactnativefileviewer.RNFileViewerPackage;
@@ -47,5 +49,11 @@ public class MainApplication extends Application implements ReactApplication {
     public void onCreate() {
         super.onCreate();
         SoLoader.init(this, /* native exopackage */ false);
+    }
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
     }
 }
