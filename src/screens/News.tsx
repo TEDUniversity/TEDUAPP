@@ -143,6 +143,7 @@ class News extends Component<IProp & ReduxProps> {
      */
 
     //console.log(this.props.rss)
+    // this.whenLoaded(this.props.rss); // Uncommenting it does not wait fetch, however it causes news to be slow!
 
     fetch("https://www.tedu.edu.tr/rss.xml")
       .then(response => response.text())
@@ -179,7 +180,6 @@ class News extends Component<IProp & ReduxProps> {
       .then(() => {
         this.whenLoaded(this.props.rss);
       });
-    this.whenLoaded(this.props.rss);
     //AsyncStorage.getItem("teduRSS", (err, result) => rssParser.parse(result))
     //.then(rss => {
     //this.whenLoaded(rss.items);
