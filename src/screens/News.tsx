@@ -51,7 +51,7 @@ interface ReduxProps {
   updateRss?: (rss: string[]) => any;
 }
 
-let deviceWidth = Dimensions.get("screen").width
+let deviceWidth = Dimensions.get("screen").width;
 
 class News extends Component<IProp & ReduxProps> {
   static navigationOptions = {
@@ -61,6 +61,7 @@ class News extends Component<IProp & ReduxProps> {
     gesturesEnabled: false,
     header: null
   };
+  _isMounted: boolean;
 
   constructor(props) {
     super(props);
@@ -87,8 +88,13 @@ class News extends Component<IProp & ReduxProps> {
       showAlert: false
     });
   };
-
+  componentDidMount() {}
+  componentWillUnmount() {
+    this._isMounted = false;
+  }
   componentWillMount() {
+    this._isMounted = true;
+
     //AsyncStorage.setItem("user", JSON.stringify(this.state.user), () => { AsyncStorage.getItem("user", (err, result) => { console.log(result); }); }); DENEME
 
     //AsyncStorage.getItem("user", (err, result) => { console.log(result); }); DENEME
@@ -102,12 +108,13 @@ class News extends Component<IProp & ReduxProps> {
     //adjust header height according to different device sizes
     if (winHeight <= 568) {
       //5s height
-      this.setState({ MAX_HEIGHT: winHeight * 0.196 }); //75.5%
+      this._isMounted && this.setState({ MAX_HEIGHT: winHeight * 0.196 }); //75.5%
     } else if (winHeight > 568 && winHeight < 736) {
       let deviceSpecificMultiplier = Platform.OS === "ios" ? 0.195 : 0.195;
-      this.setState({ MAX_HEIGHT: winHeight * deviceSpecificMultiplier }); //17.5%
+      this._isMounted &&
+        this.setState({ MAX_HEIGHT: winHeight * deviceSpecificMultiplier }); //17.5%
     } else if (winHeight >= 736) {
-      this.setState({ MAX_HEIGHT: winHeight * 0.194 }); //18%
+      this._isMounted && this.setState({ MAX_HEIGHT: winHeight * 0.194 }); //18%
     }
 
     //eski çalışmayan hali
@@ -146,21 +153,21 @@ class News extends Component<IProp & ReduxProps> {
 
     //console.log(this.props.rss)
     // this.whenLoaded(this.props.rss); // Uncommenting it does not wait fetch, however it causes news to be slow!
-
+    this.whenLoaded();
     fetch("https://www.tedu.edu.tr/rss.xml")
       .then(response => response.text())
       .then(RSS => rssParser.parse(RSS))
       .catch(error => console.log(error))
       .then(result => {
         //this.whenLoaded(result.items);
-        this.props.updateRss(result.items);
+        this._isMounted && this.props.updateRss(result.items);
       })
       .catch(error => {
         console.log(error);
-        this.setState({ networkError: true });
+        this._isMounted && this.setState({ networkError: true });
         console.log("net err" + this.state.networkError);
         console.log("alert err" + this.state.showAlert);
-        this.whenLoaded(this.props.rss);
+        this.whenLoaded();
         if (this.state.networkError === true && this.state.showAlert === true) {
           Alert.alert(
             "Network error",
@@ -180,7 +187,7 @@ class News extends Component<IProp & ReduxProps> {
         }
       })
       .then(() => {
-        this.whenLoaded(this.props.rss);
+        // this.whenLoaded();
       });
     //AsyncStorage.getItem("teduRSS", (err, result) => rssParser.parse(result))
     //.then(rss => {
@@ -230,7 +237,7 @@ class News extends Component<IProp & ReduxProps> {
     //   .catch(error => console.log(error));
   }
 
-  whenLoaded = response => {
+  whenLoaded = () => {
     //console.log(response);
     let renderScreen = false;
     //other way of traversing an array
@@ -254,7 +261,7 @@ class News extends Component<IProp & ReduxProps> {
       etkinlik = [];
 
     //one way of traversing an array
-    response.map(item => {
+    this.props.rss.map(item => {
       if (item["links"][0].url.includes("gundem/duyurular")) {
         duyuru.push(item);
         //this.setState({ dataDuyurular: this.state.dataDuyurular.concat(item) });
@@ -265,11 +272,12 @@ class News extends Component<IProp & ReduxProps> {
       }
       //console.log(item.links[0].url);
     });
-    this.setState({
-      dataHaberler: haber,
-      dataEtkinlikler: etkinlik,
-      dataDuyurular: duyuru
-    });
+    this._isMounted &&
+      this.setState({
+        dataHaberler: haber,
+        dataEtkinlikler: etkinlik,
+        dataDuyurular: duyuru
+      });
 
     //console.log("duyuru"+this.state.dataDuyurular.length);
     //console.log("etkinlik"+this.state.dataEtkinlikler.length);
@@ -294,77 +302,81 @@ class News extends Component<IProp & ReduxProps> {
       //adjust body height according to different device heights with none of the horizontal list is empty
       if (winHeight <= 568) {
         //5s height
-        this.setState({ scrollHeight: winHeight * 1.15 }); //75.5%
+        this._isMounted && this.setState({ scrollHeight: winHeight * 1.15 }); //75.5%
       } else if (winHeight > 568 && winHeight < 736) {
         //console.log("device height less than 736");
 
         if (winHeight === 692) {
           //samsung s8
           console.log("HERE21");
-          this.setState({ scrollHeight: winHeight * 0.92 });
+          this._isMounted && this.setState({ scrollHeight: winHeight * 0.92 });
         } else if (winHeight === 640) {
           //samsung s7
           console.log("HERE22");
-          this.setState({ scrollHeight: winHeight * 0.97 });
+          this._isMounted && this.setState({ scrollHeight: winHeight * 0.97 });
         } else if (winHeight === 667) {
           //iPhone 6
           console.log("HERE23");
-          this.setState({ scrollHeight: winHeight * 0.97 });
+          this._isMounted && this.setState({ scrollHeight: winHeight * 0.97 });
         }
       } else if (winHeight >= 736 && winHeight < 812) {
         //iPhone plus
         //console.log("device height greater than 736");
-        this.setState({
-          scrollHeight: winHeight * 0.94,
-          horizontalMarginTop: 30
-        }); //76%
+        this._isMounted &&
+          this.setState({
+            scrollHeight: winHeight * 0.94,
+            horizontalMarginTop: 30
+          }); //76%
       } else if (winHeight >= 812) {
         //iPhone X
-        this.setState({
-          scrollHeight: winHeight * 0.85,
-          horizontalMarginTop: 30
-        }); //76%
+        this._isMounted &&
+          this.setState({
+            scrollHeight: winHeight * 0.85,
+            horizontalMarginTop: 30
+          }); //76%
       }
     } else if (emptyData) {
       //adjust body height according to different device heights with one of the horizontal list is empty
       if (winHeight <= 568) {
         //5s height
-        this.setState({ scrollHeight: winHeight * 0.9 }); //75.5%
+        this._isMounted && this.setState({ scrollHeight: winHeight * 0.9 }); //75.5%
       } else if (winHeight > 568 && winHeight < 736) {
         //not plus phones
         //console.log("device height less than 736");
         if (winHeight === 692) {
           //samsung s8
           console.log("HERE21");
-          this.setState({ scrollHeight: winHeight * 0.97 });
+          this._isMounted && this.setState({ scrollHeight: winHeight * 0.97 });
         } else if (winHeight === 640) {
           //samsung s7
           console.log("HERE22");
-          this.setState({ scrollHeight: winHeight * 0.85 });
+          this._isMounted && this.setState({ scrollHeight: winHeight * 0.85 });
         } else if (winHeight === 667) {
           //iPhone 6
           console.log("HERE23");
-          this.setState({ scrollHeight: winHeight * 0.85 });
+          this._isMounted && this.setState({ scrollHeight: winHeight * 0.85 });
         }
       } else if (winHeight >= 736 && winHeight < 812) {
         //plus phones
         //console.log("device height greater than 736");
-        this.setState({
-          scrollHeight: winHeight * 0.74,
-          horizontalMarginTop: 30
-        }); //76%
+        this._isMounted &&
+          this.setState({
+            scrollHeight: winHeight * 0.74,
+            horizontalMarginTop: 30
+          }); //76%
       }
       if (winHeight >= 812) {
         //iphone X
-        this.setState({
-          scrollHeight: winHeight * 0.7153,
-          horizontalMarginTop: 30
-        }); //76%
+        this._isMounted &&
+          this.setState({
+            scrollHeight: winHeight * 0.7153,
+            horizontalMarginTop: 30
+          }); //76%
       }
     }
     //console.log("scrollheight" + this.state.scrollHeight)
     //if (renderScreen)
-    this.setState({ loading: false });
+    this._isMounted && this.setState({ loading: false });
 
     //console.log(JSON.stringify(response));
     //console.log(this.state.data);
