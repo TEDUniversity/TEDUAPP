@@ -151,9 +151,10 @@ class Webview extends React.Component<IProp> {
           onNavigationStateChange={navState => {
             // this.webView.canGoBack = navState.canGoBack;
             if (
-              navState.url.includes(".pdf") ||
+              (navState.url.includes(".pdf") ||
               navState.url.includes(".xlsx") ||
-              navState.url.includes(".docx")
+              navState.url.includes(".docx")) &&
+              Platform.OS === "android"
             ) {
               //   this.webView.ref.stopLoading();
               //   Linking.openURL(navState.url);
@@ -191,7 +192,7 @@ class Webview extends React.Component<IProp> {
             }
           }}
           javaScriptEnabled={true}
-          onShouldStartLoadWithRequest={this.openExternalLink}
+          //onShouldStartLoadWithRequest={this.openExternalLink}
 
           //onNavigationStateChange={this.onNavigationStateChange }
         />

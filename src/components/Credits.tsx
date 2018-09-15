@@ -70,7 +70,7 @@ class Credits extends React.Component<IProp> {
         >
           <Image
             style={styles.teduIcon}
-            width={100} // height will be calculated automatically
+            width={deviceWidth / 3.75} // height will be calculated automatically
             source={require("../../img/teduappicon/Icon-App-60x60.png")}
           />
           <Text style={styles.text}> (+90 312) 585 00 00 </Text>
@@ -83,7 +83,7 @@ class Credits extends React.Component<IProp> {
                 });
               }}
               style={styles.socialIcon}
-              width={30} // height will be calculated automatically
+              width={deviceWidth / 12.5} // height will be calculated automatically
               source={require("../../img/social/facebook.png")}
             />
             <Image
@@ -95,7 +95,7 @@ class Credits extends React.Component<IProp> {
                 });
               }}
               style={styles.socialIcon}
-              width={30} // height will be calculated automatically
+              width={deviceWidth / 12.5} // height will be calculated automatically
               source={require("../../img/social/instagram.png")}
             />
             <Image
@@ -108,7 +108,7 @@ class Credits extends React.Component<IProp> {
                 });
               }}
               style={styles.socialIcon}
-              width={30} // height will be calculated automatically
+              width={deviceWidth / 12.5} // height will be calculated automatically
               source={require("../../img/social/linkedin.png")}
             />
             <Image
@@ -120,7 +120,7 @@ class Credits extends React.Component<IProp> {
                 });
               }}
               style={styles.socialIcon}
-              width={30} // height will be calculated automatically
+              width={deviceWidth / 12.5} // height will be calculated automatically
               source={require("../../img/social/twitter.png")}
             />
             <Image
@@ -132,7 +132,7 @@ class Credits extends React.Component<IProp> {
                 });
               }}
               style={styles.socialIcon}
-              width={30} // height will be calculated automatically
+              width={deviceWidth / 12.5} // height will be calculated automatically
               source={require("../../img/social/youtube.png")}
             />
           </View>
@@ -176,7 +176,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    marginLeft: 3
+    marginLeft: deviceWidth / 125
   },
   headerLeftText: {
     alignItems: "center",
@@ -185,7 +185,7 @@ const styles = StyleSheet.create({
     fontWeight: "400"
   },
   container: {
-    marginTop: -100,
+    marginTop: -deviceWidth / 3.75,
     flex: 1
   },
   socialIcon: {

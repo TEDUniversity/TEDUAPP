@@ -41,6 +41,9 @@ interface ReduxProps {
 interface IProps {
   navigation: any;
 }
+
+let deviceWidth = Dimensions.get("screen").width
+
 class CouncilNews extends Component<IProps & ReduxProps> {
   state = {
     dataEtkinlikler: [],
@@ -238,7 +241,7 @@ class CouncilNews extends Component<IProps & ReduxProps> {
       return <Spinner size={"large"} />;
     } else {
       return (
-        <View height={this.state.scrollHeight}>
+        <View style={{ marginBottom: deviceWidth / 7.5 }}>
           <HorizontalList
             Data={this.renderDataDuyurular}
             title={"Announcements"}

@@ -51,6 +51,8 @@ interface ReduxProps {
   updateRss?: (rss: string[]) => any;
 }
 
+let deviceWidth = Dimensions.get("screen").width
+
 class News extends Component<IProp & ReduxProps> {
   static navigationOptions = {
     title: "News",
@@ -443,7 +445,7 @@ class News extends Component<IProp & ReduxProps> {
               source={require("../../img/background/BACKGROUND.png")}
               style={styles.mainBackGround}
             >
-              <View style={{ marginBottom: 50 }}>
+              <View style={{ marginBottom: deviceWidth / 7.5 }}>
                 <HorizontalList
                   Data={this.renderDataDuyurular}
                   title={"Announcements"}
