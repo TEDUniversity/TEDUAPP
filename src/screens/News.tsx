@@ -159,8 +159,11 @@ class News extends Component<IProp & ReduxProps> {
       .then(RSS => rssParser.parse(RSS))
       .catch(error => console.log(error))
       .then(result => {
-        //this.whenLoaded(result.items);
-        this._isMounted && this.props.updateRss(result.items);
+        this._isMounted && this.setState({ loading: false });
+        this.props.updateRss(result.items);
+      })
+      .then(() => {
+        this.whenLoaded();
       })
       .catch(error => {
         console.log(error);
@@ -376,7 +379,7 @@ class News extends Component<IProp & ReduxProps> {
     }
     //console.log("scrollheight" + this.state.scrollHeight)
     //if (renderScreen)
-    this._isMounted && this.setState({ loading: false });
+    // this._isMounted && this.setState({ loading: false });
 
     //console.log(JSON.stringify(response));
     //console.log(this.state.data);
@@ -422,63 +425,61 @@ class News extends Component<IProp & ReduxProps> {
       //aditional 9 pixel margintop for header image to make clock visible
       headerMarginTop = Platform.OS === "ios" ? 9 : 0;
     }
-    if (this.state.loading) {
-      return <Spinner size={"large"} />;
-    } else {
-      return (
-        <HeaderImageScrollView
-          maxHeight={this.state.MAX_HEIGHT}
-          minHeight={MIN_HEIGHT}
-          renderHeader={() => (
-            <View
-              style={{
-                backgroundColor: "rgb(15, 108, 177)",
-                height: Platform.OS === "ios" ? 50 : 135
-              }}
-            >
-              <Image
-                resizeMode="stretch"
-                width={Dimensions.get("window").width}
-                style={[
-                  StyleSheet.absoluteFill,
-                  { marginTop: headerMarginTop }
-                ]}
-                source={require("../../img/header/anatepe2.png")}
+    // if (this.state.loading) {
+    //   return <Spinner size={"large"} />;
+    // } else {
+    return (
+      <HeaderImageScrollView
+        maxHeight={this.state.MAX_HEIGHT}
+        minHeight={MIN_HEIGHT}
+        renderHeader={() => (
+          <View
+            style={{
+              backgroundColor: "rgb(15, 108, 177)",
+              height: Platform.OS === "ios" ? 50 : 135
+            }}
+          >
+            <Image
+              resizeMode="stretch"
+              width={Dimensions.get("window").width}
+              style={[StyleSheet.absoluteFill, { marginTop: headerMarginTop }]}
+              source={require("../../img/header/anatepe2.png")}
+            />
+          </View>
+        )}
+        overlayColor="#006AB3"
+        maxOverlayOpacity={1}
+        bounces={false}
+        showsVerticalScrollIndicator={false}
+      >
+        <View>
+          <ImageBackground
+            source={require("../../img/background/BACKGROUND.png")}
+            style={styles.mainBackGround}
+          >
+            <View style={{ marginBottom: deviceWidth / 7.5 }}>
+              {this.state.loading && <Spinner size="large" />}
+              <HorizontalList
+                Data={this.renderDataDuyurular}
+                title={"Announcements"}
+                style={{ marginTop: this.state.horizontalMarginTop }}
+              />
+              <HorizontalList
+                Data={this.renderDataEtkinlikler}
+                title={"Events"}
+                style={{ marginTop: this.state.horizontalMarginTop }}
+              />
+              <HorizontalList
+                Data={this.renderDataHaberler}
+                title={"News"}
+                style={{ marginTop: this.state.horizontalMarginTop }}
               />
             </View>
-          )}
-          overlayColor="#006AB3"
-          maxOverlayOpacity={1}
-          bounces={false}
-          showsVerticalScrollIndicator={false}
-        >
-          <View>
-            <ImageBackground
-              source={require("../../img/background/BACKGROUND.png")}
-              style={styles.mainBackGround}
-            >
-              <View style={{ marginBottom: deviceWidth / 7.5 }}>
-                <HorizontalList
-                  Data={this.renderDataDuyurular}
-                  title={"Announcements"}
-                  style={{ marginTop: this.state.horizontalMarginTop }}
-                />
-                <HorizontalList
-                  Data={this.renderDataEtkinlikler}
-                  title={"Events"}
-                  style={{ marginTop: this.state.horizontalMarginTop }}
-                />
-                <HorizontalList
-                  Data={this.renderDataHaberler}
-                  title={"News"}
-                  style={{ marginTop: this.state.horizontalMarginTop }}
-                />
-              </View>
-            </ImageBackground>
-          </View>
-        </HeaderImageScrollView>
-      );
-    }
+          </ImageBackground>
+        </View>
+      </HeaderImageScrollView>
+    );
+    // }
   }
 }
 
