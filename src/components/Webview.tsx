@@ -191,7 +191,7 @@ class Webview extends React.Component<IProp> {
             }
           }}
           javaScriptEnabled={true}
-          onShouldStartLoadWithRequest={this.openExternalLink}
+          //onShouldStartLoadWithRequest={this.openExternalLink}
 
           //onNavigationStateChange={this.onNavigationStateChange }
         />
