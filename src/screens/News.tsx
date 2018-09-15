@@ -160,11 +160,11 @@ class News extends Component<IProp & ReduxProps> {
         this.whenLoaded(this.props.rss);
         if (this.state.networkError === true && this.state.showAlert === true) {
           Alert.alert(
-            "Network Error",
-            "Please check network for latest news.",
+            "Ağ hatası",
+            "Son haberleri almak için internete bağlı olduğunuza emin olunuz.",
             [
               {
-                text: "OK",
+                text: "Tamam",
                 onPress: () => {
                   this.props.navigation.state.params.showAlert = false;
                   console.log(this.props.navigation.state.params.showAlert);
@@ -179,7 +179,7 @@ class News extends Component<IProp & ReduxProps> {
       .then(() => {
         this.whenLoaded(this.props.rss);
       });
-
+    this.whenLoaded(this.props.rss);
     //AsyncStorage.getItem("teduRSS", (err, result) => rssParser.parse(result))
     //.then(rss => {
     //this.whenLoaded(rss.items);

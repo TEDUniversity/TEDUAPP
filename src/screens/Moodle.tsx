@@ -125,6 +125,9 @@ class Moodle extends Component<IProp & ReduxProps> {
         }
         this.setState({ dersler: dersArr, isLoading: false });
       }
+      //   else if (http.readyState == 4 && http.status !== 200) {
+      // Toast.show("Ağ hatası ");
+      //   }
     };
 
     http.send(params);
@@ -157,6 +160,9 @@ class Moodle extends Component<IProp & ReduxProps> {
         this.props.updateIsMoodleLoggedIn(true);
         this.getDersler();
       }
+      //   else if (http.readyState == 4 && http.status !== 200) {
+      //     Toast.show("Ağ hatası ");
+      //   }
     };
     http.send(params);
   };
@@ -181,6 +187,9 @@ class Moodle extends Component<IProp & ReduxProps> {
           this.getUserInfo();
         }
       }
+      //   else if (http.readyState == 4 && http.status !== 200) {
+      //     Toast.show("Ağ hatası ");
+      //   }
     };
     http.send(params);
   };
@@ -196,12 +205,12 @@ class Moodle extends Component<IProp & ReduxProps> {
               "Çıkış yapmak istediğine emin misin?.",
               [
                 {
-                  text: "Evet",
-                  onPress: () => this.props.updateIsMoodleLoggedIn(false)
-                },
-                {
                   text: "Hayır",
                   onPress: () => {}
+                },
+                {
+                  text: "Evet",
+                  onPress: () => this.props.updateIsMoodleLoggedIn(false)
                 }
               ],
               { cancelable: false }

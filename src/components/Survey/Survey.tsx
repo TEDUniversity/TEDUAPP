@@ -32,7 +32,6 @@ import { connect } from "react-redux";
 import { Dispatch } from "redux";
 import firebase from "firebase";
 
-
 interface ReduxProps {
   surveys?: types.Survey[];
   user?: types.User;
@@ -47,12 +46,15 @@ interface IProp {
 class Survey extends Component<IProp & ReduxProps> {
   state = {
     answers: [],
-    currentSurvey: this.props.surveyData,
+    currentSurvey: this.props.surveyData
   };
 
   static navigationOptions = ({ navigation }) => ({
     headerTitle: (
-      <Text style={styles.headerTitle}> { Platform.OS === 'ios' ? navigation.state.params.title : " " } </Text>
+      <Text style={styles.headerTitle}>
+        {" "}
+        {Platform.OS === "ios" ? navigation.state.params.title : " "}{" "}
+      </Text>
     ),
     //title: "Webview",
     headerStyle: { marginTop: 0, backgroundColor: "#144d8c", height: 35 },
@@ -119,136 +121,157 @@ class Survey extends Component<IProp & ReduxProps> {
             //this.setState({ loading: false });
             //console.log(this.props.surveys);
           });*/
-          const url = "/surveys/" + this.props.navigation.state.params.index + "/questions/" + id + "/answers/" + question.currentPressedAnswers + "/count";
-          console.log(url)
-          var adaRankRef = firebase
-            .database()
-            .ref(url);
-          adaRankRef.transaction((currentCount) => {
-            // If users/ada/rank has never been set, currentRank will be `null`.
-            return currentCount + 1;
-          },
-            function (Error) {
+          const url =
+            "/surveys/" +
+            this.props.navigation.state.params.index +
+            "/questions/" +
+            id +
+            "/answers/" +
+            question.currentPressedAnswers +
+            "/count";
+          console.log(url);
+          var adaRankRef = firebase.database().ref(url);
+          adaRankRef.transaction(
+            currentCount => {
+              // If users/ada/rank has never been set, currentRank will be `null`.
+              return currentCount + 1;
+            },
+            function(Error) {
               //console.log(Error);
-            });
+            }
+          );
           console.log(pressedAnswer);
-          surveys[this.props.navigation.state.params.index].questions[id].currentPressedAnswers = pressedAnswer;
+          surveys[this.props.navigation.state.params.index].questions[
+            id
+          ].currentPressedAnswers = pressedAnswer;
           this.props.updateSurveys(surveys);
           //son iki satırı silince pressedAnswers undefined oluyor
-        })
+        });
       }
-    })
-  }
+    });
+  };
 
   sendResultsToFirebaseV2 = () => {
     //console.log(this.props.navigation.state.params.title)
     //console.log(this.props.surveys)
     const surveys = this.props.surveys;
     let survey;
-    this.props.surveys.map((item)=>{
-      if(item.id === this.props.navigation.state.params.index )
-        survey = item;
-    })
-    
+    this.props.surveys.map(item => {
+      if (item.id === this.props.navigation.state.params.index) survey = item;
+    });
+
     this.setState({ currentSurvey: survey }, () => {
-
-
-
       //console.log(this.state.currentSurvey)
-      let allAnswered = true;//control variable for questions that are not answered
-      this.state.currentSurvey.questions.map((question, id) => {//traverse the question array of the related survey and check current pressed answers. If it is undefined, question is not answered.
+      let allAnswered = true; //control variable for questions that are not answered
+      this.state.currentSurvey.questions.map((question, id) => {
+        //traverse the question array of the related survey and check current pressed answers. If it is undefined, question is not answered.
         if (question.currentPressedAnswers == undefined) {
           allAnswered = false;
         }
-      })
+      });
       //if all questions are not answered, show alert
       if (!allAnswered) {
         Alert.alert(
-          "Required",
-          "All questions must be answered.",
+          "Dikkat",
+          "Lütfen tüm soruları cevaplayınız.",
           [
             {
               text: "OK",
-              onPress: () => { }
+              onPress: () => {}
             }
           ],
           { cancelable: false }
         );
-      //if all questions are answered, proceed
+        //if all questions are answered, proceed
       } else {
-  
         //check firebase to ensure that user does not vote again for same voting
         //userVoteBefore is a promise whose return value must be handled by .then
         //userVoteBefore is a control variable for checking that user does not vote before
         const userVoteBefore = this.checkUserVote();
-        userVoteBefore.then((response) => {
-          if (response) {//if userVoteBefore true, this means that user did vote before
+        userVoteBefore.then(response => {
+          if (response) {
+            //if userVoteBefore true, this means that user did vote before
             //console.log("user vote before:")
             Alert.alert(
-              "Double Vote",
-              "You cannot vote again.",
+              "Zaten Oy Vermişsiniz",
+              "Her kullanıcı bir kez oy verebilir.",
               [
                 {
                   text: "OK",
-                  onPress: () => { this.props.navigation.navigate("MainRouter", { showAlert: false }); }
+                  onPress: () => {
+                    this.props.navigation.navigate("MainRouter", {
+                      showAlert: false
+                    });
+                  }
                 }
               ],
-              { 
+              {
                 cancelable: false
-               }
+              }
             );
-  
-          } else {//if userVoteBefore is false, this means that user did not vote before. So proceed.
+          } else {
+            //if userVoteBefore is false, this means that user did not vote before. So proceed.
             //console.log("not vote")
-            
-            let givenAnswers = []
+
+            let givenAnswers = [];
             this.state.currentSurvey.questions.map((question, id) => {
               const pressedAnswer = question.currentPressedAnswers;
-              givenAnswers.push(pressedAnswer)//push given aswers to this array for inserting it firebase 
-    
-              //increase the counter of the pressed answers. 
-              const url = "/surveys/" + this.props.navigation.state.params.index + "/questions/" + id + "/answers/" + question.currentPressedAnswers + "/count";
+              givenAnswers.push(pressedAnswer); //push given aswers to this array for inserting it firebase
+
+              //increase the counter of the pressed answers.
+              const url =
+                "/surveys/" +
+                this.props.navigation.state.params.index +
+                "/questions/" +
+                id +
+                "/answers/" +
+                question.currentPressedAnswers +
+                "/count";
               //console.log(url)
-              var adaRankRef = firebase
-                .database()
-                .ref(url);
-              adaRankRef.transaction((currentCount) => {
-                // If users/ada/rank has never been set, currentCount will be `null`.
-                return currentCount + 1;
-              },
-                function (Error) {
+              var adaRankRef = firebase.database().ref(url);
+              adaRankRef.transaction(
+                currentCount => {
+                  // If users/ada/rank has never been set, currentCount will be `null`.
+                  return currentCount + 1;
+                },
+                function(Error) {
                   //console.log(Error);
-                });
-    
+                }
+              );
+
               //set the global state again after updating firebase because when question.currentPressedAnswers are read to update firebase it become undefined for the next time.
               //thats why, after it becomes undefined, it is set and updated again to preserve satete by pressedAnswer
-              surveys.map((item)=>{
-                if(item.id === this.props.navigation.state.params.index){
+              surveys.map(item => {
+                if (item.id === this.props.navigation.state.params.index) {
                   item.questions[id].currentPressedAnswers = pressedAnswer;
-                  console.log(item.questions[id].currentPressedAnswers)
+                  console.log(item.questions[id].currentPressedAnswers);
                 }
-              })
-              surveys.map((item)=>{
-                if(item.id === this.props.navigation.state.params.index){
-                  console.log(item)
+              });
+              surveys.map(item => {
+                if (item.id === this.props.navigation.state.params.index) {
+                  console.log(item);
                 }
-              })
-              
+              });
+
               //surveys[this.props.navigation.state.params.index].questions[id].currentPressedAnswers = pressedAnswer;
               this.props.updateSurveys(surveys);
-            })
-            surveys.map((item)=>{
-              if(item.id === this.props.navigation.state.params.index){
-                console.log(item)
+            });
+            surveys.map(item => {
+              if (item.id === this.props.navigation.state.params.index) {
+                console.log(item);
               }
-            })
-            
+            });
+
             //insert the userid of the current user to the firebase for keeping track of who votes and who does not. Needed to prevent double voting problem.
-            const votersUrl = "/surveys/" + this.props.navigation.state.params.index + "/voters/" + this.props.user.userid;
+            const votersUrl =
+              "/surveys/" +
+              this.props.navigation.state.params.index +
+              "/voters/" +
+              this.props.user.userid;
             const voter = {
               id: this.props.user.userName,
               vote: givenAnswers
-            }
+            };
             //insert voter data to firebase
             firebase
               .database()
@@ -264,65 +287,73 @@ class Survey extends Component<IProp & ReduxProps> {
                 //error callback
                 //console.log("error ", error);
               });
-  
           }
         });
       }
-
-
-
-
-
-    })
-    
-
-  }
+    });
+  };
 
   //return false if user does not vote, otherwise return true meaning that user vote before this survey.
   checkUserVote = () => {
-    const votersUrl = "/surveys/" + this.props.navigation.state.params.index + "/voters/" + this.props.user.userid;
-    return firebase.database().ref(votersUrl).once('value').then(function (snapshot) {
-      //console.log(snapshot.val())
-      if (snapshot.val() === null) {
-        console.log(snapshot.val())
-        return Boolean(false);
-      } else {
-        console.log(snapshot.val())
-        return Boolean(true);
-      }
-    });
-  }
+    const votersUrl =
+      "/surveys/" +
+      this.props.navigation.state.params.index +
+      "/voters/" +
+      this.props.user.userid;
+    return firebase
+      .database()
+      .ref(votersUrl)
+      .once("value")
+      .then(function(snapshot) {
+        //console.log(snapshot.val())
+        if (snapshot.val() === null) {
+          console.log(snapshot.val());
+          return Boolean(false);
+        } else {
+          console.log(snapshot.val());
+          return Boolean(true);
+        }
+      });
+  };
 
   renderQuestions = () => {
-    
-    return this.props.navigation.state.params.surveyData.questions.map((item, id) => (
-      <Question
-        question={item}
-        questionIndex={id}
-        surveyIndex={this.props.navigation.state.params.index}
-        key={id}
-      />
-    ));
-  }
-
+    return this.props.navigation.state.params.surveyData.questions.map(
+      (item, id) => (
+        <Question
+          question={item}
+          questionIndex={id}
+          surveyIndex={this.props.navigation.state.params.index}
+          key={id}
+        />
+      )
+    );
+  };
 
   render() {
     //console.log(this.props.navigation.state.params.surveyData);
-    
+
     return (
       <ImageBackground
         source={require("../../../img/background/BACKGROUND.png")}
-        style={{ width: Dimensions.get("window").width, height: Dimensions.get("window").height }}
+        style={{
+          width: Dimensions.get("window").width,
+          height: Dimensions.get("window").height
+        }}
       >
         <View style={styles.container}>
           {this.renderQuestions()}
-          <View style={styles.buttonView} >
-            <TouchableOpacity style={styles.button} onPress={() => { this.sendResultsToFirebaseV2() }} disabled={false} >
+          <View style={styles.buttonView}>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => {
+                this.sendResultsToFirebaseV2();
+              }}
+              disabled={false}
+            >
               <Text>SUBMIT</Text>
             </TouchableOpacity>
           </View>
         </View>
-
       </ImageBackground>
     );
   }
@@ -330,8 +361,7 @@ class Survey extends Component<IProp & ReduxProps> {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: "3%",
-
+    marginTop: "3%"
   },
   headerTitle: {
     fontWeight: "bold"
@@ -352,16 +382,13 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "flex-end",
     alignItems: "center",
-    marginRight: "5%",
-
+    marginRight: "5%"
   },
   button: {
     borderWidth: 0.5,
     borderRadius: 5,
-    padding: 5,
-
+    padding: 5
   }
-
 });
 
 const mapStateToProps = (state: types.GlobalState) => {
@@ -381,4 +408,3 @@ export default connect<{}, {}, ReduxProps>(
   mapStateToProps,
   mapDispatchToProps
 )(Survey);
-

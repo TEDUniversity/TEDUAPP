@@ -100,6 +100,16 @@ export default class App extends Component<any> {
         console.log("then notificationListener", notification);
         firebasee.notifications().displayNotification(notification);
       });
+    this.notificationListener = firebasee
+      .app()
+      .messaging()
+      .onMessage((notification: any) => {
+        notification.android.setChannelId("daily");
+        notification.android.setSmallIcon("@drawable/ic_stat_tedu");
+        // Process your notification as required
+        console.log("then notificationListener", notification);
+        firebasee.notifications().displayNotification(notification);
+      });
 
     firebasee
       .app()

@@ -8,7 +8,6 @@ import {
   Dimensions
 } from "react-native";
 
-
 interface IProp {
   title: string;
   Data: () => JSX.Element[];
@@ -18,17 +17,26 @@ interface IProp {
 let deviceWidth = Dimensions.get("window").width;
 
 class HorizontalList extends React.Component<IProp> {
-
   render() {
-    const { warningText, textStyle, subContainerStyle, containerStyle, warningView } = styles;
+    const {
+      warningText,
+      textStyle,
+      subContainerStyle,
+      containerStyle,
+      warningView
+    } = styles;
     let news;
     if (this.props.Data().length === 0) {
-      news = <View style={warningView} ><Text style={warningText} > Updated soon. </Text></View>
+      news = (
+        <View style={warningView}>
+          <Text style={warningText}> Çok yakında... </Text>
+        </View>
+      );
     } else {
-      news = this.props.Data()
+      news = this.props.Data();
     }
     return (
-      <View style={[containerStyle, this.props.style]} >
+      <View style={[containerStyle, this.props.style]}>
         <Text style={textStyle}> {this.props.title} </Text>
         <ScrollView
           horizontal={true}
@@ -42,16 +50,12 @@ class HorizontalList extends React.Component<IProp> {
             right: 35
           }}
         >
-
           {news}
-
         </ScrollView>
       </View>
     );
-
   }
-
-};
+}
 
 const styles = StyleSheet.create({
   containerStyle: {
@@ -64,7 +68,7 @@ const styles = StyleSheet.create({
     //shadowRadius: 2,
     elevation: 100,
     marginLeft: 12,
-    marginRight: 5,
+    marginRight: 5
     //marginTop: 20 commented out to adjusted from news.js with prop. If required it can uncommented.
   },
   subContainerStyle: {
@@ -84,17 +88,17 @@ const styles = StyleSheet.create({
   warningText: {
     marginLeft: 20,
     marginTop: 10,
-    fontStyle: 'italic',
+    fontStyle: "italic",
     //fontSize: 18,
 
-    fontWeight: "bold",
+    fontWeight: "bold"
   },
   warningView: {
     height: 130,
     width: 150,
     justifyContent: "center",
     alignContent: "center"
-  },
+  }
 });
 
 export default HorizontalList;

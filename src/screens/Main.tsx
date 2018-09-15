@@ -56,14 +56,14 @@ class Main extends Component<IProp> {
     {
       key: "NewsRouter",
       icon: "dashboard",
-      label: "News",
+      label: "Haberler",
       barColor: "#006AB3",
       pressColor: "rgba(232, 36, 55, 0.16)"
     },
     {
       key: "MenuRouter",
       icon: "menu",
-      label: "Menu",
+      label: "Menü",
       barColor: "#006AB3",
       pressColor: "rgba(232, 36, 55, 0.16)"
     },
@@ -78,7 +78,7 @@ class Main extends Component<IProp> {
     {
       key: "CouncilRouter",
       icon: "people",
-      label: "Council",
+      label: "Öğrenci Konseyi",
       barColor: "#006AB3",
       pressColor: "rgba(232, 36, 55, 0.16)"
     }
