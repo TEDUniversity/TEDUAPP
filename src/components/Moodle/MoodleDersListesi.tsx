@@ -70,9 +70,25 @@ class MoodleDersListesi extends Component<IProps> {
   componentDidMount() {}
   componentWillReceiveProps(next: IProps) {}
   render() {
-    return (
-      <ScrollView style={styles.container}>{this.renderAClass()}</ScrollView>
-    );
+    if (this.props.dersler.length === 0) {
+      return (
+        <ScrollView style={styles.container}>{this.renderAClass()}</ScrollView>
+      );
+    } else {
+      return (
+        <View
+          style={{
+            flex: 1,
+            alignItems: "center",
+            justifyContent: "center"
+          }}
+        >
+          <Text style={{ fontWeight: "bold", fontSize: 20 }}>
+            You do not have any classes on Moodle
+          </Text>
+        </View>
+      );
+    }
   }
 }
 
