@@ -172,8 +172,8 @@ class Survey extends Component<IProp & ReduxProps> {
       //if all questions are not answered, show alert
       if (!allAnswered) {
         Alert.alert(
-          "Dikkat",
-          "Lütfen tüm soruları cevaplayınız.",
+          "Warning",
+          "All questions must be answered.",
           [
             {
               text: "OK",
@@ -193,8 +193,8 @@ class Survey extends Component<IProp & ReduxProps> {
             //if userVoteBefore true, this means that user did vote before
             //console.log("user vote before:")
             Alert.alert(
-              "Zaten Oy Vermişsiniz",
-              "Her kullanıcı bir kez oy verebilir.",
+              "Warning",
+              "You have already voted.",
               [
                 {
                   text: "OK",

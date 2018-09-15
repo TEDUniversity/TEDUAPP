@@ -203,7 +203,7 @@ class CouncilVotings extends Component<IProps & ReduxProps> {
   renderSurvey = surveyName => {
     //this.setState({selectedSurey: surveyName});//for rendering survey on same page
     if (!this.props.surveys) {
-      Alert.alert("Hata", "surveys undefined");
+      Alert.alert("Error", "surveys undefined");
       return;
     }
     return this.props.surveys.map((item, id) => {
@@ -228,7 +228,7 @@ class CouncilVotings extends Component<IProps & ReduxProps> {
 
   renderSurveyButtons = () => {
     if (!this.props.surveys) {
-      Alert.alert("Hata", "surveys undefined");
+      Alert.alert("Error", "surveys undefined");
       return;
     }
     return this.props.surveys.map((item, id) => {

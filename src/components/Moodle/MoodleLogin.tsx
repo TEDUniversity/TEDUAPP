@@ -37,9 +37,7 @@ class MoodleLogin extends Component<IProp> {
     return (
       <View style={[{ padding: 10 }, this.props.style]}>
         <View>
-          <Text style={[styles.text, { marginBottom: 5 }]}>
-            Kullanıcı adı:{" "}
-          </Text>
+          <Text style={[styles.text, { marginBottom: 5 }]}>Username: </Text>
           <TextInput
             style={{
               height: 50,
@@ -56,7 +54,7 @@ class MoodleLogin extends Component<IProp> {
         </View>
 
         <View style={{ marginTop: 10 }}>
-          <Text style={[styles.text, { marginBottom: 5 }]}>Şifre: </Text>
+          <Text style={[styles.text, { marginBottom: 5 }]}>Password: </Text>
           <TextInput
             secureTextEntry={true}
             style={{
@@ -94,8 +92,8 @@ class MoodleLogin extends Component<IProp> {
         <TouchableHighlight
           onPress={() => {
             Alert.alert(
-              "Giriş yapmak için",
-              'Kullanıcı adınız sonunda "@tedu.edu.tr" olmadan mail kullanıcı adı(adınız.soyadınız), şifreniz mail şifrenizdir.'
+              "How to login?",
+              "Username is your name.surname (tedu mail address without @tedu.edu.tr), Password is tedu mail password"
             );
           }}
           style={{
@@ -103,9 +101,7 @@ class MoodleLogin extends Component<IProp> {
             justifyContent: "center"
           }}
         >
-          <Text style={{ color: "rgb(15, 108, 177)" }}>
-            Nasıl giriş yaparım?
-          </Text>
+          <Text style={{ color: "rgb(15, 108, 177)" }}>How to login?</Text>
         </TouchableHighlight>
       </View>
     );

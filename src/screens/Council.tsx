@@ -150,15 +150,15 @@ class Council extends Component<IProp & ReduxProps> {
           <TouchableOpacity
             onPress={() => {
               Alert.alert(
-                "Emin Misin?",
-                "Çıkış yapmak istediğine emin misin?.",
+                "Are you sure?",
+                "Are you sure to log out?",
                 [
                   {
-                    text: "Hayır",
+                    text: "No",
                     onPress: () => {}
                   },
                   {
-                    text: "Evet",
+                    text: "Yes",
                     onPress: () => this.props.updateIsMoodleLoggedIn(false)
                   }
                 ],
@@ -181,7 +181,7 @@ class Council extends Component<IProp & ReduxProps> {
           >
             <TabNavigator.Item
               selected={this.state.selectedTab === "News"}
-              title="Konsey Haberleri"
+              title="Council News"
               //renderIcon={() => <Image source={require("./img/moodle/m3.png")} />}
               //badgeText="+1"
               onPress={() => {
@@ -194,7 +194,7 @@ class Council extends Component<IProp & ReduxProps> {
             </TabNavigator.Item>
             <TabNavigator.Item
               selected={this.state.selectedTab === "Votings"}
-              title="Anketler"
+              title="Surveys"
               //renderIcon={() => <Image source={require("./img/menu/me3.png")} />}
               onPress={() => {
                 this.setState({ selectedTab: "Votings" });
@@ -337,7 +337,7 @@ class Council extends Component<IProp & ReduxProps> {
               >
                 <TabNavigator.Item
                   selected={this.state.selectedTab === "News"}
-                  title="Konsey Haberleri"
+                  title="Council News"
                   //renderIcon={() => <Image source={require("./img/moodle/m3.png")} />}
                   //badgeText="+1"
                   onPress={() => {
@@ -350,7 +350,7 @@ class Council extends Component<IProp & ReduxProps> {
                 </TabNavigator.Item>
                 <TabNavigator.Item
                   selected={this.state.selectedTab === "Votings"}
-                  title="Anketler"
+                  title="Surveys"
                   //renderIcon={() => <Image source={require("./img/menu/me3.png")} />}
                   onPress={() => {
                     this.setState({ selectedTab: "Votings" });

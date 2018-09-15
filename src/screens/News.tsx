@@ -160,8 +160,8 @@ class News extends Component<IProp & ReduxProps> {
         this.whenLoaded(this.props.rss);
         if (this.state.networkError === true && this.state.showAlert === true) {
           Alert.alert(
-            "Ağ hatası",
-            "Son haberleri almak için internete bağlı olduğunuza emin olunuz.",
+            "Network error",
+            "Check your network connection.",
             [
               {
                 text: "Tamam",
@@ -438,7 +438,7 @@ class News extends Component<IProp & ReduxProps> {
           bounces={false}
           showsVerticalScrollIndicator={false}
         >
-          <View >
+          <View>
             <ImageBackground
               source={require("../../img/background/BACKGROUND.png")}
               style={styles.mainBackGround}

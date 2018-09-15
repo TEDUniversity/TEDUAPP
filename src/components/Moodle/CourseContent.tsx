@@ -157,8 +157,8 @@ class Detay extends Component<IProp & ReduxProps> {
                           .catch(error => {
                             console.log(error);
                             Alert.alert(
-                              "Hata",
-                              "Bir hata oluştu: lütfen bir office programı indirin!"
+                              "Error",
+                              "Please download an office application!"
                             );
                           });
                       })
