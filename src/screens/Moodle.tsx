@@ -33,7 +33,6 @@ import * as actions from "../store/actions";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
 import { Spinner } from "./News";
-import Toast from "react-native-simple-toast";
 
 const MIN_HEIGHT = (Header as any).height;
 
@@ -160,9 +159,10 @@ class Moodle extends Component<IProp & ReduxProps> {
         this.props.updateUser(u);
         this.props.updateIsMoodleLoggedIn(true);
         this.getDersler();
-      } else if (http.readyState == 4 && http.status !== 200) {
-        Toast.show("Ağ hatası ");
       }
+      //   else if (http.readyState == 4 && http.status !== 200) {
+      //     Toast.show("Ağ hatası ");
+      //   }
     };
     http.send(params);
   };
@@ -186,9 +186,10 @@ class Moodle extends Component<IProp & ReduxProps> {
           this.setState({ token: JSON.parse(http.responseText).token });
           this.getUserInfo();
         }
-      } else if (http.readyState == 4 && http.status !== 200) {
-        Toast.show("Ağ hatası ");
       }
+      //   else if (http.readyState == 4 && http.status !== 200) {
+      //     Toast.show("Ağ hatası ");
+      //   }
     };
     http.send(params);
   };
