@@ -308,7 +308,7 @@ const styles = StyleSheet.create({
     height: deviceWidth / 6.25
   },
   subContainer: {
-    marginTop: 20,
+    marginTop: deviceWidth / 18.75,
     justifyContent: "center",
     alignItems: "center"
   }

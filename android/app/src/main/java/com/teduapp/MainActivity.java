@@ -1,6 +1,6 @@
 
 import com.facebook.react.ReactActivity;
-
+//import tedu.edu.tr.MainActivity;
 public class MainActivity extends ReactActivity {
 
     /**
