@@ -446,17 +446,17 @@ class News extends Component<IProp & ReduxProps> {
               <View style={{ marginBottom: 50 }}>
                 <HorizontalList
                   Data={this.renderDataDuyurular}
-                  title={"Duyurular"}
+                  title={"Announcements"}
                   style={{ marginTop: this.state.horizontalMarginTop }}
                 />
                 <HorizontalList
                   Data={this.renderDataEtkinlikler}
-                  title={"Etkinlikler"}
+                  title={"Events"}
                   style={{ marginTop: this.state.horizontalMarginTop }}
                 />
                 <HorizontalList
                   Data={this.renderDataHaberler}
-                  title={"Haberler"}
+                  title={"News"}
                   style={{ marginTop: this.state.horizontalMarginTop }}
                 />
               </View>

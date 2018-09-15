@@ -262,7 +262,7 @@ class CouncilVotings extends Component<IProps & ReduxProps> {
             style={{ alignItems: "center" }}
             height={Dimensions.get("window").height}
           >
-            <Text>Çok yakında...</Text>
+            <Text>Will be here soon...</Text>
           </View>
         );
       } else

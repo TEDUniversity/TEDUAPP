@@ -47,7 +47,7 @@ class MoodleLogin extends Component<IProp> {
               borderWidth: 1,
               color: "black"
             }}
-            placeholder="Kullanıcı adı"
+            placeholder="Username"
             placeholderTextColor="gray"
             onChangeText={kullaniciAdi => this.setState({ kullaniciAdi })}
           />
@@ -66,7 +66,7 @@ class MoodleLogin extends Component<IProp> {
               color: "black"
             }}
             placeholderTextColor="gray"
-            placeholder="Şifre"
+            placeholder="Password"
             onChangeText={sifre => this.setState({ sifre })}
           />
         </View>
@@ -86,7 +86,7 @@ class MoodleLogin extends Component<IProp> {
               backgroundColor: "rgb(15, 108, 177)"
             }}
           >
-            <Text style={{ color: "white" }}>GİRİŞ</Text>
+            <Text style={{ color: "white" }}>LOG IN</Text>
           </TouchableHighlight>
         </View>
         <TouchableHighlight

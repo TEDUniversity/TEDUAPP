@@ -29,7 +29,7 @@ class HorizontalList extends React.Component<IProp> {
     if (this.props.Data().length === 0) {
       news = (
         <View style={warningView}>
-          <Text style={warningText}> Çok yakında... </Text>
+          <Text style={warningText}>Will be here soon... </Text>
         </View>
       );
     } else {

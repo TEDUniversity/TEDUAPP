@@ -230,7 +230,7 @@ class Menu extends Component<IProp> {
                     { backgroundColor: "rgb(35,49,126)" }
                   ]}
                 >
-                  <Text style={styles.menuText}>Akademik Takvim</Text>
+                  <Text style={styles.menuText}>Academic Calendar</Text>
                 </View>
               </TouchableOpacity>
 
