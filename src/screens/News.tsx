@@ -438,7 +438,7 @@ class News extends Component<IProp & ReduxProps> {
           bounces={false}
           showsVerticalScrollIndicator={false}
         >
-          <View height={this.state.scrollHeight}>
+          <View >
             <ImageBackground
               source={require("../../img/background/BACKGROUND.png")}
               style={styles.mainBackGround}

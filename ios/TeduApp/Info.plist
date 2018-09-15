@@ -35,6 +35,8 @@
 				<key>NSExceptionAllowsInsecureHTTPLoads</key>
 				<true/>
 			</dict>
+			<key>New item</key>
+			<string></string>
 			<key>NSExceptionAllowsInsecureHTTPLoads</key>
 			<true/>
 			<key>issuu.com/tedukultursanat/docs</key>
@@ -82,6 +84,8 @@
 	<array>
 		<string>armv7</string>
 	</array>
+	<key>UIRequiresFullScreen</key>
+	<false/>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
