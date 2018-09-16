@@ -15,7 +15,8 @@ import {
   ImageBackground,
   TouchableOpacity,
   Alert,
-  Platform
+  Platform,
+  RefreshControl
 } from "react-native";
 import Image from "react-native-scalable-image";
 import TabNavigator from "react-native-tab-navigator";
@@ -70,13 +71,15 @@ class Council extends Component<IProp & ReduxProps> {
   };
   //
   state = {
+    loading: false,
     selectedTab: "News",
     MAX_HEIGHT: 0,
     dataDuyurular: [],
     dataHaberler: [],
     dataEtkinlikler: [],
     token: "",
-    scrollHeight: Dimensions.get("window").height
+    scrollHeight: Dimensions.get("window").height,
+    reloadNumber: 0
   };
 
   renderDataDuyurular = () => {
@@ -93,6 +96,16 @@ class Council extends Component<IProp & ReduxProps> {
     return this.state.dataEtkinlikler.map((responseData, Id) => (
       <DetailNews key={Id} data={responseData} imgsrc={"mavi"} />
     ));
+  };
+
+  _onRefresh = () => {
+    this.setState({ loading: true });
+    this.setState({ reloadNumber: this.state.reloadNumber + 1 }, () => {
+      this.setState({ loading: false });
+    });
+    // setTimeout(() => {
+    //   this.setState({ loading: false });
+    // }, 500);
   };
 
   componentWillMount() {
@@ -136,9 +149,19 @@ class Council extends Component<IProp & ReduxProps> {
 
   renderBody = () => {
     if (this.state.selectedTab === "News") {
-      return <CouncilNews navigation={this.props.navigation} />;
+      return (
+        <CouncilNews
+          key={this.state.reloadNumber}
+          navigation={this.props.navigation}
+        />
+      );
     } else if (this.state.selectedTab === "Votings") {
-      return <CouncilVotings navigation={this.props.navigation} />;
+      return (
+        <CouncilVotings
+          key={this.state.reloadNumber}
+          navigation={this.props.navigation}
+        />
+      );
     }
   };
 
@@ -304,6 +327,12 @@ class Council extends Component<IProp & ReduxProps> {
     }
     return (
       <HeaderImageScrollView
+        refreshControl={
+          <RefreshControl
+            refreshing={this.state.loading}
+            onRefresh={this._onRefresh}
+          />
+        }
         maxHeight={this.state.MAX_HEIGHT}
         minHeight={MIN_HEIGHT}
         renderHeader={() => (

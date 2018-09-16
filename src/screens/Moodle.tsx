@@ -15,7 +15,8 @@ import {
   ImageBackground,
   TouchableOpacity,
   Alert,
-  Platform
+  Platform,
+  RefreshControl
 } from "react-native";
 import Image from "react-native-scalable-image";
 import TabNavigator from "react-native-tab-navigator";
@@ -71,6 +72,42 @@ class Moodle extends Component<IProp & ReduxProps> {
     token: "",
     dersler: [],
     isLoading: true
+  };
+
+  _onRefresh = () => {
+    this.setState({ isLoading: true });
+    let url = "https://moodle.tedu.edu.tr/webservice/rest/server.php";
+    var http = new XMLHttpRequest();
+    http.open("POST", url, true);
+
+    //Send the proper header information along with the request
+    http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+    var params =
+      "moodlewsrestformat=json&wsfunction=core_enrol_get_users_courses&wstoken=" +
+      this.props.User.token +
+      "&userid=" +
+      this.props.User.userid;
+
+    http.onreadystatechange = () => {
+      //Call a function when the state changes.
+      if (http.readyState == 4 && http.status == 200) {
+        let dersArr = [];
+        for (let index = 0; index < JSON.parse(http.response).length; index++) {
+          dersArr.push(JSON.parse(http.response)[index]);
+        }
+        this.setState({ dersler: dersArr, isLoading: false });
+      }
+      //   else if (http.readyState == 4 && http.status !== 200) {
+      // Toast.show("Ağ hatası ");
+      //   }
+    };
+
+    http.send(params);
+
+    // setTimeout(() => {
+    //   this.setState({ loading: false });
+    // }, 500);
   };
 
   componentWillMount() {
@@ -266,6 +303,12 @@ class Moodle extends Component<IProp & ReduxProps> {
       <HeaderImageScrollView
         maxHeight={this.state.MAX_HEIGHT}
         minHeight={MIN_HEIGHT}
+        refreshControl={
+          <RefreshControl
+            refreshing={this.state.isLoading}
+            onRefresh={this._onRefresh}
+          />
+        }
         renderHeader={() => (
           <View
             style={{
