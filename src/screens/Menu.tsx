@@ -146,7 +146,7 @@ class Menu extends Component<IProp> {
           <View
             style={{
               backgroundColor: "rgb(15, 108, 177)",
-              height: Platform.OS === "ios" ? 50 : 135
+              height: Platform.OS === "ios" ? 50 : this.state.MAX_HEIGHT
             }}
           >
             <Image
@@ -163,7 +163,7 @@ class Menu extends Component<IProp> {
         contentOffset={{ x: 0, y: 0 }}
         scrollViewBackgroundColor="rgba(52, 52, 52, 0.40)"
         scrollEnabled={false}
-        //renderForeground={this.renderHeader}
+      //renderForeground={this.renderHeader}
       >
         <View style={styles.container} height={this.state.scrollHeight}>
           <ImageBackground

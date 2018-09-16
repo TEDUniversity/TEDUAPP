@@ -93,7 +93,7 @@ export default class App extends Component<any> {
         notification.android.setChannelId("daily");
         if (Platform.OS === 'ios') {
           notification
-            .ios.setBadge(1);
+            .ios.setBadge(10);
         }
         notification.android.setSmallIcon("@drawable/ic_stat_tedu");
         // Process your notification as required

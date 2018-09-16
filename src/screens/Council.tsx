@@ -155,7 +155,7 @@ class Council extends Component<IProp & ReduxProps> {
                 [
                   {
                     text: "Hayır",
-                    onPress: () => {}
+                    onPress: () => { }
                   },
                   {
                     text: "Evet",
@@ -310,7 +310,7 @@ class Council extends Component<IProp & ReduxProps> {
           <View
             style={{
               backgroundColor: "rgb(15, 108, 177)",
-              height: Platform.OS === "ios" ? 50 : 140
+              height: Platform.OS === "ios" ? 50 : this.state.MAX_HEIGHT
             }}
           >
             <Image

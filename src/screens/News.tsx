@@ -421,7 +421,7 @@ class News extends Component<IProp & ReduxProps> {
             <View
               style={{
                 backgroundColor: "rgb(15, 108, 177)",
-                height: Platform.OS === "ios" ? 50 : 135
+                height: Platform.OS === "ios" ? 50 : this.state.MAX_HEIGHT
               }}
             >
               <Image
