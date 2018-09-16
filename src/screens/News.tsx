@@ -16,7 +16,8 @@ import {
   ActivityIndicator,
   Dimensions,
   ImageBackground,
-  Platform
+  Platform,
+  RefreshControl
 } from "react-native";
 import axios from "axios";
 import * as rssParser from "react-native-rss-parser";
@@ -79,9 +80,52 @@ class News extends Component<IProp & ReduxProps> {
     scrollHeight: Dimensions.get("window").height,
     networkError: false,
     showAlert: this.props.showAlert,
-    horizontalMarginTop: 20
+    horizontalMarginTop: 20,
+    refreshing: false
   };
 
+  _onRefresh = () => {
+    this._isMounted && this.setState({ loading: true });
+    fetch("https://www.tedu.edu.tr/rss.xml")
+      .then(response => response.text())
+      .then(RSS => rssParser.parse(RSS))
+      .catch(error => console.log(error))
+      .then(result => {
+        this.props.updateRss(result.items);
+      })
+      .then(() => {
+        this._isMounted && this.setState({ loading: false, refreshing: false });
+        this.whenLoaded();
+      })
+      .catch(error => {
+        console.log(error);
+        this._isMounted && this.setState({ networkError: true });
+        console.log("net err" + this.state.networkError);
+        console.log("alert err" + this.state.showAlert);
+        this.whenLoaded();
+        this._isMounted && this.setState({ loading: false, refreshing: false });
+        if (this.state.networkError === true && this.state.showAlert === true) {
+          Alert.alert(
+            "Network error",
+            "Check your network connection.",
+            [
+              {
+                text: "Tamam",
+                onPress: () => {
+                  this.props.navigation.state.params.showAlert = false;
+                  console.log(this.props.navigation.state.params.showAlert);
+                  console.log(this.state.showAlert);
+                }
+              }
+            ],
+            { cancelable: false }
+          );
+        }
+      })
+      .then(() => {
+        // this.whenLoaded();
+      });
+  };
   //not used. for editind navigation parameters.
   setNavParams = props => {
     props.navigation.setParams({
@@ -430,6 +474,12 @@ class News extends Component<IProp & ReduxProps> {
     // } else {
     return (
       <HeaderImageScrollView
+        refreshControl={
+          <RefreshControl
+            refreshing={this.state.loading}
+            onRefresh={this._onRefresh}
+          />
+        }
         maxHeight={this.state.MAX_HEIGHT}
         minHeight={MIN_HEIGHT}
         renderHeader={() => (
@@ -458,7 +508,6 @@ class News extends Component<IProp & ReduxProps> {
             style={styles.mainBackGround}
           >
             <View style={{ marginBottom: deviceWidth / 7.5 }}>
-              {this.state.loading && <Spinner size="large" />}
               <HorizontalList
                 Data={this.renderDataDuyurular}
                 title={"Announcements"}
