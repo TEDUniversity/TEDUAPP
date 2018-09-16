@@ -240,11 +240,11 @@ class Moodle extends Component<IProp & ReduxProps> {
               "Are you sure to log out?",
               [
                 {
-                  text: "Hayır",
+                  text: "No",
                   onPress: () => {}
                 },
                 {
-                  text: "Evet",
+                  text: "Yes",
                   onPress: () => this.props.updateIsMoodleLoggedIn(false)
                 }
               ],

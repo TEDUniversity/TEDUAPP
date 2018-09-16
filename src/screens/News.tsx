@@ -110,7 +110,7 @@ class News extends Component<IProp & ReduxProps> {
             "Check your network connection.",
             [
               {
-                text: "Tamam",
+                text: "OK",
                 onPress: () => {
                   this.props.navigation.state.params.showAlert = false;
                   console.log(this.props.navigation.state.params.showAlert);
@@ -221,7 +221,7 @@ class News extends Component<IProp & ReduxProps> {
             "Check your network connection.",
             [
               {
-                text: "Tamam",
+                text: "OK",
                 onPress: () => {
                   this.props.navigation.state.params.showAlert = false;
                   console.log(this.props.navigation.state.params.showAlert);
