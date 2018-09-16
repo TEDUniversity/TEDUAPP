@@ -70,50 +70,54 @@ class Grades extends Component<IProp & ReduxProps> {
   };
 
   renderSection = () => {
-    return this.state.jsonToBeParsed["tables"][0]["tabledata"].map(
-      (data, Id) => {
-        let str;
-        if (data["itemname"]) {
-          str = data["itemname"]["content"];
-        } else {
-          return;
-        }
-        str = strip(str);
+    if (this.state.jsonToBeParsed["tables"]) {
+      return this.state.jsonToBeParsed["tables"][0]["tabledata"].map(
+        (data, Id) => {
+          let str;
+          if (data["itemname"]) {
+            str = data["itemname"]["content"];
+          } else {
+            return;
+          }
+          str = strip(str);
 
-        let percentage = "",
-          grade = "";
-        if (data["percentage"] !== undefined && data["grade"] !== undefined) {
-          str = "\t\t" + str + ":";
-          percentage = data["percentage"]["content"] + "";
-          grade = data["grade"]["content"];
-        }
+          let percentage = "",
+            grade = "";
+          if (data["percentage"] !== undefined && data["grade"] !== undefined) {
+            str = "\t\t" + str + ":";
+            percentage = data["percentage"]["content"] + "";
+            grade = data["grade"]["content"];
+          }
 
-        return (
-          <View key={Id} style={{ marginBottom: 10 }}>
-            <View key={Id} style={styles.subContainer}>
-              <View style={styles.textContainer}>
-                <Text style={styles.txt}>{str}</Text>
+          return (
+            <View key={Id} style={{ marginBottom: 10 }}>
+              <View key={Id} style={styles.subContainer}>
+                <View style={styles.textContainer}>
+                  <Text style={styles.txt}>{str}</Text>
+                </View>
+
+                <View style={styles.textContainer}>
+                  <Text style={styles.txt}> {percentage} </Text>
+                </View>
+
+                <View style={styles.textContainer}>
+                  <Text style={styles.txt}>{grade}</Text>
+                </View>
               </View>
-
-              <View style={styles.textContainer}>
-                <Text style={styles.txt}> {percentage} </Text>
-              </View>
-
-              <View style={styles.textContainer}>
-                <Text style={styles.txt}>{grade}</Text>
-              </View>
+              <View
+                style={{
+                  backgroundColor: "black",
+                  height: 1,
+                  width: Dimensions.get("window").width
+                }}
+              />
             </View>
-            <View
-              style={{
-                backgroundColor: "black",
-                height: 1,
-                width: Dimensions.get("window").width
-              }}
-            />
-          </View>
-        );
-      }
-    );
+          );
+        }
+      );
+    } else {
+      return <View />;
+    }
   };
   render() {
     if (this.state.isLoading) {

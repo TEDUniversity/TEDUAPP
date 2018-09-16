@@ -51,7 +51,7 @@ class Detay extends Component<IProp & ReduxProps> {
   parseResponse = (parse: any) => {
     let CONTENT = [];
     parse.map((data, id) => {
-      if (data["visible"] === 1) {
+      if (data && data["visible"] && data["visible"] === 1) {
         CONTENT.push({
           data: data["modules"],
           title: data["name"]
@@ -81,6 +81,7 @@ class Detay extends Component<IProp & ReduxProps> {
     http.onreadystatechange = () => {
       //Call a function when the state changes.
       if (http.readyState == 4 && http.status == 200) {
+        console.log(http.response);
         this.setState(
           {
             jsonToBeParsed: JSON.parse(http.response),
@@ -96,10 +97,10 @@ class Detay extends Component<IProp & ReduxProps> {
   renderElement = (elements: any) => {
     return elements.map((data, Id) => {
       let description = "";
-      if (data["description"]) {
+      if (data && data["description"]) {
         description = strip(data["description"]);
       }
-      if (data["visible"] === 1) {
+      if (data && data["visible"] && data["visible"] === 1) {
         return (
           <View
             key={Id}
@@ -122,6 +123,7 @@ class Detay extends Component<IProp & ReduxProps> {
               <TouchableOpacity
                 onPress={() => {
                   if (
+                    data &&
                     data["contents"] &&
                     data["contents"][0] &&
                     data["contents"][0]["fileurl"]
@@ -213,7 +215,7 @@ class Detay extends Component<IProp & ReduxProps> {
   renderSection = (toBeMapped: any) => {
     return toBeMapped.map(
       (data, Id) =>
-        data["visible"] === 1 ? (
+        data && data["visible"] && data["visible"] === 1 ? (
           <View key={Id} style={styles.subContainer}>
             <View
               style={{
