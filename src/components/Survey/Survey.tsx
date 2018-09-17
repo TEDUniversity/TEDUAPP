@@ -287,6 +287,23 @@ class Survey extends Component<IProp & ReduxProps> {
                 //error callback
                 //console.log("error ", error);
               });
+              Alert.alert(
+                "You Vote!!",
+                "Thank you for voting.",
+                [
+                  {
+                    text: "OK",
+                    onPress: () => {
+                      this.props.navigation.navigate("MainRouter", {
+                        showAlert: false
+                      });
+                    }
+                  }
+                ],
+                {
+                  cancelable: false
+                }
+              );
           }
         });
       }
