@@ -14,6 +14,7 @@ export interface GlobalState {
 }
 
 export interface Question {
+  type: number;
   question: string;
   answers: Answer[];
   currentPressedAnswers: number;

@@ -136,7 +136,7 @@ class Survey extends Component<IProp & ReduxProps> {
               // If users/ada/rank has never been set, currentRank will be `null`.
               return currentCount + 1;
             },
-            function(Error) {
+            function (Error) {
               //console.log(Error);
             }
           );
@@ -164,9 +164,11 @@ class Survey extends Component<IProp & ReduxProps> {
       //console.log(this.state.currentSurvey)
       let allAnswered = true; //control variable for questions that are not answered
       this.state.currentSurvey.questions.map((question, id) => {
-        //traverse the question array of the related survey and check current pressed answers. If it is undefined, question is not answered.
-        if (question.currentPressedAnswers == undefined) {
-          allAnswered = false;
+        if (question.type === 0) {
+          //traverse the question array of the related survey and check current pressed answers. If it is undefined, question is not answered.
+          if (question.currentPressedAnswers == undefined) {
+            allAnswered = false;
+          }
         }
       });
       //if all questions are not answered, show alert
@@ -177,7 +179,7 @@ class Survey extends Component<IProp & ReduxProps> {
           [
             {
               text: "OK",
-              onPress: () => {}
+              onPress: () => { }
             }
           ],
           { cancelable: false }
@@ -215,46 +217,70 @@ class Survey extends Component<IProp & ReduxProps> {
 
             let givenAnswers = [];
             this.state.currentSurvey.questions.map((question, id) => {
-              const pressedAnswer = question.currentPressedAnswers;
-              givenAnswers.push(pressedAnswer); //push given aswers to this array for inserting it firebase
+              if (question.type === 0) {
+                const pressedAnswer = question.currentPressedAnswers;
+                givenAnswers.push(pressedAnswer); //push given aswers to this array for inserting it firebase
 
-              //increase the counter of the pressed answers.
-              const url =
-                "/surveys/" +
-                this.props.navigation.state.params.index +
-                "/questions/" +
-                id +
-                "/answers/" +
-                question.currentPressedAnswers +
-                "/count";
-              //console.log(url)
-              var adaRankRef = firebase.database().ref(url);
-              adaRankRef.transaction(
-                currentCount => {
-                  // If users/ada/rank has never been set, currentCount will be `null`.
-                  return currentCount + 1;
-                },
-                function(Error) {
-                  //console.log(Error);
-                }
-              );
+                //increase the counter of the pressed answers.
+                const url =
+                  "/surveys/" +
+                  this.props.navigation.state.params.index +
+                  "/questions/" +
+                  id +
+                  "/answers/" +
+                  question.currentPressedAnswers +
+                  "/count";
+                //console.log(url)
+                var adaRankRef = firebase.database().ref(url);
+                adaRankRef.transaction(
+                  currentCount => {
+                    // If users/ada/rank has never been set, currentCount will be `null`.
+                    return currentCount + 1;
+                  },
+                  function (Error) {
+                    //console.log(Error);
+                  }
+                );
 
-              //set the global state again after updating firebase because when question.currentPressedAnswers are read to update firebase it become undefined for the next time.
-              //thats why, after it becomes undefined, it is set and updated again to preserve satete by pressedAnswer
-              surveys.map(item => {
-                if (item.id === this.props.navigation.state.params.index) {
-                  item.questions[id].currentPressedAnswers = pressedAnswer;
-                  console.log(item.questions[id].currentPressedAnswers);
-                }
-              });
-              surveys.map(item => {
-                if (item.id === this.props.navigation.state.params.index) {
-                  console.log(item);
-                }
-              });
+                //set the global state again after updating firebase because when question.currentPressedAnswers are read to update firebase it become undefined for the next time.
+                //thats why, after it becomes undefined, it is set and updated again to preserve satete by pressedAnswer
+                surveys.map(item => {
+                  if (item.id === this.props.navigation.state.params.index) {
+                    item.questions[id].currentPressedAnswers = pressedAnswer;
+                    console.log(item.questions[id].currentPressedAnswers);
+                  }
+                });
 
-              //surveys[this.props.navigation.state.params.index].questions[id].currentPressedAnswers = pressedAnswer;
-              this.props.updateSurveys(surveys);
+                //surveys[this.props.navigation.state.params.index].questions[id].currentPressedAnswers = pressedAnswer;
+                this.props.updateSurveys(surveys);
+              } else if (question.type === 1) {
+                const typedAnswer = question.answers[0].text;
+                givenAnswers.push(typedAnswer);
+
+                const url =
+                  "/surveys/" +
+                  this.props.navigation.state.params.index +
+                  "/questions/" +
+                  id +
+                  "/answers/text";
+                //console.log(url)
+                let key = firebase.database().ref(url).push().key;
+
+                var updates = {};
+                updates[key] = typedAnswer;
+
+
+                firebase.database().ref(url).update(updates);
+
+
+                surveys.map(item => {
+                  if (item.id === this.props.navigation.state.params.index) {
+                    item.questions[id].answers[0].text = typedAnswer;
+                    console.log(item.questions[id].currentPressedAnswers);
+                  }
+                });
+              }
+
             });
             surveys.map(item => {
               if (item.id === this.props.navigation.state.params.index) {
@@ -287,23 +313,23 @@ class Survey extends Component<IProp & ReduxProps> {
                 //error callback
                 //console.log("error ", error);
               });
-              Alert.alert(
-                "You Vote!!",
-                "Thank you for voting.",
-                [
-                  {
-                    text: "OK",
-                    onPress: () => {
-                      this.props.navigation.navigate("MainRouter", {
-                        showAlert: false
-                      });
-                    }
-                  }
-                ],
+            Alert.alert(
+              "You Vote!!",
+              "Thank you for voting.",
+              [
                 {
-                  cancelable: false
+                  text: "OK",
+                  onPress: () => {
+                    this.props.navigation.navigate("MainRouter", {
+                      showAlert: false
+                    });
+                  }
                 }
-              );
+              ],
+              {
+                cancelable: false
+              }
+            );
           }
         });
       }
@@ -321,7 +347,7 @@ class Survey extends Component<IProp & ReduxProps> {
       .database()
       .ref(votersUrl)
       .once("value")
-      .then(function(snapshot) {
+      .then(function (snapshot) {
         //console.log(snapshot.val())
         if (snapshot.val() === null) {
           console.log(snapshot.val());
@@ -334,6 +360,7 @@ class Survey extends Component<IProp & ReduxProps> {
   };
 
   renderQuestions = () => {
+    //console.log(this.props.navigation.state.params.surveyData)
     return this.props.navigation.state.params.surveyData.questions.map(
       (item, id) => (
         <Question
@@ -341,6 +368,7 @@ class Survey extends Component<IProp & ReduxProps> {
           questionIndex={id}
           surveyIndex={this.props.navigation.state.params.index}
           key={id}
+          type={item.type}
         />
       )
     );

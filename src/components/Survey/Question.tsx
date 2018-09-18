@@ -23,21 +23,24 @@ import HeaderImageScrollView, {
 } from "react-native-image-header-scroll-view";
 import { Header } from "react-navigation";
 import Answer from "./Answer";
+import TextAnswer from "./TextAnswer";
+
 import * as types from "../../store/types";
 import * as actions from "../../store/actions";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
 
 interface IProp {
-    question: any;
-    questionIndex: number;
-    surveyIndex: string;
-  }
+  question: any;
+  questionIndex: number;
+  surveyIndex: string;
+  type: number;
+}
 
-  interface ReduxProps {
-    surveys?: types.Survey[];
-    updateSurveys?: (surveys: types.Survey[]) => any;
-  }
+interface ReduxProps {
+  surveys?: types.Survey[];
+  updateSurveys?: (surveys: types.Survey[]) => any;
+}
 
 class Question extends Component<IProp & ReduxProps> {
   state = {
@@ -45,10 +48,10 @@ class Question extends Component<IProp & ReduxProps> {
     prevAnswers: [],//not workind this versin
     currentAnswer: "",//working in this verison
     chosenIndex: -1,//working in this version
-
+    textAnswer: "", //working in this version. For free text answers
 
   };
-  
+
   //prev version of the answer. not suiting for requierements
   /*setAnswers = (val) => {
     if(val.includes("not")) {
@@ -93,21 +96,31 @@ class Question extends Component<IProp & ReduxProps> {
 
 
 
-  setAnswersSingle = (index:number) => {
-    if(this.state.chosenIndex != index) {
-      this.setState({chosenIndex: index}, this.UpdateGlobalState );
+  setAnswersSingle = (index: number) => {
+    if (this.state.chosenIndex != index) {
+      this.setState({ chosenIndex: index }, this.UpdateGlobalState);
     }
-    
+
+  };
+
+  setAnswersText = (text: string) => {
+    this.setState({ textAnswer: text }, this.UpdateGlobalState);
   };
 
 
   UpdateGlobalState = () => {
-    console.log(this.props.surveyIndex)
+    //console.log(this.props.surveyIndex)
     var survey = this.props.surveys;
-    console.log(survey)
+    //console.log(survey)
     survey.map((item) => {
-      if (item.id === this.props.surveyIndex){
+      if (item.id === this.props.surveyIndex) {
+
+        if(item.questions[this.props.questionIndex].type === 0){         
           item.questions[this.props.questionIndex].currentPressedAnswers = this.state.chosenIndex;
+
+        }else if (item.questions[this.props.questionIndex].type === 0){
+          item.questions[this.props.questionIndex].answers[0].text = this.state.textAnswer;
+        }
       }
     })
     //survey[this.props.surveyIndex].questions[this.props.questionIndex].currentPressedAnswers = this.state.chosenIndex;
@@ -115,103 +128,112 @@ class Question extends Component<IProp & ReduxProps> {
   }
 
   renderAnswers = () => {
+    if (this.props.type === 0) {
       return this.props.question.answers.map((item, id) => (
-        <Answer 
-        index={id}
-        answer={item}
-        key={id}
-        getAnswer={ this.setAnswersSingle }
-        isChosen={this.state.chosenIndex === id}
+        <Answer
+          index={id}
+          answer={item}
+          key={id}
+          getAnswer={this.setAnswersSingle}
+          isChosen={this.state.chosenIndex === id}
         //unClickAnswer={ this.state.prevAnswers }
         />
       ));
+    } else if (this.props.type == 1) {
+      return (<TextAnswer
+        getAnswer={this.setAnswersText}
+      //unClickAnswer={ this.state.prevAnswers }
+      />);
+      
+    }
+
   }
 
   render() {
-    console.log()
+    console.log(this.props.type)
     //console.log(this.props.question);
     return (
-        <View style={styles.questionContainer}>
-          <View style={styles.question}>
-            <Text style={styles.text}>
-              {this.props.question.question}
-            </Text>
-          </View>
-          <View style={styles.answers}>
-            {this.renderAnswers()}
-          </View>
+      <View style={styles.questionContainer}>
+        <View style={styles.question}>
+          <Text style={styles.text}>
+            {this.props.question.question}
+          </Text>
         </View>
+        <View style={styles.answers}>
+          {this.renderAnswers()}
+        </View>
+      </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      justifyContent: "flex-start",
-      marginTop: "1%"
-    },
-    questionContainer: {
-      //justifyContent: "center"
-    },
-    answers: {
-      flexDirection: "row",
-      justifyContent: "space-around",
-      borderWidth: 1,
-      borderRadius: 5,
-      padding: 5,
-      margin: 5,
-      
-    },
-    answerButton: {
-      borderWidth: 0.5,
-      borderRadius: 5,
-      padding: 3
-    },
-    question: {
-      marginLeft: "5%"
-    },
-    text: {
-      fontWeight: "bold"
-    },
-  
-    button: {
-      //marginLeft: -100,
-      //flex: 1,
-  
-      flexDirection: "row",
-      //width: "100%",
-      height: 35,
-      backgroundColor: "rgb(12,57,98)",
-      alignItems: "center",
-      justifyContent: "space-around"
-      //#373738
-    },
-    tabNavTitle: {},
-    mainBackGround: {
-      flex: 1,
-      alignSelf: "stretch",
-      resizeMode: "cover"
-      // width: null,
-      // height: null
-    }
-  });
+  container: {
+    flex: 1,
+    justifyContent: "flex-start",
+    marginTop: "1%"
+  },
+  questionContainer: {
+    //justifyContent: "center"
+  },
+  answers: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    borderWidth: 1,
+    borderRadius: 5,
+    padding: 5,
+    margin: 5,
+
+  },
+  answerButton: {
+    borderWidth: 0.5,
+    borderRadius: 5,
+    padding: 3
+  },
+  question: {
+    marginLeft: "5%"
+  },
+  text: {
+    fontWeight: "bold"
+  },
+
+  button: {
+    //marginLeft: -100,
+    //flex: 1,
+
+    flexDirection: "row",
+    //width: "100%",
+    height: 35,
+    backgroundColor: "rgb(12,57,98)",
+    alignItems: "center",
+    justifyContent: "space-around"
+    //#373738
+  },
+  tabNavTitle: {},
+  mainBackGround: {
+    flex: 1,
+    alignSelf: "stretch",
+    resizeMode: "cover"
+    // width: null,
+    // height: null
+  }
+});
 
 
-  const mapStateToProps = (state: types.GlobalState) => {
-    return {
-      surveys: state.Surveys
-    };
+const mapStateToProps = (state: types.GlobalState) => {
+  return {
+    surveys: state.Surveys
   };
-  
-  const mapDispatchToProps = (dispatch: Dispatch) => ({
-    updateSurveys: (surveys: types.Survey[]) => {
-      dispatch(actions.updateSurveys(surveys));
-    }
-  });
-  
-  export default connect<{}, {}, ReduxProps>(
-    mapStateToProps,
-    mapDispatchToProps
-  )(Question);
+};
+
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  updateSurveys: (surveys: types.Survey[]) => {
+    dispatch(actions.updateSurveys(surveys));
+  }
+});
+
+export default connect<{}, {}, ReduxProps>(
+  mapStateToProps,
+  mapDispatchToProps
+)(Question);
 
