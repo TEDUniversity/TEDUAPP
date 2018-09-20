@@ -362,15 +362,19 @@ class Survey extends Component<IProp & ReduxProps> {
   renderQuestions = () => {
     //console.log(this.props.navigation.state.params.surveyData)
     return this.props.navigation.state.params.surveyData.questions.map(
-      (item, id) => (
-        <Question
-          question={item}
-          questionIndex={id}
-          surveyIndex={this.props.navigation.state.params.index}
-          key={id}
-          type={item.type}
-        />
-      )
+      (item, id) => {
+        console.log(item)
+        if (item.valid) {
+          return (<Question
+            question={item}
+            questionIndex={id}
+            surveyIndex={this.props.navigation.state.params.index}
+            key={id}
+            type={item.type}
+          />);
+        }
+
+      }
     );
   };
 
@@ -427,7 +431,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "flex-end",
     alignItems: "center",
-    marginRight: "5%"
+    marginRight: "5%",
+    marginTop: "3%"
   },
   button: {
     borderWidth: 0.5,

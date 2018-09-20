@@ -108,11 +108,11 @@ class TextAnswer extends Component<IProp & ReduxProps> {
                             return (
 
                                           <TextInput
-                                                        style={{height: 100}}
+                                                        style={{height: 50}}
                                                         editable={true}
-                                                        maxLength={280}
+                                                        maxLength={500}
                                                         multiline={true}
-                                                        numberOfLines={4}
+                                                        numberOfLines={5}
                                                         onChangeText={(text) => {this.setState({textAnswer: text }, this.onWrite )}}
                                                         placeholder={"Type here..."}
                                           />

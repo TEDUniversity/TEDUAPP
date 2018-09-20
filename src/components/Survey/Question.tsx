@@ -115,10 +115,12 @@ class Question extends Component<IProp & ReduxProps> {
     survey.map((item) => {
       if (item.id === this.props.surveyIndex) {
 
-        if(item.questions[this.props.questionIndex].type === 0){         
+        if (item.questions[this.props.questionIndex].type === 0) {
           item.questions[this.props.questionIndex].currentPressedAnswers = this.state.chosenIndex;
 
-        }else if (item.questions[this.props.questionIndex].type === 0){
+        } else if (item.questions[this.props.questionIndex].type === 1) {
+          //console.log(item.questions[this.props.questionIndex])
+          //console.log(item.questions[this.props.questionIndex].answers[0])
           item.questions[this.props.questionIndex].answers[0].text = this.state.textAnswer;
         }
       }
@@ -129,28 +131,44 @@ class Question extends Component<IProp & ReduxProps> {
 
   renderAnswers = () => {
     if (this.props.type === 0) {
-      return this.props.question.answers.map((item, id) => (
-        <Answer
-          index={id}
-          answer={item}
-          key={id}
-          getAnswer={this.setAnswersSingle}
-          isChosen={this.state.chosenIndex === id}
-        //unClickAnswer={ this.state.prevAnswers }
-        />
-      ));
+      return (
+        <View style={styles.multipleAnswer}>
+          {this.renderMultipleAnswer()}
+        </View>
+      );
     } else if (this.props.type == 1) {
-      return (<TextAnswer
-        getAnswer={this.setAnswersText}
-      //unClickAnswer={ this.state.prevAnswers }
-      />);
-      
+      return (
+        <View style={styles.textAnswer}>
+          {this.renderTextAnswer()}
+        </View>
+      );
+
     }
 
   }
 
+  renderTextAnswer = () => {
+    return (<TextAnswer
+      getAnswer={this.setAnswersText}
+    />);
+  }
+
+  renderMultipleAnswer = () => {
+    return this.props.question.answers.map((item, id) => (
+      <Answer
+        index={id}
+        answer={item}
+        key={id}
+        getAnswer={this.setAnswersSingle}
+        isChosen={this.state.chosenIndex === id}
+      //unClickAnswer={ this.state.prevAnswers }
+      />
+    ));
+  }
+
+
   render() {
-    console.log(this.props.type)
+    //console.log(this.props.type)
     //console.log(this.props.question);
     return (
       <View style={styles.questionContainer}>
@@ -159,9 +177,7 @@ class Question extends Component<IProp & ReduxProps> {
             {this.props.question.question}
           </Text>
         </View>
-        <View style={styles.answers}>
-          {this.renderAnswers()}
-        </View>
+        {this.renderAnswers()}
       </View>
     );
   }
@@ -174,9 +190,10 @@ const styles = StyleSheet.create({
     marginTop: "1%"
   },
   questionContainer: {
-    //justifyContent: "center"
+    //justifyContent: "center",
+    marginTop: 7,
   },
-  answers: {
+  multipleAnswer: {
     flexDirection: "row",
     justifyContent: "space-around",
     borderWidth: 1,
@@ -184,6 +201,14 @@ const styles = StyleSheet.create({
     padding: 5,
     margin: 5,
 
+  },
+  textAnswer: {
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    borderWidth: 1,
+    borderRadius: 5,
+    padding: 5,
+    margin: 5,
   },
   answerButton: {
     borderWidth: 0.5,
