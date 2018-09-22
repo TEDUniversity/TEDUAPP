@@ -177,11 +177,7 @@ class Council extends Component<IProp & ReduxProps> {
                 "Are you sure to log out?",
                 [
                   {
-<<<<<<< HEAD
-                    text: "Hayır",
-=======
                     text: "No",
->>>>>>> v2.0.2-fixes
                     onPress: () => { }
                   },
                   {
@@ -358,7 +354,7 @@ class Council extends Component<IProp & ReduxProps> {
         )}
         overlayColor="#006AB3"
         maxOverlayOpacity={1}
-        bounces={true}
+        bounces={false}
         showsVerticalScrollIndicator={false}
         scrollViewBackgroundColor="rgb(231,231,232)"
         fadeOutForeground={true}

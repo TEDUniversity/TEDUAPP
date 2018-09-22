@@ -472,68 +472,69 @@ class News extends Component<IProp & ReduxProps> {
     if (this.state.loading) {
       return <Spinner size={"large"} />;
     } else {
-    //   return <Spinner size={"large"} />;
-    // } else {
-    return (
-      <HeaderImageScrollView
-        refreshControl={
-          Platform.select({
-            android: (<RefreshControl
-              refreshing={this.state.loading}
-              onRefresh={this._onRefresh}
-            />)
-          })
-              
-        }
-        maxHeight={this.state.MAX_HEIGHT}
-        minHeight={MIN_HEIGHT}
-        renderHeader={() => (
-          <View
-            style={{
-              backgroundColor: "rgb(15, 108, 177)",
-              height: Platform.OS === "ios" ? 50 : 135
-            }}
-          >
-            <Image
-              resizeMode="stretch"
-              width={Dimensions.get("window").width}
-              style={[StyleSheet.absoluteFill, { marginTop: headerMarginTop }]}
-              source={require("../../img/header/anatepe2.png")}
-            />
-          </View>
-        )}
-        overlayColor="#006AB3"
-        maxOverlayOpacity={1}
-        bounces={true}
-        showsVerticalScrollIndicator={false}
-      >
-        <View>
-          <ImageBackground
-            source={require("../../img/background/BACKGROUND.png")}
-            style={styles.mainBackGround}
-          >
-            <View style={{ marginBottom: deviceWidth / 7.5 }}>
-              <HorizontalList
-                Data={this.renderDataDuyurular}
-                title={"Announcements"}
-                style={{ marginTop: this.state.horizontalMarginTop }}
-              />
-              <HorizontalList
-                Data={this.renderDataEtkinlikler}
-                title={"Events"}
-                style={{ marginTop: this.state.horizontalMarginTop }}
-              />
-              <HorizontalList
-                Data={this.renderDataHaberler}
-                title={"News"}
-                style={{ marginTop: this.state.horizontalMarginTop }}
+      //   return <Spinner size={"large"} />;
+      // } else {
+      return (
+        <HeaderImageScrollView
+          refreshControl={
+            Platform.select({
+              android: (<RefreshControl
+                refreshing={this.state.loading}
+                onRefresh={this._onRefresh}
+              />)
+            })
+
+          }
+          maxHeight={this.state.MAX_HEIGHT}
+          minHeight={MIN_HEIGHT}
+          renderHeader={() => (
+            <View
+              style={{
+                backgroundColor: "rgb(15, 108, 177)",
+                height: Platform.OS === "ios" ? 50 : 135
+              }}
+            >
+              <Image
+                resizeMode="stretch"
+                width={Dimensions.get("window").width}
+                style={[StyleSheet.absoluteFill, { marginTop: headerMarginTop }]}
+                source={require("../../img/header/anatepe2.png")}
               />
             </View>
-          </ImageBackground>
-        </View>
-      </HeaderImageScrollView>
-    );
-    // }
+          )}
+          overlayColor="#006AB3"
+          maxOverlayOpacity={1}
+          bounces={false}
+          showsVerticalScrollIndicator={false}
+        >
+          <View>
+            <ImageBackground
+              source={require("../../img/background/BACKGROUND.png")}
+              style={styles.mainBackGround}
+            >
+              <View style={{ marginBottom: deviceWidth / 7.5 }}>
+                <HorizontalList
+                  Data={this.renderDataDuyurular}
+                  title={"Announcements"}
+                  style={{ marginTop: this.state.horizontalMarginTop }}
+                />
+                <HorizontalList
+                  Data={this.renderDataEtkinlikler}
+                  title={"Events"}
+                  style={{ marginTop: this.state.horizontalMarginTop }}
+                />
+                <HorizontalList
+                  Data={this.renderDataHaberler}
+                  title={"News"}
+                  style={{ marginTop: this.state.horizontalMarginTop }}
+                />
+              </View>
+            </ImageBackground>
+          </View>
+        </HeaderImageScrollView>
+      );
+      // }
+    }
   }
 }
 

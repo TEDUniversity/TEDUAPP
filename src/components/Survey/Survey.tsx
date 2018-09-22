@@ -43,6 +43,8 @@ interface IProp {
   navigation: any;
 }
 
+let deviceWidth = Dimensions.get("window").width
+
 class Survey extends Component<IProp & ReduxProps> {
   state = {
     answers: [],
@@ -57,7 +59,7 @@ class Survey extends Component<IProp & ReduxProps> {
       </Text>
     ),
     //title: "Webview",
-    headerStyle: { marginTop: 0, backgroundColor: "#144d8c", height: 35 },
+    headerStyle: { marginTop: 0, backgroundColor: "#144d8c", height: deviceWidth / 10.7 },
     headerLeft: (
       <TouchableOpacity
         style={styles.headerLeftContainer}
@@ -65,7 +67,7 @@ class Survey extends Component<IProp & ReduxProps> {
           navigation.navigate("MainRouter", { showAlert: false });
         }}
       >
-        <Icon name="ios-arrow-back" size={30} />
+        <Icon name="ios-arrow-back" size={deviceWidth / 12.5} />
         <Text style={styles.headerLeftText}>
           {navigation.state.params.backButton}
         </Text>
@@ -254,7 +256,7 @@ class Survey extends Component<IProp & ReduxProps> {
                 //surveys[this.props.navigation.state.params.index].questions[id].currentPressedAnswers = pressedAnswer;
                 this.props.updateSurveys(surveys);
               } else if (question.type === 1) {
-                const typedAnswer = question.answers[0].text;
+                const typedAnswer = question.answers[0].text; // firebase database must be structured accordingly
                 givenAnswers.push(typedAnswer);
 
                 const url =
@@ -390,7 +392,9 @@ class Survey extends Component<IProp & ReduxProps> {
         }}
       >
         <View style={styles.container}>
+
           {this.renderQuestions()}
+
           <View style={styles.buttonView}>
             <TouchableOpacity
               style={styles.button}
@@ -402,6 +406,7 @@ class Survey extends Component<IProp & ReduxProps> {
               <Text>SUBMIT</Text>
             </TouchableOpacity>
           </View>
+
         </View>
       </ImageBackground>
     );
@@ -410,7 +415,7 @@ class Survey extends Component<IProp & ReduxProps> {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: "3%"
+    marginTop: "3%",
   },
   headerTitle: {
     fontWeight: "bold"
@@ -419,12 +424,12 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    marginLeft: 3
+    marginLeft: deviceWidth / 125,
   },
   headerLeftText: {
     alignItems: "center",
     justifyContent: "center",
-    fontSize: 15,
+    fontSize: deviceWidth / 25,
     fontWeight: "400"
   },
   buttonView: {
@@ -432,12 +437,12 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
     alignItems: "center",
     marginRight: "5%",
-    marginTop: "3%"
+    marginTop: "5%"
   },
   button: {
     borderWidth: 0.5,
     borderRadius: 5,
-    padding: 5
+    padding: deviceWidth / 75,
   }
 });
 
