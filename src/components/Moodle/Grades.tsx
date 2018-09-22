@@ -29,6 +29,8 @@ interface IProp {
 interface ReduxProps {
   user: types.User;
 }
+
+let deviceWidth = Dimensions.get("window").width
 var DomParser = require("react-native-html-parser").DOMParser;
 
 class Grades extends Component<IProp & ReduxProps> {
@@ -90,33 +92,49 @@ class Grades extends Component<IProp & ReduxProps> {
           }
 
           return (
-            <View key={Id} style={{ marginBottom: 10 }}>
-              <View key={Id} style={styles.subContainer}>
-                <View style={styles.textContainer}>
-                  <Text style={styles.txt}>{str}</Text>
-                </View>
+            <ScrollView style={styles.container}>
 
-                <View style={styles.textContainer}>
-                  <Text style={styles.txt}> {percentage} </Text>
-                </View>
+              <View key={Id} style={{ marginBottom: 10 }}>
+                <View key={Id} style={styles.subContainer}>
+                  <View style={styles.textContainer}>
+                    <Text style={styles.txt}>{str}</Text>
+                  </View>
 
-                <View style={styles.textContainer}>
-                  <Text style={styles.txt}>{grade}</Text>
+                  <View style={styles.textContainer}>
+                    <Text style={styles.txt}> {percentage} </Text>
+                  </View>
+
+                  <View style={styles.textContainer}>
+                    <Text style={styles.txt}>{grade}</Text>
+                  </View>
                 </View>
+                <View
+                  style={{
+                    backgroundColor: "black",
+                    height: 1,
+                    width: Dimensions.get("window").width
+                  }}
+                />
               </View>
-              <View
-                style={{
-                  backgroundColor: "black",
-                  height: 1,
-                  width: Dimensions.get("window").width
-                }}
-              />
-            </View>
+            </ScrollView>
+
           );
         }
       );
     } else {
-      return <View />;
+      return (<View
+        style={{
+          flex: 1,
+          alignItems: "center",
+          justifyContent: "center",
+          marginLeft: "2%",
+          marginRight: "2%"
+        }}
+      >
+        <Text style={{ fontWeight: "400", fontSize: deviceWidth / 18.75 }}>
+          There is no grade entered for this course on moodle.
+        </Text>
+      </View>);
     }
   };
   render() {
@@ -128,9 +146,7 @@ class Grades extends Component<IProp & ReduxProps> {
           source={require("../../../img/background/BACKGROUND.png")}
           style={styles.mainBackGround}
         >
-          <ScrollView style={styles.container}>
-            {this.renderSection()}
-          </ScrollView>
+          {this.renderSection()}
         </ImageBackground>
       );
     }

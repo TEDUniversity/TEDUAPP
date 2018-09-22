@@ -178,7 +178,7 @@ class Council extends Component<IProp & ReduxProps> {
                 [
                   {
                     text: "No",
-                    onPress: () => {}
+                    onPress: () => { }
                   },
                   {
                     text: "Yes",
@@ -328,10 +328,12 @@ class Council extends Component<IProp & ReduxProps> {
     return (
       <HeaderImageScrollView
         refreshControl={
-          <RefreshControl
-            refreshing={this.state.loading}
-            onRefresh={this._onRefresh}
-          />
+          Platform.select({
+            android: (<RefreshControl
+              refreshing={this.state.loading}
+              onRefresh={this._onRefresh}
+            />)
+          })
         }
         maxHeight={this.state.MAX_HEIGHT}
         minHeight={MIN_HEIGHT}
@@ -352,7 +354,7 @@ class Council extends Component<IProp & ReduxProps> {
         )}
         overlayColor="#006AB3"
         maxOverlayOpacity={1}
-        bounces={false}
+        bounces={true}
         showsVerticalScrollIndicator={false}
         scrollViewBackgroundColor="rgb(231,231,232)"
         fadeOutForeground={true}

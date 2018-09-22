@@ -241,7 +241,7 @@ class Moodle extends Component<IProp & ReduxProps> {
               [
                 {
                   text: "No",
-                  onPress: () => {}
+                  onPress: () => { }
                 },
                 {
                   text: "Yes",
@@ -304,10 +304,12 @@ class Moodle extends Component<IProp & ReduxProps> {
         maxHeight={this.state.MAX_HEIGHT}
         minHeight={MIN_HEIGHT}
         refreshControl={
-          <RefreshControl
-            refreshing={this.state.isLoading}
-            onRefresh={this._onRefresh}
-          />
+          Platform.select({
+            android: (<RefreshControl
+              refreshing={this.state.isLoading}
+              onRefresh={this._onRefresh}
+            />)
+          })
         }
         renderHeader={() => (
           <View

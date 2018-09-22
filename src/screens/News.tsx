@@ -132,7 +132,7 @@ class News extends Component<IProp & ReduxProps> {
       showAlert: false
     });
   };
-  componentDidMount() {}
+  componentDidMount() { }
   componentWillUnmount() {
     this._isMounted = false;
   }
@@ -475,10 +475,13 @@ class News extends Component<IProp & ReduxProps> {
     return (
       <HeaderImageScrollView
         refreshControl={
-          <RefreshControl
-            refreshing={this.state.loading}
-            onRefresh={this._onRefresh}
-          />
+          Platform.select({
+            android: (<RefreshControl
+              refreshing={this.state.loading}
+              onRefresh={this._onRefresh}
+            />)
+          })
+              
         }
         maxHeight={this.state.MAX_HEIGHT}
         minHeight={MIN_HEIGHT}
@@ -499,7 +502,7 @@ class News extends Component<IProp & ReduxProps> {
         )}
         overlayColor="#006AB3"
         maxOverlayOpacity={1}
-        bounces={false}
+        bounces={true}
         showsVerticalScrollIndicator={false}
       >
         <View>
