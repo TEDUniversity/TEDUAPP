@@ -29,6 +29,7 @@ interface IProp {
 interface ReduxProps {
   user: types.User;
 }
+let deviceWidth = Dimensions.get("window").width
 
 class Forum extends Component<IProp & ReduxProps> {
   state = {
@@ -147,32 +148,54 @@ class Forum extends Component<IProp & ReduxProps> {
   };
 
   renderSection = (toBeMapped: any) => {
-    return toBeMapped.map((data, Id) => (
-      <View key={Id} style={styles.subContainer}>
-        <View
-          style={{
-            flex: 1,
-            flexDirection: "column",
-            justifyContent: "space-between"
-          }}
-        >
-          <Text style={{ fontSize: 20, fontWeight: "bold", margin: 5 }}>
-            {data["name"]}
-          </Text>
-          <View
+    console.log(toBeMapped)
+    if (toBeMapped != "") {
+      return toBeMapped.map((data, Id) => (
+        <ScrollView style={styles.container}>
+          <View key={Id} style={styles.subContainer}>
+            <View
+              style={{
+                flex: 1,
+                flexDirection: "column",
+                justifyContent: "space-between"
+              }}
+            >
+              <Text style={{ fontSize: 20, fontWeight: "bold", margin: 5 }}>
+                {data["name"]}
+              </Text>
+              <View
                 style={{
                   backgroundColor: "black",
                   height: 1,
                   width: Dimensions.get("window").width - 10
                 }}
               />
-          <Text style={{ fontSize: 17, fontStyle: "italic", margin: 5 }}>
-            {data["userfullname"]}
-          </Text>
-          <Text style={{ margin: 5 }}>{strip(data["message"])}</Text>
+              <Text style={{ fontSize: 17, fontStyle: "italic", margin: 5 }}>
+                {data["userfullname"]}
+              </Text>
+              <Text style={{ margin: 5 }}>{strip(data["message"])}</Text>
+            </View>
+          </View>
+        </ScrollView>
+      ));
+    } else {
+      return (
+        <View
+          style={{
+            flex: 1,
+            alignItems: "center",
+            justifyContent: "center",
+            marginLeft: "2%",
+            marginRight: "2%"
+          }}
+        >
+          <Text style={{ fontWeight: "400", fontSize: deviceWidth / 18.75 }}>
+            There is no data entered for this course on moodle.
+        </Text>
         </View>
-      </View>
-    ));
+      );
+    }
+
   };
   render() {
     if (this.state.isLoading) {
@@ -183,9 +206,7 @@ class Forum extends Component<IProp & ReduxProps> {
           source={require("../../../img/background/BACKGROUND.png")}
           style={styles.mainBackGround}
         >
-          <ScrollView style={styles.container}>
-            {this.renderSection(this.state.jsonToBeParsed["discussions"])}
-          </ScrollView>
+          {this.renderSection(this.state.jsonToBeParsed["discussions"])}
         </ImageBackground>
       );
     }

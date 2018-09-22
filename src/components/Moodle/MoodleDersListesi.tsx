@@ -13,7 +13,8 @@ import {
   StyleSheet,
   Dimensions,
   ScrollView,
-  TouchableOpacity
+  TouchableOpacity,
+  Alert
 } from "react-native";
 
 interface IProps {
@@ -62,17 +63,67 @@ class MoodleDersListesi extends Component<IProps> {
             </View>
           </TouchableOpacity>
         ) : (
-          <View key={Id} />
-        )
+            <View key={Id}>
+              <TouchableOpacity
+                style={styles.button}
+                key={Id}
+                onPress={() => {
+                  Alert.alert(
+                    "Warning",
+                    "You do not have permission to see this class"
+                  );
+                }}
+              >
+                <View style={styles.subContainer}>
+                  <Text
+                    style={{
+                      margin: deviceWidth / 75,
+                      marginBottom: 0,
+                      fontSize: deviceWidth / 18.75,
+                      color: "black"
+                    }}
+                  >
+                    {responseData["fullname"]}
+                  </Text>
+                  <Text
+                    style={{
+                      fontSize: deviceWidth / 25,
+                      margin: deviceWidth / 75
+                    }}
+                  >
+                    {"Not visible class"}
+                  </Text>
+                </View>
+              </TouchableOpacity>
+            </View>
+          )
     );
   };
 
-  componentDidMount() {}
-  componentWillReceiveProps(next: IProps) {}
+  componentDidMount() { }
+  componentWillReceiveProps(next: IProps) { }
   render() {
-    return (
-      <ScrollView style={styles.container}>{this.renderAClass()}</ScrollView>
-    );
+    if (this.props.dersler.length !== 0) {
+      return (
+        <ScrollView style={styles.container}>{this.renderAClass()}</ScrollView>
+      );
+    } else {
+      return (
+        <View
+          style={{
+            flex: 1,
+            alignItems: "center",
+            justifyContent: "center",
+            marginLeft: "2%",
+            marginRight: "2%"
+          }}
+        >
+          <Text style={{ fontWeight: "500", fontSize: deviceWidth / 18.75 }}>
+            You do not have any classes on Moodle
+          </Text>
+        </View>
+      );
+    }
   }
 }
 

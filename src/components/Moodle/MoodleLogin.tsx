@@ -37,9 +37,7 @@ class MoodleLogin extends Component<IProp> {
     return (
       <View style={[{ padding: 10 }, this.props.style]}>
         <View>
-          <Text style={[styles.text, { marginBottom: 5 }]}>
-            Kullanıcı adı:{" "}
-          </Text>
+          <Text style={[styles.text, { marginBottom: 5 }]}>Username: </Text>
           <TextInput
             style={{
               height: 50,
@@ -49,14 +47,14 @@ class MoodleLogin extends Component<IProp> {
               borderWidth: 1,
               color: "black"
             }}
-            placeholder="Kullanıcı adı"
+            placeholder="Username"
             placeholderTextColor="gray"
             onChangeText={kullaniciAdi => this.setState({ kullaniciAdi })}
           />
         </View>
 
         <View style={{ marginTop: 10 }}>
-          <Text style={[styles.text, { marginBottom: 5 }]}>Şifre: </Text>
+          <Text style={[styles.text, { marginBottom: 5 }]}>Password: </Text>
           <TextInput
             secureTextEntry={true}
             style={{
@@ -68,7 +66,7 @@ class MoodleLogin extends Component<IProp> {
               color: "black"
             }}
             placeholderTextColor="gray"
-            placeholder="Şifre"
+            placeholder="Password"
             onChangeText={sifre => this.setState({ sifre })}
           />
         </View>
@@ -88,14 +86,14 @@ class MoodleLogin extends Component<IProp> {
               backgroundColor: "rgb(15, 108, 177)"
             }}
           >
-            <Text style={{ color: "white" }}>GİRİŞ</Text>
+            <Text style={{ color: "white" }}>LOG IN</Text>
           </TouchableHighlight>
         </View>
         <TouchableHighlight
           onPress={() => {
             Alert.alert(
-              "Giriş yapmak için",
-              'Kullanıcı adınız sonunda "@tedu.edu.tr" olmadan mail kullanıcı adı(adınız.soyadınız), şifreniz mail şifrenizdir.'
+              "How to login?",
+              "Username is your name.surname (tedu mail address without @tedu.edu.tr), Password is tedu mail password"
             );
           }}
           style={{
@@ -103,9 +101,7 @@ class MoodleLogin extends Component<IProp> {
             justifyContent: "center"
           }}
         >
-          <Text style={{ color: "rgb(15, 108, 177)" }}>
-            Nasıl giriş yaparım?
-          </Text>
+          <Text style={{ color: "rgb(15, 108, 177)" }}>How to login?</Text>
         </TouchableHighlight>
       </View>
     );

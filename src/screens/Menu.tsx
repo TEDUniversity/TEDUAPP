@@ -33,7 +33,7 @@ const MIN_HEIGHT = (Header as any).height;
 
 class Menu extends Component<IProp> {
   static navigationOptions = {
-    title: "Menü",
+    title: "Menu",
     headerStyle: { marginTop: 0, backgroundColor: "#fff" },
     headerLeft: null,
     gesturesEnabled: false,
@@ -180,7 +180,7 @@ class Menu extends Component<IProp> {
                     url:
                       "https://my.tedu.edu.tr/sap/bc/ui5_ui5/ui2/ushell/shells/abap/FioriLaunchpad.html?sap-client=001&sap-language=TR",
                     title: "TEDU Portal",
-                    backButton: "Menü"
+                    backButton: "Menu"
                   });
                 }}
               >
@@ -200,7 +200,7 @@ class Menu extends Component<IProp> {
                   this.props.navigation.navigate("WebviewRouter", {
                     url: "https://issuu.com/tedukultursanat/docs",
                     title: "Karafanzin",
-                    backButton: "Menü"
+                    backButton: "Menu"
                   });
                 }}
               >
@@ -220,7 +220,7 @@ class Menu extends Component<IProp> {
                   this.props.navigation.navigate("WebviewRouter", {
                     url: "https://www.tedu.edu.tr/tr/main/akademik-takvim",
                     title: "Academic Calendar",
-                    backButton: "Menü"
+                    backButton: "Menu"
                   });
                 }}
               >
@@ -230,7 +230,7 @@ class Menu extends Component<IProp> {
                     { backgroundColor: "rgb(35,49,126)" }
                   ]}
                 >
-                  <Text style={styles.menuText}>Akademik Takvim</Text>
+                  <Text style={styles.menuText}>Academic Calendar</Text>
                 </View>
               </TouchableOpacity>
 
@@ -240,7 +240,7 @@ class Menu extends Component<IProp> {
                   this.props.navigation.navigate("WebviewRouter", {
                     url: "http://www.radiotedu.com",
                     title: "Listen radio tedu",
-                    backButton: "Menü"
+                    backButton: "Menu"
                   });
                 }}
               >
@@ -261,7 +261,7 @@ class Menu extends Component<IProp> {
                   this.props.navigation.navigate("CreditsRouter", {
                     url: "http://www.radiotedu.com",
                     title: "Credits",
-                    backButton: "Menü"
+                    backButton: "Menu"
                   });
                 }}
               >

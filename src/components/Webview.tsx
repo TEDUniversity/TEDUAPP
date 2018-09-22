@@ -70,8 +70,8 @@ class Webview extends React.Component<IProp> {
 
   loadError = () => {
     Alert.alert(
-      "Ağ hatası",
-      "Sayfayı görüntülemek için lütfen internet bağlantınızı kontrol ediniz.",
+      "Network error",
+      "Please check your network",
       [
         {
           text: "OK",
@@ -179,8 +179,8 @@ class Webview extends React.Component<IProp> {
                     .catch(error => {
                       console.log(error);
                       Alert.alert(
-                        "Hata",
-                        "Bir hata oluştu: lütfen bir office programı indirin!"
+                        "Error",
+                        "Please download an office application!"
                       );
                     });
                 })

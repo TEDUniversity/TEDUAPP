@@ -15,7 +15,8 @@ import {
   ImageBackground,
   TouchableOpacity,
   Alert,
-  Platform
+  Platform,
+  RefreshControl
 } from "react-native";
 import Image from "react-native-scalable-image";
 import TabNavigator from "react-native-tab-navigator";
@@ -70,13 +71,15 @@ class Council extends Component<IProp & ReduxProps> {
   };
   //
   state = {
+    loading: false,
     selectedTab: "News",
     MAX_HEIGHT: 0,
     dataDuyurular: [],
     dataHaberler: [],
     dataEtkinlikler: [],
     token: "",
-    scrollHeight: Dimensions.get("window").height
+    scrollHeight: Dimensions.get("window").height,
+    reloadNumber: 0
   };
 
   renderDataDuyurular = () => {
@@ -93,6 +96,16 @@ class Council extends Component<IProp & ReduxProps> {
     return this.state.dataEtkinlikler.map((responseData, Id) => (
       <DetailNews key={Id} data={responseData} imgsrc={"mavi"} />
     ));
+  };
+
+  _onRefresh = () => {
+    this.setState({ loading: true });
+    this.setState({ reloadNumber: this.state.reloadNumber + 1 }, () => {
+      this.setState({ loading: false });
+    });
+    // setTimeout(() => {
+    //   this.setState({ loading: false });
+    // }, 500);
   };
 
   componentWillMount() {
@@ -136,9 +149,19 @@ class Council extends Component<IProp & ReduxProps> {
 
   renderBody = () => {
     if (this.state.selectedTab === "News") {
-      return <CouncilNews navigation={this.props.navigation} />;
+      return (
+        <CouncilNews
+          key={this.state.reloadNumber}
+          navigation={this.props.navigation}
+        />
+      );
     } else if (this.state.selectedTab === "Votings") {
-      return <CouncilVotings navigation={this.props.navigation} />;
+      return (
+        <CouncilVotings
+          key={this.state.reloadNumber}
+          navigation={this.props.navigation}
+        />
+      );
     }
   };
 
@@ -150,15 +173,19 @@ class Council extends Component<IProp & ReduxProps> {
           <TouchableOpacity
             onPress={() => {
               Alert.alert(
-                "Emin Misin?",
-                "Çıkış yapmak istediğine emin misin?.",
+                "Are you sure?",
+                "Are you sure to log out?",
                 [
                   {
+<<<<<<< HEAD
                     text: "Hayır",
+=======
+                    text: "No",
+>>>>>>> v2.0.2-fixes
                     onPress: () => { }
                   },
                   {
-                    text: "Evet",
+                    text: "Yes",
                     onPress: () => this.props.updateIsMoodleLoggedIn(false)
                   }
                 ],
@@ -181,7 +208,7 @@ class Council extends Component<IProp & ReduxProps> {
           >
             <TabNavigator.Item
               selected={this.state.selectedTab === "News"}
-              title="Konsey Haberleri"
+              title="Council News"
               //renderIcon={() => <Image source={require("./img/moodle/m3.png")} />}
               //badgeText="+1"
               onPress={() => {
@@ -194,7 +221,7 @@ class Council extends Component<IProp & ReduxProps> {
             </TabNavigator.Item>
             <TabNavigator.Item
               selected={this.state.selectedTab === "Votings"}
-              title="Anketler"
+              title="Surveys"
               //renderIcon={() => <Image source={require("./img/menu/me3.png")} />}
               onPress={() => {
                 this.setState({ selectedTab: "Votings" });
@@ -255,7 +282,7 @@ class Council extends Component<IProp & ReduxProps> {
       //Call a function when the state changes.
       if (http.readyState == 4 && http.status == 200) {
         if (!JSON.parse(http.responseText).token) {
-          Alert.alert("Hata", "Kullanıcı adı veya şifre yanlış!");
+          Alert.alert("Error", "Username or password is incorrect!");
         } else {
           this.setState({ token: JSON.parse(http.responseText).token });
           this.getUserInfo();
@@ -304,6 +331,14 @@ class Council extends Component<IProp & ReduxProps> {
     }
     return (
       <HeaderImageScrollView
+        refreshControl={
+          Platform.select({
+            android: (<RefreshControl
+              refreshing={this.state.loading}
+              onRefresh={this._onRefresh}
+            />)
+          })
+        }
         maxHeight={this.state.MAX_HEIGHT}
         minHeight={MIN_HEIGHT}
         renderHeader={() => (
@@ -323,7 +358,7 @@ class Council extends Component<IProp & ReduxProps> {
         )}
         overlayColor="#006AB3"
         maxOverlayOpacity={1}
-        bounces={false}
+        bounces={true}
         showsVerticalScrollIndicator={false}
         scrollViewBackgroundColor="rgb(231,231,232)"
         fadeOutForeground={true}
@@ -337,7 +372,7 @@ class Council extends Component<IProp & ReduxProps> {
               >
                 <TabNavigator.Item
                   selected={this.state.selectedTab === "News"}
-                  title="Konsey Haberleri"
+                  title="Council News"
                   //renderIcon={() => <Image source={require("./img/moodle/m3.png")} />}
                   //badgeText="+1"
                   onPress={() => {
@@ -350,7 +385,7 @@ class Council extends Component<IProp & ReduxProps> {
                 </TabNavigator.Item>
                 <TabNavigator.Item
                   selected={this.state.selectedTab === "Votings"}
-                  title="Anketler"
+                  title="Surveys"
                   //renderIcon={() => <Image source={require("./img/menu/me3.png")} />}
                   onPress={() => {
                     this.setState({ selectedTab: "Votings" });
