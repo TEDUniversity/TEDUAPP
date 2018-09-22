@@ -469,7 +469,7 @@ class News extends Component<IProp & ReduxProps> {
       //aditional 9 pixel margintop for header image to make clock visible
       headerMarginTop = Platform.OS === "ios" ? 9 : 0;
     }
-    if (this.state.loading) {
+    if (this.state.loading && Platform.OS === "ios") {
       return <Spinner size={"large"} />;
     } else {
       //   return <Spinner size={"large"} />;
