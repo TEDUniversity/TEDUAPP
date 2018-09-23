@@ -202,7 +202,7 @@ class Webview extends React.Component<IProp> {
             flexDirection: "row",
             justifyContent: "space-between",
             alignItems: "center",
-            height: 45,
+            height: deviceWidth / 8.333,
             backgroundColor: "rgb(24, 79, 138)"
           }}
         >

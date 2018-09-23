@@ -116,7 +116,7 @@ class CouncilNews extends Component<IProps & ReduxProps> {
   };
 
   whenLoaded = () => {
-    //console.log(this.props.councilNews)
+    console.log(this.props.councilNews)
 
     let duyuru = [],
       haber = [],

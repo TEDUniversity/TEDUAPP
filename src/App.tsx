@@ -52,7 +52,8 @@ export default class App extends Component<any> {
     super(prop);
     var config = {
       databaseURL: "https://teduapp-210c9.firebaseio.com",
-      projectId: "teduapp-210c9"
+      projectId: "teduapp-210c9",
+      storageBucket: "teduapp-210c9.appspot.com"
     };
     if (!firebase.apps.length) {
       firebase.initializeApp(config);
@@ -92,8 +93,7 @@ export default class App extends Component<any> {
       .onNotification((notification: any) => {
         notification.android.setChannelId("daily");
         if (Platform.OS === 'ios') {
-          notification
-            .ios.setBadge(10);
+          //notification.ios.setBadge(1);
         }
         notification.android.setSmallIcon("@drawable/ic_stat_tedu");
         // Process your notification as required
@@ -178,7 +178,7 @@ const RootStack = createStackNavigator(
           backgroundColor: "#144d8c",
           height: deviceWidth / 12.5
         },
-        title: "Moodle"
+        title: Platform.OS === "ios" ? "Moodle" : ""
       }
     }
   },

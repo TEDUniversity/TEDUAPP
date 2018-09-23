@@ -34,6 +34,7 @@ class DetailCouncilNews extends Component<IProps> {
               content: this.props.data.content,
               author: this.props.data.author,
               date: this.props.data.date,
+              image: this.props.data.image
             });
             //console.log(this.props.data);
           }}
@@ -59,7 +60,7 @@ class DetailCouncilNews extends Component<IProps> {
               content: this.props.data.content,
               author: this.props.data.author,
               date: this.props.data.date,
-
+              image: this.props.data.image
             });
             //console.log(this.props.data);
           }}
@@ -85,6 +86,7 @@ class DetailCouncilNews extends Component<IProps> {
               content: this.props.data.content,
               author: this.props.data.author,
               date: this.props.data.date,
+              image: this.props.data.image
             });
             console.log("pressed");
           }}

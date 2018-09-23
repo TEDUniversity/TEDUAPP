@@ -16,7 +16,8 @@ import {
   TouchableOpacity,
   Alert,
   Platform,
-  RefreshControl
+  RefreshControl,
+  NetInfo
 } from "react-native";
 import Image from "react-native-scalable-image";
 import TabNavigator from "react-native-tab-navigator";
@@ -142,7 +143,7 @@ class Moodle extends Component<IProp & ReduxProps> {
   getDersler = () => {
     let url = "https://moodle.tedu.edu.tr/webservice/rest/server.php";
     var http = new XMLHttpRequest();
-    http.open("POST", url, true);
+    http.open("POST", url, true)
 
     //Send the proper header information along with the request
     http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");

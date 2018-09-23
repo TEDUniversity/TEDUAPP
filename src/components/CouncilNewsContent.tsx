@@ -2,15 +2,25 @@ import React, { Component } from "react";
 import {
   Text,
   View,
-  Image,
   Dimensions,
   TouchableOpacity,
   ImageBackground,
   StyleSheet,
-  ScrollView
+  ScrollView,
+  ActivityIndicator,
+  Alert,
+  Platform
 } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
+import firebase from "firebase";
+import Image from 'react-native-scalable-image';
 
+
+export const Spinner = ({ size }) => (
+  <View>
+    <ActivityIndicator size={size || "large"} />
+  </View>
+);
 
 interface IProps {
   imgsrc: string;
@@ -24,7 +34,7 @@ class CouncilNewsContent extends Component<IProps> {
   //   alert(JSON.stringify(props.data));
   static navigationOptions = ({ navigation }) => ({
     headerTitle: (
-      <Text style={styles.headerTitle}> News </Text>
+      <Text style={styles.headerTitle}> {Platform.OS === "ios" ? "News" : ""} </Text>
     ),
     headerStyle: { marginTop: 0, backgroundColor: "#144d8c", height: deviceWidth / 10.7 },
     headerLeft: (
@@ -42,11 +52,69 @@ class CouncilNewsContent extends Component<IProps> {
     )
   });
 
+  state= {
+    hasImage: false,
+  }
 
   componentWillMount() {
-    console.log(this.props.navigation.state.params.data);
+    if(this.props.navigation.state.params.image != ""){
+      this.setState({hasImage: true})
+    }
+
+
+    //console.log(this.props.navigation.state.params);
+    //var storage = firebase.storage();
+    //var storageRef = storage.ref("TedüOpening.jpeg");
+    //var storageRef = storage.refFromURL('gs://teduapp-210c9.appspot.com/TedüOpening.jpeg');
+    //var url = "/council/TedüOpening.jpeg";
+    console.log(this.props.navigation.state.params.image)
+
+    //var storageRef = storage.ref();
+    //console.log(storageRef.fullPath)
+    //console.log(storageRef.name)
+    //var imageName = this.props.navigation.state.params.image
+    //var starsRef = storageRef.child(imageName);
+
+    //storageRef.getDownloadURL().then(function(url) {
+    //  console.log(url)
+    //}).catch(function(error) {
+    // Handle any errors
+    //console.log(error)
+    //});
   }
   render() {
+    let image;
+    if(this.state.hasImage){
+      image = (
+        <View style={{ width: Dimensions.get("window").width }} >
+            <Image
+              width={Dimensions.get('window').width} // height will be calculated automatically
+              source={{ uri: this.props.navigation.state.params.image }}
+              onError={(error)=>{
+                console.log(error)
+                console.log("error")
+
+                Alert.alert(
+                  "Network error",
+                  "Check your network connection.",
+                  [
+                    {
+                      text: "OK",
+                      onPress: () => {
+                      }
+                    }
+                  ],
+                  { cancelable: false }
+                );
+              }}
+            />
+          </View>
+      )
+    }else{
+      image = (
+        <View />
+      )
+    }
 
     return <View style={{ flex: 1 }} >
       <ImageBackground
@@ -54,19 +122,22 @@ class CouncilNewsContent extends Component<IProps> {
         style={styles.mainBackGround}
       >
         <ScrollView>
+
+          {image}
+
           <Text style={{ margin: 10, fontSize: 15, fontWeight: "300", lineHeight: 20 }} >
             {this.props.navigation.state.params.content}
           </Text>
         </ScrollView>
-        <View style={{marginBottom: 7, marginTop: 5}} >
-        <View style={{ alignItems: "flex-end", marginRight: 13 }} >
-          <Text style={{}}> {this.props.navigation.state.params.author} </Text>
+        <View style={{ marginBottom: 7, marginTop: 5 }} >
+          <View style={{ alignItems: "flex-end", marginRight: 13 }} >
+            <Text style={{}}> {this.props.navigation.state.params.author} </Text>
+          </View>
+          <View style={{ alignItems: "flex-end", marginRight: 13, marginTop: 2 }} >
+            <Text style={{}}> {this.props.navigation.state.params.date} </Text>
+          </View>
         </View>
-        <View style={{ alignItems: "flex-end", marginRight: 13, marginTop: 2 }} >
-          <Text style={{}}> {this.props.navigation.state.params.date} </Text>
-        </View>
-        </View>
-        
+
       </ImageBackground>
     </View>;
   }
