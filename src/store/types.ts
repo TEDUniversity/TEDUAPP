@@ -18,6 +18,7 @@ export interface Question {
   question: string;
   answers: Answer[];
   currentPressedAnswers: number;
+  currentPressedAnswersMultiple: number[];
 }
 
 export interface Answer {

@@ -46,9 +46,10 @@ class Question extends Component<IProp & ReduxProps> {
   state = {
     answers: [],//not working this version
     prevAnswers: [],//not workind this versin
-    currentAnswer: "",//working in this verison
-    chosenIndex: -1,//working in this version
-    textAnswer: "", //working in this version. For free text answers
+    currentAnswer: "",// not working in this verison
+    chosenIndex: -1,//working in this version for single answered questions
+    textAnswer: "", //working in this version for free text answers
+    multipleAnswers: [] as number[] 
 
   };
 
@@ -107,6 +108,10 @@ class Question extends Component<IProp & ReduxProps> {
     this.setState({ textAnswer: text }, this.UpdateGlobalState);
   };
 
+  setAnswersMultiple = (index : number) => {
+    this.setState({multipleAnswers: this.state.multipleAnswers.push(index)}, this.UpdateGlobalState)
+  }
+
 
   UpdateGlobalState = () => {
     //console.log(this.props.surveyIndex)
@@ -122,6 +127,8 @@ class Question extends Component<IProp & ReduxProps> {
           //console.log(item.questions[this.props.questionIndex])
           //console.log(item.questions[this.props.questionIndex].answers[0])
           item.questions[this.props.questionIndex].answers[0].text = this.state.textAnswer;
+        } else if (item.questions[this.props.questionIndex].type === 2){
+          item.questions[this.props.questionIndex].currentPressedAnswersMultiple = this.state.multipleAnswers;
         }
       }
     })
@@ -133,7 +140,7 @@ class Question extends Component<IProp & ReduxProps> {
     if (this.props.type === 0) {
       return (
         <View style={styles.multipleAnswer}>
-          {this.renderMultipleAnswer()}
+          {this.renderSingleAnswer()}
         </View>
       );
     } else if (this.props.type == 1) {
@@ -142,7 +149,12 @@ class Question extends Component<IProp & ReduxProps> {
           {this.renderTextAnswer()}
         </View>
       );
-
+    } else if (this.props.type == 2) {
+      return (
+        <View style={styles.textAnswer}>
+          {this.renderMultipleAnswer()}
+        </View>
+      );
     }
 
   }
@@ -153,7 +165,7 @@ class Question extends Component<IProp & ReduxProps> {
     />);
   }
 
-  renderMultipleAnswer = () => {
+  renderSingleAnswer = () => {
     return this.props.question.answers.map((item, id) => (
       <Answer
         index={id}
@@ -161,6 +173,19 @@ class Question extends Component<IProp & ReduxProps> {
         key={id}
         getAnswer={this.setAnswersSingle}
         isChosen={this.state.chosenIndex === id}
+      //unClickAnswer={ this.state.prevAnswers }
+      />
+    ));
+  }
+
+  renderMultipleAnswer = () => {
+    return this.props.question.answers.map((item, id) => (
+      <Answer
+        index={id}
+        answer={item}
+        key={id}
+        getAnswer={this.setAnswersMultiple}
+        isChosen={this.state.multipleAnswers.includes(id)}
       //unClickAnswer={ this.state.prevAnswers }
       />
     ));
