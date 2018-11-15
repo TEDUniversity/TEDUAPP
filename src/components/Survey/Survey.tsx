@@ -166,7 +166,7 @@ class Survey extends Component<IProp & ReduxProps> {
     this.setState({ currentSurvey: survey }, () => {
       //console.log(this.state.currentSurvey)
       let allAnswered = true; //control variable for questions that are not answered
-      this.state.currentSurvey.questions.map((question, id) => {
+      this.state.currentSurvey.questions.map((question: types.Question, id) => {
         if (question.type === 0) {
           //traverse the question array of the related survey and check current pressed answers. If it is undefined, question is not answered.
           if (question.currentPressedAnswers == undefined) {
@@ -282,6 +282,10 @@ class Survey extends Component<IProp & ReduxProps> {
                     console.log(item.questions[id].currentPressedAnswers);
                   }
                 });
+              } else if (question.type === 2){
+                givenAnswers.push(question.currentPressedAnswersMultiple)
+                //BURDASIN/////BURDASIN//////BURDASIN/////////BURDASIN///////////BURDASIN/////////////////BURDASIN/////////////////////////////////////////////////////////
+                //quesitona type ekledin çalışmazsa sil
               }
 
             });
@@ -353,10 +357,10 @@ class Survey extends Component<IProp & ReduxProps> {
       .then(function (snapshot) {
         //console.log(snapshot.val())
         if (snapshot.val() === null) {
-          console.log(snapshot.val());
+          //console.log(snapshot.val());
           return Boolean(false);
         } else {
-          console.log(snapshot.val());
+          //console.log(snapshot.val());
           return Boolean(true);
         }
       });
@@ -366,7 +370,7 @@ class Survey extends Component<IProp & ReduxProps> {
     //console.log(this.props.navigation.state.params.surveyData)
     return this.props.navigation.state.params.surveyData.questions.map(
       (item, id) => {
-        console.log(item)
+        //console.log(item)
         if (item.valid) {
           return (<Question
             question={item}

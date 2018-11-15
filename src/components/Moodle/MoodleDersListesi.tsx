@@ -63,8 +63,8 @@ class MoodleDersListesi extends Component<IProps> {
             </View>
           </TouchableOpacity>
         ) : (
-            <View key={Id}>
-              <TouchableOpacity
+          <View key={Id}>
+            {/* <TouchableOpacity
                 style={styles.button}
                 key={Id}
                 onPress={() => {
@@ -94,14 +94,14 @@ class MoodleDersListesi extends Component<IProps> {
                     {"Not visible class"}
                   </Text>
                 </View>
-              </TouchableOpacity>
-            </View>
-          )
+              </TouchableOpacity> */}
+          </View>
+        )
     );
   };
 
-  componentDidMount() { }
-  componentWillReceiveProps(next: IProps) { }
+  componentDidMount() {}
+  componentWillReceiveProps(next: IProps) {}
   render() {
     if (this.props.dersler.length !== 0) {
       return (

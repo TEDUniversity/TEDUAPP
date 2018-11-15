@@ -30,7 +30,7 @@ interface ReduxProps {
   user: types.User;
 }
 
-let deviceWidth = Dimensions.get("window").width
+let deviceWidth = Dimensions.get("window").width;
 var DomParser = require("react-native-html-parser").DOMParser;
 
 class Grades extends Component<IProp & ReduxProps> {
@@ -92,8 +92,7 @@ class Grades extends Component<IProp & ReduxProps> {
           }
 
           return (
-            <ScrollView style={styles.container}>
-
+            <View style={styles.container}>
               <View key={Id} style={{ marginBottom: 10 }}>
                 <View key={Id} style={styles.subContainer}>
                   <View style={styles.textContainer}>
@@ -116,25 +115,26 @@ class Grades extends Component<IProp & ReduxProps> {
                   }}
                 />
               </View>
-            </ScrollView>
-
+            </View>
           );
         }
       );
     } else {
-      return (<View
-        style={{
-          flex: 1,
-          alignItems: "center",
-          justifyContent: "center",
-          marginLeft: "2%",
-          marginRight: "2%"
-        }}
-      >
-        <Text style={{ fontWeight: "400", fontSize: deviceWidth / 18.75 }}>
-          There is no grade entered for this course on moodle.
-        </Text>
-      </View>);
+      return (
+        <View
+          style={{
+            flex: 1,
+            alignItems: "center",
+            justifyContent: "center",
+            marginLeft: "2%",
+            marginRight: "2%"
+          }}
+        >
+          <Text style={{ fontWeight: "400", fontSize: deviceWidth / 18.75 }}>
+            There is no grade entered for this course on moodle.
+          </Text>
+        </View>
+      );
     }
   };
   render() {
@@ -146,7 +146,9 @@ class Grades extends Component<IProp & ReduxProps> {
           source={require("../../../img/background/BACKGROUND.png")}
           style={styles.mainBackGround}
         >
-          {this.renderSection()}
+          <ScrollView style={styles.container}>
+            {this.renderSection()}
+          </ScrollView>
         </ImageBackground>
       );
     }

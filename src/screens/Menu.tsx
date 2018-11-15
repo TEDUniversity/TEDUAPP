@@ -218,7 +218,7 @@ class Menu extends Component<IProp> {
                 style={styles.subContainer}
                 onPress={() => {
                   this.props.navigation.navigate("WebviewRouter", {
-                    url: "https://www.tedu.edu.tr/tr/main/akademik-takvim",
+                    url: Platform.OS === "ios" ? "https://www.tedu.edu.tr/sites/default/files/content_files/2018-2019_akademik_takvim_31.07.2018_pdf_tur.pdf": "https://www.tedu.edu.tr/tr/main/akademik-takvim",
                     title: "Academic Calendar",
                     backButton: "Menu"
                   });

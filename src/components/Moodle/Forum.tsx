@@ -29,7 +29,7 @@ interface IProp {
 interface ReduxProps {
   user: types.User;
 }
-let deviceWidth = Dimensions.get("window").width
+let deviceWidth = Dimensions.get("window").width;
 
 class Forum extends Component<IProp & ReduxProps> {
   state = {
@@ -148,10 +148,10 @@ class Forum extends Component<IProp & ReduxProps> {
   };
 
   renderSection = (toBeMapped: any) => {
-    console.log(toBeMapped)
+    console.log(toBeMapped);
     if (toBeMapped != "") {
       return toBeMapped.map((data, Id) => (
-        <ScrollView style={styles.container}>
+        <View style={styles.container}>
           <View key={Id} style={styles.subContainer}>
             <View
               style={{
@@ -176,7 +176,7 @@ class Forum extends Component<IProp & ReduxProps> {
               <Text style={{ margin: 5 }}>{strip(data["message"])}</Text>
             </View>
           </View>
-        </ScrollView>
+        </View>
       ));
     } else {
       return (
@@ -191,11 +191,10 @@ class Forum extends Component<IProp & ReduxProps> {
         >
           <Text style={{ fontWeight: "400", fontSize: deviceWidth / 18.75 }}>
             There is no data entered for this course on moodle.
-        </Text>
+          </Text>
         </View>
       );
     }
-
   };
   render() {
     if (this.state.isLoading) {
@@ -206,7 +205,9 @@ class Forum extends Component<IProp & ReduxProps> {
           source={require("../../../img/background/BACKGROUND.png")}
           style={styles.mainBackGround}
         >
-          {this.renderSection(this.state.jsonToBeParsed["discussions"])}
+          <ScrollView style={styles.container}>
+            {this.renderSection(this.state.jsonToBeParsed["discussions"])}
+          </ScrollView>
         </ImageBackground>
       );
     }
