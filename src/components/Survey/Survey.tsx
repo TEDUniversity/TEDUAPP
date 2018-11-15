@@ -15,7 +15,8 @@ import {
   ImageBackground,
   TouchableOpacity,
   Alert,
-  Platform
+  Platform,
+  ScrollView
 } from "react-native";
 import Image from "react-native-scalable-image";
 import TabNavigator from "react-native-tab-navigator";
@@ -391,7 +392,7 @@ class Survey extends Component<IProp & ReduxProps> {
           height: Dimensions.get("window").height
         }}
       >
-        <View style={styles.container}>
+        <ScrollView style={styles.container}>
 
           {this.renderQuestions()}
 
@@ -407,7 +408,7 @@ class Survey extends Component<IProp & ReduxProps> {
             </TouchableOpacity>
           </View>
 
-        </View>
+        </ScrollView>
       </ImageBackground>
     );
   }
