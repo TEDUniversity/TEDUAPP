@@ -116,8 +116,6 @@ class CouncilNews extends Component<IProps & ReduxProps> {
   };
 
   whenLoaded = () => {
-    console.log(this.props.councilNews)
-
     let duyuru = [],
       haber = [],
       etkinlik = [];
@@ -236,6 +234,10 @@ class CouncilNews extends Component<IProps & ReduxProps> {
       />
     ));
   };
+
+  renderLists = () => {
+    
+  }
   render() {
     if (this.state.loading) {
       return <Spinner size={"large"} />;

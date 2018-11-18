@@ -19,6 +19,7 @@ export interface Question {
   answers: Answer[];
   currentPressedAnswers: number;
   currentPressedAnswersMultiple: number[];
+  required: boolean;
 }
 
 export interface Answer {

@@ -13,7 +13,8 @@ import {
   StyleSheet,
   Dimensions,
   ImageBackground,
-  TouchableOpacity
+  TouchableOpacity,
+  TouchableNativeFeedbackBase
 } from "react-native";
 import Image from "react-native-scalable-image";
 import TabNavigator from "react-native-tab-navigator";
@@ -49,9 +50,13 @@ class Question extends Component<IProp & ReduxProps> {
     currentAnswer: "",// not working in this verison
     chosenIndex: -1,//working in this version for single answered questions
     textAnswer: "", //working in this version for free text answers
-    multipleAnswers: [] as number[] 
+    multipleAnswers: [] as number[]
 
   };
+
+  componentWillMount()
+  {
+  }
 
   //prev version of the answer. not suiting for requierements
   /*setAnswers = (val) => {
@@ -109,12 +114,21 @@ class Question extends Component<IProp & ReduxProps> {
   };
 
   setAnswersMultiple = (index : number) => {
-    this.setState({multipleAnswers: this.state.multipleAnswers.push(index)}, this.UpdateGlobalState)
+    if(!this.state.multipleAnswers.includes(index))
+      this.setState({multipleAnswers: [...this.state.multipleAnswers, index]}, () =>   {  this.UpdateGlobalState();}   )
+    else{
+      var tempArr = this.state.multipleAnswers
+      for(var i = tempArr.length - 1; i >= 0; i--) {
+        if(tempArr[i] === index) {
+          tempArr.splice(i, 1);
+        }
+    }
+    this.setState({multipleAnswer: tempArr }, () =>   {  this.UpdateGlobalState();}  )
+    }
   }
 
 
   UpdateGlobalState = () => {
-    //console.log(this.props.surveyIndex)
     var survey = this.props.surveys;
     //console.log(survey)
     survey.map((item) => {
@@ -122,10 +136,7 @@ class Question extends Component<IProp & ReduxProps> {
 
         if (item.questions[this.props.questionIndex].type === 0) {
           item.questions[this.props.questionIndex].currentPressedAnswers = this.state.chosenIndex;
-
         } else if (item.questions[this.props.questionIndex].type === 1) {
-          //console.log(item.questions[this.props.questionIndex])
-          //console.log(item.questions[this.props.questionIndex].answers[0])
           item.questions[this.props.questionIndex].answers[0].text = this.state.textAnswer;
         } else if (item.questions[this.props.questionIndex].type === 2){
           item.questions[this.props.questionIndex].currentPressedAnswersMultiple = this.state.multipleAnswers;
@@ -185,8 +196,7 @@ class Question extends Component<IProp & ReduxProps> {
         answer={item}
         key={id}
         getAnswer={this.setAnswersMultiple}
-        isChosen={this.state.multipleAnswers.includes(id)}
-      //unClickAnswer={ this.state.prevAnswers }
+        isChosen={this.state.multipleAnswers.indexOf(id) > -1}
       />
     ));
   }
