@@ -29,39 +29,39 @@ import { connect } from "react-redux";
 import { Dispatch } from "redux";
 
 interface IProp {
-    answer: any;
-    getAnswer: any;
-    index: number;
-    isChosen: boolean;
-  }
+  answer: any;
+  getAnswer: any;
+  index: number;
+  isChosen: boolean;
+}
 
-  interface ReduxProps {
-    surveys?: types.Survey[];
-    updateSurveys?: (surveys: types.Survey[]) => any;
-  }
+interface ReduxProps {
+  surveys?: types.Survey[];
+  updateSurveys?: (surveys: types.Survey[]) => any;
+}
 
 class Answer extends Component<IProp & ReduxProps> {
-  
 
-  constructor(props: IProp){
+
+  constructor(props: IProp) {
     super(props);
-    
+
   }
-  
+
   state = {
     buttonBackgroundColor: "",
     borderBottomWidth: 0.5
-    
+
   };
 
-  componentWillReceiveProps(next: IProp & ReduxProps ){
-    
+  componentWillReceiveProps(next: IProp & ReduxProps) {
+
     if (next.isChosen) {
       this.setState({
         buttonBackgroundColor: "rgb(22,103,163)",
         borderBottomWidth: 0,
-      });   
-    }else{
+      });
+    } else {
       this.setState({
         buttonBackgroundColor: "transparent",
         borderBottomWidth: 0.5,
@@ -70,21 +70,21 @@ class Answer extends Component<IProp & ReduxProps> {
   }
 
   onClick = () => {
-    
+
     this.props.getAnswer(this.props.index);
-  
+
   }
- 
+
   //previous version of the answer. not working for this vers.
-  componentDidUpdate(){
-    
+  componentDidUpdate() {
+
     /*if(this.state.clicked == true){
       this.props.answer(this.props.text);
     } else {
       this.props.answer("not " + this.props.text);
     }*/
 
-    
+
   }
 
   /*componentWillMount(){
@@ -100,21 +100,24 @@ class Answer extends Component<IProp & ReduxProps> {
   }*/
 
   render() {
-      //console.log(this.props.text);
-      //console.log("after setting state and renderind screen" + this.state.clicked);
-      
+    //console.log(this.props.text);
+    //console.log("after setting state and renderind screen" + this.state.clicked);
+
     return (
+      <View style={styles.answerContainerRow} >
         <TouchableOpacity
-              style={[
-                styles.answerButton,
-                { backgroundColor: this.state.buttonBackgroundColor,
-                  borderBottomWidth: this.state.borderBottomWidth,
-                }
-              ]}
-              onPress={this.onClick}
-            >
-              <Text> {this.props.answer.text} </Text>
+          style={[
+            styles.answerButton,
+            {
+              backgroundColor: this.state.buttonBackgroundColor,
+              borderBottomWidth: this.state.borderBottomWidth,
+            }
+          ]}
+          onPress={this.onClick}
+        >
+          <Text> {this.props.answer.text} </Text>
         </TouchableOpacity>
+      </View>
     );
   }
 }
@@ -124,8 +127,19 @@ const styles = StyleSheet.create({
     borderWidth: 0,
     borderRadius: 5,
     padding: 3,
-    
+
   },
+  answerContainerRow: {
+    marginTop: 5,
+    marginRight: 5
+  },
+  answerContainerColumn: {//assign this style to answer conditionally
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    marginTop: 5,
+    marginRight: 5
+  }
 });
 
 const mapStateToProps = (state: types.GlobalState) => {

@@ -100,7 +100,13 @@ class Question extends Component<IProp & ReduxProps> {
     }
   };*/
 
-
+  setStyleForQuestionContainer = (directionType) => {
+      if(directionType === "row"){
+          return styles.multipleAnswerRow;
+      } else if(directionType === "column") {
+          return styles.multipleAnswerColumn;
+      }
+  }
 
   setAnswersSingle = (index: number) => {
     if (this.state.chosenIndex != index) {
@@ -150,7 +156,7 @@ class Question extends Component<IProp & ReduxProps> {
   renderAnswers = () => {
     if (this.props.type === 0) {
       return (
-        <View style={styles.multipleAnswer}>
+        <View style={this.setStyleForQuestionContainer("row")}>
           {this.renderSingleAnswer()}
         </View>
       );
@@ -228,14 +234,23 @@ const styles = StyleSheet.create({
     //justifyContent: "center",
     marginTop: 7,
   },
-  multipleAnswer: {
+  multipleAnswerRow: {
     flexDirection: "row",
     justifyContent: "space-around",
     borderWidth: 1,
     borderRadius: 5,
     padding: 5,
     margin: 5,
-
+    flexWrap: 'wrap',
+  },
+  multipleAnswerColumn: {
+    flexDirection: "column",
+    justifyContent: "space-around",
+    borderWidth: 1,
+    borderRadius: 5,
+    padding: 5,
+    margin: 5,
+    flexWrap: 'wrap',
   },
   textAnswer: {
     flexDirection: "row",
