@@ -50,7 +50,8 @@ class Question extends Component<IProp & ReduxProps> {
     currentAnswer: "",// not working in this verison
     chosenIndex: -1,//working in this version for single answered questions
     textAnswer: "", //working in this version for free text answers
-    multipleAnswers: [] as number[]
+    multipleAnswers: [] as number[], //working in this version for multiple choice questions. added in update 4
+    answerStyle: "", //working in this version for specifying answer alignment. added in update 4 
 
   };
 
@@ -101,6 +102,7 @@ class Question extends Component<IProp & ReduxProps> {
   };*/
 
   setStyleForQuestionContainer = (directionType) => {
+    //this.setState({answerStyle: directionType})
       if(directionType === "row"){
           return styles.multipleAnswerRow;
       } else if(directionType === "column") {
@@ -157,7 +159,7 @@ class Question extends Component<IProp & ReduxProps> {
     if (this.props.type === 0) {
       return (
         <View style={this.setStyleForQuestionContainer("row")}>
-          {this.renderSingleAnswer()}
+          {this.renderSingleAnswer("row")}
         </View>
       );
     } else if (this.props.type == 1) {
@@ -182,7 +184,7 @@ class Question extends Component<IProp & ReduxProps> {
     />);
   }
 
-  renderSingleAnswer = () => {
+  renderSingleAnswer = (answerStyleType) => {
     return this.props.question.answers.map((item, id) => (
       <Answer
         index={id}
@@ -190,6 +192,7 @@ class Question extends Component<IProp & ReduxProps> {
         key={id}
         getAnswer={this.setAnswersSingle}
         isChosen={this.state.chosenIndex === id}
+        styleType={answerStyleType}
       //unClickAnswer={ this.state.prevAnswers }
       />
     ));

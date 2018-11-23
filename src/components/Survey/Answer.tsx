@@ -33,6 +33,7 @@ interface IProp {
   getAnswer: any;
   index: number;
   isChosen: boolean;
+  styleType: string;
 }
 
 interface ReduxProps {
@@ -66,6 +67,14 @@ class Answer extends Component<IProp & ReduxProps> {
         buttonBackgroundColor: "transparent",
         borderBottomWidth: 0.5,
       });
+    }
+  }
+
+  setStyleForAnswerContainer = (style) => {
+    if(style === "row"){
+      return styles.answerContainerRow;
+    }else if(style === "column"){
+      return styles.answerContainerColumn;
     }
   }
 
@@ -104,7 +113,7 @@ class Answer extends Component<IProp & ReduxProps> {
     //console.log("after setting state and renderind screen" + this.state.clicked);
 
     return (
-      <View style={styles.answerContainerRow} >
+      <View style={this.setStyleForAnswerContainer(this.props.styleType)} >
         <TouchableOpacity
           style={[
             styles.answerButton,
@@ -130,8 +139,10 @@ const styles = StyleSheet.create({
 
   },
   answerContainerRow: {
-    marginTop: 5,
-    marginRight: 5
+    marginTop: 10,
+    marginRight: 10,
+    marginLeft: 10,
+    marginBottom: 5,
   },
   answerContainerColumn: {//assign this style to answer conditionally
     flex: 1,
