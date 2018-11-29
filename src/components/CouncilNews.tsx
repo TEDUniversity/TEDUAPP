@@ -235,8 +235,30 @@ class CouncilNews extends Component<IProps & ReduxProps> {
     ));
   };
 
-  renderLists = () => {
-    
+  renderDataSub = (subItems) => {
+    return subItems.map((item, Id) => (
+      <DetailCouncilNews
+        navigation={this.props.navigation}
+        key={Id}
+        data={item}
+        imgsrc={"kırmızı"}
+      />
+    ));
+  }
+
+  renderLists = (newsData) => {
+      let news = []
+      newsData.map((item, id)=>{
+        news = []
+          item.map((subItem, id)=> {
+            news.push(subItem)
+          })
+          return <HorizontalList
+            Data={this.renderDataSub(news)}
+            title={item.header}
+            style={{ marginTop: this.state.horizontalMarginTop }}
+          />
+      })
   }
   render() {
     if (this.state.loading) {
