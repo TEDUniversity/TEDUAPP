@@ -122,6 +122,9 @@ class Detay extends Component<IProp & ReduxProps> {
             <View style={{ flex: 1, flexDirection: "column" }}>
               <TouchableOpacity
                 onPress={() => {
+                  if (data && data["name"] && data["name"] == "Announcements") {
+                    this.props.navigation.navigate("Forum");
+                  }
                   if (
                     data &&
                     data["contents"] &&
@@ -213,33 +216,32 @@ class Detay extends Component<IProp & ReduxProps> {
   };
 
   renderSection = (toBeMapped: any) => {
-    return toBeMapped.map(
-      (data, Id) =>
-        data && data["visible"] && data["visible"] === 1 ? (
-          <View key={Id} style={styles.subContainer}>
+    return toBeMapped.map((data, Id) =>
+      data && data["visible"] && data["visible"] === 1 ? (
+        <View key={Id} style={styles.subContainer}>
+          <View
+            style={{
+              flex: 1,
+              flexDirection: "column",
+              justifyContent: "space-between"
+            }}
+          >
+            <Text style={{ margin: 10, fontSize: deviceWidth / 18.75 }}>
+              {data["name"]}
+            </Text>
             <View
               style={{
-                flex: 1,
-                flexDirection: "column",
-                justifyContent: "space-between"
+                backgroundColor: "black",
+                height: 1,
+                width: Dimensions.get("window").width - 10
               }}
-            >
-              <Text style={{ margin: 10, fontSize: deviceWidth / 18.75 }}>
-                {data["name"]}
-              </Text>
-              <View
-                style={{
-                  backgroundColor: "black",
-                  height: 1,
-                  width: Dimensions.get("window").width - 10
-                }}
-              />
-              {this.renderElement(data["modules"])}
-            </View>
+            />
+            {this.renderElement(data["modules"])}
           </View>
-        ) : (
-          <View key={Id} />
-        )
+        </View>
+      ) : (
+        <View key={Id} />
+      )
     );
   };
   render() {
