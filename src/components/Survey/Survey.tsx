@@ -167,23 +167,23 @@ class Survey extends Component<IProp & ReduxProps> {
       //console.log(this.state.currentSurvey)
       let allAnswered = true; //control variable for questions that are not answered
       this.state.currentSurvey.questions.map((question, id) => {
-        if(question.required) {
+        if (question.required) {
           if (question.type === 0) {
             //traverse the question array of the related survey and check current pressed answers. If it is undefined, question is not answered.
             if (question.currentPressedAnswers == undefined) {//type 0 = single answered question
               allAnswered = false;
             }
-          }else if(question.type === 1){//type 1 = free text answered question
-            if(question.answers[0].text == undefined) {
+          } else if (question.type === 1) {//type 1 = free text answered question
+            if (question.answers[0].text == undefined) {
               allAnswered = false;
-            } 
-          }else if(question.type === 2){
+            }
+          } else if (question.type === 2) {
             if (question.currentPressedAnswersMultiple == undefined) {//type 2 = multiple answered quesiton
               allAnswered = false;
             }
           }
         }
-        
+
       });
       //if all questions are not answered, show alert
       if (!allAnswered) {
@@ -446,31 +446,31 @@ class Survey extends Component<IProp & ReduxProps> {
         }}
       >
         <ScrollView style={styles.container}>
-
-          {this.renderQuestions()}
-
-          <View style={styles.buttonView}>
-            <TouchableOpacity
-              style={styles.button}
-              onPress={() => {
-                this.sendResultsToFirebaseV2();
-              }}
-              disabled={false}
-            >
-              <Text>SUBMIT</Text>
-            </TouchableOpacity>
-          </View>
-          <View style={styles.buttonView}>
-            <TouchableOpacity
-              style={styles.button}
-              onPress={() => {
-                this.showResults();
-              }}
-              disabled={false}
-            >
-              <Text>show results</Text>
-            </TouchableOpacity>
-          </View>
+            {this.renderQuestions()}
+            <View style={{ flex: 1 }} >
+              <View style={styles.buttonView}>
+                <TouchableOpacity
+                  style={styles.button}
+                  onPress={() => {
+                    this.sendResultsToFirebaseV2();
+                  }}
+                  disabled={false}
+                >
+                  <Text>SUBMIT</Text>
+                </TouchableOpacity>
+              </View>
+              <View style={styles.buttonView}>
+                <TouchableOpacity
+                  style={styles.button}
+                  onPress={() => {
+                    this.showResults();
+                  }}
+                  disabled={false}
+                >
+                  <Text>show results</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
 
         </ScrollView>
       </ImageBackground>
@@ -480,6 +480,7 @@ class Survey extends Component<IProp & ReduxProps> {
 
 const styles = StyleSheet.create({
   container: {
+    flex:1,
     marginTop: "3%",
   },
   headerTitle: {

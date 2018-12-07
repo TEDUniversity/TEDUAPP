@@ -124,7 +124,7 @@ class Answer extends Component<IProp & ReduxProps> {
           ]}
           onPress={this.onClick}
         >
-          <Text> {this.props.answer.text} </Text>
+          <Text style={styles.text} > {this.props.answer.text} </Text>
         </TouchableOpacity>
       </View>
     );
@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
 
   },
   answerContainerRow: {
-    marginTop: 10,
+    marginTop: 5,
     marginRight: 10,
     marginLeft: 10,
     marginBottom: 5,
@@ -148,8 +148,12 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     justifyContent: "flex-start",
-    marginTop: 5,
-    marginRight: 5
+    marginTop: 10,
+    marginRight: 5,
+  },
+  text:{
+    fontSize:15,
+    
   }
 });
 

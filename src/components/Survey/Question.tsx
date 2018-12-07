@@ -158,8 +158,8 @@ class Question extends Component<IProp & ReduxProps> {
   renderAnswers = () => {
     if (this.props.type === 0) {
       return (
-        <View style={this.setStyleForQuestionContainer("row")}>
-          {this.renderSingleAnswer("row")}
+        <View style={this.setStyleForQuestionContainer("column")}>
+          {this.renderSingleAnswer("column")}
         </View>
       );
     } else if (this.props.type == 1) {
@@ -170,8 +170,8 @@ class Question extends Component<IProp & ReduxProps> {
       );
     } else if (this.props.type == 2) {
       return (
-        <View style={styles.textAnswer}>
-          {this.renderMultipleAnswer()}
+        <View style={this.setStyleForQuestionContainer("column")}>
+          {this.renderMultipleAnswer("column")}
         </View>
       );
     }
@@ -198,7 +198,7 @@ class Question extends Component<IProp & ReduxProps> {
     ));
   }
 
-  renderMultipleAnswer = () => {
+  renderMultipleAnswer = (answerStyleType) => {
     return this.props.question.answers.map((item, id) => (
       <Answer
         index={id}
@@ -206,6 +206,7 @@ class Question extends Component<IProp & ReduxProps> {
         key={id}
         getAnswer={this.setAnswersMultiple}
         isChosen={this.state.multipleAnswers.indexOf(id) > -1}
+        styleType={answerStyleType}
       />
     ));
   }
