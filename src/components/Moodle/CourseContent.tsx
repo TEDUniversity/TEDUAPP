@@ -81,7 +81,7 @@ class Detay extends Component<IProp & ReduxProps> {
     http.onreadystatechange = () => {
       //Call a function when the state changes.
       if (http.readyState == 4 && http.status == 200) {
-        console.log(http.response);
+        //console.log(http.response);
         this.setState(
           {
             jsonToBeParsed: JSON.parse(http.response),
