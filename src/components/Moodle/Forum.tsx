@@ -115,7 +115,8 @@ class Forum extends Component<IProp & ReduxProps> {
                 onPress={() => {
                   this.props.navigation.navigate("WebviewRouter", {
                     url: data["url"],
-                    title: data["name"]
+                    title: data["name"],
+                    backRoute: "MainRouter"
                   });
                 }}
               >

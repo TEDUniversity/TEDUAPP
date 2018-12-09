@@ -15,7 +15,9 @@ import {
   ImageBackground,
   TouchableOpacity,
   Alert,
-  Platform
+  Platform,
+  ScrollView,
+  KeyboardAvoidingView
 } from "react-native";
 import Image from "react-native-scalable-image";
 import TabNavigator from "react-native-tab-navigator";
@@ -165,13 +167,25 @@ class Survey extends Component<IProp & ReduxProps> {
     this.setState({ currentSurvey: survey }, () => {
       //console.log(this.state.currentSurvey)
       let allAnswered = true; //control variable for questions that are not answered
-      this.state.currentSurvey.questions.map((question: types.Question, id) => {
-        if (question.type === 0) {
-          //traverse the question array of the related survey and check current pressed answers. If it is undefined, question is not answered.
-          if (question.currentPressedAnswers == undefined) {
-            allAnswered = false;
+      this.state.currentSurvey.questions.map((question, id) => {
+        if (question.required) {
+          if (question.type === 0) {
+            //traverse the question array of the related survey and check current pressed answers. If it is undefined, question is not answered.
+            if (question.currentPressedAnswers === undefined) {//type 0 = single answered question
+              allAnswered = false;
+            }
+          } else if (question.type === 1) {//type 1 = free text answered question
+            //console.log(question.answers[0].text)
+            if (question.answers[0].text === undefined) {
+              allAnswered = false;
+            }
+          } else if (question.type === 2) {
+            if (question.currentPressedAnswersMultiple === undefined) {//type 2 = multiple answered quesiton
+              allAnswered = false;
+            }
           }
         }
+
       });
       //if all questions are not answered, show alert
       if (!allAnswered) {
@@ -219,7 +233,7 @@ class Survey extends Component<IProp & ReduxProps> {
 
             let givenAnswers = [];
             this.state.currentSurvey.questions.map((question, id) => {
-              if (question.type === 0) {
+              if (question.type === 0 && question.currentPressedAnswers != undefined) {//if answer is undefined, question is not required. So dont check answer of it. update for not required questions
                 const pressedAnswer = question.currentPressedAnswers;
                 givenAnswers.push(pressedAnswer); //push given aswers to this array for inserting it firebase
 
@@ -249,13 +263,13 @@ class Survey extends Component<IProp & ReduxProps> {
                 surveys.map(item => {
                   if (item.id === this.props.navigation.state.params.index) {
                     item.questions[id].currentPressedAnswers = pressedAnswer;
-                    console.log(item.questions[id].currentPressedAnswers);
+                    //console.log(item.questions[id].currentPressedAnswers);
                   }
                 });
 
                 //surveys[this.props.navigation.state.params.index].questions[id].currentPressedAnswers = pressedAnswer;
                 this.props.updateSurveys(surveys);
-              } else if (question.type === 1) {
+              } else if (question.type === 1 && question.answers[0].text != undefined) {//if answer is undefined, question is not required. So dont check answer of it. update for not required questions 
                 const typedAnswer = question.answers[0].text; // firebase database must be structured accordingly
                 givenAnswers.push(typedAnswer);
 
@@ -270,29 +284,61 @@ class Survey extends Component<IProp & ReduxProps> {
 
                 var updates = {};
                 updates[key] = typedAnswer;
-
-
                 firebase.database().ref(url).update(updates);
-
-
                 surveys.map(item => {
                   if (item.id === this.props.navigation.state.params.index) {
                     item.questions[id].answers[0].text = typedAnswer;
-                    console.log(item.questions[id].currentPressedAnswers);
+                    //console.log(item.questions[id].currentPressedAnswers);
                   }
                 });
-              } else if (question.type === 2){
-                givenAnswers.push(question.currentPressedAnswersMultiple)
-                //BURDASIN/////BURDASIN//////BURDASIN/////////BURDASIN///////////BURDASIN/////////////////BURDASIN/////////////////////////////////////////////////////////
-                //quesitona type ekledin çalışmazsa sil
+              } else if (question.type === 2 && question.currentPressedAnswersMultiple != undefined) {//if answer is undefined, question is not required. So dont check answer of it. update for not required questions
+                const pressedAnswers = question.currentPressedAnswersMultiple;
+                givenAnswers.push(pressedAnswers); //push given aswers to this array for inserting it firebase
+
+                pressedAnswers.forEach(element => {
+                  //increase the counter of the pressed answers.
+                  const url =
+                    "/surveys/" +
+                    this.props.navigation.state.params.index +
+                    "/questions/" +
+                    id +
+                    "/answers/" +
+                    element +
+                    "/count";
+                  //console.log(url)
+                  var adaRankRef = firebase.database().ref(url);
+                  adaRankRef.transaction(
+                    currentCount => {
+                      // If users/ada/rank has never been set, currentCount will be `null`.
+                      return currentCount + 1;
+                    },
+                    function (Error) {
+                      //console.log(Error);
+                    }
+                  );
+                });
+
+
+
+                //set the global state again after updating firebase because when question.currentPressedAnswers are read to update firebase it become undefined for the next time.
+                //thats why, after it becomes undefined, it is set and updated again to preserve satete by pressedAnswer
+                surveys.map(item => {
+                  if (item.id === this.props.navigation.state.params.index) {
+                    item.questions[id].currentPressedAnswersMultiple = pressedAnswers;
+                    //console.log(item.questions[id].currentPressedAnswers);
+                  }
+                });
+
+                //surveys[this.props.navigation.state.params.index].questions[id].currentPressedAnswers = pressedAnswer;
+                this.props.updateSurveys(surveys);
               }
 
             });
-            surveys.map(item => {
+            /*surveys.map(item => {
               if (item.id === this.props.navigation.state.params.index) {
                 console.log(item);
               }
-            });
+            });*/
 
             //insert the userid of the current user to the firebase for keeping track of who votes and who does not. Needed to prevent double voting problem.
             const votersUrl =
@@ -383,7 +429,22 @@ class Survey extends Component<IProp & ReduxProps> {
       }
     );
   };
-
+  renderExplanation = () => {
+    if (this.props.navigation.state.params.surveyData.explanation != "") {
+      return (
+        <Text style={styles.text} >
+          {this.props.navigation.state.params.surveyData.explanation}
+        </Text>
+      )
+    }
+  }
+  showResults = () => {
+    let survey
+    this.props.surveys.map(item => {
+      if (item.id === this.props.navigation.state.params.index) survey = item;
+    });
+    console.log(survey)
+  }
   render() {
     //console.log(this.props.navigation.state.params.surveyData);
 
@@ -392,26 +453,33 @@ class Survey extends Component<IProp & ReduxProps> {
         source={require("../../../img/background/BACKGROUND.png")}
         style={{
           width: Dimensions.get("window").width,
-          height: Dimensions.get("window").height
+          height: Dimensions.get("window").height,
+          flex: 1
         }}
       >
-        <View style={styles.container}>
+        <KeyboardAvoidingView behavior="padding" style={{ flex: 1 }} keyboardVerticalOffset={55}>
 
-          {this.renderQuestions()}
+          <ScrollView style={styles.container}>
 
-          <View style={styles.buttonView}>
-            <TouchableOpacity
-              style={styles.button}
-              onPress={() => {
-                this.sendResultsToFirebaseV2();
-              }}
-              disabled={false}
-            >
-              <Text>SUBMIT</Text>
-            </TouchableOpacity>
-          </View>
+            <View style={{ flex: 1 }} >
+              {this.renderExplanation()}
+              {this.renderQuestions()}
+              <View style={{ flex: 1 }} >
+                <TouchableOpacity
+                  style={styles.button}
+                  onPress={() => {
+                    this.sendResultsToFirebaseV2();
+                  }}
+                  disabled={false}
+                >
+                  <Text>SUBMIT</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
 
-        </View>
+          </ScrollView>
+        </KeyboardAvoidingView>
+
       </ImageBackground>
     );
   }
@@ -419,6 +487,7 @@ class Survey extends Component<IProp & ReduxProps> {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     marginTop: "3%",
   },
   headerTitle: {
@@ -444,10 +513,17 @@ const styles = StyleSheet.create({
     marginTop: "5%"
   },
   button: {
+    alignItems: "center",
+
     borderWidth: 0.5,
     borderRadius: 5,
     padding: deviceWidth / 75,
-  }
+  },
+  text: {
+    fontWeight: "400",
+    fontSize: 17,
+    marginLeft: "3%"
+  },
 });
 
 const mapStateToProps = (state: types.GlobalState) => {

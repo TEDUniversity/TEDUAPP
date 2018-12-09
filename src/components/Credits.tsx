@@ -79,7 +79,8 @@ class Credits extends React.Component<IProp> {
               onPress={() => {
                 this.props.navigation.navigate("WebviewRouter", {
                   url: "https://www.facebook.com/TEDUniversity",
-                  backButton: "Menu"
+                  backButton: "Menu",
+                  backRoute: "CreditsRouter"
                 });
               }}
               style={styles.socialIcon}
@@ -91,7 +92,8 @@ class Credits extends React.Component<IProp> {
                 this.props.navigation.navigate("WebviewRouter", {
                   url: "https://www.instagram.com/universityted/",
                   title: "TEDU Instagram",
-                  backButton: "Menu"
+                  backButton: "Menu",
+                  backRoute: "CreditsRouter"
                 });
               }}
               style={styles.socialIcon}
@@ -104,7 +106,8 @@ class Credits extends React.Component<IProp> {
                   url:
                     "https://tr.linkedin.com/edu/ted-%C3%BCniversitesi-23068",
                   title: "TEDU Linkedin",
-                  backButton: "Menu"
+                  backButton: "Menu",
+                  backRoute: "CreditsRouter"
                 });
               }}
               style={styles.socialIcon}
@@ -116,7 +119,8 @@ class Credits extends React.Component<IProp> {
                 this.props.navigation.navigate("WebviewRouter", {
                   url: "https://twitter.com/TED_Uni",
                   title: "TEDU Twitter",
-                  backButton: "Menu"
+                  backButton: "Menu",
+                  backRoute: "CreditsRouter"
                 });
               }}
               style={styles.socialIcon}
@@ -128,7 +132,8 @@ class Credits extends React.Component<IProp> {
                 this.props.navigation.navigate("WebviewRouter", {
                   url: "https://www.youtube.com/user/TEDUChannel",
                   title: "TEDU Youtube",
-                  backButton: "Menu"
+                  backButton: "Menu",
+                  backRoute: "CreditsRouter"
                 });
               }}
               style={styles.socialIcon}
