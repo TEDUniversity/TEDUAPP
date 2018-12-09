@@ -156,9 +156,19 @@ class Webview extends React.Component<IProp> {
               (navState.url.includes(".pdf") ||
                 navState.url.includes(".xlsx") ||
                 navState.url.includes(".docx") ||
-                navState.url.includes(".jpg")) &&
+                navState.url.includes(".jpg") ||
+                navState.url.includes(".jpeg") ||
+                navState.url.includes(".png")) &&
               Platform.OS === "android"
             ) {
+              if (!(this.webView.canGoBack && this.webView.ref)) {
+                this.props.navigation.navigate(
+                  this.props.navigation.state.params.backRoute,
+                  {
+                    showAlert: false
+                  }
+                );
+              }
               //   this.webView.ref.stopLoading();
               //   Linking.openURL(navState.url);
               let dirs = RNFetchBlob.fs.dirs;
@@ -178,14 +188,6 @@ class Webview extends React.Component<IProp> {
                   FileViewer.open(res.path())
                     .then(() => {
                       console.log("success");
-                      if (!(this.webView.canGoBack && this.webView.ref)) {
-                        this.props.navigation.navigate(
-                          this.props.navigation.state.params.backRoute,
-                          {
-                            showAlert: false
-                          }
-                        );
-                      }
                     })
                     .catch(error => {
                       console.log(error);
