@@ -92,8 +92,8 @@ class Grades extends Component<IProp & ReduxProps> {
           }
 
           return (
-            <View style={styles.container}>
-              <View key={Id} style={{ marginBottom: 10 }}>
+            <View style={styles.container} key={Id}>
+              <View style={{ marginBottom: 10 }}>
                 <View key={Id} style={styles.subContainer}>
                   <View style={styles.textContainer}>
                     <Text style={styles.txt}>{str}</Text>
