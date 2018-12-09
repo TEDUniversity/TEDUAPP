@@ -52,7 +52,7 @@ class Webview extends React.Component<IProp> {
       <TouchableOpacity
         style={styles.headerLeftContainer}
         onPress={() => {
-          navigation.navigate("MainRouter", { showAlert: false });
+          navigation.navigate(navigation.state.params.backRoute, { showAlert: false });
         }}
       >
         <Icon name="ios-arrow-back" size={30} />
@@ -153,7 +153,7 @@ class Webview extends React.Component<IProp> {
             if (
               (navState.url.includes(".pdf") ||
               navState.url.includes(".xlsx") ||
-              navState.url.includes(".docx")) &&
+              navState.url.includes(".docx") || navState.url.includes(".jpg") )  &&
               Platform.OS === "android"
             ) {
               //   this.webView.ref.stopLoading();

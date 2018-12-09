@@ -75,6 +75,7 @@ class CouncilNews extends Component<IProps & ReduxProps> {
       .database()
       .ref("/councilNews")
       .on("value", response => {
+        console.log(response)
         response.forEach(child => {
           news.push(child.val());
           this.props.updateCouncilNews(news);

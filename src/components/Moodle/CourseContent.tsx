@@ -142,8 +142,8 @@ class Detay extends Component<IProp & ReduxProps> {
                       .fetch(
                         "GET",
                         data["contents"][0]["fileurl"] +
-                          "&token=" +
-                          this.props.user.token,
+                        "&token=" +
+                        this.props.user.token,
                         {
                           //some headers ..
                         }
@@ -238,8 +238,8 @@ class Detay extends Component<IProp & ReduxProps> {
             </View>
           </View>
         ) : (
-          <View key={Id} />
-        )
+            <View key={Id} />
+          )
     );
   };
   render() {

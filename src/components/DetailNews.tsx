@@ -30,7 +30,8 @@ class DetailNews extends Component<IProps> {
             this.props.navigation.navigate("WebviewRouter", {
               url: this.props.data.links[0].url,
               title: "News",
-              backButton: "Home"
+              backButton: "Home",
+              backRoute: "MainRouter"
             });
             console.log(this.props.data.link);
           }}
@@ -53,7 +54,8 @@ class DetailNews extends Component<IProps> {
             this.props.navigation.navigate("WebviewRouter", {
               url: this.props.data.links[0].url,
               title: "News",
-              backButton: "Home"
+              backButton: "Home",
+              backRoute: "MainRouter"
             });
             console.log(this.props.data.link);
           }}
@@ -76,7 +78,8 @@ class DetailNews extends Component<IProps> {
             this.props.navigation.navigate("WebviewRouter", {
               url: this.props.data.links[0].url,
               title: "News",
-              backButton: "Home"
+              backButton: "Home",
+              backRoute: "MainRouter"
             });
             console.log(this.props.data.link);
           }}

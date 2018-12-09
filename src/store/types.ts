@@ -32,6 +32,7 @@ export interface Survey {
   name: string;
   questions: Question[];
   valid: Boolean;
+  explanation: string;
 }
 
 export interface User {

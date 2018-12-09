@@ -16,7 +16,8 @@ import {
   TouchableOpacity,
   Alert,
   Platform,
-  ScrollView
+  ScrollView,
+  KeyboardAvoidingView
 } from "react-native";
 import Image from "react-native-scalable-image";
 import TabNavigator from "react-native-tab-navigator";
@@ -170,15 +171,16 @@ class Survey extends Component<IProp & ReduxProps> {
         if (question.required) {
           if (question.type === 0) {
             //traverse the question array of the related survey and check current pressed answers. If it is undefined, question is not answered.
-            if (question.currentPressedAnswers == undefined) {//type 0 = single answered question
+            if (question.currentPressedAnswers === undefined) {//type 0 = single answered question
               allAnswered = false;
             }
           } else if (question.type === 1) {//type 1 = free text answered question
-            if (question.answers[0].text == undefined) {
+            //console.log(question.answers[0].text)
+            if (question.answers[0].text === undefined) {
               allAnswered = false;
             }
           } else if (question.type === 2) {
-            if (question.currentPressedAnswersMultiple == undefined) {//type 2 = multiple answered quesiton
+            if (question.currentPressedAnswersMultiple === undefined) {//type 2 = multiple answered quesiton
               allAnswered = false;
             }
           }
@@ -400,10 +402,10 @@ class Survey extends Component<IProp & ReduxProps> {
       .then(function (snapshot) {
         //console.log(snapshot.val())
         if (snapshot.val() === null) {
-          console.log(snapshot.val());
+          //console.log(snapshot.val());
           return Boolean(false);
         } else {
-          console.log(snapshot.val());
+          //console.log(snapshot.val());
           return Boolean(true);
         }
       });
@@ -427,6 +429,15 @@ class Survey extends Component<IProp & ReduxProps> {
       }
     );
   };
+  renderExplanation = () => {
+    if (this.props.navigation.state.params.surveyData.explanation != "") {
+      return (
+        <Text style={styles.text} >
+          {this.props.navigation.state.params.surveyData.explanation}
+        </Text>
+      )
+    }
+  }
   showResults = () => {
     let survey
     this.props.surveys.map(item => {
@@ -442,13 +453,18 @@ class Survey extends Component<IProp & ReduxProps> {
         source={require("../../../img/background/BACKGROUND.png")}
         style={{
           width: Dimensions.get("window").width,
-          height: Dimensions.get("window").height
+          height: Dimensions.get("window").height,
+          flex: 1
         }}
       >
-        <ScrollView style={styles.container}>
-            {this.renderQuestions()}
+        <KeyboardAvoidingView behavior="padding" style={{ flex: 1 }} keyboardVerticalOffset={55}>
+
+          <ScrollView style={styles.container}>
+
             <View style={{ flex: 1 }} >
-              <View style={styles.buttonView}>
+              {this.renderExplanation()}
+              {this.renderQuestions()}
+              <View style={{ flex: 1 }} >
                 <TouchableOpacity
                   style={styles.button}
                   onPress={() => {
@@ -459,20 +475,11 @@ class Survey extends Component<IProp & ReduxProps> {
                   <Text>SUBMIT</Text>
                 </TouchableOpacity>
               </View>
-              <View style={styles.buttonView}>
-                <TouchableOpacity
-                  style={styles.button}
-                  onPress={() => {
-                    this.showResults();
-                  }}
-                  disabled={false}
-                >
-                  <Text>show results</Text>
-                </TouchableOpacity>
-              </View>
             </View>
 
-        </ScrollView>
+          </ScrollView>
+        </KeyboardAvoidingView>
+
       </ImageBackground>
     );
   }
@@ -480,7 +487,7 @@ class Survey extends Component<IProp & ReduxProps> {
 
 const styles = StyleSheet.create({
   container: {
-    flex:1,
+    flex: 1,
     marginTop: "3%",
   },
   headerTitle: {
@@ -506,10 +513,17 @@ const styles = StyleSheet.create({
     marginTop: "5%"
   },
   button: {
+    alignItems: "center",
+
     borderWidth: 0.5,
     borderRadius: 5,
     padding: deviceWidth / 75,
-  }
+  },
+  text: {
+    fontWeight: "400",
+    fontSize: 17,
+    marginLeft: "3%"
+  },
 });
 
 const mapStateToProps = (state: types.GlobalState) => {

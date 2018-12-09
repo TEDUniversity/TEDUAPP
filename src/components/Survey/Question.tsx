@@ -158,8 +158,8 @@ class Question extends Component<IProp & ReduxProps> {
   renderAnswers = () => {
     if (this.props.type === 0) {
       return (
-        <View style={this.setStyleForQuestionContainer("column")}>
-          {this.renderSingleAnswer("column")}
+        <View style={this.setStyleForQuestionContainer("row")}>
+          {this.renderSingleAnswer("row")}
         </View>
       );
     } else if (this.props.type == 1) {
@@ -170,8 +170,8 @@ class Question extends Component<IProp & ReduxProps> {
       );
     } else if (this.props.type == 2) {
       return (
-        <View style={this.setStyleForQuestionContainer("column")}>
-          {this.renderMultipleAnswer("column")}
+        <View style={this.setStyleForQuestionContainer("row")}>
+          {this.renderMultipleAnswer("row")}
         </View>
       );
     }
@@ -263,6 +263,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     padding: 5,
     margin: 5,
+    flexWrap: "wrap"
   },
   answerButton: {
     borderWidth: 0.5,
@@ -273,7 +274,8 @@ const styles = StyleSheet.create({
     marginLeft: "5%"
   },
   text: {
-    fontWeight: "bold"
+    fontWeight: "bold",
+    fontSize: 17
   },
 
   button: {

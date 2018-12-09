@@ -180,7 +180,8 @@ class Menu extends Component<IProp> {
                     url:
                       "https://my.tedu.edu.tr/sap/bc/ui5_ui5/ui2/ushell/shells/abap/FioriLaunchpad.html?sap-client=001&sap-language=TR",
                     title: "TEDU Portal",
-                    backButton: "Menu"
+                    backButton: "Menu",
+                    backRoute: "MainRouter"
                   });
                 }}
               >
@@ -200,7 +201,8 @@ class Menu extends Component<IProp> {
                   this.props.navigation.navigate("WebviewRouter", {
                     url: "https://issuu.com/tedukultursanat/docs",
                     title: "Karafanzin",
-                    backButton: "Menu"
+                    backButton: "Menu",
+                    backRoute: "MainRouter"
                   });
                 }}
               >
@@ -220,7 +222,8 @@ class Menu extends Component<IProp> {
                   this.props.navigation.navigate("WebviewRouter", {
                     url: Platform.OS === "ios" ? "https://www.tedu.edu.tr/sites/default/files/content_files/2018-2019_akademik_takvim_31.07.2018_pdf_tur.pdf": "https://www.tedu.edu.tr/tr/main/akademik-takvim",
                     title: "Academic Calendar",
-                    backButton: "Menu"
+                    backButton: "Menu",
+                    backRoute: "MainRouter"
                   });
                 }}
               >
@@ -240,7 +243,8 @@ class Menu extends Component<IProp> {
                   this.props.navigation.navigate("WebviewRouter", {
                     url: "http://www.radiotedu.com",
                     title: "Listen radio tedu",
-                    backButton: "Menu"
+                    backButton: "Menu",
+                    backRoute: "MainRouter"
                   });
                 }}
               >
