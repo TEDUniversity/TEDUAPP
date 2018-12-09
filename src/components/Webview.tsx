@@ -52,7 +52,9 @@ class Webview extends React.Component<IProp> {
       <TouchableOpacity
         style={styles.headerLeftContainer}
         onPress={() => {
-          navigation.navigate(navigation.state.params.backRoute, { showAlert: false });
+          navigation.navigate(navigation.state.params.backRoute, {
+            showAlert: false
+          });
         }}
       >
         <Icon name="ios-arrow-back" size={30} />
@@ -152,8 +154,9 @@ class Webview extends React.Component<IProp> {
             // this.webView.canGoBack = navState.canGoBack;
             if (
               (navState.url.includes(".pdf") ||
-              navState.url.includes(".xlsx") ||
-              navState.url.includes(".docx") || navState.url.includes(".jpg") )  &&
+                navState.url.includes(".xlsx") ||
+                navState.url.includes(".docx") ||
+                navState.url.includes(".jpg")) &&
               Platform.OS === "android"
             ) {
               //   this.webView.ref.stopLoading();
@@ -175,6 +178,14 @@ class Webview extends React.Component<IProp> {
                   FileViewer.open(res.path())
                     .then(() => {
                       console.log("success");
+                      if (!(this.webView.canGoBack && this.webView.ref)) {
+                        this.props.navigation.navigate(
+                          this.props.navigation.state.params.backRoute,
+                          {
+                            showAlert: false
+                          }
+                        );
+                      }
                     })
                     .catch(error => {
                       console.log(error);
