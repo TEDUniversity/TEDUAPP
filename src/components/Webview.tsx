@@ -149,6 +149,7 @@ class Webview extends React.Component<IProp> {
             this.loadError();
           }}
           onNavigationStateChange={navState => {
+            console.log(navState.url)
             // this.webView.canGoBack = navState.canGoBack;
             if (
               (navState.url.includes(".pdf") ||

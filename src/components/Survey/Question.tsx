@@ -158,8 +158,8 @@ class Question extends Component<IProp & ReduxProps> {
   renderAnswers = () => {
     if (this.props.type === 0) {
       return (
-        <View style={this.setStyleForQuestionContainer("row")}>
-          {this.renderSingleAnswer("row")}
+        <View style={this.setStyleForQuestionContainer(this.props.question.style)}>
+          {this.renderSingleAnswer(this.props.question.style)}
         </View>
       );
     } else if (this.props.type == 1) {
@@ -170,8 +170,8 @@ class Question extends Component<IProp & ReduxProps> {
       );
     } else if (this.props.type == 2) {
       return (
-        <View style={this.setStyleForQuestionContainer("row")}>
-          {this.renderMultipleAnswer("row")}
+        <View style={this.setStyleForQuestionContainer(this.props.question.style)}>
+          {this.renderMultipleAnswer(this.props.question.style)}
         </View>
       );
     }
