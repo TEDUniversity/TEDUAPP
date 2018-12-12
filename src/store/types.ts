@@ -19,6 +19,7 @@ export interface Question {
   answers: Answer[];
   currentPressedAnswers: number;
   currentPressedAnswersMultiple: number[];
+  required: boolean;
 }
 
 export interface Answer {
@@ -31,6 +32,7 @@ export interface Survey {
   name: string;
   questions: Question[];
   valid: Boolean;
+  explanation: string;
 }
 
 export interface User {

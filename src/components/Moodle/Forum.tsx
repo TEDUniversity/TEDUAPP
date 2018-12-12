@@ -115,7 +115,8 @@ class Forum extends Component<IProp & ReduxProps> {
                 onPress={() => {
                   this.props.navigation.navigate("WebviewRouter", {
                     url: data["url"],
-                    title: data["name"]
+                    title: data["name"],
+                    backRoute: "MainRouter"
                   });
                 }}
               >
@@ -152,8 +153,8 @@ class Forum extends Component<IProp & ReduxProps> {
     console.log(toBeMapped);
     if (toBeMapped != "") {
       return toBeMapped.map((data, Id) => (
-        <View style={styles.container}>
-          <View key={Id} style={styles.subContainer}>
+        <View style={styles.container} key={Id}>
+          <View style={styles.subContainer}>
             <View
               style={{
                 flex: 1,

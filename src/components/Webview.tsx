@@ -52,7 +52,9 @@ class Webview extends React.Component<IProp> {
       <TouchableOpacity
         style={styles.headerLeftContainer}
         onPress={() => {
-          navigation.navigate("MainRouter", { showAlert: false });
+          navigation.navigate(navigation.state.params.backRoute, {
+            showAlert: false
+          });
         }}
       >
         <Icon name="ios-arrow-back" size={30} />
@@ -149,13 +151,25 @@ class Webview extends React.Component<IProp> {
             this.loadError();
           }}
           onNavigationStateChange={navState => {
+            console.log(navState.url)
             // this.webView.canGoBack = navState.canGoBack;
             if (
               (navState.url.includes(".pdf") ||
-              navState.url.includes(".xlsx") ||
-              navState.url.includes(".docx")) &&
+                navState.url.includes(".xlsx") ||
+                navState.url.includes(".docx") ||
+                navState.url.includes(".jpg") ||
+                navState.url.includes(".jpeg") ||
+                navState.url.includes(".png")) &&
               Platform.OS === "android"
             ) {
+              if (!(this.webView.canGoBack && this.webView.ref)) {
+                this.props.navigation.navigate(
+                  this.props.navigation.state.params.backRoute,
+                  {
+                    showAlert: false
+                  }
+                );
+              }
               //   this.webView.ref.stopLoading();
               //   Linking.openURL(navState.url);
               let dirs = RNFetchBlob.fs.dirs;

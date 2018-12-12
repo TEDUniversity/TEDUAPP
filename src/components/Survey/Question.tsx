@@ -13,7 +13,8 @@ import {
   StyleSheet,
   Dimensions,
   ImageBackground,
-  TouchableOpacity
+  TouchableOpacity,
+  TouchableNativeFeedbackBase
 } from "react-native";
 import Image from "react-native-scalable-image";
 import TabNavigator from "react-native-tab-navigator";
@@ -49,9 +50,14 @@ class Question extends Component<IProp & ReduxProps> {
     currentAnswer: "",// not working in this verison
     chosenIndex: -1,//working in this version for single answered questions
     textAnswer: "", //working in this version for free text answers
-    multipleAnswers: [] as number[] 
+    multipleAnswers: [] as number[], //working in this version for multiple choice questions. added in update 4
+    answerStyle: "", //working in this version for specifying answer alignment. added in update 4 
 
   };
+
+  componentWillMount()
+  {
+  }
 
   //prev version of the answer. not suiting for requierements
   /*setAnswers = (val) => {
@@ -95,7 +101,14 @@ class Question extends Component<IProp & ReduxProps> {
     }
   };*/
 
-
+  setStyleForQuestionContainer = (directionType) => {
+    //this.setState({answerStyle: directionType})
+      if(directionType === "row"){
+          return styles.multipleAnswerRow;
+      } else if(directionType === "column") {
+          return styles.multipleAnswerColumn;
+      }
+  }
 
   setAnswersSingle = (index: number) => {
     if (this.state.chosenIndex != index) {
@@ -109,12 +122,21 @@ class Question extends Component<IProp & ReduxProps> {
   };
 
   setAnswersMultiple = (index : number) => {
-    this.setState({multipleAnswers: this.state.multipleAnswers.push(index)}, this.UpdateGlobalState)
+    if(!this.state.multipleAnswers.includes(index))
+      this.setState({multipleAnswers: [...this.state.multipleAnswers, index]}, () =>   {  this.UpdateGlobalState();}   )
+    else{
+      var tempArr = this.state.multipleAnswers
+      for(var i = tempArr.length - 1; i >= 0; i--) {
+        if(tempArr[i] === index) {
+          tempArr.splice(i, 1);
+        }
+    }
+    this.setState({multipleAnswer: tempArr }, () =>   {  this.UpdateGlobalState();}  )
+    }
   }
 
 
   UpdateGlobalState = () => {
-    //console.log(this.props.surveyIndex)
     var survey = this.props.surveys;
     //console.log(survey)
     survey.map((item) => {
@@ -122,10 +144,7 @@ class Question extends Component<IProp & ReduxProps> {
 
         if (item.questions[this.props.questionIndex].type === 0) {
           item.questions[this.props.questionIndex].currentPressedAnswers = this.state.chosenIndex;
-
         } else if (item.questions[this.props.questionIndex].type === 1) {
-          //console.log(item.questions[this.props.questionIndex])
-          //console.log(item.questions[this.props.questionIndex].answers[0])
           item.questions[this.props.questionIndex].answers[0].text = this.state.textAnswer;
         } else if (item.questions[this.props.questionIndex].type === 2){
           item.questions[this.props.questionIndex].currentPressedAnswersMultiple = this.state.multipleAnswers;
@@ -139,8 +158,8 @@ class Question extends Component<IProp & ReduxProps> {
   renderAnswers = () => {
     if (this.props.type === 0) {
       return (
-        <View style={styles.multipleAnswer}>
-          {this.renderSingleAnswer()}
+        <View style={this.setStyleForQuestionContainer(this.props.question.style)}>
+          {this.renderSingleAnswer(this.props.question.style)}
         </View>
       );
     } else if (this.props.type == 1) {
@@ -151,8 +170,8 @@ class Question extends Component<IProp & ReduxProps> {
       );
     } else if (this.props.type == 2) {
       return (
-        <View style={styles.textAnswer}>
-          {this.renderMultipleAnswer()}
+        <View style={this.setStyleForQuestionContainer(this.props.question.style)}>
+          {this.renderMultipleAnswer(this.props.question.style)}
         </View>
       );
     }
@@ -165,7 +184,7 @@ class Question extends Component<IProp & ReduxProps> {
     />);
   }
 
-  renderSingleAnswer = () => {
+  renderSingleAnswer = (answerStyleType) => {
     return this.props.question.answers.map((item, id) => (
       <Answer
         index={id}
@@ -173,20 +192,21 @@ class Question extends Component<IProp & ReduxProps> {
         key={id}
         getAnswer={this.setAnswersSingle}
         isChosen={this.state.chosenIndex === id}
+        styleType={answerStyleType}
       //unClickAnswer={ this.state.prevAnswers }
       />
     ));
   }
 
-  renderMultipleAnswer = () => {
+  renderMultipleAnswer = (answerStyleType) => {
     return this.props.question.answers.map((item, id) => (
       <Answer
         index={id}
         answer={item}
         key={id}
         getAnswer={this.setAnswersMultiple}
-        isChosen={this.state.multipleAnswers.includes(id)}
-      //unClickAnswer={ this.state.prevAnswers }
+        isChosen={this.state.multipleAnswers.indexOf(id) > -1}
+        styleType={answerStyleType}
       />
     ));
   }
@@ -218,14 +238,23 @@ const styles = StyleSheet.create({
     //justifyContent: "center",
     marginTop: 7,
   },
-  multipleAnswer: {
+  multipleAnswerRow: {
     flexDirection: "row",
     justifyContent: "space-around",
     borderWidth: 1,
     borderRadius: 5,
     padding: 5,
     margin: 5,
-
+    flexWrap: 'wrap',
+  },
+  multipleAnswerColumn: {
+    flexDirection: "column",
+    justifyContent: "space-around",
+    borderWidth: 1,
+    borderRadius: 5,
+    padding: 5,
+    margin: 5,
+    flexWrap: 'wrap',
   },
   textAnswer: {
     flexDirection: "row",
@@ -234,6 +263,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     padding: 5,
     margin: 5,
+    flexWrap: "wrap"
   },
   answerButton: {
     borderWidth: 0.5,
@@ -244,7 +274,8 @@ const styles = StyleSheet.create({
     marginLeft: "5%"
   },
   text: {
-    fontWeight: "bold"
+    fontWeight: "bold",
+    fontSize: 17
   },
 
   button: {
