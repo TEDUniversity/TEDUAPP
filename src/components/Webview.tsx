@@ -52,7 +52,9 @@ class Webview extends React.Component<IProp> {
       <TouchableOpacity
         style={styles.headerLeftContainer}
         onPress={() => {
-          navigation.navigate("MainRouter", { showAlert: false });
+          navigation.navigate(navigation.state.params.backRoute, {
+            showAlert: false
+          });
         }}
       >
         <Icon name="ios-arrow-back" size={30} />
@@ -149,11 +151,15 @@ class Webview extends React.Component<IProp> {
             this.loadError();
           }}
           onNavigationStateChange={navState => {
+            console.log(navState.loading);
             // this.webView.canGoBack = navState.canGoBack;
             if (
               (navState.url.includes(".pdf") ||
-              navState.url.includes(".xlsx") ||
-              navState.url.includes(".docx")) &&
+                navState.url.includes(".xlsx") ||
+                navState.url.includes(".docx") ||
+                navState.url.includes(".jpg") ||
+                navState.url.includes(".jpeg") ||
+                navState.url.includes(".png")) &&
               Platform.OS === "android"
             ) {
               //   this.webView.ref.stopLoading();
@@ -170,7 +176,7 @@ class Webview extends React.Component<IProp> {
                 })
                 .then(res => {
                   // the temp file path
-                  this.setState({ fileLoading: false });
+                  //this.setState({ fileLoading: false });
                   console.log("The file saved to ", res.path());
                   FileViewer.open(res.path())
                     .then(() => {
@@ -187,6 +193,15 @@ class Webview extends React.Component<IProp> {
                 .catch(err => {
                   console.error(err);
                 });
+
+              if (!(this.webView.canGoBack && this.webView.ref)) {
+                this.props.navigation.navigate(
+                  this.props.navigation.state.params.backRoute,
+                  {
+                    showAlert: false
+                  }
+                );
+              }
             } else {
               this.webView.canGoBack = navState.canGoBack;
             }
