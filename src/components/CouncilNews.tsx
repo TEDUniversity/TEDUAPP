@@ -75,6 +75,7 @@ class CouncilNews extends Component<IProps & ReduxProps> {
       .database()
       .ref("/councilNews")
       .on("value", response => {
+        console.log(response)
         response.forEach(child => {
           news.push(child.val());
           this.props.updateCouncilNews(news);
@@ -116,8 +117,6 @@ class CouncilNews extends Component<IProps & ReduxProps> {
   };
 
   whenLoaded = () => {
-    console.log(this.props.councilNews)
-
     let duyuru = [],
       haber = [],
       etkinlik = [];
@@ -236,6 +235,32 @@ class CouncilNews extends Component<IProps & ReduxProps> {
       />
     ));
   };
+
+  renderDataSub = (subItems) => {
+    return subItems.map((item, Id) => (
+      <DetailCouncilNews
+        navigation={this.props.navigation}
+        key={Id}
+        data={item}
+        imgsrc={"kırmızı"}
+      />
+    ));
+  }
+
+  renderLists = (newsData) => {
+      let news = []
+      newsData.map((item, id)=>{
+        news = []
+          item.map((subItem, id)=> {
+            news.push(subItem)
+          })
+          return <HorizontalList
+            Data={this.renderDataSub(news)}
+            title={item.header}
+            style={{ marginTop: this.state.horizontalMarginTop }}
+          />
+      })
+  }
   render() {
     if (this.state.loading) {
       return <Spinner size={"large"} />;

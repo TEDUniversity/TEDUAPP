@@ -34,7 +34,8 @@ class DetailCouncilNews extends Component<IProps> {
               content: this.props.data.content,
               author: this.props.data.author,
               date: this.props.data.date,
-              image: this.props.data.image
+              image: this.props.data.image,
+              links: this.props.data.links
             });
             //console.log(this.props.data);
           }}
@@ -60,7 +61,8 @@ class DetailCouncilNews extends Component<IProps> {
               content: this.props.data.content,
               author: this.props.data.author,
               date: this.props.data.date,
-              image: this.props.data.image
+              image: this.props.data.image,
+              links: this.props.data.links
             });
             //console.log(this.props.data);
           }}
@@ -86,9 +88,9 @@ class DetailCouncilNews extends Component<IProps> {
               content: this.props.data.content,
               author: this.props.data.author,
               date: this.props.data.date,
-              image: this.props.data.image
+              image: this.props.data.image,
+              links: this.props.data.links
             });
-            console.log("pressed");
           }}
         >
           <ImageBackground

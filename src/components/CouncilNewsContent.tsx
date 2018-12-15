@@ -52,13 +52,13 @@ class CouncilNewsContent extends Component<IProps> {
     )
   });
 
-  state= {
+  state = {
     hasImage: false,
   }
 
   componentWillMount() {
-    if(this.props.navigation.state.params.image != ""){
-      this.setState({hasImage: true})
+    if (this.props.navigation.state.params.image != "") {
+      this.setState({ hasImage: true })
     }
 
 
@@ -82,35 +82,64 @@ class CouncilNewsContent extends Component<IProps> {
     //console.log(error)
     //});
   }
+
+  renderLinks = () => {
+    let array = [];
+    Object.keys(this.props.navigation.state.params.links).forEach(child => {
+      array.push(this.props.navigation.state.params.links[child])
+    })
+
+    return (array.map((item, id) => {
+      console.log(item)
+      if (item.valid) {
+        return (
+          <TouchableOpacity key={id}
+            style={{ flex: 1 }}
+            onPress={() => {
+              this.props.navigation.navigate("WebviewRouter", {
+                url: item.url,
+                title: "News",
+                backButton: "News",
+                backRoute: "CouncilContentRouter"
+              });
+            }}
+          >
+            <Text style={[styles.text, { color: "rgb(0, 120, 201)" }]} >{item.text}</Text>
+          </TouchableOpacity>
+        )
+      }
+    }))
+  }
+
   render() {
     let image;
-    if(this.state.hasImage){
+    if (this.state.hasImage) {
       image = (
         <View style={{ width: Dimensions.get("window").width }} >
-            <Image
-              width={Dimensions.get('window').width} // height will be calculated automatically
-              source={{ uri: this.props.navigation.state.params.image }}
-              onError={(error)=>{
-                console.log(error)
-                console.log("error")
+          <Image
+            width={Dimensions.get('window').width} // height will be calculated automatically
+            source={{ uri: this.props.navigation.state.params.image }}
+            onError={(error) => {
+              console.log(error)
+              console.log("error")
 
-                Alert.alert(
-                  "Network error",
-                  "Check your network connection.",
-                  [
-                    {
-                      text: "OK",
-                      onPress: () => {
-                      }
+              Alert.alert(
+                "Network error",
+                "Check your network connection.",
+                [
+                  {
+                    text: "OK",
+                    onPress: () => {
                     }
-                  ],
-                  { cancelable: false }
-                );
-              }}
-            />
-          </View>
+                  }
+                ],
+                { cancelable: false }
+              );
+            }}
+          />
+        </View>
       )
-    }else{
+    } else {
       image = (
         <View />
       )
@@ -125,9 +154,10 @@ class CouncilNewsContent extends Component<IProps> {
 
           {image}
 
-          <Text style={{ margin: 10, fontSize: 15, fontWeight: "300", lineHeight: 20 }} >
+          <Text style={styles.text} >
             {this.props.navigation.state.params.content}
           </Text>
+          {this.renderLinks()}
         </ScrollView>
         <View style={{ marginBottom: 7, marginTop: 5 }} >
           <View style={{ alignItems: "flex-end", marginRight: 13 }} >
@@ -147,6 +177,12 @@ const styles = StyleSheet.create({
   headerTitle: {
     fontWeight: "bold",
     fontSize: deviceWidth / 22,
+  },
+  text: {
+    margin: 10,
+    fontSize: 15,
+    fontWeight: "300",
+    lineHeight: 20
   },
   headerLeftContainer: {
     flexDirection: "row",

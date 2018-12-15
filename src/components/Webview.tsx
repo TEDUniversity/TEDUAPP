@@ -152,6 +152,7 @@ class Webview extends React.Component<IProp> {
           }}
           onNavigationStateChange={navState => {
             console.log(navState.loading);
+            console.log(navState.url);
             // this.webView.canGoBack = navState.canGoBack;
             if (
               (navState.url.includes(".pdf") ||
@@ -162,6 +163,14 @@ class Webview extends React.Component<IProp> {
                 navState.url.includes(".png")) &&
               Platform.OS === "android"
             ) {
+              if (!(this.webView.canGoBack && this.webView.ref)) {
+                this.props.navigation.navigate(
+                  this.props.navigation.state.params.backRoute,
+                  {
+                    showAlert: false
+                  }
+                );
+              }
               //   this.webView.ref.stopLoading();
               //   Linking.openURL(navState.url);
               let dirs = RNFetchBlob.fs.dirs;
